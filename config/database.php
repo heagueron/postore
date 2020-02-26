@@ -84,13 +84,13 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            //'url' => env('DATABASE_URL'),
+            'url' => 'postgres://swvtswkdmhgnxx:98452c8a58897aa3681ae142445162a0620737381b396f1dd897671735b9dab5@ec2-3-91-112-166.compute-1.amazonaws.com:5432/d7p7flakj2hgi5',
             'host' => $DATABASE_URL["host"],
             'port' => $DATABASE_URL["port"],
             'database' => ltrim($DATABASE_URL["path"], "/"),
             'username' => $DATABASE_URL["user"],
             'password' => $DATABASE_URL["pass"],
-            'charset' => 'utf8',
+            'charset' => 'utf8mb4',
             'prefix' => '',
             'prefix_indexes' => true,
             'schema' => 'public',
