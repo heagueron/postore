@@ -25,13 +25,15 @@ class StweetController extends Controller
     
     public function create()
     {
-        return view('stweets.create');
+        // twitter_profile_id forced. TODO: make it selectable.
+        $user = \Auth::user();
+        return view('stweets.create', concat('user'));
     }
 
     public function store(TwitterGateway $twitter)
     {
         $stweet = Stweet::create($this->validatedData());
-        dd($twitter,  $twitter->connection );
+        // dd( $stweet,  $twitter->connection );
         $twitter->connection->post("statuses/update", ["status" => $stweet->text]);
         return redirect('/stweets/create');
     }
