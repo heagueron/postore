@@ -24,10 +24,13 @@ class StweetController extends Controller
     
     public function create()
     {
-        // twitter_profile_id forced. TODO: make it selectable.
         $user = \Auth::user();
-        // dd( $user, $user->twitter_profiles->first()->id );
-        return view('stweets.create', compact('user'));
+        if ( !empty($user->twitter_profiles->all() )){
+            // In the create, twitter_profile_id is forced to first. TODO: make it selectable.
+            return view('stweets.create', compact('user'));
+        }
+        // Go ahead and create a twitter profile
+        return view('twitter_profiles.create', compact('user'));
     }
 
     public function store(TwitterGateway $twitter)
