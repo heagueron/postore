@@ -14,6 +14,7 @@ class CreateTwitterProfilesTable extends Migration
     public function up()
     {
         Schema::create('twitter_profiles', function (Blueprint $table) {
+            $table->charset = 'utf8';
             $table->bigIncrements('id');
             $table->string('handler');
             $table->string('access_token')->nullable();

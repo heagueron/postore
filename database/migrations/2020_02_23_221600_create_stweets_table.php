@@ -14,6 +14,7 @@ class CreateStweetsTable extends Migration
     public function up()
     {
         Schema::create('stweets', function (Blueprint $table) {
+            $table->charset = 'utf8';
             $table->bigIncrements('id');
             $table->string('text');
             $table->unsignedInteger('twitter_profile_id');
