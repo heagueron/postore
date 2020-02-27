@@ -31,6 +31,7 @@ class StweetController extends Controller
     public function store(TwitterGateway $twitter)
     {
         $stweet = Stweet::create($this->validatedData());
+        dd($twitter,  $twitter->connection );
         $twitter->connection->post("statuses/update", ["status" => $stweet->text]);
         return redirect('/stweets/create');
     }
