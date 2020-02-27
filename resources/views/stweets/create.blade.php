@@ -4,6 +4,7 @@
 
 @section('content')
 
-<h1>Create your Tweet</h1>
+<h1>{{ $user->name }}, Schedule your tweet here</h1>
+TPI: {{ $user->twitter_profiles->first()->id }}
 
 @endsection
