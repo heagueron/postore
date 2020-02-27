@@ -17,29 +17,24 @@ class StweetController extends Controller
     
     public function index(TwitterGateway $twitter)
     {
-        //dd($twitter);
         $content = $twitter->connection->get("account/verify_credentials");
-        $status  = $twitter->connection->get("statuses/home_timeline", ["count" => 1, "exclude_replies" => true]);
-        dd($content, $status);
+        $statuses  = $twitter->connection->get("statuses/user_timeline", ["count" => 5, "exclude_replies" => true]);
+        return view('stweets.index', compact('content', 'statuses'));
     }
     
     public function create()
     {
         // twitter_profile_id forced. TODO: make it selectable.
         $user = \Auth::user();
-        //dd($user);
-        //return view('stweets.create', compact('user'));
-        return view('stweets.create');
+        return view('stweets.create', compact('user'));
     }
 
     public function store(TwitterGateway $twitter)
     {
-        //dd(request());
-        $stweet = Stweet::create($this->validatedData());
-        // dd( $stweet,  $twitter->connection );
-
+        $stweet = Stweet::create( $this->validatedData() );
+        // dd($stweet);
         $twitter->connection->post("statuses/update", ["status" => $stweet->text]);
-        return redirect('/stweets/create');
+        return redirect('/stweets');
     }
 
     protected function validatedData()
