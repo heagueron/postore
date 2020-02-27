@@ -26,7 +26,7 @@ class StweetController extends Controller
     {
         // twitter_profile_id forced. TODO: make it selectable.
         $user = \Auth::user();
-        dd($user, $user->twitter_profiles->first()->id);
+        dd($user);
         return view('stweets.create', compact('user'));
     }
 
