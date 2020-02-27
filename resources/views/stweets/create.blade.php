@@ -12,8 +12,8 @@
     <textarea name="text" autocomplete="off" rows="4" cols="50"></textarea><br/>
 
     </br><smal>twitter_profile_id: {{ $user->twitter_profiles->first()->id }}</small></br>
-    <input type="hidden" name="twitter_profile_id" value="{{ $user->twitter_profiles->first()->id }}">
-    
+    <!--<input type="hidden" name="twitter_profile_id" value="{{ $user->twitter_profiles->first()->id }}">-->
+
     <button type="submit">Save</button>
 </form>
 @error('name') <small style="color:red">{{ $message }} </small> @enderror
