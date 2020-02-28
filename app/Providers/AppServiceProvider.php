@@ -56,10 +56,8 @@ class AppServiceProvider extends ServiceProvider
          *
          ******************************************/
 
-        $twitter_profiles = $user->twitter_profiles;
+        if ( !empty($user->twitter_profiles->all() )){
 
-        if( $twitter_profiles->count() > 0)
-        {
             // Here, in #developement, we are forcing first twitter profile.
             // In prod, there must be a way to select it.
             $twitter_profile = $user->twitter_profiles->first();
