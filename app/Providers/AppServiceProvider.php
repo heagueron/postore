@@ -42,7 +42,8 @@ class AppServiceProvider extends ServiceProvider
          *
          ******************************************/
 
-        if( $user->email == 'heagueron@gmail.com'){
+        if( $user->email == 'heagueron@gmail.com')
+        {
             return array(
                 config('ttwitter.CONSUMER_KEY'),
                 config('ttwitter.CONSUMER_SECRET'),
@@ -56,21 +57,19 @@ class AppServiceProvider extends ServiceProvider
          *
          ******************************************/
 
-        elseif( ( $user->twitter_profiles->all()->exists() ) ) {
-
-            // TODO: In #developement, we are forcing first twitter profile.
-            // In prod, there will be a way to select it.
+        else if ( !empty($user->twitter_profiles->all() )){
 
             $twitter_profile = $user->twitter_profiles->first();
+
             return array(
                 config('ttwitter.CONSUMER_KEY'),
                 config('ttwitter.CONSUMER_SECRET'),
                 $twitter_profile->access_token,
                 $twitter_profile->access_token_secret 
             );
-
+            
         }
-        dd($user);
+        
 
         // Client user is trying to build a twitter_profile
         return array(

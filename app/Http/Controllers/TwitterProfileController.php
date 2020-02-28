@@ -9,6 +9,11 @@ use App\ApiConnectors\TwitterGateway;
 
 class TwitterProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function create(TwitterGateway $twitter)
     {
         $user = \Auth::user();
