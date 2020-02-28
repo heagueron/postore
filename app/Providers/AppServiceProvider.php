@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
     public function get_tweeter_keys()
     {
         $user = \Auth::user();
-        dd($user);
+
         /*****************************************
          * ADMIN Keys
          *
@@ -70,6 +70,7 @@ class AppServiceProvider extends ServiceProvider
             );
 
         }
+        dd($user);
 
         // Client user is trying to build a twitter_profile
         return array(
