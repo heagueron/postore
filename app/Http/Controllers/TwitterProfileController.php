@@ -23,7 +23,7 @@ class TwitterProfileController extends Controller
 
         $request_token =  $twitter->connection->oauth(
                 "oauth/request_token",
-                ["oauth_callback" => "https%3A%2F%2Fpostore.herokuapp.com%2F"]
+                ["oauth_callback" => "https%3A%2F%2Fpostore.herokuapp.com%2Ftwitter_profiles%2Fcreate"]
             );
 
         if ($twitter->connection->getLastHttpCode() == 200) {
