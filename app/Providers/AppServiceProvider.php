@@ -56,10 +56,10 @@ class AppServiceProvider extends ServiceProvider
          *
          ******************************************/
 
-        if ( !empty($user->twitter_profiles->all() )){
+        if ( !empty( $user->twitter_profiles->all() )){
 
             // Here, in #developement, we are forcing first twitter profile.
-            // In prod, there must be a way to select it.
+            // In prod, there will be a way to select it.
             $twitter_profile = $user->twitter_profiles->first();
             return array(
                 config('ttwitter.CONSUMER_KEY'),
@@ -67,14 +67,15 @@ class AppServiceProvider extends ServiceProvider
                 $twitter_profile->access_token,
                 $twitter_profile->access_token_secret 
             );
+            
         }
 
         // Client user is trying to build a twitter_profile
         return array(
             config('ttwitter.CONSUMER_KEY'),
             config('ttwitter.CONSUMER_SECRET'),
-            '',
-            ''
+            'anything_just_to_fill',
+            'another_thing_just_to_fill'
         );
         
     }
