@@ -13,11 +13,11 @@ class TwitterProfileController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function create(TwitterGateway $twitter)
     {
         $user = \Auth::user();
-        dd($user, $twitter);
+        // dd($user, $twitter);
 
         // Ask for the Request Token:
         $request_token =  $twitter->connection->oauth("oauth/request_token");
