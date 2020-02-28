@@ -17,9 +17,14 @@ class StweetController extends Controller
     
     public function index(TwitterGateway $twitter)
     {
-        $content = $twitter->connection->get("account/verify_credentials");
-        $statuses  = $twitter->connection->get("statuses/user_timeline", ["count" => 5, "exclude_replies" => true]);
-        return view('stweets.index', compact('content', 'statuses'));
+        $user = \Auth::user();
+        if ( !empty($user->twitter_profiles->all() )){
+            $content = $twitter->connection->get("account/verify_credentials");
+            $statuses  = $twitter->connection->get("statuses/user_timeline", ["count" => 5, "exclude_replies" => true]);
+            return view('stweets.index', compact('content', 'statuses'));
+        }
+        // Go ahead and create a twitter profile in postore app (not just a Twitter user).
+        return redirect('/twitter-profiles/create');
     }
     
     public function create()

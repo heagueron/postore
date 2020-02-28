@@ -29,8 +29,8 @@ Route::patch('/twitter-profiles/{twitter-profile}', 'TwitterProfileController@up
 Route::delete('/twitter-profiles/{twitter-profile}', 'TwitterProfileController@destroy');
 
 // Scheduled Tweets (Stweets)
-Route::get('/stweets', 'StweetController@index');
-Route::get('/stweets/create', 'StweetController@create');
+Route::get('/stweets', 'StweetController@index')->name('stweets.index');
+Route::get('/stweets/create', 'StweetController@create')->name('stweets.create');
 Route::post('/stweets', 'StweetController@store');
 Route::get('/stweets/{stweet}', 'StweetController@show');
 Route::get('/stweets/{stweet}/edit', 'StweetController@edit');
