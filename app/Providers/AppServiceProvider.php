@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(TwitterGateway::class, function($app) {
-            dd( $this->get_tweeter_keys() );
+            // dd( $this->get_tweeter_keys() );
             return new TwitterGateway(
                 $this->get_tweeter_keys()
             );
@@ -57,9 +57,9 @@ class AppServiceProvider extends ServiceProvider
          *
          ******************************************/
 
-        if ( !empty( $user->twitter_profiles->all() )){
+        if( !empty( $user->twitter_profiles->all() )){
 
-            // Here, in #developement, we are forcing first twitter profile.
+            // TODO: In #developement, we are forcing first twitter profile.
             // In prod, there will be a way to select it.
             $twitter_profile = $user->twitter_profiles->first();
             return array(
@@ -75,8 +75,8 @@ class AppServiceProvider extends ServiceProvider
         return array(
             config('ttwitter.CONSUMER_KEY'),
             config('ttwitter.CONSUMER_SECRET'),
-            'anything_just_to_fill',
-            'another_thing_just_to_fill'
+            config('ttwitter.ACCESS_TOKEN'),
+            config('ttwitter.ACCESS_TOKEN_SECRET')
         );
         
     }
