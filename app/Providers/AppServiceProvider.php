@@ -67,7 +67,7 @@ class AppServiceProvider extends ServiceProvider
                 $twitter_profile->access_token,
                 $twitter_profile->access_token_secret 
             );
-            
+
         }
         
 
@@ -75,8 +75,8 @@ class AppServiceProvider extends ServiceProvider
         return array(
             config('ttwitter.CONSUMER_KEY'),
             config('ttwitter.CONSUMER_SECRET'),
-            'FAKE_ACCESS_TOKEN',
-            'FAKE_ACCESS_TOKEN_SECRET'
+            config('ttwitter.ACCESS_TOKEN'),
+            config('ttwitter.ACCESS_TOKEN_SECRET')
         );
         
     }
