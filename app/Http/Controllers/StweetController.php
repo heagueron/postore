@@ -30,7 +30,7 @@ class StweetController extends Controller
             return view('stweets.create', compact('user'));
         }
         // Go ahead and create a twitter profile in postore app (not just a Twitter user).
-        return redirect('/twitter-profiles/create')->with('message', 'Ok, lets create a twitter_profile in our db!');
+        return redirect('/twitter-profiles/create');
     }
 
     public function store(TwitterGateway $twitter)
