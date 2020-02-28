@@ -24,7 +24,7 @@ class StweetController extends Controller
             return view('stweets.index', compact('content', 'statuses'));
         }
         // Go ahead and create a twitter profile in postore app (not just a Twitter user).
-        return redirect('/twitter-profiles/create');
+        return redirect('/twitter_profiles/create');
     }
     
     public function create()
@@ -35,7 +35,7 @@ class StweetController extends Controller
             return view('stweets.create', compact('user'));
         }
         // Go ahead and create a twitter profile in postore app (not just a Twitter user).
-        return redirect('/twitter-profiles/create');
+        return redirect('/twitter_profiles/create');
     }
 
     public function store(TwitterGateway $twitter)

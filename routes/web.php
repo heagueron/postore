@@ -20,13 +20,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Twitter Profiles
-Route::get('/twitter-profiles', 'TwitterProfileController@index');
-Route::get('/twitter-profiles/create', 'TwitterProfileController@create');
-Route::post('/twitter-profiles', 'TwitterProfileController@store');
-Route::get('/twitter-profiles/{twitter-profile}', 'TwitterProfileController@show');
-Route::get('/twitter-profiles/{twitter-profile}/edit', 'TwitterProfileController@edit');
-Route::patch('/twitter-profiles/{twitter-profile}', 'TwitterProfileController@update');
-Route::delete('/twitter-profiles/{twitter-profile}', 'TwitterProfileController@destroy');
+Route::get('/twitter_profiles', 'TwitterProfileController@index');
+Route::get('/twitter_profiles/create', 'TwitterProfileController@create');
+Route::post('/twitter_profiles', 'TwitterProfileController@store');
+Route::get('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@show');
+Route::get('/twitter_profiles/{twitter_profile}/edit', 'TwitterProfileController@edit');
+Route::patch('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@update');
+Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@destroy');
 
 // Scheduled Tweets (Stweets)
 Route::get('/stweets', 'StweetController@index')->name('stweets.index');

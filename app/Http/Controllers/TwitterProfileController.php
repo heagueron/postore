@@ -35,4 +35,6 @@ class TwitterProfileController extends Controller
 
     }
 
+    // https%3A%2F%2Fpostore.herokuapp.com%2Ftwitter_profiles%2Fcreate
+
 }
