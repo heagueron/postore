@@ -21,12 +21,18 @@ class TwitterProfileController extends Controller
 
         // Ask for the Request Token:
         try {
-            $request_token =  $twitter->connection->oauth("oauth/request_token");
+
+            $request_token =  $twitter->connection->oauth(
+                "oauth/request_token",
+                ["oauth_callback" => "https%3A%2F%2Fpostore.herokuapp.com%2F"]
+            );
+            
             return view('twitter_profiles.create', compact('user', 'request_token'));
+
         } catch (Exception $e) {
             return redirect('/home')->with('message', $e->getMessage() );
         }
 
     }
-    
+
 }
