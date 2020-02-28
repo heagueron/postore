@@ -71,7 +71,13 @@ class AppServiceProvider extends ServiceProvider
             );
         }
 
-        dd('no twitter profile');
+        // Client user is trying to build a twitter_profile
+        return array(
+            config('ttwitter.CONSUMER_KEY'),
+            config('ttwitter.CONSUMER_SECRET'),
+            '',
+            ''
+        );
         
     }
 

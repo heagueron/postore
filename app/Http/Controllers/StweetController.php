@@ -29,8 +29,8 @@ class StweetController extends Controller
             // In the create, twitter_profile_id is forced to first. TODO: make it selectable.
             return view('stweets.create', compact('user'));
         }
-        // Go ahead and create a twitter profile
-        return view('twitter_profiles.create', compact('user'));
+        // Go ahead and create a twitter profile in postore app (not just a Twitter user).
+        return redirect('/twitter-profiles/create')->with('message', 'Ok, lets create a twitter_profile in our db!');
     }
 
     public function store(TwitterGateway $twitter)
@@ -38,7 +38,13 @@ class StweetController extends Controller
         $stweet = Stweet::create( $this->validatedData() );
         // dd($stweet);
         $twitter->connection->post("statuses/update", ["status" => $stweet->text]);
-        return redirect('/stweets');
+
+        if ($twitter->connection->getLastHttpCode() == 200) {
+            // Tweet posted succesfully
+            return redirect('/stweets')->with('message', 'New tweet sent!');
+        } else {
+            return redirect('/stweets')->with('message', 'Error: New tweet not sent!');
+        }
     }
 
     protected function validatedData()

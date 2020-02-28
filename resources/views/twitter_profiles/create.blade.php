@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h1>{{ $user->name}}, Create your Twitter Profile(s) here</h1>
+<h1>{{ $user->name}}, Let's create your Twitter Profile(s) here</h1>
 
-
+<p>Request Token: {{ $request_token }}</p>
 @endsection
