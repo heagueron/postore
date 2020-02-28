@@ -22,12 +22,13 @@ class TwitterProfileController extends Controller
         // Ask for the Request Token:
 
         $request_token =  $twitter->connection->oauth(
-                "oauth/request_token",
-                ["oauth_callback" => "https%3A%2F%2Fpostore.herokuapp.com%2Ftwitter_profiles%2Fcreate"]
-            );
+            "oauth/request_token",
+            ["oauth_callback" => "https%3A%2F%2Fpostore.herokuapp.com%2Ftwitter_profiles%2Fcreate"]
+        );
 
         if ($twitter->connection->getLastHttpCode() == 200) {
             // Got request token
+            dd($request_token);
             return view('twitter_profiles.create', compact('user', 'request_token'));
         } else {
             return redirect('/home')->with('message', 'Error in token request' );
@@ -36,5 +37,5 @@ class TwitterProfileController extends Controller
     }
 
     // https%3A%2F%2Fpostore.herokuapp.com%2Ftwitter_profiles%2Fcreate
-
+    // http%3A%2F%2Flocalhost%3A8000%2Ftwitter_profiles%2Fcreate
 }
