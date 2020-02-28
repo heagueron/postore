@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\ApiConnectors\TwitterGateway;
+
+
 class TwitterProfileController extends Controller
 {
     public function create(TwitterGateway $twitter)
     {
         $user = \Auth::user();
         dd($user, $twitter);
-        
+
         // Ask for the Request Token:
         $request_token =  $twitter->connection->oauth("oauth/request_token");
 
