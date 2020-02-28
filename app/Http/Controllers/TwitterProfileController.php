@@ -20,13 +20,13 @@ class TwitterProfileController extends Controller
         // dd($user, $twitter);
 
         // Ask for the Request Token:
-        $request_token =  $twitter->connection->oauth("oauth/request_token");
-
-        if ($twitter->connection->getLastHttpCode() == 200) {
+        try {
+            $request_token =  $twitter->connection->oauth("oauth/request_token");
             return view('twitter_profiles.create', compact('user', 'request_token'));
-        } else {
-            return redirect('/home')->with('message', 'Error: No request_token received');
-        }    
-        
+        } catch (Exception $e) {
+            return redirect('/home')->with('message', $e->getMessage() );
+        }
+
     }
+    
 }
