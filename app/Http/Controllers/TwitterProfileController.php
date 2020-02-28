@@ -20,7 +20,7 @@ class TwitterProfileController extends Controller
         if ($twitter->connection->getLastHttpCode() == 200) {
             return view('twitter_profiles.create', compact('user', 'request_token'));
         } else {
-            return redirect('/home')->with('message', 'Error: No request_token received!');
+            return redirect('/home')->with('message', 'Error: No request_token received');
         }    
         
     }

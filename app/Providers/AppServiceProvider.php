@@ -17,10 +17,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(TwitterGateway::class, function($app) {
-            // dd( $this->get_tweeter_keys() );
-            return new TwitterGateway(
-                $this->get_tweeter_keys()
-            );
+
+            return new TwitterGateway( $this->get_tweeter_keys() );
+
         });
     }
 
@@ -37,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
     public function get_tweeter_keys()
     {
         $user = \Auth::user();
-
+        dd($user);
         /*****************************************
          * ADMIN Keys
          *
