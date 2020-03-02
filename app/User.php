@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 use App\TwitterProfile;
 
+
 class User extends Authenticatable
 {
     use Notifiable;

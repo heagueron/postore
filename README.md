@@ -3,9 +3,9 @@
 
 ## About POSTORE
 
-Postore is a social posting web client application based on the Laravel framework (https://laravel.com)and several supporting libraries, such as:
+Postore is a social posting web client application based on the Laravel framework (https://laravel.com) and several supporting libraries, such as:
 
-<p itemprop="name">TwitterOAuth</p> (https://twitteroauth.com).
+<p itemprop="name">TwitterOAuth (https://twitteroauth.com) </p>.
 
 
 ## Contributing
