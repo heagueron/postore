@@ -18,6 +18,8 @@ class CreateStweetsTable extends Migration
             $table->bigIncrements('id');
             $table->string('text');
             $table->unsignedInteger('twitter_profile_id');
+            $table->timestamp('post_date')->nullable();
+            $table->boolean('posted')->default(false);
             $table->timestamps();
         });
     }

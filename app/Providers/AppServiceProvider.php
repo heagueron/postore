@@ -37,6 +37,15 @@ class AppServiceProvider extends ServiceProvider
     {
         $user = \Auth::user();
 
+        if( empty($user) ){ // Accesing from Task Scheduler
+            return array(
+                config('ttwitter.CONSUMER_KEY'),
+                config('ttwitter.CONSUMER_SECRET'),
+                config('ttwitter.ACCESS_TOKEN'),
+                config('ttwitter.ACCESS_TOKEN_SECRET')
+            );
+        };
+
         /*****************************************
          * ADMIN Keys
          *

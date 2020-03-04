@@ -13,7 +13,7 @@ twitterProfileId: {{ $user->twitter_profiles->first()->id }}
     <textarea name="text" autocomplete="off" rows="4" cols="50"></textarea><br/>
 
     Datetime:
-    <datetime format="YYYY-MM-DD H:i:s" width="300px" name='pickedDate' firstDayOfWeek="1"></datetime>
+    <datetime format="YYYY-MM-DD H:i:s" width="300px" name='post_date' firstDayOfWeek="1"></datetime>
 
     <input type="hidden" name="twitter_profile_id" value="{{ $user->twitter_profiles->first()->id }}">
 

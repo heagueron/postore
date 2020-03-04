@@ -18,13 +18,11 @@ class StweetController extends Controller
     public function index(TwitterGateway $twitter)
     {
         $user = \Auth::user();
-        if ( !empty($user->twitter_profiles->all() )){
-            $content = $twitter->connection->get("account/verify_credentials");
-            $statuses  = $twitter->connection->get("statuses/user_timeline", ["count" => 5, "exclude_replies" => true]);
-            return view('stweets.index', compact('content', 'statuses'));
-        }
-        // Go ahead and create a twitter profile in postore app (not just a Twitter user).
-        return redirect('/twitter_profiles/create');
+
+        $stweets = Stweet::all();
+        // dd($stweets);
+        return view( 'stweets.index', compact('user', 'stweets') );
+
     }
     
     public function create()
@@ -40,24 +38,39 @@ class StweetController extends Controller
 
     public function store(TwitterGateway $twitter)
     {
-        dd( request() );
+        // dd( request() );
         $stweet = Stweet::create( $this->validatedData() );
         // dd($stweet);
-        $twitter->connection->post("statuses/update", ["status" => $stweet->text]);
+        return redirect('/stweets')->with('flash', 'New tweet scheduled!');
 
-        if ($twitter->connection->getLastHttpCode() == 200) {
-            // Tweet posted succesfully
-            return redirect('/stweets')->with('flash', 'New tweet sent!');
-        } else {
-            return redirect('/stweets')->with('flash', 'Error: New tweet not sent!');
+        // $twitter->connection->post("statuses/update", ["status" => $stweet->text]);
+
+        // if ($twitter->connection->getLastHttpCode() == 200) {
+        //     // Tweet posted succesfully
+        //     return redirect('/stweets')->with('flash', 'New tweet sent!');
+        // } else {
+        //     return redirect('/stweets')->with('flash', 'Error: New tweet not sent!');
+        // }
+    }
+
+    public function twitterStatuses(TwitterGateway $twitter)
+    {
+        $user = \Auth::user();
+        if ( !empty($user->twitter_profiles->all() )){
+            $content = $twitter->connection->get("account/verify_credentials");
+            $statuses  = $twitter->connection->get("statuses/user_timeline", ["count" => 5, "exclude_replies" => true]);
+            return view('stweets.statuses', compact('content', 'statuses'));
         }
+        // Go ahead and create a twitter profile in postore app (not just a Twitter user).
+        return redirect('/twitter_profiles/create');
     }
 
     protected function validatedData()
     {
         return request()->validate([
-            'text' => 'required|min:1|max:240',
-            'twitter_profile_id' => 'required'
+            'text'                  => 'required|min:1|max:240',
+            'twitter_profile_id'    => 'required',
+            'post_date'             => 'required'
         ]);
     }
 }

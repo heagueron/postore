@@ -32,11 +32,12 @@ Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@d
 Route::get('/stweets', 'StweetController@index')->name('stweets.index');
 Route::get('/stweets/create', 'StweetController@create')->name('stweets.create');
 Route::post('/stweets', 'StweetController@store');
-Route::get('/stweets/{stweet}', 'StweetController@show');
-Route::get('/stweets/{stweet}/edit', 'StweetController@edit');
-Route::patch('/stweets/{stweet}', 'StweetController@update');
-Route::delete('/stweets/stweetr}', 'StweetController@destroy');
+// Route::get('/stweets/{stweet}', 'StweetController@show');
+// Route::get('/stweets/{stweet}/edit', 'StweetController@edit');
+// Route::patch('/stweets/{stweet}', 'StweetController@update');
+// Route::delete('/stweets/stweetr}', 'StweetController@destroy');
 
+Route::get('/stweets/statuses', 'StweetController@twitterStatuses')->name('stweets.statuses');
 
  //Clear route cache:
  Route::get('/route-cache', function() {
