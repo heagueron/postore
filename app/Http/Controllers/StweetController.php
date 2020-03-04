@@ -40,15 +40,16 @@ class StweetController extends Controller
 
     public function store(TwitterGateway $twitter)
     {
+        dd( request() );
         $stweet = Stweet::create( $this->validatedData() );
         // dd($stweet);
         $twitter->connection->post("statuses/update", ["status" => $stweet->text]);
 
         if ($twitter->connection->getLastHttpCode() == 200) {
             // Tweet posted succesfully
-            return redirect('/stweets')->with('message', 'New tweet sent!');
+            return redirect('/stweets')->with('flash', 'New tweet sent!');
         } else {
-            return redirect('/stweets')->with('message', 'Error: New tweet not sent!');
+            return redirect('/stweets')->with('flash', 'Error: New tweet not sent!');
         }
     }
 

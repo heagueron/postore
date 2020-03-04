@@ -9,6 +9,18 @@
 
     <title>@yield( 'title' )</title>
 
+    
+    
+    <!-- Bootstrap Datetime picker -->
+    <!-- Minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Minified JS library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Minified Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Datetime picker -->
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -18,6 +30,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
 </head>
 <body>
     <div id="app">
@@ -85,9 +99,15 @@
                 </div>
             @endif
 
-            @yield('content')
-
+            <flash  class="alert-flash" message="{{ session('flash') }}"></flash>
+            
+            <div class="container">
+                @yield('content')
+            </div>
+            
         </main>
     </div>
+
+
 </body>
 </html>
