@@ -49,6 +49,7 @@ class PostTweets extends Command
 
         foreach ($users as $user){ // TODO: Build a different TwitterGateway class for everyuser! 
             $userDate = Carbon::now()->timezone($user->timezone)->toDateTimeString();
+            $this->info('Posting on behalf of: ' .$user->name. 'at' .$userDate);
 
             $stweets = DB::table('stweets')->where([
                 [ 'twitter_profile_id', '=', $user->id ],
@@ -63,8 +64,9 @@ class PostTweets extends Command
                 $model->updated_at = $userDate;
                 $model->save();
             }
-            $sent = count($stweets);
+            $sent += count($stweets);
         }
+        
         $this->info('Total pending tweets posted: ' . $sent);
         
     }

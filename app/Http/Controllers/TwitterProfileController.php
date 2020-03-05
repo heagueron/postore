@@ -17,13 +17,11 @@ class TwitterProfileController extends Controller
     public function create(TwitterGateway $twitter)
     {
         $user = \Auth::user();
-        // dd($user, $twitter);
 
         // Ask for the Request Token:
-
         $request_token =  $twitter->connection->oauth(
             "oauth/request_token",
-            ["oauth_callback" => "http%3A%2F%2F127.0.0.1%3A8000%"]
+            ["oauth_callback" => "http%3A%2F%2F127.0.0.1%3A8000%2Ftwitter_profiles%2Fcreate"]
         );
 
         if ($twitter->connection->getLastHttpCode() == 200) {
@@ -39,7 +37,7 @@ class TwitterProfileController extends Controller
 
 }
 
-    // https%3A%2F%2Fpostore.herokuapp.com%
-    // https%3A%2F%2Fpostore.herokuapp.com%2Ftwitter_profiles%2Fcreate%
-    // http%3A%2F%2F127.0.0.1%3A8000%
-    // http%3A%2F%2F127.0.0.1%3A8000%2Ftwitter_profiles%2Fcreate%
+    // https%3A%2F%2Fpostore.herokuapp.com
+    // https%3A%2F%2Fpostore.herokuapp.com%2Ftwitter_profiles%2Fcreate
+    // http%3A%2F%2F127.0.0.1%3A8000
+    // http%3A%2F%2F127.0.0.1%3A8000%2Ftwitter_profiles%2Fcreate

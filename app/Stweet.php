@@ -26,7 +26,7 @@ class Stweet extends Model
 
     public function twitter_profile()
     {
-        $this->belongsTo(TwitterProfile::class);
+        return $this->belongsTo(TwitterProfile::class);
     }
 
 }

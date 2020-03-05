@@ -14,12 +14,12 @@ class TwitterProfile extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function stweets()
     {
-        $this->hasMany(Stweet::class);
+        return $this->hasMany(Stweet::class);
     }
     
 }

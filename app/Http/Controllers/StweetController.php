@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\ApiConnectors\TwitterGateway;
 use App\Stweet;
 
+use DB;
+
 
 class StweetController extends Controller
 {
@@ -19,8 +21,13 @@ class StweetController extends Controller
     {
         $user = \Auth::user();
 
-        $stweets = Stweet::all();
-        // dd($stweets);
+        $stweets = [];
+
+        if ( $user->twitter_profiles()->exists() ){
+            // TODO: Get stweets from all twitter profiles for the user.
+            $stweets = $user->twitter_profiles()->first()->stweets;
+        }
+
         return view( 'stweets.index', compact('user', 'stweets') );
 
     }
@@ -29,7 +36,7 @@ class StweetController extends Controller
     {
         $user = \Auth::user();
         if ( !empty($user->twitter_profiles->all() )){
-            // In the create, twitter_profile_id is forced to first. TODO: make it selectable.
+            // TODO: In the create, twitter_profile_id is forced to first. TODO: make it selectable.
             return view('stweets.create', compact('user'));
         }
         // Go ahead and create a twitter profile in postore app (not just a Twitter user).
@@ -38,19 +45,11 @@ class StweetController extends Controller
 
     public function store(TwitterGateway $twitter)
     {
-        // dd( request() );
+
         $stweet = Stweet::create( $this->validatedData() );
-        // dd($stweet);
+
         return redirect('/stweets')->with('flash', 'New tweet scheduled!');
 
-        // $twitter->connection->post("statuses/update", ["status" => $stweet->text]);
-
-        // if ($twitter->connection->getLastHttpCode() == 200) {
-        //     // Tweet posted succesfully
-        //     return redirect('/stweets')->with('flash', 'New tweet sent!');
-        // } else {
-        //     return redirect('/stweets')->with('flash', 'Error: New tweet not sent!');
-        // }
     }
 
     public function twitterStatuses(TwitterGateway $twitter)

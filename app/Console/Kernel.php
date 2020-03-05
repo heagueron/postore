@@ -26,24 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
-        $schedule->command('postore:ptweets')->everyTenMinutes();
-                
-                // ->when(function () {
-                //     if ( DB::table('stweets')
-                //         ->where([
-                //             [ 'posted', '=', 0 ],
-                //             [ 'post_date', '<=', $userDate ]
-                //             ])
-                //         ->count() > 0) { 
-
-                //         return true;
-
-                //     } 
-
-                //     return false;
-                // });
+        $schedule->command('postore:ptweets')->everyMinute();
     }
 
     /**

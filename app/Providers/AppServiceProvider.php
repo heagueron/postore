@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $user = \Auth::user();
 
-        if( empty($user) ){ // Accesing from Task Scheduler
+        if( empty($user) ){ // Accesing from an artisan command. TODO: Build the TwitterGateway class on same command, not here.
             return array(
                 config('ttwitter.CONSUMER_KEY'),
                 config('ttwitter.CONSUMER_SECRET'),
