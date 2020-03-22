@@ -27,7 +27,7 @@
             <td>{{ $stweet->posted }}</td>
         </tr>
     @empty
-        <p>No tweets available. </p>
+        <p>No scheduled tweets pending to post</p>
     @endforelse
   </tbody>
 

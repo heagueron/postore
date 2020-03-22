@@ -17,9 +17,10 @@ class CreateTwitterProfilesTable extends Migration
             $table->charset = 'utf8';
             $table->bigIncrements('id');
             $table->string('handler');
-            $table->string('access_token')->nullable();
-            $table->string('access_token_secret')->nullable();
+            $table->string('access_token');
+            $table->string('access_token_secret');
             $table->unsignedInteger('user_id');
+            $table->bigInteger('twitter_user_id');
             $table->timestamps();
         });
     }

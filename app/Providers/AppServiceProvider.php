@@ -37,13 +37,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $user = \Auth::user();
 
-        if( empty($user) ){ // Accesing from an artisan command. TODO: Build the TwitterGateway class on same command, not here.
-            return array(
-                config('ttwitter.CONSUMER_KEY'),
-                config('ttwitter.CONSUMER_SECRET'),
-                config('ttwitter.ACCESS_TOKEN'),
-                config('ttwitter.ACCESS_TOKEN_SECRET')
-            );
+        if( empty($user) ){ 
+            dd('Trying to create TwitterGateway in AUTO mode, no user authed');
         };
 
         /*****************************************
@@ -54,10 +49,10 @@ class AppServiceProvider extends ServiceProvider
         if( $user->email == 'heagueron@gmail.com')
         {
             return array(
-                config('ttwitter.CONSUMER_KEY'),
-                config('ttwitter.CONSUMER_SECRET'),
-                config('ttwitter.ACCESS_TOKEN'),
-                config('ttwitter.ACCESS_TOKEN_SECRET')
+                'oauth_access_token' => config('ttwitter.ACCESS_TOKEN'),
+                'oauth_access_token_secret' => config('ttwitter.ACCESS_TOKEN_SECRET'),
+                'consumer_key' => config('ttwitter.CONSUMER_KEY'),
+                'consumer_secret' => config('ttwitter.CONSUMER_SECRET')
             );
         }
 
@@ -71,21 +66,20 @@ class AppServiceProvider extends ServiceProvider
             $twitter_profile = $user->twitter_profiles->first();
 
             return array(
-                config('ttwitter.CONSUMER_KEY'),
-                config('ttwitter.CONSUMER_SECRET'),
-                $twitter_profile->access_token,
-                $twitter_profile->access_token_secret 
+                'oauth_access_token' => $twitter_profile->access_token,
+                'oauth_access_token_secret' => $twitter_profile->access_token_secret,
+                'consumer_key' => config('ttwitter.CONSUMER_KEY'),
+                'consumer_secret' => config('ttwitter.CONSUMER_SECRET')
             );
 
         }
         
-
         // Client user is trying to build a twitter_profile
         return array(
-            config('ttwitter.CONSUMER_KEY'),
-            config('ttwitter.CONSUMER_SECRET'),
-            config('ttwitter.ACCESS_TOKEN'),
-            config('ttwitter.ACCESS_TOKEN_SECRET')
+            'oauth_access_token' => config('ttwitter.ACCESS_TOKEN'),
+            'oauth_access_token_secret' => config('ttwitter.ACCESS_TOKEN_SECRET'),
+            'consumer_key' => config('ttwitter.CONSUMER_KEY'),
+            'consumer_secret' => config('ttwitter.CONSUMER_SECRET')
         );
         
     }

@@ -20,7 +20,7 @@ window.flash = function (message) {
 
 
 
-// DatetimePicker;
+// DatetimePicker (vue component);
 import datetime from 'vuejs-datetimepicker';
 
 /**

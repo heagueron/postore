@@ -24,7 +24,6 @@ class StweetController extends Controller
         $stweets = [];
 
         if ( $user->twitter_profiles()->exists() ){
-            // TODO: Get stweets from all twitter profiles for the user.
             $stweets = $user->twitter_profiles()->first()->stweets;
         }
 

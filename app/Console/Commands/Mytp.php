@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 
 use App\User;
 
+use Illuminate\Support\Str;
+
 
 class Mytp extends Command
 {
@@ -39,19 +41,27 @@ class Mytp extends Command
      * @return mixed
      */
     public function handle()
-    {
-        $user = User::where('email','heagueron@gmail.com')->first();
-        if ($user === null) {
-            $this->info('User "heagueron" not found');
-            return;
-        }
+    { 
+        // heagueron
+        if( User::where('email','heagueron@gmail.com')-> exists() ){
+            $user = User::where('email','heagueron@gmail.com')->first();
+            if ( !$user->twitter_profiles()->exists() ){
+                \App\TwitterProfile::create(
+                [
+                    'handler'               => 'heagueron',
+                    'access_token'          => config('ttwitter.ACCESS_TOKEN'),
+                    'access_token_secret'   => config('ttwitter.ACCESS_TOKEN_SECRET'),
+                    'user_id'               => $user->id
+                ]
+            );
 
-        \App\TwitterProfile::create([
-            'handler' => 'heagueron',
-            'access_token' => config('ttwitter.ACCESS_TOKEN'),
-            'access_token_secret' => config('ttwitter.ACCESS_TOKEN_SECRET'),
-            'user_id' => $user->id
-        ]);
-        $this->info('User "heagueron" twitter profile completed');
+            $this->info('User "heagueron@gmail.com" twitter profile completed');
+            } else {
+                $this->info('User "heagueron@gmail.com" already has a twitter profile');
+            }
+
+        } else {
+            $this->info('User "heagueron@gmail.com" not yet created');
+        }
     }
 }
