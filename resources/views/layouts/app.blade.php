@@ -13,16 +13,17 @@
     
     <!-- Bootstrap Datetime picker -->
     <!-- Minified Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
     <!-- Minified JS library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <!-- Minified Bootstrap JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
     <!-- Datetime picker -->
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/d67ba59f50.js" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -35,8 +36,9 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md bg-primary navbar-dark shadow-sm">
             <div class="container">
+                <div id="sidebarCollapse" class="mr-5"><i class="fas fa-bars fa-2x"></i></div>
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Postore
                 </a>
@@ -95,21 +97,60 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <div class="row">
 
-            @if( session()->has('message') )
-                <div class="alert alert-primary" role="alert">
-                    <strong>{{ session()->get('message')}}</strong>
+            <div class="col-md-2 col-sm-12" style="display:none;" id="p-sidebar">
+                <div class="sidebar-header">
+                    <h3>Postore</h3>
                 </div>
-            @endif
 
-            <flash  class="alert-flash" message="{{ session('flash') }}"></flash>
-            
-            <div class="container">
-                @yield('content')
+                <ul class="list-unstyled components" style="border:none;">
+                    <p>Choose an action</p>
+                    <li class="mb-3">
+                        <a href="{{ route('stweets.create') }}">SCHEDULER</a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#">SOCIAL ACCOUNTS</a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#">TIMETABLES</a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#">DRAFTS</a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#">FILE UPLOADS</a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#">SETTINGS</a>
+                    </li>
+                    <li class="mb-3">
+                        <a href="#">HELP</a>
+                    </li>
+                </ul>
+        
+        
             </div>
-            
-        </main>
+
+            <div class="col-12" id="p-content">
+                <main class="py-4">
+                    @if( session()->has('message') )
+                        <div class="alert alert-primary" role="alert">
+                            <strong>{{ session()->get('message')}}</strong>
+                        </div>
+                    @endif
+
+                    <flash  class="alert-flash" message="{{ session('flash') }}"></flash>
+                    
+                    <div class="container">
+                        @yield('content')
+                    </div> 
+                </main>
+            </div>
+
+        </div>
+        
+
     </div>
 
 

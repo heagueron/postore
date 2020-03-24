@@ -53,6 +53,29 @@ const app = new Vue({
     }
 });
 
+$( document ).ready(function() {
+    $('#sidebarCollapse').on('click', function () {
+
+        if( $('#p-sidebar').css("display") == 'none'  ){
+            //alert('show sidebar');
+
+            $('#p-content').removeClass('col-12').addClass('col-md-10 col-sm-12');
+            $('#p-sidebar').css("display", "block");
+
+
+        }
+
+        else{
+            //alert('hide sidebar');
+
+            $('#p-sidebar').css("display", "none");
+            $('#p-content').removeClass('col-md-10 col-sm-12').addClass('col-12');   
+        }
+        
+    });
+});
+
+
 
 
 
