@@ -45,4 +45,9 @@ class User extends Authenticatable
         return $this->hasMany(TwitterProfile::class);
     }
     
+    public function sposts()
+    {
+        return $this->hasMany(\App\Spost::class);
+    }
+    
 }

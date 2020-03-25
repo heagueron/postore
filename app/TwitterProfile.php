@@ -21,5 +21,10 @@ class TwitterProfile extends Model
     {
         return $this->hasMany(Stweet::class);
     }
+
+    public function sposts()
+    {
+        return $this->belongsToMany('App\Spost','spost_twitter_profile')->withTimestamps();
+    }
     
 }

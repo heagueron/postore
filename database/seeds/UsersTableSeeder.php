@@ -137,6 +137,18 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2020-03-22 16:57:34',
                 'updated_at' => '2020-03-22 12:57:34',
             ),
+            10 => 
+            array (
+                'id' => 12,
+                'name' => 'Gato con Botas',
+                'email' => 'gato@postore.com',
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$zNYFPaJgWHSHKdM90IfgveX0A0yDHqPirX0j.45bmCAonTIPy3jB.',
+                'timezone' => 'America/Caracas',
+                'remember_token' => NULL,
+                'created_at' => '2020-03-24 17:38:59',
+                'updated_at' => '2020-03-24 13:38:59',
+            ),
         ));
         
         

@@ -24,7 +24,7 @@ class TwitterProfilesTableSeeder extends Seeder
                 'access_token' => '42450712-YpZMaj6f9HBsxyedo70oLYR78nhB1ky4rRSKnZHLS',
                 'access_token_secret' => 'JU7g03RemnFDFu7NkSaN6v8Ng4H4kVpOUQeWSVFoF6yHp',
                 'user_id' => 1,
-                'twitter_user_id' => 112000112000112000,
+                'twitter_user_id' => 42450712,
                 'created_at' => '2020-03-04 14:41:49',
                 'updated_at' => '2020-03-04 14:41:49',
             ),
@@ -79,9 +79,20 @@ class TwitterProfilesTableSeeder extends Seeder
                 'access_token' => '1179475211407826946-08XP9qPgvWMu8TZIreOT9B6f4nR3ON',
                 'access_token_secret' => 'Dkd4GISxKZeg9drKhZwTuGEjXT0XxfdrRngVcOLwS5dJx',
                 'user_id' => 11,
-                'twitter_user_id' => 112000112000112001,
+                'twitter_user_id' => 1179475211407826946,
                 'created_at' => '2020-03-22 20:58:05',
                 'updated_at' => '2020-03-22 20:58:05',
+            ),
+            6 => 
+            array (
+                'id' => 12,
+                'handler' => 'AssistantSuppo1',
+                'access_token' => '1200017560093253634-qWnFllXxamylrBxq50p3cLcdQiNUjy',
+                'access_token_secret' => 'v2cNKOVd8aJ3A9zfbCesnHTqArRHba1fzD7LC8AUeMur1',
+                'user_id' => 1,
+                'twitter_user_id' => 1200017560093253634,
+                'created_at' => '2020-03-24 21:54:00',
+                'updated_at' => '2020-03-24 21:54:00',
             ),
         ));
         

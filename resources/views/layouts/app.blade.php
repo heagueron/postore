@@ -107,7 +107,7 @@
                 <ul class="list-unstyled components" style="border:none;">
                     <p>Choose an action</p>
                     <li class="mb-3">
-                        <a href="{{ route('stweets.create') }}">SCHEDULER</a>
+                        <a href="{{ route('sposts.create') }}">SCHEDULER</a>
                     </li>
                     <li class="mb-3">
                         <a href="#">SOCIAL ACCOUNTS</a>

@@ -2,9 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class StweetsTableSeeder extends Seeder
+class SpostsTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -14,15 +13,15 @@ class StweetsTableSeeder extends Seeder
     {
         
 
-        \DB::table('stweets')->delete();
+        \DB::table('sposts')->delete();
         
-        \DB::table('stweets')->insert(array (
+        \DB::table('sposts')->insert(array (
             0 => 
             array (
                 'id' => 2,
                 'text' => 'Machine Learning
 Check out this free computer science courses at CSEdu4All csedu4all.org/courses/',
-                'twitter_profile_id' => 1,
+                'user_id' => 1,
                 'post_date' => '2020-03-04 10:58:00',
                 'posted' => 1,
                 'created_at' => '2020-03-04 10:51:58',
@@ -33,7 +32,7 @@ Check out this free computer science courses at CSEdu4All csedu4all.org/courses/
                 'id' => 3,
                 'text' => 'Machine learning
 Machine learning for everyone teachablemachine.withgoogle.com',
-                'twitter_profile_id' => 1,
+                'user_id' => 1,
                 'post_date' => '2020-03-04 11:05:00',
                 'posted' => 1,
                 'created_at' => '2020-03-04 10:53:35',
@@ -48,7 +47,7 @@ Forecasting volcano eruptions is notoriously tricky, but machine learning might 
 Unlock the Potential of Machine Learning. Spell.run
 
 Source: Science Daily',
-                'twitter_profile_id' => 1,
+                'user_id' => 1,                
                 'post_date' => '2020-03-05 11:14:00',
                 'posted' => 1,
                 'created_at' => '2020-03-04 11:15:47',
@@ -57,9 +56,8 @@ Source: Science Daily',
             3 => 
             array (
                 'id' => 5,
-                'text' => 'Laravel Job
-Programador Laravel chiletrabajos.cl/trabajo/2110836 ciudad Puerto Montt #trabajo #empleo',
-                'twitter_profile_id' => 1,
+                'text' => 'Laravel Job: Programador Laravel chiletrabajos.cl/trabajo/2110836 ciudad Puerto Montt #trabajo #empleo',
+                'user_id' => 6,    
                 'post_date' => '2020-03-04 13:56:00',
                 'posted' => 1,
                 'created_at' => '2020-03-04 13:56:51',
@@ -72,7 +70,7 @@ Programador Laravel chiletrabajos.cl/trabajo/2110836 ciudad Puerto Montt #trabaj
 How to add Real-Time Notifications to Laravel with Pusher
 
 hackernoon.com/how-to-add-rea…',
-                'twitter_profile_id' => 1,
+                'user_id' => 6,              
                 'post_date' => '2020-03-04 16:00:00',
                 'posted' => 1,
                 'created_at' => '2020-03-04 15:56:56',
@@ -85,7 +83,7 @@ hackernoon.com/how-to-add-rea…',
 5 ways to write Laravel code that scales (sponsor) 
 
 laravel-news.com/5-ways-to-writ…',
-                'twitter_profile_id' => 1,
+                'user_id' => 11,               
                 'post_date' => '2020-03-04 16:02:00',
                 'posted' => 1,
                 'created_at' => '2020-03-04 15:58:04',
@@ -99,7 +97,7 @@ laravel-news.com/5-ways-to-writ…',
 Senior ReactJS Developer 
 
 #MT - Palermo, Ciudad de Buenos Aires, Buenos Aires careers.deviget.com/careers/33298-…',
-                'twitter_profile_id' => 1,
+                'user_id' => 1,               
                 'post_date' => '2020-03-04 18:00:00',
                 'posted' => 1,
                 'created_at' => '2020-03-04 17:30:33',
@@ -110,32 +108,13 @@ Senior ReactJS Developer
                 'id' => 10,
                 'text' => 'Django:
 Pytest Django and Django Rest Framework: 10 – Testing Create, Details and DestroyAPIViews trumpathon.com/pytest-django-…',
-                'twitter_profile_id' => 1,
+                'user_id' => 1,               
                 'post_date' => '2020-03-05 13:35:00',
                 'posted' => 0,
                 'created_at' => '2020-03-05 13:34:38',
                 'updated_at' => '2020-03-05 17:34:38',
             ),
-            8 => 
-            array (
-                'id' => 11,
-                'text' => 'We will defeat that bastard coronavirus.',
-                'twitter_profile_id' => 1,
-                'post_date' => '2020-04-28 17:10:00',
-                'posted' => 0,
-                'created_at' => '2020-03-23 16:50:37',
-                'updated_at' => '2020-03-23 20:50:37',
-            ),
-            9 => 
-            array (
-                'id' => 12,
-                'text' => 'Humanity will prevail.',
-                'twitter_profile_id' => 1,
-                'post_date' => '2020-03-25 20:02:00',
-                'posted' => 0,
-                'created_at' => '2020-03-23 16:54:04',
-                'updated_at' => '2020-03-23 20:54:04',
-            ),
+            
         ));
         
         
