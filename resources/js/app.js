@@ -53,6 +53,9 @@ const app = new Vue({
     }
 });
 
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+var path = "http://localhost:8000/";
+
 $( document ).ready(function() {
     $('#sidebarCollapse').on('click', function () {
 
@@ -73,6 +76,36 @@ $( document ).ready(function() {
         }
         
     });
+
+    //let now = new Date().toISOString().substr(0, 10);
+    let now = new Date().toISOString().substr(0, 16); 
+    $('#post_date').val(now);
+
+    // TODO: adjust initial value with proper timezone (It shows UTC)
+
+    $('#post_now').on('click', function () {
+        
+        $.ajax({
+            url: path + "sposts/sendNow",
+            type: "post",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+              return {
+                _token: CSRF_TOKEN,
+                //post_text:  $('#post_text').html(),    
+              };
+            },
+            processResults: function (response) {
+              console.log(response);
+            //   return {
+            //     results: response
+            //   };
+            },
+            cache: true
+        }); 
+    })
+
 });
 
 

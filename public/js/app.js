@@ -40078,6 +40078,7 @@ const PM = 'PM'
     },
   },
   created () {
+    
     if (this.value) {
       try {
         this.timeStamp = this.makeDateObject(this.value)
@@ -52862,6 +52863,8 @@ var app = new Vue({
     datetime: vuejs_datetimepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+var path = "http://localhost:8000/";
 $(document).ready(function () {
   $('#sidebarCollapse').on('click', function () {
     if ($('#p-sidebar').css("display") == 'none') {
@@ -52873,6 +52876,30 @@ $(document).ready(function () {
       $('#p-sidebar').css("display", "none");
       $('#p-content').removeClass('col-md-10 col-sm-12').addClass('col-12');
     }
+  }); //let now = new Date().toISOString().substr(0, 10);
+
+  var now = new Date().toISOString().substr(0, 16);
+  $('#post_date').val(now); // TODO: adjust initial value with proper timezone (It shows UTC)
+
+  $('#post_now').on('click', function () {
+    $.ajax({
+      url: path + "sposts/sendNow",
+      type: "post",
+      dataType: 'json',
+      delay: 250,
+      data: function data(params) {
+        return {
+          _token: CSRF_TOKEN //post_text:  $('#post_text').html(),    
+
+        };
+      },
+      processResults: function processResults(response) {
+        console.log(response); //   return {
+        //     results: response
+        //   };
+      },
+      cache: true
+    });
   });
 });
 

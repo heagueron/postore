@@ -10,14 +10,15 @@ class TwitterGateway extends TwitterAPIExchange
 {
     public $connection;
 
-    public function __construct($isPosting, $twitterProfileId=null)
+    public function __construct( $twitterProfileId=null )
     {
-        $this->connection = new TwitterAPIExchange( $this->get_tweeter_keys($isPosting, $twitterProfileId) );
+        $this->connection = new TwitterAPIExchange( $this->get_tweeter_keys( $twitterProfileId ) );
     }
 
-    public function get_tweeter_keys($isPosting, $twitterProfileId=null)
+    public function get_tweeter_keys( $twitterProfileId=null )
     {
-        if ($isPosting){
+        // Sending scheduled or inmediate posts 
+        if ( !is_null($twitterProfileId) ){
 
             $twitter_profile=\App\TwitterProfile::findOrFail($twitterProfileId);
             return array(

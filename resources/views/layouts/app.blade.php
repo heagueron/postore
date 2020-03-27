@@ -37,7 +37,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md bg-primary navbar-dark shadow-sm">
-            <div class="container">
+            
                 <div id="sidebarCollapse" class="mr-5"><i class="fas fa-bars fa-2x"></i></div>
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Postore
@@ -94,7 +94,7 @@
                         @endguest
                     </ul>
                 </div>
-            </div>
+            
         </nav>
 
         <div class="row">

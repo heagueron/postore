@@ -22,7 +22,7 @@ class TwitterProfileController extends Controller
 
         // STEP 1: POST oauth/request_token
         // Create a request for a consumer application to obtain a request token.
-        $twitter1 = new TwitterGateway(false);  // First parameters indicates if we are posting.
+        $twitter1 = new TwitterGateway();
         $url = 'https://api.twitter.com/oauth/request_token';
         $requestMethod = 'POST';
 
@@ -57,7 +57,7 @@ class TwitterProfileController extends Controller
 
         // Step 2: GET oauth/authorize
         // Have the user authenticate, and send the consumer application a request token.
-        $twitter2 = new TwitterGateway(false);
+        $twitter2 = new TwitterGateway();
         $url = 'https://api.twitter.com/oauth/authorize';
         $getfield = Str::of('?oauth_token=')->append($oauth_token);
         $requestMethod = 'GET';
@@ -94,7 +94,7 @@ class TwitterProfileController extends Controller
           "oauth_verifier" => $oauth_verifier
         );
 
-        $twitter3 = new TwitterGateway(false);
+        $twitter3 = new TwitterGateway();
         $response3 = $twitter3->buildOauth($url, $requestMethod)
             ->setPostfields($postfields)
             ->performRequest();
