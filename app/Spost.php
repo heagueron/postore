@@ -27,7 +27,9 @@ class Spost extends Model
 
     public function twitter_profiles()
     {
-        return $this->belongsToMany('App\TwitterProfile', 'spost_twitter_profile')->withTimestamps();
+        return $this->belongsToMany('App\TwitterProfile', 'spost_twitter_profile')
+            ->withPivot(['twitter_status_id'])
+            ->withTimestamps();
     }
 
 }

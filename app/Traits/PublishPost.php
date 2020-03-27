@@ -22,12 +22,19 @@ trait PublishPost
                 ->buildOauth($url, $requestMethod)
                 ->setPostfields($postfields)
                 ->performRequest();
+            
+            $decodedResponse = json_decode($response, true);
+
+            // Attach twitter status id in pivot table 'spost_twitter_profile'
+            $spost->twitter_profiles()->syncWithoutDetaching([
+                $value => [ 'twitter_status_id' => $decodedResponse['id'] ]
+            ]);
+            
         }
         
         $spost->update([
             'posted'                => true,
         ]);
+        
     }
-
-
 }

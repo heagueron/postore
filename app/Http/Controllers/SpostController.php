@@ -53,8 +53,11 @@ class SpostController extends Controller
             // Go ahead and create a twitter profile in postore app (not just a Twitter user).
             return redirect('/twitter_profiles/create'); 
         }
+
+        $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
+        $currentDate = Str::of($now)->limit(16,'');
         
-        return view('sposts.create', compact('user'));
+        return view('sposts.create', compact('user', 'currentDate'));
     }
 
     /**
@@ -113,6 +116,11 @@ class SpostController extends Controller
         $spost->twitter_profiles()->attach( array_values($tpIds) );
 
         return $spost;
+    }
+
+    public function imageUpload()
+    {
+        dd('ok, lets load that marvelous image');
     }
 
 }

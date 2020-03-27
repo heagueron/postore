@@ -18,6 +18,7 @@ class CreateSpostTwitterProfileTable extends Migration
             $table->id();
             $table->unsignedBigInteger('spost_id');
             $table->unsignedBigInteger('twitter_profile_id');
+            $table->unsignedBigInteger('twitter_status_id')->nullable();
             $table->timestamps();
         });
     }

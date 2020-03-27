@@ -55,6 +55,8 @@ Route::get('/sposts/create', 'SpostController@create')->name('sposts.create');
 Route::post('/sposts', 'SpostController@store');
 Route::post('/sposts', 'SpostController@sendNow')->name('sposts.send_now');
 
+Route::post('/sposts/imageUpload', 'SpostController@imageUpload')->name('sposts.image');
+
 
  //Clear route cache:
  Route::get('/route-cache', function() {

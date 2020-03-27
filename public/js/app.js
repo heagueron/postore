@@ -52866,20 +52866,16 @@ var app = new Vue({
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 var path = "http://localhost:8000/";
 $(document).ready(function () {
+  // Left sidebar navigation
   $('#sidebarCollapse').on('click', function () {
     if ($('#p-sidebar').css("display") == 'none') {
-      //alert('show sidebar');
       $('#p-content').removeClass('col-12').addClass('col-md-10 col-sm-12');
       $('#p-sidebar').css("display", "block");
     } else {
-      //alert('hide sidebar');
       $('#p-sidebar').css("display", "none");
       $('#p-content').removeClass('col-md-10 col-sm-12').addClass('col-12');
     }
-  }); //let now = new Date().toISOString().substr(0, 10);
-
-  var now = new Date().toISOString().substr(0, 16);
-  $('#post_date').val(now); // TODO: adjust initial value with proper timezone (It shows UTC)
+  }); // Inmediate posting
 
   $('#post_now').on('click', function () {
     $.ajax({
@@ -52889,17 +52885,19 @@ $(document).ready(function () {
       delay: 250,
       data: function data(params) {
         return {
-          _token: CSRF_TOKEN //post_text:  $('#post_text').html(),    
-
+          _token: CSRF_TOKEN
         };
       },
-      processResults: function processResults(response) {
-        console.log(response); //   return {
-        //     results: response
-        //   };
-      },
+      processResults: function processResults(response) {},
       cache: true
     });
+  }); // Media Upload
+  //$('#fileupload').fileupload();
+  // New post form
+
+  $("#add_new_post").on('click', function () {
+    $("#add_new_post").css("display", "none");
+    $("#create_post_content").toggleClass('collapse');
   });
 });
 

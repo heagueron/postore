@@ -99,12 +99,7 @@ class TwitterProfileController extends Controller
             ->setPostfields($postfields)
             ->performRequest();
         
-        // dd($response3);
-
-        $oauth_token =
-        // $oauth_token_secret =
-        // $twitter_user_id =
-        // $screen_name =
+        // TODO: use json_decode instead of Str
 
         $oauth_token = Str::of($response3)
             ->after('oauth_token=')
