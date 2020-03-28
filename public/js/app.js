@@ -52865,9 +52865,12 @@ var app = new Vue({
 });
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 var path = "http://localhost:8000/";
-$(document).ready(function () {
+$(document).ready(function (e) {
   // Left sidebar navigation
-  $('#sidebarCollapse').on('click', function () {
+  $('#sidebarCollapse').on('click', function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+
     if ($('#p-sidebar').css("display") == 'none') {
       $('#p-content').removeClass('col-12').addClass('col-md-10 col-sm-12');
       $('#p-sidebar').css("display", "block");
@@ -52877,7 +52880,9 @@ $(document).ready(function () {
     }
   }); // Inmediate posting
 
-  $('#post_now').on('click', function () {
+  $('#post_now').on('click', function (e) {
+    e.stopPropagation();
+    e.preventDefault();
     $.ajax({
       url: path + "sposts/sendNow",
       type: "post",
@@ -52895,8 +52900,11 @@ $(document).ready(function () {
   //$('#fileupload').fileupload();
   // New post form
 
-  $("#add_new_post").on('click', function () {
+  $("#add_new_post").on('click', function (e) {
+    //e.stopPropagation();
+    e.preventDefault();
     $("#add_new_post").css("display", "none");
+    $("#new-compose-title").css("display", "block");
     $("#create_post_content").toggleClass('collapse');
   });
 });

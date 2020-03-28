@@ -68,7 +68,7 @@ class SpostController extends Controller
      */
 
     public function store(StoreSpost $request)
-    {      
+    {    dd( "store",request() );  
         $date=Carbon::createFromDate( request()->input('post_date') );
         $minDate = Carbon::now()->timezone(auth()->user()->timezone);
 
@@ -84,7 +84,7 @@ class SpostController extends Controller
     }
 
     public function sendNow( StoreSpost $request )
-    { 
+    {   dd( "sendNow",request() );
         $date = Carbon::now()->timezone(auth()->user()->timezone);
 
         $spost = $this->completeStore($date);

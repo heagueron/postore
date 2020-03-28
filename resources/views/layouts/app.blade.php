@@ -101,36 +101,64 @@
         <div class="row">
 
             <div class="col-md-2 col-sm-12" style="display:none;" id="p-sidebar">
-                <div class="sidebar-header">
-                    <h3>Postore</h3>
+
+                <div class="postore_left_icon_menu">
+                    <ul class="list-unstyled components" style="border:none;">
+                        <li class="mb-3">
+                            <a href="#">DR</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">DR</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">DR</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">DR</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">DR</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">DR</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">DR</a>
+                        </li>
+                    </ul>
                 </div>
 
-                <ul class="list-unstyled components" style="border:none;">
-                    <p>Choose an action</p>
-                    <li class="mb-3">
-                        <a href="{{ route('sposts.create') }}">SCHEDULER</a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#">SOCIAL ACCOUNTS</a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#">TIMETABLES</a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#">DRAFTS</a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#">FILE UPLOADS</a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#">SETTINGS</a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="#">HELP</a>
-                    </li>
-                </ul>
-        
-        
+                <div class="postore_left_expanded_menu">
+
+                    <ul class="list-unstyled components" style="border:none;">
+ 
+                        <li class="mb-3">
+                            <a href="{{ route('sposts.create') }}">SCHEDULER</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">SOCIAL ACCOUNTS</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">TIMETABLES</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">DRAFTS</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">FILE UPLOADS</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">SETTINGS</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#">HELP</a>
+                        </li>
+                    </ul> 
+                </div>
+                
+
+                
+                
             </div>
 
             <div class="col-12" id="p-content">

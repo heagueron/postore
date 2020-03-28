@@ -6,7 +6,7 @@ use App\ApiConnectors\TwitterGateway;
 trait PublishPost
 {
     public function publishTwitter(Spost $spost, $ids)
-    {   //dd('spost ids: ',$spost->text, $ids);
+    {   dd( request() );
         $url = 'https://api.twitter.com/1.1/statuses/update.json';
         $requestMethod = 'POST';
 

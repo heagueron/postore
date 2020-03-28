@@ -10886,8 +10886,8 @@ a.text-dark:focus {
 
 #p-sidebar {
   min-height: 100vh;
-  background: #7386D5;
-  color: #fff;
+  background: white;
+  color: black;
   transition: all 0.3s;
 }
 
@@ -10952,5 +10952,27 @@ a:focus {
   font-size: 1.2rem;
   display: block;
   padding: 0.2rem 0.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+
+  .postore_left_icon_menu {
+    display: block;
+  }
+
+  .postore_left_expanded_menu {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .postore_left_icon_menu {
+    display: none;
+  }
+
+  .postore_left_expanded_menu {
+    display: block;
+  }
 }
 
