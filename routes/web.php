@@ -53,10 +53,12 @@ Route::get('/stweets/statuses', 'StweetController@twitterStatuses')->name('stwee
 Route::get('/sposts', 'SpostController@index')->name('sposts.index');
 Route::get('/sposts/create', 'SpostController@create')->name('sposts.create');
 Route::post('/sposts', 'SpostController@store');
-Route::post('/sposts', 'SpostController@sendNow')->name('sposts.send_now');
+Route::post('/sposts/sendNow', 'SpostController@sendNow')->name('sposts.send_now');
 
 Route::post('/sposts/imageUpload', 'SpostController@imageUpload')->name('sposts.image');
 
+Route::get('/sposts/schedule', 'SpostController@schedule')->name('sposts.schedule');
+//Route::post('/sposts', 'SpostController@store');
 
  //Clear route cache:
  Route::get('/route-cache', function() {

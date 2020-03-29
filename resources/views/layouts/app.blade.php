@@ -32,7 +32,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    
 
 </head>
 <body>
@@ -51,13 +51,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('stweets.index') }}">My stweets</a>
+                            <a class="nav-link" href="{{ route('sposts.schedule') }}">Scheduler</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('stweets.create') }}">Create stweet</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('stweets.statuses') }}">Recent tweets</a>
+                            <a class="nav-link" href="#">Statistics</a>
                         </li>
 
                     </ul>
@@ -133,7 +130,7 @@
                     <ul class="list-unstyled components" style="border:none;">
  
                         <li class="mb-3">
-                            <a href="{{ route('sposts.create') }}">SCHEDULER</a>
+                            <a href="{{ route('sposts.schedule') }}">SCHEDULER</a>
                         </li>
                         <li class="mb-3">
                             <a href="#">SOCIAL ACCOUNTS</a>
@@ -182,6 +179,6 @@
 
     </div>
 
-
+    
 </body>
 </html>

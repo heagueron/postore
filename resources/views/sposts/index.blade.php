@@ -1,10 +1,5 @@
-@extends('layouts.app')
-
-@section('title', 'Scheduled posts')
-
-@section('content')
-
 <h3> Your scheduled posts</h3>
+<hr>
 
 <table class="table table-sm">
   <thead>
@@ -38,6 +33,3 @@
   </tbody>
 
 </table>
-
-
-@endsection

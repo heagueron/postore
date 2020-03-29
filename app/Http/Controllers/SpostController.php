@@ -43,7 +43,7 @@ class SpostController extends Controller
      * @return Response
      */
 
-    public function create()
+    public function schedule()
     {
         $user = \Auth::user();
 
@@ -54,10 +54,13 @@ class SpostController extends Controller
             return redirect('/twitter_profiles/create'); 
         }
 
+        $sposts = $user->sposts()->get();
+
         $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
         $currentDate = Str::of($now)->limit(16,'');
         
-        return view('sposts.create', compact('user', 'currentDate'));
+        return view('sposts.schedule', compact('user', 'sposts', 'currentDate'));
+
     }
 
     /**
@@ -83,7 +86,7 @@ class SpostController extends Controller
 
     }
 
-    public function sendNow( StoreSpost $request )
+    public function sendNow ()
     {   dd( "sendNow",request() );
         $date = Carbon::now()->timezone(auth()->user()->timezone);
 

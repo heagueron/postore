@@ -75,25 +75,37 @@ $( document ).ready(function(e) {
     $('#post_now').on('click', function (e) {
         e.stopPropagation();
         e.preventDefault();
-        $.ajax({
-            url: path + "sposts/sendNow",
-            type: "post",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-              return {
-                _token: CSRF_TOKEN,    
-              };
-            },
-            processResults: function (response) {
-            },
-            cache: true
-        }); 
-    })
+        console.log("POST NOW!");
+        $("#submit-schedule").click();
+    });
 
-    // Media Upload
+    // $('#post_now').on('click', function (e) {
+    //     e.stopPropagation();
+    //     e.preventDefault();
 
-    //$('#fileupload').fileupload();
+    //     $.ajax({
+    //         url: path + "sposts/sendNow",
+    //         type: "post",
+    //         dataType: 'json',
+    //         delay: 250,
+    //         // data: function (params) {
+    //         //   return {
+    //         //     _token:     CSRF_TOKEN,
+    //         //     mediaFiles: upload.cachedFileArray     
+    //         //   };
+    //         // },
+    //         data: {
+    //             _token      : CSRF_TOKEN,
+    //             user_id     : $("#post-user-id").val(),
+    //             text        : $("#post_text").html(),
+    //         },
+    //         processResults: function (response) {
+    //             console.log(response)
+    //         },
+    //         cache: true
+    //     }); 
+    // })
+
 
     // New post form
     $("#add_new_post").on('click', function (e) {
@@ -105,4 +117,46 @@ $( document ).ready(function(e) {
     });
 
 });
+
+// Media files
+
+$( document ).ready(function(e) {
+    $("#add-media-button").on('click', function (e) {
+        //e.stopPropagation();
+        e.preventDefault();
+        let mediaCount = parseInt( $("#media-files-count").val());
+        let targetInput = $("#imageUpload"+mediaCount);
+        //console.log($("#imageUpload"+mediaCount))
+        targetInput.click();  
+    });
+
+    function readURL(input) {
+        
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                $(".avatar-preview").css("display","block");
+                let mediaCount = parseInt( $("#media-files-count").val());
+                $("#media-files-count").val(mediaCount+1);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imageUpload0").change(function() {
+        readURL(this);
+    });
+    $("#imageUpload1").change(function() {
+        readURL(this);
+    });
+    $("#imageUpload2").change(function() {
+        readURL(this);
+    });
+    $("#imageUpload3").change(function() {
+        readURL(this);
+    });
+})
+
 
