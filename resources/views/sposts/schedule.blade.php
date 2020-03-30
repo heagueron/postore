@@ -14,7 +14,7 @@
 
 <div class="collapse" id="create_post_content">
 
-    <form action="/sposts" method="post">
+    <form action="/sposts" method="post" enctype="multipart/form-data">
         @csrf
 
         {{-- Social profiles --}}
@@ -45,22 +45,26 @@
         {{-- Media file loader --}}
         <div class="media-files-container" id="media-files-container">
             <input type="hidden" name="media-files-count" value="0" id="media-files-count">
-            <input type='file' id="imageUpload0" name="files[]" style="display:none" accept=".png, .jpg, .jpeg" multiple/>
-            <input type='file' id="imageUpload1" name="files[]" style="display:none" accept=".png, .jpg, .jpeg" multiple/>
-            <input type='file' id="imageUpload2" name="files[]" style="display:none" accept=".png, .jpg, .jpeg" multiple/>
-            <input type='file' id="imageUpload3" name="files[]" style="display:none" accept=".png, .jpg, .jpeg" multiple/>
+            <input type='file' id="imageUpload0" name="media_1" style="display:none" accept=".png, .jpg, .jpeg" />
+            <input type='file' id="imageUpload1" name="media_2" style="display:none" accept=".png, .jpg, .jpeg" />
+            <input type='file' id="imageUpload2" name="media_3" style="display:none" accept=".png, .jpg, .jpeg" />
+            <input type='file' id="imageUpload3" name="media_4" style="display:none" accept=".png, .jpg, .jpeg" />
             <!-- <label for="imageUpload">label</label> -->
 
             {{-- Preview media files --}}
-            <div class="avatar-preview mb-2" style="display:none">
-                <div id="imagePreview" class="imagePreview"></div>
+            <div class="avatar-preview d-flex mb-2" style="display:none" id="image-preview-container">
+                <!-- <div id="imagePreview" class="imagePreview"></div> -->
             </div>
+            @error('media_1') <div class="alert alert-danger">{{ $message }}</div> @enderror
+            @error('media_2') <div class="alert alert-danger">{{ $message }}</div> @enderror
+            @error('media_3') <div class="alert alert-danger">{{ $message }}</div> @enderror
+            @error('media_4') <div class="alert alert-danger">{{ $message }}</div> @enderror
             {{-- Add media button --}}
             <button class="add-media-button btn btn-primary mb-4"  id="add-media-button" title="Add media" tabindex=""> 
                 <i class="fab fa-instagram"></i> 
                 <span class="ml-2">Add file</span> 
             </button>
-
+            
         </div>
 
         {{-- Date and time picker --}}
@@ -86,6 +90,7 @@
         </div>       
         
         <input type="hidden" name="user_id" value="{{ $user->id }}" id="post-user-id">
+        <input type="hidden" name="send-now" value="false" id="send-now-flag">
 
         <button class="btn btn-primary" type="submit" id="submit-schedule">Schedule the post</button>
         <button class="btn btn-success" id="post_now">Post it now!</button>

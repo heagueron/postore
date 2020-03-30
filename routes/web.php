@@ -66,6 +66,9 @@ Route::get('/sposts/schedule', 'SpostController@schedule')->name('sposts.schedul
     return 'Routes cache cleared';
 });
 
+
+
+
 //Clear config cache:
 Route::get('/config-cache', function() {
     $exitCode = Artisan::call('config:cache');

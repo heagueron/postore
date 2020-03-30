@@ -20,6 +20,10 @@ class CreateSpostsTable extends Migration
             $table->timestamp('post_date')->nullable();
             $table->boolean('posted')->default(false);
             $table->unsignedInteger('user_id');
+            $table->string('media_1')->nullable();
+            $table->string('media_2')->nullable();
+            $table->string('media_3')->nullable();
+            $table->string('media_4')->nullable();
             $table->timestamps();
         });
     }

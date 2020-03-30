@@ -27,6 +27,10 @@ class StoreSpost extends FormRequest
             'text'                  => 'required|min:1|max:240',
             'user_id'               => 'required',
             'post_date'             => 'required',
+            'media_1'               => 'nullable|file|image|max:5000',
+            'media_2'               => 'nullable|file|image|max:5000',
+            'media_3'               => 'nullable|file|image|max:5000',
+            'media_4'               => 'nullable|file|image|max:5000'
             //'twitter_accounts'      => 'required',
             //"twitter_accounts.*"    => "required|string",
         ];
@@ -39,6 +43,7 @@ class StoreSpost extends FormRequest
             'text.required'             => 'Please enter a text for your post.',
             'post_date.required'        => 'Please select a date and time to schedule your post.',
             'twitter_accounts.required' => 'Please select at least one social profile.',
+            'media_1.file'              => 'Media file(s) could not be uploaded.'
         ];
     }
 }

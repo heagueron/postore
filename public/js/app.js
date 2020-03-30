@@ -52884,7 +52884,10 @@ $(document).ready(function (e) {
     e.stopPropagation();
     e.preventDefault();
     console.log("POST NOW!");
-    $("#submit-schedule").click();
+    $("#send-now-flag").val(true);
+    setTimeout(function () {
+      $("#submit-schedule").click();
+    }, 500);
   }); // $('#post_now').on('click', function (e) {
   //     e.stopPropagation();
   //     e.preventDefault();
@@ -52926,8 +52929,7 @@ $(document).ready(function (e) {
     //e.stopPropagation();
     e.preventDefault();
     var mediaCount = parseInt($("#media-files-count").val());
-    var targetInput = $("#imageUpload" + mediaCount); //console.log($("#imageUpload"+mediaCount))
-
+    var targetInput = $("#imageUpload" + mediaCount);
     targetInput.click();
   });
 
@@ -52936,9 +52938,13 @@ $(document).ready(function (e) {
       var reader = new FileReader();
 
       reader.onload = function (e) {
-        $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-        $(".avatar-preview").css("display", "block");
+        $(".avatar-preview").css("display", "none");
         var mediaCount = parseInt($("#media-files-count").val());
+        var spot = $('<div class="imagePreview"></div>');
+        spot.css('background-image', 'url(' + e.target.result + ')');
+        spot.appendTo('#image-preview-container');
+        $(".avatar-preview").css("display", "block"); // Update media counter
+
         $("#media-files-count").val(mediaCount + 1);
       };
 

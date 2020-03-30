@@ -76,7 +76,11 @@ $( document ).ready(function(e) {
         e.stopPropagation();
         e.preventDefault();
         console.log("POST NOW!");
-        $("#submit-schedule").click();
+        $("#send-now-flag").val(true);
+        setTimeout(() => {
+            $("#submit-schedule").click();
+        }, 500);
+        
     });
 
     // $('#post_now').on('click', function (e) {
@@ -126,7 +130,6 @@ $( document ).ready(function(e) {
         e.preventDefault();
         let mediaCount = parseInt( $("#media-files-count").val());
         let targetInput = $("#imageUpload"+mediaCount);
-        //console.log($("#imageUpload"+mediaCount))
         targetInput.click();  
     });
 
@@ -137,9 +140,18 @@ $( document ).ready(function(e) {
             var reader = new FileReader();
             
             reader.onload = function(e) {
-                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-                $(".avatar-preview").css("display","block");
+
+                $(".avatar-preview").css("display","none");
+
                 let mediaCount = parseInt( $("#media-files-count").val());
+
+                let spot = $('<div class="imagePreview"></div>');
+                spot.css('background-image', 'url('+e.target.result +')');
+                spot.appendTo('#image-preview-container');
+                
+                $(".avatar-preview").css("display","block");
+
+                // Update media counter
                 $("#media-files-count").val(mediaCount+1);
             }
             reader.readAsDataURL(input.files[0]);

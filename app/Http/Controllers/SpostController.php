@@ -71,54 +71,63 @@ class SpostController extends Controller
      */
 
     public function store(StoreSpost $request)
-    {    dd( "store",request() );  
+    {   
         $date=Carbon::createFromDate( request()->input('post_date') );
         $minDate = Carbon::now()->timezone(auth()->user()->timezone);
 
-        // Check that date is greater than current date
-        if ( ! $date->gte( $minDate ) ) {
-            return back()->withInput()->with('date_error', 'Please select a date after current date');
+        // Check date
+        if ( ! $date->gte( $minDate ) && request()->input('send-now') == "false" ) {
+            return back()
+                ->withInput()
+                ->with('date_error', 'Please select a date after current date');
         }
 
-        $this->completeStore($date);
-
-        return redirect('/sposts')->with('flash', 'New post scheduled!');
-
-    }
-
-    public function sendNow ()
-    {   dd( "sendNow",request() );
-        $date = Carbon::now()->timezone(auth()->user()->timezone);
-
-        $spost = $this->completeStore($date);
-        
-        //dd('post and profiles',$spost,request()->input('twitter_accounts'));
-        // Trait to publish a post to a set of social profiles
-        $this->publishTwitter($spost, request()->input('twitter_accounts') );
-
-        return redirect('/sposts')->with('flash', 'New post sent!');
-
-    }
-
-    private function completeStore($date){
         // Check social profiles
         $tpIds = request()->input('twitter_accounts');
         if ( is_null($tpIds) ){
-            return back()->withInput()->with('profile_error', 'Please select at least one social profile.');
+            return back()
+                ->withInput()
+                ->with('profile_error', 'Please select at least one social profile.');
         }
 
         // Create the scheduled post
         $spost = Spost::create([
-            'text'                  => request()->input('text'),
-            'user_id'               => request()->input('user_id'),
+            'text'                  => request()->text,
+            'user_id'               => request()->user_id,
             'post_date'             => $date->toDateTimeString(),
             'posted'                => false,
+            'media_1'               => request()->media_1,
+            'media_2'               => request()->media_2,
+            'media_3'               => request()->media_3,
+            'media_4'               => request()->media_4,
         ]);
+
+        // Add media to the model
+        if( request()->input('media-files-count') > 0 ){
+            $this->storeMedia($spost);
+        } 
 
         // Attach social profiles
         $spost->twitter_profiles()->attach( array_values($tpIds) );
 
-        return $spost;
+        // Check inmediate posting
+        if( request()->input('send-now') == "true" ) {
+            // Trait to publish a post to a set of social profiles
+            $this->publishTwitter($spost, request()->input('twitter_accounts') );
+        }
+
+        return redirect('/sposts/schedule')->with('flash', 'New post scheduled!');
+
+    }
+
+    private function storeMedia($spost)
+    {
+        $spost->update([
+                'media_1' => is_null( request()->media_1 ) ? '' : request()->media_1->store('uploads', 'public'),
+                'media_2' => is_null( request()->media_2 ) ? '' : request()->media_2->store('uploads', 'public'),
+                'media_3' => is_null( request()->media_3 ) ? '' : request()->media_3->store('uploads', 'public'),
+                'media_4' => is_null( request()->media_4 ) ? '' : request()->media_4->store('uploads', 'public'),
+            ]);
     }
 
     public function imageUpload()
