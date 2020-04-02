@@ -52888,32 +52888,7 @@ $(document).ready(function (e) {
     setTimeout(function () {
       $("#submit-schedule").click();
     }, 500);
-  }); // $('#post_now').on('click', function (e) {
-  //     e.stopPropagation();
-  //     e.preventDefault();
-  //     $.ajax({
-  //         url: path + "sposts/sendNow",
-  //         type: "post",
-  //         dataType: 'json',
-  //         delay: 250,
-  //         // data: function (params) {
-  //         //   return {
-  //         //     _token:     CSRF_TOKEN,
-  //         //     mediaFiles: upload.cachedFileArray     
-  //         //   };
-  //         // },
-  //         data: {
-  //             _token      : CSRF_TOKEN,
-  //             user_id     : $("#post-user-id").val(),
-  //             text        : $("#post_text").html(),
-  //         },
-  //         processResults: function (response) {
-  //             console.log(response)
-  //         },
-  //         cache: true
-  //     }); 
-  // })
-  // New post form
+  }); // New post form
 
   $("#add_new_post").on('click', function (e) {
     //e.stopPropagation();
@@ -52936,16 +52911,66 @@ $(document).ready(function (e) {
   function readURL(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
+      var mediaCount = parseInt($("#media-files-count").val());
+      mediaCount += 1;
 
       reader.onload = function (e) {
-        $(".avatar-preview").css("display", "none");
-        var mediaCount = parseInt($("#media-files-count").val());
-        var spot = $('<div class="imagePreview"></div>');
-        spot.css('background-image', 'url(' + e.target.result + ')');
-        spot.appendTo('#image-preview-container');
-        $(".avatar-preview").css("display", "block"); // Update media counter
+        var spot1 = $("<div class=\"imagePreview\" id=\"imagePreview1\">\n                                        <i class=\"far fa-times-circle removeMedia\"></i>\n                                    </div>");
+        var spot2 = $("<div class=\"imagePreview\" id=\"imagePreview2\">\n                                        <i class=\"far fa-times-circle removeMedia\"></i>\n                                    </div>");
+        var spot3 = $("<div class=\"imagePreview\" id=\"imagePreview3\">\n                                        <i class=\"far fa-times-circle removeMedia\"></i>\n                                    </div>");
+        var spot4 = $("<div class=\"imagePreview\" id=\"imagePreview4\">\n                                        <i class=\"far fa-times-circle removeMedia\"></i>\n                                    </div>");
 
-        $("#media-files-count").val(mediaCount + 1);
+        switch (mediaCount) {
+          case 1:
+            spot1.css('background-image', 'url(' + e.target.result + ')');
+            spot1.appendTo('#previewColumn1');
+            break;
+
+          case 2:
+            $("#imagePreview1").remove();
+            var bg1 = sessionStorage.getItem("bg1");
+            spot1.css('background-image', bg1).css('width', '115px');
+            spot1.appendTo('#previewColumn1');
+            spot2.css('background-image', 'url(' + e.target.result + ')');
+            spot2.css('width', '115px');
+            spot2.appendTo('#previewColumn2');
+            break;
+
+          case 3:
+            $("#imagePreview2").remove();
+            var bg2 = sessionStorage.getItem("bg2");
+            spot2.css('background-image', bg2).css('height', '115px').css('width', '115px');
+            spot2.appendTo('#previewColumn2');
+            spot3.css('background-image', 'url(' + e.target.result + ')');
+            spot3.css('width', '115px').css('height', '115px');
+            spot3.appendTo('#previewColumn2'); //column2.appendTo('#image-preview-container');
+
+            break;
+
+          case 4:
+            $("#imagePreview1").remove();
+            bg1 = sessionStorage.getItem("bg1");
+            spot1.css('background-image', bg1).css('width', '115px').css('height', '115px');
+            spot1.appendTo('#previewColumn1');
+            $("#imagePreview3").remove();
+            var bg3 = sessionStorage.getItem("bg3");
+            spot3.css('background-image', bg3).css('width', '115px').css('height', '115px');
+            spot3.appendTo('#previewColumn1');
+            spot4.css('background-image', 'url(' + e.target.result + ')');
+            spot4.css('width', '115px').css('height', '115px');
+            spot4.appendTo('#previewColumn2');
+            break;
+
+          default:
+            console.log("Maximun image files count exceeded!");
+            break;
+        }
+
+        $(".avatar-preview").css("display", "block"); // Update media counter
+        //mediaCount +=1;
+
+        $("#media-files-count").val(mediaCount);
+        sessionStorage.setItem("bg" + mediaCount, 'url(' + e.target.result + ')');
       };
 
       reader.readAsDataURL(input.files[0]);

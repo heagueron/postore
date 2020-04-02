@@ -49,10 +49,11 @@
             <input type='file' id="imageUpload1" name="media_2" style="display:none" accept=".png, .jpg, .jpeg" />
             <input type='file' id="imageUpload2" name="media_3" style="display:none" accept=".png, .jpg, .jpeg" />
             <input type='file' id="imageUpload3" name="media_4" style="display:none" accept=".png, .jpg, .jpeg" />
-            <!-- <label for="imageUpload">label</label> -->
 
             {{-- Preview media files --}}
-            <div class="avatar-preview d-flex mb-2" style="display:none" id="image-preview-container">
+            <div class="avatar-preview d-flex mb-2" id="image-preview-container">
+                <div class="d-flex flex-column" id="previewColumn1"></div>
+                <div class="d-flex flex-column" id="previewColumn2"></div>
                 <!-- <div id="imagePreview" class="imagePreview"></div> -->
             </div>
             @error('media_1') <div class="alert alert-danger">{{ $message }}</div> @enderror

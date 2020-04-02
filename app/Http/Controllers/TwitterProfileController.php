@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\ApiConnectors\TwitterGateway;
 
+use Abraham\TwitterOAuth\TwitterOAuth;
+
 
 class TwitterProfileController extends Controller
 {
@@ -18,7 +20,19 @@ class TwitterProfileController extends Controller
 
     public function create()
     {
-        // $this->authorize('create', TwitterProfile::class);
+        // $connection = new TwitterOAuth(
+        //     config('ttwitter.CONSUMER_KEY'), 
+        //     config('ttwitter.CONSUMER_SECRET'), 
+        //     config('ttwitter.ACCESS_TOKEN'), 
+        //     config('ttwitter.ACCESS_TOKEN_SECRET')
+        // );
+
+        // // $content = $connection->get("account/verify_credentials");
+        
+        // $access_token = $connection->oauth("oauth/request_token", ["oauth_callback" => "http%3A%2F%2F127.0.0.1%3A8000%2Ftwitter_profiles%2FconvertToken"]);
+        // //$resp = $connection->post("oauth/request_token", ["oauth_callback" => "http%3A%2F%2F127.0.0.1%3A8000%2Ftwitter_profiles%2FconvertToken"]);
+        // dd('after token request');
+
 
         // STEP 1: POST oauth/request_token
         // Create a request for a consumer application to obtain a request token.
@@ -53,7 +67,6 @@ class TwitterProfileController extends Controller
             'oauth_token_secret' => $oauth_token_secret
         ]);
 
-        // dd( $response1, $oauth_token, $oauth_token_secret);
 
         // Step 2: GET oauth/authorize
         // Have the user authenticate, and send the consumer application a request token.
@@ -67,7 +80,7 @@ class TwitterProfileController extends Controller
             ->buildOauth($url, $requestMethod)
             ->performRequest();
 
-        //dd($response2);
+
     }
 
 
@@ -77,7 +90,7 @@ class TwitterProfileController extends Controller
         $tokenFromStep2 = request()->oauth_token;
         $oauth_verifier = request()->oauth_verifier;
 
-        // dd(request(),$tokenFromStep2,$oauth_verifier);
+
 
         if( !session()->get('oauth_token') == $tokenFromStep2 ){
             dd("Token mismatch. Please log out Postore, log in and try again.");
@@ -117,7 +130,7 @@ class TwitterProfileController extends Controller
             ->after('screen_name=')
             ->before(' ◀');
 
-        // dd( $oauth_token, $oauth_token_secret, $twitter_user_id, $screen_name);
+ 
         
         // Create the Twiter Profile
         \App\TwitterProfile::create(

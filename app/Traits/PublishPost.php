@@ -2,6 +2,8 @@
 
 use App\Spost;
 use App\ApiConnectors\TwitterGateway;
+use Abraham\TwitterOAuth\TwitterOAuth;
+
 
 trait PublishPost
 {
@@ -13,7 +15,7 @@ trait PublishPost
         $this->profileIds = $ids;
 
         // Check and register media files
-        $this->checkRegisterMedia();
+        $this->checkRegisterMedia($spost);
 
         // Send the post
         $url = 'https://api.twitter.com/1.1/statuses/update.json';
@@ -34,11 +36,22 @@ trait PublishPost
             
             $decodedResponse = json_decode($response, true);
 
-            // Attach twitter status id in pivot table 'spost_twitter_profile'
-            $spost->twitter_profiles()->syncWithoutDetaching([
-                $value => [ 'twitter_status_id' => $decodedResponse['id'] ]
-            ]);
-            
+            if ( !array_key_exists("errors",$decodedResponse) ) 
+            {   
+                // Tweet posted succesfully
+                // dd("posted succesfully", $decodedResponse );
+                
+                // Attach twitter status id in pivot table 'spost_twitter_profile'
+                $spost->twitter_profiles()->syncWithoutDetaching([
+                    $value => [ 'twitter_status_id' => $decodedResponse['id'] ]
+                ]);
+                
+            } 
+            else 
+            {   // TODO: handle error.
+                dd("Tweet not published. Contact site administration", $decodedResponse);
+            }
+    
         }
         
         $spost->update([
@@ -47,7 +60,7 @@ trait PublishPost
         
     }
 
-    private function checkRegisterMedia()
+    private function checkRegisterMedia($spost)
     {
         // Build the twitter connection class
         $url = 'https://upload.twitter.com/1.1/media/upload.json';
@@ -57,7 +70,7 @@ trait PublishPost
         $twitter = new TwitterGateway( $this->profileIds[0] );
 
         if ( !is_null( request()->media_1 )) {
-            $this->registerMedia( $twitter, $requestMethod, $url, request()->media_1);
+            $this->registerMedia( $twitter, $requestMethod, $url, $spost);
         }
         if ( !is_null( request()->media_2 )) {
             $this->registerMedia( $twitter, $requestMethod, $url, request()->media_2);
@@ -71,21 +84,46 @@ trait PublishPost
 
     }
 
-    private function registerMedia($twitter, $requestMethod, $url, $media)
+    private function registerMedia($twitter, $requestMethod, $url, $spost)
     {
+        $connection = new TwitterOAuth(
+            config('ttwitter.CONSUMER_KEY'), 
+            config('ttwitter.CONSUMER_SECRET'), 
+            config('ttwitter.ACCESS_TOKEN'), 
+            config('ttwitter.ACCESS_TOKEN_SECRET')
+        );
+
+        $media1Response = $connection->upload(
+            'media/upload', 
+            ['media' => request()->media_1 ]
+        );
+        dd('media1Response: ', $media1Response);
+
         $postfields = array(
-            "media"        => $media,
+            "media"         => $media,
+            "command"       => "INIT",
+            "total_bytes"   => filesize( $media ),
+            "media_type"    => 'image/' . $media->extension()
         );
         
-        //dd('about to request media id');
         
         $response = $twitter->connection
             ->buildOauth($url, $requestMethod)
             ->setPostfields($postfields)
             ->performRequest();
+
         
         $decodedResponse = json_decode($response, true);
-        dd($decodedResponse);
+        
+        if ( !array_key_exists("errors",$decodedResponse) ) 
+        {
+            dd("success registering", $decodedResponse );
+        } 
+        else 
+        {   // TODO: handle error.
+            dd("failed registering", $decodedResponse);
+        }
+
     }
     
 }

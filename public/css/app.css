@@ -10977,10 +10977,24 @@ a:focus {
 }
 
 .imagePreview {
-  width: 150px;
-  height: 150px;
+  width: 240px;
+  height: 240px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  margin: 5px;
+  border-radius: 14px;
+  position: relative;
+}
+
+.imagePreview .removeMedia {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  color: white;
+  background-color: grey;
+  border-radius: 100%;
+  cursor: pointer;
+  z-index: 10;
 }
 

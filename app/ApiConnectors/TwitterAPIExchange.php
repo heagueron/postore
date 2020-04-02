@@ -246,11 +246,12 @@ class TwitterAPIExchange
 
         $postfields = $this->getPostfields();
 
-        if (!is_null($postfields)) {
+        //if (!is_null($postfields)) {
+        if ( !is_null($postfields) && ( $url != 'https://upload.twitter.com/1.1/media/upload.json') ){
             foreach ($postfields as $key => $value) {
                 $oauth[$key] = $value;
             }
-        }
+        } 
 
         $base_info = $this->buildBaseString($url, $requestMethod, $oauth);
         $composite_key = rawurlencode($consumer_secret) . '&' . rawurlencode($oauth_access_token_secret);

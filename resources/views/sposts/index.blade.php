@@ -1,5 +1,4 @@
 <h3> Your scheduled posts</h3>
-<hr>
 
 <table class="table table-sm">
   <thead>
