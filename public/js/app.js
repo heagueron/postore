@@ -52827,6 +52827,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./media */ "./resources/js/media.js");
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * Handle events for flash messages
@@ -52896,98 +52898,6 @@ $(document).ready(function (e) {
     $("#add_new_post").css("display", "none");
     $("#new-compose-title").css("display", "block");
     $("#create_post_content").toggleClass('collapse');
-  });
-}); // Media files
-
-$(document).ready(function (e) {
-  $("#add-media-button").on('click', function (e) {
-    //e.stopPropagation();
-    e.preventDefault();
-    var mediaCount = parseInt($("#media-files-count").val());
-    var targetInput = $("#imageUpload" + mediaCount);
-    targetInput.click();
-  });
-
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      var mediaCount = parseInt($("#media-files-count").val());
-      mediaCount += 1;
-
-      reader.onload = function (e) {
-        var spot1 = $("<div class=\"imagePreview\" id=\"imagePreview1\">\n                                        <i class=\"far fa-times-circle removeMedia\"></i>\n                                    </div>");
-        var spot2 = $("<div class=\"imagePreview\" id=\"imagePreview2\">\n                                        <i class=\"far fa-times-circle removeMedia\"></i>\n                                    </div>");
-        var spot3 = $("<div class=\"imagePreview\" id=\"imagePreview3\">\n                                        <i class=\"far fa-times-circle removeMedia\"></i>\n                                    </div>");
-        var spot4 = $("<div class=\"imagePreview\" id=\"imagePreview4\">\n                                        <i class=\"far fa-times-circle removeMedia\"></i>\n                                    </div>");
-
-        switch (mediaCount) {
-          case 1:
-            spot1.css('background-image', 'url(' + e.target.result + ')');
-            spot1.appendTo('#previewColumn1');
-            break;
-
-          case 2:
-            $("#imagePreview1").remove();
-            var bg1 = sessionStorage.getItem("bg1");
-            spot1.css('background-image', bg1).css('width', '115px');
-            spot1.appendTo('#previewColumn1');
-            spot2.css('background-image', 'url(' + e.target.result + ')');
-            spot2.css('width', '115px');
-            spot2.appendTo('#previewColumn2');
-            break;
-
-          case 3:
-            $("#imagePreview2").remove();
-            var bg2 = sessionStorage.getItem("bg2");
-            spot2.css('background-image', bg2).css('height', '115px').css('width', '115px');
-            spot2.appendTo('#previewColumn2');
-            spot3.css('background-image', 'url(' + e.target.result + ')');
-            spot3.css('width', '115px').css('height', '115px');
-            spot3.appendTo('#previewColumn2'); //column2.appendTo('#image-preview-container');
-
-            break;
-
-          case 4:
-            $("#imagePreview1").remove();
-            bg1 = sessionStorage.getItem("bg1");
-            spot1.css('background-image', bg1).css('width', '115px').css('height', '115px');
-            spot1.appendTo('#previewColumn1');
-            $("#imagePreview3").remove();
-            var bg3 = sessionStorage.getItem("bg3");
-            spot3.css('background-image', bg3).css('width', '115px').css('height', '115px');
-            spot3.appendTo('#previewColumn1');
-            spot4.css('background-image', 'url(' + e.target.result + ')');
-            spot4.css('width', '115px').css('height', '115px');
-            spot4.appendTo('#previewColumn2');
-            break;
-
-          default:
-            console.log("Maximun image files count exceeded!");
-            break;
-        }
-
-        $(".avatar-preview").css("display", "block"); // Update media counter
-        //mediaCount +=1;
-
-        $("#media-files-count").val(mediaCount);
-        sessionStorage.setItem("bg" + mediaCount, 'url(' + e.target.result + ')');
-      };
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  $("#imageUpload0").change(function () {
-    readURL(this);
-  });
-  $("#imageUpload1").change(function () {
-    readURL(this);
-  });
-  $("#imageUpload2").change(function () {
-    readURL(this);
-  });
-  $("#imageUpload3").change(function () {
-    readURL(this);
   });
 });
 
@@ -53122,6 +53032,169 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_template_id_e4161ed6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/media.js":
+/*!*******************************!*\
+  !*** ./resources/js/media.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Media files
+$(document).ready(function (e) {
+  $("#add-media-button").on('click', function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log("More media?");
+    var mediaCount = parseInt($("#media-files-count").val());
+    console.log("mediaCount when clicked: ".concat(mediaCount));
+
+    if (mediaCount < 4) {
+      for (var i = 1; i < 5; i++) {
+        console.log("bg".concat(i), sessionStorage.getItem("bg".concat(i)));
+
+        if (!sessionStorage.getItem("bg".concat(i))) {
+          var targetInput = $("#imageUpload".concat(i - 1));
+          targetInput.click();
+          break;
+        }
+      }
+    } else {
+      console.log("Maximum media file number reached.");
+    }
+  });
+  var filesToRender = [];
+  sessionStorage.clear();
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      var mediaCount = parseInt($("#media-files-count").val());
+      mediaCount += 1;
+
+      reader.onload = function (e) {
+        // Get sub index from input and store image in session
+        var subIndex = input.name.slice(6, 7);
+        console.log(subIndex);
+        sessionStorage.setItem("bg".concat(subIndex), 'url(' + e.target.result + ')'); // Build image preview node
+
+        var bg = sessionStorage.getItem("bg".concat(subIndex));
+        var spot = $("<div class=\"imagePreview\">\n                                <i class=\"far fa-times-circle removeMedia\"></i></span>\n                            </div>");
+        spot.css('background-image', bg);
+        spot.attr('data-session-key', "bg".concat(subIndex));
+        spot.attr('data-input', input.id); // Add to files array and render
+
+        filesToRender.push(spot);
+        renderFiles(); // Update media counter
+
+        $("#media-files-count").val(mediaCount);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  } // Input events
+
+
+  $("#imageUpload0").change(function () {
+    console.log("Opening at input media 1");
+    readURL(this);
+  });
+  $("#imageUpload1").change(function () {
+    console.log("Opening at input media 2");
+    readURL(this);
+  });
+  $("#imageUpload2").change(function () {
+    console.log("Opening at input media 3");
+    readURL(this);
+  });
+  $("#imageUpload3").change(function () {
+    console.log("Opening at input media 4");
+    readURL(this);
+  }); // Show media file
+
+  var showMedia = function showMedia(element, position, heigth, width, column) {
+    if ($("*[data-preview-position=".concat(position, "]")).length) {
+      $("*[data-preview-position=".concat(position, "]")).remove();
+    }
+
+    var spot = filesToRender[element];
+    spot.attr("data-preview-position", position);
+    spot.css('height', heigth).css('width', width); //console.log(spot)
+
+    spot.appendTo("#previewColumn".concat(column));
+    console.log("appended in position ".concat(position, " the media:"));
+    console.log(spot);
+    spot.children().on('click', function (e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      removeMedia(spot);
+    });
+  }; // Organize grid for files preview
+
+
+  var renderFiles = function renderFiles() {
+    var mediaCount = filesToRender.length;
+    console.log("files to render: " + mediaCount);
+
+    switch (mediaCount) {
+      // showMedia signature: (element, position, heigth, width, column)
+      case 1:
+        showMedia(0, 1, 240, 240, 1);
+        break;
+
+      case 2:
+        showMedia(0, 1, 240, 115, 1);
+        showMedia(1, 2, 240, 115, 2);
+        break;
+
+      case 3:
+        showMedia(0, 1, 240, 115, 1);
+        showMedia(1, 2, 115, 115, 2);
+        showMedia(2, 4, 115, 115, 2);
+        break;
+
+      case 4:
+        showMedia(0, 1, 115, 115, 1);
+        showMedia(1, 3, 115, 115, 1);
+        showMedia(2, 2, 115, 115, 2);
+        showMedia(3, 4, 115, 115, 2);
+        break;
+
+      case 0:
+        console.log("No image to preview!");
+        break;
+
+      default:
+        console.log("Maximun image files count exceeded!");
+        break;
+    }
+
+    $(".avatar-preview").css("display", "block");
+  };
+
+  var removeMedia = function removeMedia(element) {
+    console.log("element to remove:");
+    console.log(element);
+    element.remove(); // Update media count
+
+    var mediaCount = parseInt($("#media-files-count").val());
+    mediaCount -= 1;
+    $("#media-files-count").val(mediaCount); // Remove from session
+
+    var key = element.attr("data-session-key");
+    sessionStorage.removeItem(key);
+    console.log("Removed session key ".concat(key));
+    console.log("Remains there: ".concat(sessionStorage.getItem(key))); // Remove from filesToRender array
+
+    var newArray = filesToRender.filter(function (element) {
+      return element.attr("data-session-key") != key;
+    });
+    filesToRender = newArray;
+    renderFiles();
+  };
+});
 
 /***/ }),
 

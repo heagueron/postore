@@ -72,6 +72,7 @@ class SpostController extends Controller
 
     public function store(StoreSpost $request)
     {   
+        dd(request());
         $date=Carbon::createFromDate( request()->input('post_date') );
         $minDate = Carbon::now()->timezone(auth()->user()->timezone);
 
@@ -122,6 +123,7 @@ class SpostController extends Controller
 
     private function storeMedia($spost)
     {
+        
         $spost->update([
                 'media_1' => is_null( request()->media_1 ) ? '' : request()->media_1->store('uploads', 'public'),
                 'media_2' => is_null( request()->media_2 ) ? '' : request()->media_2->store('uploads', 'public'),

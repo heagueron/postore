@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('./media');
 
 window.Vue = require('vue');
 
@@ -17,7 +18,6 @@ window.events = new Vue();
 window.flash = function (message) {
     window.events.$emit('flash', message)
 };
-
 
 
 // DatetimePicker (vue component);
@@ -70,7 +70,6 @@ $( document ).ready(function(e) {
         }      
     });
 
-
     // Inmediate posting
     $('#post_now').on('click', function (e) {
         e.stopPropagation();
@@ -83,8 +82,6 @@ $( document ).ready(function(e) {
         
     });
 
-    
-
     // New post form
     $("#add_new_post").on('click', function (e) {
         //e.stopPropagation();
@@ -95,116 +92,4 @@ $( document ).ready(function(e) {
     });
 
 });
-
-// Media files
-
-$( document ).ready(function(e) {
-    $("#add-media-button").on('click', function (e) {
-        //e.stopPropagation();
-        e.preventDefault();
-        let mediaCount = parseInt( $("#media-files-count").val());
-        let targetInput = $("#imageUpload"+mediaCount);
-        targetInput.click();  
-    });
-
-    function readURL(input) {
-        
-        if (input.files && input.files[0]) {
-
-            var reader = new FileReader();
-
-            let mediaCount = parseInt( $("#media-files-count").val());
-            mediaCount +=1;
-
-            reader.onload = function(e) {
-
-                    let spot1 = $(`<div class="imagePreview" id="imagePreview1">
-                                        <i class="far fa-times-circle removeMedia"></i>
-                                    </div>`);
-                    let spot2 = $(`<div class="imagePreview" id="imagePreview2">
-                                        <i class="far fa-times-circle removeMedia"></i>
-                                    </div>`);
-                    let spot3 = $(`<div class="imagePreview" id="imagePreview3">
-                                        <i class="far fa-times-circle removeMedia"></i>
-                                    </div>`);
-                    let spot4 = $(`<div class="imagePreview" id="imagePreview4">
-                                        <i class="far fa-times-circle removeMedia"></i>
-                                    </div>`);
-
-                switch (mediaCount) {
-                    case 1:                      
-                        spot1.css('background-image', 'url('+e.target.result +')');
-                        spot1.appendTo('#previewColumn1');                      
-                    break;
-                    case 2:
-                        $( "#imagePreview1" ).remove();
-                        let bg1 = sessionStorage.getItem("bg1");
-                        spot1.css('background-image', bg1).css('width','115px');
-                        spot1.appendTo('#previewColumn1'); 
-
-                        spot2.css('background-image', 'url('+e.target.result +')');
-                        spot2.css('width','115px');
-                        spot2.appendTo('#previewColumn2');
-                    break;
-                    case 3:
-
-                        $( "#imagePreview2" ).remove();
-                        let bg2 = sessionStorage.getItem("bg2");
-                        spot2.css('background-image', bg2).css('height','115px').css('width','115px');
-                        spot2.appendTo('#previewColumn2');
-
-                        spot3.css('background-image', 'url('+e.target.result +')');
-                        spot3.css('width','115px').css('height','115px');
-                        spot3.appendTo('#previewColumn2');
-
-                        //column2.appendTo('#image-preview-container');
-                    break;
-                    case 4:
-                        $( "#imagePreview1" ).remove();
-                        bg1 = sessionStorage.getItem("bg1");
-                        spot1.css('background-image', bg1).css('width','115px').css('height','115px');
-                        spot1.appendTo('#previewColumn1');
-
-                        $( "#imagePreview3" ).remove();
-                        let bg3 = sessionStorage.getItem("bg3");
-                        spot3.css('background-image', bg3).css('width','115px').css('height','115px');
-                        spot3.appendTo('#previewColumn1');
-
-                        spot4.css('background-image', 'url('+e.target.result +')');
-                        spot4.css('width','115px').css('height','115px');
-                        spot4.appendTo('#previewColumn2');
-                    break;
-                    default:
-                        console.log("Maximun image files count exceeded!")
-                        break;
-                }
-
-                
-                $(".avatar-preview").css("display","block");
-                
-
-                // Update media counter
-                //mediaCount +=1;
-                $("#media-files-count").val(mediaCount);
-    
-                sessionStorage.setItem("bg"+mediaCount, 'url('+e.target.result +')');
-
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $("#imageUpload0").change(function() {
-        readURL(this);
-    });
-    $("#imageUpload1").change(function() {
-        readURL(this);
-    });
-    $("#imageUpload2").change(function() {
-        readURL(this);
-    });
-    $("#imageUpload3").change(function() {
-        readURL(this);
-    });
-})
-
 

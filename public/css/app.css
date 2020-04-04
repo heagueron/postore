@@ -10989,8 +10989,8 @@ a:focus {
 
 .imagePreview .removeMedia {
   position: absolute;
-  right: 12px;
-  top: 12px;
+  right: 5px;
+  top: 5px;
   color: white;
   background-color: grey;
   border-radius: 100%;
