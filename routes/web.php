@@ -38,17 +38,6 @@ Route::get('/twitter_profiles/convertToken', 'TwitterProfileController@convertTo
 
 
 
-// Scheduled Tweets (Stweets)
-Route::get('/stweets', 'StweetController@index')->name('stweets.index');
-Route::get('/stweets/create', 'StweetController@create')->name('stweets.create');
-Route::post('/stweets', 'StweetController@store');
-// Route::get('/stweets/{stweet}', 'StweetController@show');
-// Route::get('/stweets/{stweet}/edit', 'StweetController@edit');
-// Route::patch('/stweets/{stweet}', 'StweetController@update');
-// Route::delete('/stweets/stweetr}', 'StweetController@destroy');
-
-Route::get('/stweets/statuses', 'StweetController@twitterStatuses')->name('stweets.statuses');
-
 // Scheduled posts (Sposts)
 Route::get('/sposts', 'SpostController@index')->name('sposts.index');
 Route::get('/sposts/create', 'SpostController@create')->name('sposts.create');
@@ -60,14 +49,14 @@ Route::post('/sposts/imageUpload', 'SpostController@imageUpload')->name('sposts.
 Route::get('/sposts/schedule', 'SpostController@schedule')->name('sposts.schedule');
 //Route::post('/sposts', 'SpostController@store');
 
+
+
+
  //Clear route cache:
  Route::get('/route-cache', function() {
     $exitCode = Artisan::call('route:cache');
     return 'Routes cache cleared';
 });
-
-
-
 
 //Clear config cache:
 Route::get('/config-cache', function() {

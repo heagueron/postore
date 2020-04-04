@@ -10,12 +10,23 @@ class TwitterGateway extends TwitterAPIExchange
 {
     public $connection;
 
-    public function __construct( $twitterProfileId=null )
+    public function __construct( $twitterProfileId=null, $creatingProfile=true )
     {
-        $this->connection = new TwitterAPIExchange( $this->get_tweeter_keys( $twitterProfileId ) );
+        if($creatingProfile){
+            $this->connection = new TwitterAPIExchange( $this->get_tweeter_credentials( $twitterProfileId ) );
+        } else {
+            $credentials = $this->get_tweeter_credentials( $twitterProfileId );
+            $this->connection = new TwitterOAuth( 
+                $credentials['consumer_key'], 
+                $credentials['consumer_secret'], 
+                $credentials['oauth_access_token'], 
+                $credentials['oauth_access_token_secret']  
+            );
+        }
+
     }
 
-    public function get_tweeter_keys( $twitterProfileId=null )
+    public function get_tweeter_credentials( $twitterProfileId=null )
     {
         
         // Sending scheduled or inmediate posts 

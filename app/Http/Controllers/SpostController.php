@@ -72,9 +72,9 @@ class SpostController extends Controller
 
     public function store(StoreSpost $request)
     {   
-        dd(request());
-        $date=Carbon::createFromDate( request()->input('post_date') );
-        $minDate = Carbon::now()->timezone(auth()->user()->timezone);
+        //dd(request());
+        $date       = Carbon::createFromDate( request()->input('post_date') );
+        $minDate    = Carbon::now()->timezone(auth()->user()->timezone);
 
         // Check date
         if ( ! $date->gte( $minDate ) && request()->input('send-now') == "false" ) {
@@ -114,7 +114,9 @@ class SpostController extends Controller
         // Check inmediate posting
         if( request()->input('send-now') == "true" ) {
             // Trait to publish a post to a set of social profiles
-            $this->publishTwitter($spost, request()->input('twitter_accounts') );
+            $this->publishTwitter( $spost, request()->input('twitter_accounts') );
+
+            // TODO: Also publish on other social networks.
         }
 
         return redirect('/sposts/schedule')->with('flash', 'New post scheduled!');
