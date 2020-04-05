@@ -15,9 +15,17 @@
         <tr>
             <td>{{ $spost->post_date }}</td>
             <td>
+              <div class="post-text-container">
                 @foreach( explode("\r\n", $spost->text) as $line )
                     {{ $line }}<br/>
-                @endforeach    
+                @endforeach
+              </div>
+              @if($spost->media_files_count > 0)
+                <div class="post-media-container">
+                  <img 
+                    src="{{ asset('storage/' . $spost->media_1) }}" class="show-image-1" alt="" >
+                </div>
+              @endif
             </td>
             <td>
                 @foreach( $spost->twitter_profiles as $twitterProfile)

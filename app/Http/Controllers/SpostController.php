@@ -31,8 +31,8 @@ class SpostController extends Controller
     {
         $user = \Auth::user();
 
-        $sposts = $user->sposts()->get();
-      
+        $sposts = $user->sposts()->orderBy('created_at', 'desc')->get();
+        //dd($sposts);
         return view( 'sposts.index', compact('user', 'sposts') );
 
     }
@@ -54,7 +54,7 @@ class SpostController extends Controller
             return redirect('/twitter_profiles/create'); 
         }
 
-        $sposts = $user->sposts()->get();
+        $sposts = $user->sposts()->orderBy('created_at', 'desc')->get();
 
         $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
         $currentDate = Str::of($now)->limit(16,'');
@@ -101,10 +101,11 @@ class SpostController extends Controller
             'media_2'               => request()->media_2,
             'media_3'               => request()->media_3,
             'media_4'               => request()->media_4,
+            'media_files_count'     => request()->media_files_count,
         ]);
 
         // Add media to the model
-        if( request()->input('media-files-count') > 0 ){
+        if( request()->media_files_count > 0 ){
             $this->storeMedia($spost);
         } 
 
@@ -127,10 +128,10 @@ class SpostController extends Controller
     {
         
         $spost->update([
-                'media_1' => is_null( request()->media_1 ) ? '' : request()->media_1->store('uploads', 'public'),
-                'media_2' => is_null( request()->media_2 ) ? '' : request()->media_2->store('uploads', 'public'),
-                'media_3' => is_null( request()->media_3 ) ? '' : request()->media_3->store('uploads', 'public'),
-                'media_4' => is_null( request()->media_4 ) ? '' : request()->media_4->store('uploads', 'public'),
+                'media_1' => is_null( request()->media_1 ) ? null : request()->media_1->store('uploads', 'public'),
+                'media_2' => is_null( request()->media_2 ) ? null : request()->media_2->store('uploads', 'public'),
+                'media_3' => is_null( request()->media_3 ) ? null : request()->media_3->store('uploads', 'public'),
+                'media_4' => is_null( request()->media_4 ) ? null : request()->media_4->store('uploads', 'public'),
             ]);
     }
 

@@ -24,6 +24,7 @@ class CreateSpostsTable extends Migration
             $table->string('media_2')->nullable();
             $table->string('media_3')->nullable();
             $table->string('media_4')->nullable();
+            $table->unsignedInteger('media_files_count')->default(0);
             $table->timestamps();
         });
     }

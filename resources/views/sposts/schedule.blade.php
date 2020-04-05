@@ -44,7 +44,7 @@
               
         {{-- Media file loader --}}
         <div class="media-files-container" id="media-files-container">
-            <input type="hidden" name="media-files-count" value="0" id="media-files-count">
+            <input type="hidden" name="media_files_count" value="0" id="media_files_count">
             <input type='file' id="imageUpload0" name="media_1" style="display:none" accept=".png, .jpg, .jpeg" />
             <input type='file' id="imageUpload1" name="media_2" style="display:none" accept=".png, .jpg, .jpeg" />
             <input type='file' id="imageUpload2" name="media_3" style="display:none" accept=".png, .jpg, .jpeg" />

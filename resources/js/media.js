@@ -5,15 +5,12 @@ $( document ).ready(function(e) {
     $("#add-media-button").on('click', function (e) {
         e.stopPropagation()
         e.preventDefault()
-        console.log("More media?")
 
-        let mediaCount = parseInt( $("#media-files-count").val())
-        console.log(`mediaCount when clicked: ${mediaCount}`)
+        let mediaCount = parseInt( $("#media_files_count").val())
 
         if( mediaCount < 4 ) {
 
             for(let i=1; i<5; i++){
-                console.log(`bg${i}`, sessionStorage.getItem(`bg${i}`) )
 
                 if( !sessionStorage.getItem(`bg${i}`) ) {
                     let targetInput = $(`#imageUpload${i-1}`)
@@ -38,14 +35,13 @@ $( document ).ready(function(e) {
 
             var reader = new FileReader();
 
-            let mediaCount = parseInt( $("#media-files-count").val());
+            let mediaCount = parseInt( $("#media_files_count").val());
             mediaCount +=1;
 
             reader.onload = function(e) {
 
                 // Get sub index from input and store image in session
                 let subIndex = input.name.slice(6,7);
-                console.log(subIndex)
                 sessionStorage.setItem(`bg${subIndex}`, 'url('+e.target.result +')');
 
                 // Build image preview node
@@ -62,7 +58,7 @@ $( document ).ready(function(e) {
                 renderFiles();
 
                 // Update media counter
-                $("#media-files-count").val(mediaCount);
+                $("#media_files_count").val(mediaCount);
             }
             reader.readAsDataURL(input.files[0]);
         }    
@@ -71,19 +67,15 @@ $( document ).ready(function(e) {
 
     // Input events
     $("#imageUpload0").change(function() {
-        console.log("Opening at input media 1")
         readURL(this);
     })
     $("#imageUpload1").change(function() {
-        console.log("Opening at input media 2")
         readURL(this);
     })
     $("#imageUpload2").change(function() {
-        console.log("Opening at input media 3")
         readURL(this);
     })
     $("#imageUpload3").change(function() {
-        console.log("Opening at input media 4")
         readURL(this);
     })
 
@@ -97,8 +89,7 @@ $( document ).ready(function(e) {
         spot.css('height',heigth).css('width',width)
         //console.log(spot)
         spot.appendTo(`#previewColumn${column}`);
-        console.log(`appended in position ${position} the media:`)
-        console.log(spot)
+
         spot.children().on('click', function(e){ 
             e.preventDefault();
             e.stopImmediatePropagation();
@@ -110,7 +101,6 @@ $( document ).ready(function(e) {
     const renderFiles = () => {
 
         const mediaCount = filesToRender.length;
-        console.log("files to render: "+mediaCount)
 
         switch (mediaCount) {
 
@@ -144,21 +134,30 @@ $( document ).ready(function(e) {
     }
 
     const removeMedia = ( element ) =>{
-        console.log("element to remove:")
-        console.log(element)
 
         element.remove();
 
         // Update media count
-        let mediaCount = parseInt( $("#media-files-count").val())
+        let mediaCount = parseInt( $("#media_files_count").val())
         mediaCount -=1
-        $("#media-files-count").val(mediaCount)
+        $("#media_files_count").val(mediaCount)
 
         // Remove from session
         let key = element.attr("data-session-key");
         sessionStorage.removeItem(key);
-        console.log(`Removed session key ${key}`)
-        console.log(`Remains there: ${sessionStorage.getItem(key)}`)
+
+
+        // Clean input set:
+        let targetInputId = element.attr("data-input");
+        $(`#${targetInputId}`).remove();
+        let targetName=parseInt( targetInputId.substr(11,1) ) +1;
+        targetName = `media_${targetName}`;
+        let newInput = $(`<input type='file' 
+            id="${targetInputId}" 
+            name="${targetName}"
+            style="display:none" 
+            accept=".png, .jpg, .jpeg" />`)
+        newInput.appendTo("#media-files-container");
 
         // Remove from filesToRender array
         const newArray = filesToRender.filter(function(element) {
