@@ -52895,10 +52895,21 @@ $(document).ready(function (e) {
   $("#add_new_post").on('click', function (e) {
     //e.stopPropagation();
     e.preventDefault();
-    $("#add_new_post").css("display", "none");
-    $("#new-compose-title").css("display", "block");
-    $("#create_post_content").toggleClass('collapse');
-  });
+    $("#add_new_post").css("display", "none"); //$("#new-compose-title").css("display","block");
+
+    $("#new-scheduled-post").css("display", "block");
+  }); // $( ".twitter-profile-option" ).on( "click", function(event) {
+  //     event.stopPropagation();
+  //     event.preventDefault();
+  //     console.log( event.target );
+  //     if( !$(event.target).first().prop('checked') ) {
+  //         console.log("INPUT WAS FOUND NOT CHECKED")
+  //         $(event.target).css('border', '3px solid blue')
+  //     } else {
+  //         console.log("INPUT WAS FOUND CHECKED")
+  //         $(event.target).css('border', '1px solid blue')
+  //     }    
+  // } );
 });
 
 /***/ }),
@@ -53044,8 +53055,10 @@ __webpack_require__.r(__webpack_exports__);
 
 // Media files
 $(document).ready(function (e) {
+  var filesToRender = [];
+  sessionStorage.clear();
   $("#add-media-button").on('click', function (e) {
-    e.stopPropagation();
+    //e.stopPropagation()
     e.preventDefault();
     var mediaCount = parseInt($("#media_files_count").val());
 
@@ -53061,8 +53074,6 @@ $(document).ready(function (e) {
       console.log("Maximum media file number reached.");
     }
   });
-  var filesToRender = [];
-  sessionStorage.clear();
 
   function readURL(input) {
     if (input.files && input.files[0]) {
@@ -53089,19 +53100,18 @@ $(document).ready(function (e) {
 
       reader.readAsDataURL(input.files[0]);
     }
-  } // Input events
+  } // When a image is removed, its input is re-created,
+  // and looses its change handler. Here it is restored
 
 
-  $("#imageUpload0").change(function () {
-    readURL(this);
-  });
-  $("#imageUpload1").change(function () {
-    readURL(this);
-  });
-  $("#imageUpload2").change(function () {
-    readURL(this);
-  });
-  $("#imageUpload3").change(function () {
+  var activateInputEvent = function activateInputEvent(targetInput) {
+    targetInput.change(function () {
+      readURL(this);
+    });
+  }; // Input events
+
+
+  $("#imageUpload0, #imageUpload1, #imageUpload2, #imageUpload3").change(function () {
     readURL(this);
   }); // Show media file
 
@@ -53112,8 +53122,7 @@ $(document).ready(function (e) {
 
     var spot = filesToRender[element];
     spot.attr("data-preview-position", position);
-    spot.css('height', heigth).css('width', width); //console.log(spot)
-
+    spot.css('height', heigth).css('width', width);
     spot.appendTo("#previewColumn".concat(column));
     spot.children().on('click', function (e) {
       e.preventDefault();
@@ -53177,7 +53186,8 @@ $(document).ready(function (e) {
     var targetName = parseInt(targetInputId.substr(11, 1)) + 1;
     targetName = "media_".concat(targetName);
     var newInput = $("<input type='file' \n            id=\"".concat(targetInputId, "\" \n            name=\"").concat(targetName, "\"\n            style=\"display:none\" \n            accept=\".png, .jpg, .jpeg\" />"));
-    newInput.appendTo("#media-files-container"); // Remove from filesToRender array
+    newInput.appendTo("#media-files-container");
+    activateInputEvent(newInput); // Remove from filesToRender array
 
     var newArray = filesToRender.filter(function (element) {
       return element.attr("data-session-key") != key;

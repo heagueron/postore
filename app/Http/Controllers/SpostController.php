@@ -54,8 +54,21 @@ class SpostController extends Controller
             return redirect('/twitter_profiles/create'); 
         }
 
-        $sposts = $user->sposts()->orderBy('created_at', 'desc')->get();
-
+        $sposts = $user->sposts()
+            ->where('posted', false)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        
+        // Set media array
+        foreach ($sposts as $spost) {
+            $media = [];
+            if( !is_null($spost->media_1) ) { array_push($media, $spost->media_1); }
+            if( !is_null($spost->media_2) ) { array_push($media, $spost->media_2); }
+            if( !is_null($spost->media_3) ) { array_push($media, $spost->media_3); }
+            if( !is_null($spost->media_4) ) { array_push($media, $spost->media_4); }
+            $spost->media   =   $media;
+        }
+        
         $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
         $currentDate = Str::of($now)->limit(16,'');
         
@@ -72,7 +85,6 @@ class SpostController extends Controller
 
     public function store(StoreSpost $request)
     {   
-        //dd(request());
         $date       = Carbon::createFromDate( request()->input('post_date') );
         $minDate    = Carbon::now()->timezone(auth()->user()->timezone);
 
@@ -84,12 +96,13 @@ class SpostController extends Controller
         }
 
         // Check social profiles
-        $tpIds = request()->input('twitter_accounts');
-        if ( is_null($tpIds) ){
-            return back()
-                ->withInput()
-                ->with('profile_error', 'Please select at least one social profile.');
-        }
+        // $tpIds = request()->input('twitter_accounts');
+        // dd($tpIds);
+        // if ( is_null($tpIds) ){
+        //     return back()
+        //         ->withInput()
+        //         ->with('profile_error', 'Please select at least one social profile account.');
+        // }
 
         // Create the scheduled post
         $spost = Spost::create([
@@ -110,12 +123,12 @@ class SpostController extends Controller
         } 
 
         // Attach social profiles
-        $spost->twitter_profiles()->attach( array_values($tpIds) );
+        $spost->twitter_profiles()->attach( array_values( request()->twitter_accounts ) );
 
         // Check inmediate posting
         if( request()->input('send-now') == "true" ) {
             // Trait to publish a post to a set of social profiles
-            $this->publishTwitter( $spost, request()->input('twitter_accounts') );
+            $this->publishTwitter( $spost, request()->twitter_accounts );
 
             // TODO: Also publish on other social networks.
         }

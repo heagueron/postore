@@ -10976,6 +10976,20 @@ a:focus {
   }
 }
 
+.post-text-container {
+  margin-bottom: 5px;
+}
+
+.twitter-profile-option {
+  border: 1px solid blue;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+twitter-profile-option-active {
+  border: 3px solid blue;
+}
+
 .imagePreview {
   width: 240px;
   height: 240px;
@@ -10999,8 +11013,22 @@ a:focus {
 }
 
 .show-image-1 {
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+  border-radius: 14px;
+}
+
+.show-image-2 {
+  width: 120px;
+  height: 200px;
+  margin: 5px;
+  border-radius: 14px;
+}
+
+.show-image-3 {
+  width: 120px;
+  height: 95px;
   margin: 5px;
   border-radius: 14px;
 }

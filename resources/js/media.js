@@ -2,12 +2,14 @@
 
 $( document ).ready(function(e) {
 
+    var filesToRender   =   [];
+    sessionStorage.clear();
+
     $("#add-media-button").on('click', function (e) {
-        e.stopPropagation()
+        //e.stopPropagation()
         e.preventDefault()
 
         let mediaCount = parseInt( $("#media_files_count").val())
-
         if( mediaCount < 4 ) {
 
             for(let i=1; i<5; i++){
@@ -25,9 +27,6 @@ $( document ).ready(function(e) {
         }
 
     })
-
-    var filesToRender   =   [];
-    sessionStorage.clear();
 
     function readURL(input) {
         
@@ -64,18 +63,16 @@ $( document ).ready(function(e) {
         }    
     }
 
+    // When a image is removed, its input is re-created,
+    // and looses its change handler. Here it is restored
+    const activateInputEvent = ( targetInput) => {
+        targetInput.change(function() {
+            readURL(this);
+        })
+    }
 
     // Input events
-    $("#imageUpload0").change(function() {
-        readURL(this);
-    })
-    $("#imageUpload1").change(function() {
-        readURL(this);
-    })
-    $("#imageUpload2").change(function() {
-        readURL(this);
-    })
-    $("#imageUpload3").change(function() {
+    $("#imageUpload0, #imageUpload1, #imageUpload2, #imageUpload3").change(function() {
         readURL(this);
     })
 
@@ -87,7 +84,6 @@ $( document ).ready(function(e) {
         let spot = filesToRender[element]
         spot.attr("data-preview-position", position)
         spot.css('height',heigth).css('width',width)
-        //console.log(spot)
         spot.appendTo(`#previewColumn${column}`);
 
         spot.children().on('click', function(e){ 
@@ -146,10 +142,10 @@ $( document ).ready(function(e) {
         let key = element.attr("data-session-key");
         sessionStorage.removeItem(key);
 
-
         // Clean input set:
         let targetInputId = element.attr("data-input");
         $(`#${targetInputId}`).remove();
+
         let targetName=parseInt( targetInputId.substr(11,1) ) +1;
         targetName = `media_${targetName}`;
         let newInput = $(`<input type='file' 
@@ -158,6 +154,8 @@ $( document ).ready(function(e) {
             style="display:none" 
             accept=".png, .jpg, .jpeg" />`)
         newInput.appendTo("#media-files-container");
+
+        activateInputEvent( newInput )
 
         // Remove from filesToRender array
         const newArray = filesToRender.filter(function(element) {
