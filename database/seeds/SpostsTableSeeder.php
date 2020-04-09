@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 class SpostsTableSeeder extends Seeder
 {
+
     /**
      * Auto generated seed file
      *
@@ -21,9 +22,14 @@ class SpostsTableSeeder extends Seeder
                 'id' => 2,
                 'text' => 'Machine Learning
 Check out this free computer science courses at CSEdu4All csedu4all.org/courses/',
-                'user_id' => 1,
                 'post_date' => '2020-03-04 10:58:00',
                 'posted' => 1,
+                'user_id' => 1,
+                'media_1' => NULL,
+                'media_2' => NULL,
+                'media_3' => NULL,
+                'media_4' => NULL,
+                'media_files_count' => 0,
                 'created_at' => '2020-03-04 10:51:58',
                 'updated_at' => '2020-03-04 10:51:58',
             ),
@@ -32,9 +38,14 @@ Check out this free computer science courses at CSEdu4All csedu4all.org/courses/
                 'id' => 3,
                 'text' => 'Machine learning
 Machine learning for everyone teachablemachine.withgoogle.com',
-                'user_id' => 1,
                 'post_date' => '2020-03-04 11:05:00',
                 'posted' => 1,
+                'user_id' => 1,
+                'media_1' => NULL,
+                'media_2' => NULL,
+                'media_3' => NULL,
+                'media_4' => NULL,
+                'media_files_count' => 0,
                 'created_at' => '2020-03-04 10:53:35',
                 'updated_at' => '2020-03-04 10:53:35',
             ),
@@ -47,9 +58,14 @@ Forecasting volcano eruptions is notoriously tricky, but machine learning might 
 Unlock the Potential of Machine Learning. Spell.run
 
 Source: Science Daily',
-                'user_id' => 1,                
                 'post_date' => '2020-03-05 11:14:00',
                 'posted' => 1,
+                'user_id' => 1,
+                'media_1' => NULL,
+                'media_2' => NULL,
+                'media_3' => NULL,
+                'media_4' => NULL,
+                'media_files_count' => 0,
                 'created_at' => '2020-03-04 11:15:47',
                 'updated_at' => '2020-03-05 11:31:35',
             ),
@@ -57,9 +73,14 @@ Source: Science Daily',
             array (
                 'id' => 5,
                 'text' => 'Laravel Job: Programador Laravel chiletrabajos.cl/trabajo/2110836 ciudad Puerto Montt #trabajo #empleo',
-                'user_id' => 6,    
                 'post_date' => '2020-03-04 13:56:00',
                 'posted' => 1,
+                'user_id' => 6,
+                'media_1' => NULL,
+                'media_2' => NULL,
+                'media_3' => NULL,
+                'media_4' => NULL,
+                'media_files_count' => 0,
                 'created_at' => '2020-03-04 13:56:51',
                 'updated_at' => '2020-03-04 13:57:19',
             ),
@@ -70,9 +91,14 @@ Source: Science Daily',
 How to add Real-Time Notifications to Laravel with Pusher
 
 hackernoon.com/how-to-add-rea…',
-                'user_id' => 6,              
                 'post_date' => '2020-03-04 16:00:00',
                 'posted' => 1,
+                'user_id' => 6,
+                'media_1' => NULL,
+                'media_2' => NULL,
+                'media_3' => NULL,
+                'media_4' => NULL,
+                'media_files_count' => 0,
                 'created_at' => '2020-03-04 15:56:56',
                 'updated_at' => '2020-03-04 17:25:27',
             ),
@@ -83,9 +109,14 @@ hackernoon.com/how-to-add-rea…',
 5 ways to write Laravel code that scales (sponsor) 
 
 laravel-news.com/5-ways-to-writ…',
-                'user_id' => 11,               
                 'post_date' => '2020-03-04 16:02:00',
                 'posted' => 1,
+                'user_id' => 11,
+                'media_1' => NULL,
+                'media_2' => NULL,
+                'media_3' => NULL,
+                'media_4' => NULL,
+                'media_files_count' => 0,
                 'created_at' => '2020-03-04 15:58:04',
                 'updated_at' => '2020-03-04 17:25:27',
             ),
@@ -97,9 +128,14 @@ laravel-news.com/5-ways-to-writ…',
 Senior ReactJS Developer 
 
 #MT - Palermo, Ciudad de Buenos Aires, Buenos Aires careers.deviget.com/careers/33298-…',
-                'user_id' => 1,               
                 'post_date' => '2020-03-04 18:00:00',
                 'posted' => 1,
+                'user_id' => 1,
+                'media_1' => NULL,
+                'media_2' => NULL,
+                'media_3' => NULL,
+                'media_4' => NULL,
+                'media_files_count' => 0,
                 'created_at' => '2020-03-04 17:30:33',
                 'updated_at' => '2020-03-05 11:31:35',
             ),
@@ -108,13 +144,17 @@ Senior ReactJS Developer
                 'id' => 10,
                 'text' => 'Django:
 Pytest Django and Django Rest Framework: 10 – Testing Create, Details and DestroyAPIViews trumpathon.com/pytest-django-…',
-                'user_id' => 1,               
                 'post_date' => '2020-03-05 13:35:00',
                 'posted' => 0,
+                'user_id' => 1,
+                'media_1' => NULL,
+                'media_2' => NULL,
+                'media_3' => NULL,
+                'media_4' => NULL,
+                'media_files_count' => 0,
                 'created_at' => '2020-03-05 13:34:38',
                 'updated_at' => '2020-03-05 17:34:38',
             ),
-            
         ));
         
         

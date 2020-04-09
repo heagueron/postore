@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('timezone', 60)->nullable();
+            $table->enum('category',['basic', 'pro'])->default('basic');
             $table->rememberToken();
             $table->timestamps();
         });

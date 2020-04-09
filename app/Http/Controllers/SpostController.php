@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-
-use App\Spost;
-
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreSpost;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+
+use App\Http\Requests\StoreSpost;
 use App\Traits\PublishPost;
+use App\Spost;
+
 
 class SpostController extends Controller
 {
@@ -25,7 +24,7 @@ class SpostController extends Controller
      * List the scheduled posts (sposts).
      *
      * @param  null
-     * @return Response
+     * @return view
      */
     public function index()
     {
@@ -40,7 +39,7 @@ class SpostController extends Controller
      * Create a scheduled post (spost).
      *
      * @param  null
-     * @return Response
+     * @return view
      */
 
     public function schedule()
@@ -95,15 +94,6 @@ class SpostController extends Controller
                 ->with('date_error', 'Please select a date after current date');
         }
 
-        // Check social profiles
-        // $tpIds = request()->input('twitter_accounts');
-        // dd($tpIds);
-        // if ( is_null($tpIds) ){
-        //     return back()
-        //         ->withInput()
-        //         ->with('profile_error', 'Please select at least one social profile account.');
-        // }
-
         // Create the scheduled post
         $spost = Spost::create([
             'text'                  => request()->text,
@@ -137,20 +127,20 @@ class SpostController extends Controller
 
     }
 
+    /**
+     * Store the incoming spost media files.
+     *
+     * @param  Spost $spost
+     * @return void
+     */
     private function storeMedia($spost)
     {
-        
         $spost->update([
                 'media_1' => is_null( request()->media_1 ) ? null : request()->media_1->store('uploads', 'public'),
                 'media_2' => is_null( request()->media_2 ) ? null : request()->media_2->store('uploads', 'public'),
                 'media_3' => is_null( request()->media_3 ) ? null : request()->media_3->store('uploads', 'public'),
                 'media_4' => is_null( request()->media_4 ) ? null : request()->media_4->store('uploads', 'public'),
             ]);
-    }
-
-    public function imageUpload()
-    {
-        dd('ok, lets load that marvelous image');
     }
 
 }

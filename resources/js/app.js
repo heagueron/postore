@@ -5,6 +5,11 @@
  */
 
 require('./bootstrap');
+
+/**
+ * Sposts functions
+ */
+require('./spost');
 require('./media');
 
 window.Vue = require('vue');
@@ -70,43 +75,11 @@ $( document ).ready(function(e) {
         }      
     });
 
-    // Inmediate posting
-    $('#post_now').on('click', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-        console.log("POST NOW!");
-        $("#send-now-flag").val(true);
-        setTimeout(() => {
-            $("#submit-schedule").click();
-        }, 500);
-        
-    });
-
-    // New post form
-    $("#add_new_post").on('click', function (e) {
-        //e.stopPropagation();
-        e.preventDefault();
-        $("#add_new_post").css("display","none");
-        //$("#new-compose-title").css("display","block");
-        $("#new-scheduled-post").css("display","block");
-    });
-
-
-    // $( ".twitter-profile-option" ).on( "click", function(event) {
-    //     event.stopPropagation();
-    //     event.preventDefault();
-    //     console.log( event.target );
-
-    //     if( !$(event.target).first().prop('checked') ) {
-    //         console.log("INPUT WAS FOUND NOT CHECKED")
-    //         $(event.target).css('border', '3px solid blue')
-
-    //     } else {
-    //         console.log("INPUT WAS FOUND CHECKED")
-    //         $(event.target).css('border', '1px solid blue')
-    //     }    
     
-    // } );
+
+
+
+
 
 });
 

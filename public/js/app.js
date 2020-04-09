@@ -52826,6 +52826,12 @@ __webpack_require__.r(__webpack_exports__);
  * building robust, powerful web applications using Vue and Laravel.
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/**
+ * Sposts functions
+ */
+
+
+__webpack_require__(/*! ./spost */ "./resources/js/spost.js");
 
 __webpack_require__(/*! ./media */ "./resources/js/media.js");
 
@@ -52880,36 +52886,7 @@ $(document).ready(function (e) {
       $('#p-sidebar').css("display", "none");
       $('#p-content').removeClass('col-md-10 col-sm-12').addClass('col-12');
     }
-  }); // Inmediate posting
-
-  $('#post_now').on('click', function (e) {
-    e.stopPropagation();
-    e.preventDefault();
-    console.log("POST NOW!");
-    $("#send-now-flag").val(true);
-    setTimeout(function () {
-      $("#submit-schedule").click();
-    }, 500);
-  }); // New post form
-
-  $("#add_new_post").on('click', function (e) {
-    //e.stopPropagation();
-    e.preventDefault();
-    $("#add_new_post").css("display", "none"); //$("#new-compose-title").css("display","block");
-
-    $("#new-scheduled-post").css("display", "block");
-  }); // $( ".twitter-profile-option" ).on( "click", function(event) {
-  //     event.stopPropagation();
-  //     event.preventDefault();
-  //     console.log( event.target );
-  //     if( !$(event.target).first().prop('checked') ) {
-  //         console.log("INPUT WAS FOUND NOT CHECKED")
-  //         $(event.target).css('border', '3px solid blue')
-  //     } else {
-  //         console.log("INPUT WAS FOUND CHECKED")
-  //         $(event.target).css('border', '1px solid blue')
-  //     }    
-  // } );
+  });
 });
 
 /***/ }),
@@ -53195,6 +53172,42 @@ $(document).ready(function (e) {
     filesToRender = newArray;
     renderFiles();
   };
+});
+
+/***/ }),
+
+/***/ "./resources/js/spost.js":
+/*!*******************************!*\
+  !*** ./resources/js/spost.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Scheduled Post Spost Functions
+$(document).ready(function (e) {
+  // Show New SPost Form
+  $("#add_new_post").on('click', function (e) {
+    //e.stopPropagation();
+    e.preventDefault();
+    $("#add_new_post").css("display", "none"); //$("#new-compose-title").css("display","block");
+
+    $("#new-scheduled-post").css("display", "block");
+  }); // Inmediate posting
+
+  $('#post_now').on('click', function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log("POST NOW!");
+    $("#send-now-flag").val(true);
+    setTimeout(function () {
+      $("#submit-schedule").click();
+    }, 500);
+  });
+  $("#post_text").on("keyup", function () {
+    var count = $(this).val().length; //console.log(count)
+
+    $("#post-character-count").html(count);
+  });
 });
 
 /***/ }),

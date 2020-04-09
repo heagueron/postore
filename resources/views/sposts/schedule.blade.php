@@ -58,11 +58,13 @@
             </div>
             
             {{-- New post text content --}}
-            <div class="form-group post-text-container">
-                <textarea name="text" class="form-control" autocomplete="off" 
-                        rows="4" cols="50" id="post_text" placeholder="What would you like to tell?">
+            <div class="form-group post-text-group">
+                <textarea name="text" class="form-control post-text-container" autocomplete="off" 
+                        rows="4" cols="50" id="post_text" placeholder="What would you like to tell?"
+                        maxlength="280">
                     {{ old('text') }}
                 </textarea>
+                <p id="post-character-count" class="post-character-count" value="0">0</p>
                 @error('text') <div class="alert alert-danger">{{ $message }}</div> @enderror
             </div>
                 

@@ -133,7 +133,7 @@
                             <a href="{{ route('sposts.schedule') }}">SCHEDULER</a>
                         </li>
                         <li class="mb-3">
-                            <a href="#">SOCIAL ACCOUNTS</a>
+                            <a href="{{ route('social_profiles.index') }}">SOCIAL ACCOUNTS</a>
                         </li>
                         <li class="mb-3">
                             <a href="#">TIMETABLES</a>

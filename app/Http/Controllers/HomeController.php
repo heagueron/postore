@@ -25,4 +25,16 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    
+
+    /**
+     * Show the user social profiles dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function socialProfilesIndex()
+    {
+        return view('social-profiles.index');
+    }
+
 }

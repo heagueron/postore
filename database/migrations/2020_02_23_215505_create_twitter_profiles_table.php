@@ -21,6 +21,7 @@ class CreateTwitterProfilesTable extends Migration
             $table->string('access_token_secret');
             $table->unsignedInteger('user_id');
             $table->bigInteger('twitter_user_id');
+            $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }

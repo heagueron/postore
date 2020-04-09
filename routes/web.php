@@ -50,6 +50,9 @@ Route::get('/sposts/schedule', 'SpostController@schedule')->name('sposts.schedul
 //Route::post('/sposts', 'SpostController@store');
 
 
+//Social Profiles
+Route::get('/social_profiles', 'HomeController@socialProfilesIndex')->name('social_profiles.index')->middleware('auth');
+
 
 
  //Clear route cache:
@@ -94,6 +97,26 @@ Route::get('/tap', function() {
         ->buildOauth($url, $requestMethod)
         ->performRequest();
 
-    dd($response2);
+    dd($response2->profile_image_url_https);
+    
+});
+Route::get('/tap2', function() {
+
+    // Build the twitter connection class
+    $twitter = new TwitterGateway( 8, false);
+
+    $response2 = $twitter->connection
+        ->get("account/verify_credentials", ["skip_status" => "true"]);
+
+    // $url = 'https://api.twitter.com/1.1/account/verify_credentials.json';
+    // $getfield = '?skip_status=true';
+    // $requestMethod = 'GET';
+
+    // $response2 = $twitter2->connection
+    //     ->setGetfield($getfield)
+    //     ->buildOauth($url, $requestMethod)
+    //     ->performRequest();
+
+    dd($response2->profile_image_url_https);
     
 });

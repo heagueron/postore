@@ -17,7 +17,7 @@
               <p>{{ Str::of($spost->post_date)->after(' ') }}</p>
             </td>
             <td>
-              <div class="post-text-container">
+              <div>
                 @foreach( explode("\r\n", $spost->text) as $line )
                     {{ $line }}<br/>
                 @endforeach

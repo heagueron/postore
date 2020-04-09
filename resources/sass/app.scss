@@ -92,8 +92,20 @@ a, a:hover, a:focus {
     }
 }
 
+
+// SPost
 .post-text-container{
     margin-bottom: 5px;
+    background-color: $postoreGrey; 
+}
+.post-text-group{
+    position: relative;
+    .post-character-count{
+        position: absolute;
+        right: 2px;
+        bottom: 2px;
+        margin-bottom: 0;
+    }
 }
 
 .twitter-profile-option{
@@ -150,4 +162,45 @@ twitter-profile-option-active{
     height: 95px;
     margin: 5px;
     border-radius: 14px;
+}
+
+.page-title{
+    font-size: 2.5rem;
+    padding-bottom: 15px;
+}
+
+.page-subtitle{
+    background-color: $postoreGrey;
+    margin-bottom: 30px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.social-profiles-content{
+    margin-top: 10px;
+}
+
+.social-profile-header{
+    margin-bottom: 10px;
+}
+.social-profile-name{
+    font-size: large;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.social-profile-list{
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.social-profile-item{
+    padding-left: 10px;
+}
+
+// Add twitter profile button
+.btn-add-tw{
+    background-color: $blue;
+    color:  white;
+}
+i.fab.fa-twitter{
+    color: white;
 }
