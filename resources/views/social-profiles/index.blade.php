@@ -6,7 +6,7 @@
 <h1 class="page-title d-flex justify-content-center">SOCIAL PROFILES</h1>
 <div class="page-subtitle">
     <h3><strong>MANAGE SOCIAL ACCOUNTS</strong> </h3>
-    Check the linked social accounts you use to post your messages.<br> 
+    Check the linked social accounts you use to post your messages.  
     Add or remove accounts as needed.
 </div>
 
@@ -20,10 +20,24 @@
         </div>
         <div class="social-profile-list">
             @forelse( auth()->user()->twitter_profiles as $tp)
-                <div class="social-profile-item">
-                    <label class="pl-2">
-                        {{'@' . $tp->handler}}
-                    </label>
+                <div class="social-profile-item d-flex justify-content-between align-items-baseline">
+                    <div class="social-profile-info">
+                        <img src="{{ $tp->avatar }}" class="show-avatar img-fluid" alt="" >   
+                        <label class="pl-2">
+                            {{'@' . $tp->handler}}
+                        </label>
+                    </div>
+                    
+
+                    <form method="POST" action="{{ route('twitter_profiles.destroy', $tp->id) }}">
+                        @csrf
+                        @method('DELETE')
+                    
+                        <button type="submit" class="btn btn-danger unlink-social-profile" 
+                            title="{{'Unlink @' .$tp->handler. ' account'}}">
+                            <i class="fas fa-unlink"></i>
+                        </button>
+                    </form> 
                 </div>
             @empty
                 <span><p class="no-social-profile-found">No Twitter Profile linked</p></span>     

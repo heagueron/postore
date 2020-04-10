@@ -11002,6 +11002,12 @@ twitter-profile-option-active {
   border: 3px solid blue;
 }
 
+.show-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+}
+
 .imagePreview {
   width: 240px;
   height: 240px;
@@ -11025,21 +11031,21 @@ twitter-profile-option-active {
 }
 
 .show-image-1 {
-  width: 200px;
-  height: 200px;
+  width: 340px;
+  height: 190px;
   margin: 5px;
   border-radius: 14px;
 }
 
 .show-image-2 {
-  width: 120px;
-  height: 200px;
+  width: 170px;
+  height: 190px;
   margin: 5px;
   border-radius: 14px;
 }
 
 .show-image-3 {
-  width: 120px;
+  width: 170px;
   height: 95px;
   margin: 5px;
   border-radius: 14px;
@@ -11083,9 +11089,23 @@ twitter-profile-option-active {
 .btn-add-tw {
   background-color: #3490dc;
   color: white;
+  margin-top: 10px;
 }
 
 i.fab.fa-twitter {
   color: white;
+}
+
+.failure-publish {
+  overflow: hidden;
+  position: absolute;
+  width: 80%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*centers items on the line (the x-axis by default)*/
+  align-items: center;
+  /*centers items on the cross-axis (y by default)*/
 }
 

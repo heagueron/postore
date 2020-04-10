@@ -28,38 +28,38 @@
                 @switch($spost->media_files_count)
                   @case(1)
                   <div class="d-flex flex-column">
-                    <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-1" alt="" >
+                    <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-1 img-fluid" alt="" >
                   </div>
                   <div class="d-flex flex-column"></div>
                   @break
 
                   @case(2)
                   <div class="d-flex flex-column">
-                    <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-2" alt="" >
+                    <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-2 img-fluid" alt="" >
                   </div>
                   <div class="d-flex flex-column">
-                    <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-2" alt="" >
+                    <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-2 img-fluid" alt="" >
                   </div>
                   @break
                   
                   @case(3)
                   <div class="d-flex flex-column">
-                    <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-2" alt="" >
+                    <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-2 img-fluid" alt="" >
                   </div>
                   <div class="d-flex flex-column">
-                    <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-3" alt="" >
-                    <img src="{{ asset('storage/' . $spost->media[2]) }}" class="show-image-3" alt="" >
+                    <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-3 img-fluid" alt="" >
+                    <img src="{{ asset('storage/' . $spost->media[2]) }}" class="show-image-3 img-fluid" alt="" >
                   </div>
                   @break
 
                   @case(4)
                   <div class="d-flex flex-column">
-                    <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-3" alt="" >
-                    <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-3" alt="" >
+                    <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-3 img-fluid" alt="" >
+                    <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-3 img-fluid" alt="" >
                   </div>
                   <div class="d-flex flex-column">
-                    <img src="{{ asset('storage/' . $spost->media[2]) }}" class="show-image-3" alt="" >
-                    <img src="{{ asset('storage/' . $spost->media[3]) }}" class="show-image-3" alt="" >
+                    <img src="{{ asset('storage/' . $spost->media[2]) }}" class="show-image-3 img-fluid" alt="" >
+                    <img src="{{ asset('storage/' . $spost->media[3]) }}" class="show-image-3 img-fluid" alt="" >
                   </div>
                   @break
 

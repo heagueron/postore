@@ -31,17 +31,17 @@ class SpostController extends Controller
         $user = \Auth::user();
 
         $sposts = $user->sposts()->orderBy('created_at', 'desc')->get();
-        //dd($sposts);
+
         return view( 'sposts.index', compact('user', 'sposts') );
 
     }
+
     /**
      * Create a scheduled post (spost).
      *
      * @param  null
      * @return view
      */
-
     public function schedule()
     {
         $user = \Auth::user();
@@ -50,7 +50,7 @@ class SpostController extends Controller
         if ( empty($user->twitter_profiles->all() )){
             // TODO: add check for other social network profiles (Linkedin, Instagram, Facebook)
             // Go ahead and create a twitter profile in postore app (not just a Twitter user).
-            return redirect('/twitter_profiles/create'); 
+            return redirect('/social_profiles'); 
         }
 
         $sposts = $user->sposts()
@@ -72,7 +72,6 @@ class SpostController extends Controller
         $currentDate = Str::of($now)->limit(16,'');
         
         return view('sposts.schedule', compact('user', 'sposts', 'currentDate'));
-
     }
 
     /**
@@ -84,13 +83,13 @@ class SpostController extends Controller
 
     public function store(StoreSpost $request)
     {   
-        $date       = Carbon::createFromDate( request()->input('post_date') );
-        $minDate    = Carbon::now()->timezone(auth()->user()->timezone);
+        $date       = Carbon::createFromDate( request()->post_date );
+        $now        = Carbon::now()->timezone(auth()->user()->timezone)->toDateTimeLocalString();
+        $minDate    = Carbon::createFromDate( $now );
 
         // Check date
         if ( ! $date->gte( $minDate ) && request()->input('send-now') == "false" ) {
-            return back()
-                ->withInput()
+            return back()->withInput()
                 ->with('date_error', 'Please select a date after current date');
         }
 
@@ -106,20 +105,22 @@ class SpostController extends Controller
             'media_4'               => request()->media_4,
             'media_files_count'     => request()->media_files_count,
         ]);
-
+   
         // Add media to the model
         if( request()->media_files_count > 0 ){
             $this->storeMedia($spost);
         } 
-
+        
         // Attach social profiles
         $spost->twitter_profiles()->attach( array_values( request()->twitter_accounts ) );
 
         // Check inmediate posting
         if( request()->input('send-now') == "true" ) {
             // Trait to publish a post to a set of social profiles
-            $this->publishTwitter( $spost, request()->twitter_accounts );
-
+            $publish = $this->publishTwitter( $spost, request()->twitter_accounts );
+            if($publish != 'success'){
+                return view('sposts.publish_failure', compact('publish') );
+            }
             // TODO: Also publish on other social networks.
         }
 

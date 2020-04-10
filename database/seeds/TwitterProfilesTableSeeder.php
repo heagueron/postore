@@ -31,18 +31,6 @@ class TwitterProfilesTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 7,
-                'handler' => 'AssistantSuppo1',
-                'access_token' => '1200017560093253634-f0pqsHjQwuQJ4rEY25Jm5Q5D5YRNyQ',
-                'access_token_secret' => '4aMPW5KETdM27rEgvQb8t5vcYm2gTprr2lDlDQMT6zdkF',
-                'user_id' => 7,
-                'twitter_user_id' => 1200017560093253634,
-                'avatar' => NULL,
-                'created_at' => '2020-03-22 20:58:05',
-                'updated_at' => '2020-03-22 20:58:05',
-            ),
-            2 => 
-            array (
                 'id' => 8,
                 'handler' => 'JMServca',
                 'access_token' => '389702185-Cq4XVXP4rAuO3K3DspCq2t8khpVp8UWHHflMU1Ff',
@@ -53,31 +41,7 @@ class TwitterProfilesTableSeeder extends Seeder
                 'created_at' => '2020-03-22 20:58:05',
                 'updated_at' => '2020-03-22 20:58:05',
             ),
-            3 => 
-            array (
-                'id' => 9,
-                'handler' => 'ProfessorHomew1',
-                'access_token' => '1188077876354211840-BvuH1wl3EdtqOapLRxKQBmdUVzseOp',
-                'access_token_secret' => 'k3K7hEiFWWZ3uIYosbJasKcGUiZ5zYvmzYoJ0sm0pJuwJ',
-                'user_id' => 8,
-                'twitter_user_id' => 1188077876354211840,
-                'avatar' => NULL,
-                'created_at' => '2020-03-22 20:58:05',
-                'updated_at' => '2020-03-22 20:58:05',
-            ),
-            4 => 
-            array (
-                'id' => 10,
-                'handler' => 'WebDeve94055211',
-                'access_token' => '1219267404129349633-XwQCL8Rjmu6mDD8NOTzxH5Tru3oEu0',
-                'access_token_secret' => 'N0nozcwWAoPkvt46MTyOgjHDmxY8Zt0sWZU4UBI94fSJz',
-                'user_id' => 9,
-                'twitter_user_id' => 1219267404129349633,
-                'avatar' => NULL,
-                'created_at' => '2020-03-22 20:58:05',
-                'updated_at' => '2020-03-22 20:58:05',
-            ),
-            5 => 
+            2 => 
             array (
                 'id' => 11,
                 'handler' => 'BenGilWealth',
@@ -89,17 +53,41 @@ class TwitterProfilesTableSeeder extends Seeder
                 'created_at' => '2020-03-22 20:58:05',
                 'updated_at' => '2020-03-22 20:58:05',
             ),
-            6 => 
+            3 => 
             array (
-                'id' => 12,
+                'id' => 13,
                 'handler' => 'AssistantSuppo1',
-                'access_token' => '1200017560093253634-qWnFllXxamylrBxq50p3cLcdQiNUjy',
-                'access_token_secret' => 'v2cNKOVd8aJ3A9zfbCesnHTqArRHba1fzD7LC8AUeMur1',
-                'user_id' => 1,
+                'access_token' => '1200017560093253634-JFCJfAKybyTeJTTODutQG5uiOr5y3T',
+                'access_token_secret' => 'NciKHSZAMH6rJNYexQOukBTOfaIZldRemqVFZOGcrNO25',
+                'user_id' => 7,
                 'twitter_user_id' => 1200017560093253634,
                 'avatar' => NULL,
-                'created_at' => '2020-03-24 21:54:00',
-                'updated_at' => '2020-03-24 21:54:00',
+                'created_at' => '2020-04-10 17:48:38',
+                'updated_at' => '2020-04-10 17:48:38',
+            ),
+            4 => 
+            array (
+                'id' => 14,
+                'handler' => 'ProfessorHomew1',
+                'access_token' => '1188077876354211840-jnLlDl45huhuKDT9QVBf4D9QZQBfBB',
+                'access_token_secret' => 'RPGuJf88GBbLaJ3LsRyj0IMmrM655jCpBEnbjWsQwwOmF',
+                'user_id' => 8,
+                'twitter_user_id' => 1188077876354211840,
+                'avatar' => NULL,
+                'created_at' => '2020-04-10 18:55:59',
+                'updated_at' => '2020-04-10 18:55:59',
+            ),
+            5 => 
+            array (
+                'id' => 15,
+                'handler' => 'WebDeve94055211',
+                'access_token' => '1219267404129349633-IhAUWydzvSO9nJInAVxryBCBq4eYKt',
+                'access_token_secret' => '6c3eAwROK0hggPAvWFKuchY8zQ8IJhl6l5P41qpIFWas1',
+                'user_id' => 9,
+                'twitter_user_id' => 1219267404129349633,
+                'avatar' => 'https://pbs.twimg.com/profile_images/1219267525810278405/Aq34ulCx_normal.jpg',
+                'created_at' => '2020-04-10 19:03:27',
+                'updated_at' => '2020-04-10 19:03:28',
             ),
         ));
         

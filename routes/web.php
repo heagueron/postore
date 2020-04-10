@@ -34,7 +34,7 @@ Route::get('/twitter_profiles/convertToken', 'TwitterProfileController@convertTo
 //Route::get('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@show');
 //Route::get('/twitter_profiles/{twitter_profile}/edit', 'TwitterProfileController@edit')->name('twitter_profiles.edit')->middleware('auth');;
 //Route::patch('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@update')->name('twitter_profiles.update')->middleware('auth');;
-//Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@destroy')->name('twitter_profiles.destroy')->middleware('auth');;
+Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@destroy')->name('twitter_profiles.destroy')->middleware('auth');;
 
 
 

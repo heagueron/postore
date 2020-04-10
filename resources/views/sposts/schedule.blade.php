@@ -4,7 +4,7 @@
 
 @section('content')
 
-@if( !session()->has('errors') )
+@if( !session()->has('errors') && !session()->has('date_error') )
 <button class="add-new-post-button btn btn-primary"  id="add_new_post" title="Add new post" tabindex=""> 
     <i class="fas fa-plus"></i> 
     <span class="ml-3">Add new post</span> 
@@ -14,7 +14,7 @@
 
 {{-- New Scheduled Post (Spost) Form --}}
 
-@if( session()->has('errors') )
+@if( session()->has('errors') || session()->has('date_error') )
     <div id="new-scheduled-post" style="display:block">
 @else
     <div id="new-scheduled-post" style="display:none">
