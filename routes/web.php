@@ -50,9 +50,13 @@ Route::get('/sposts/schedule', 'SpostController@schedule')->name('sposts.schedul
 //Route::post('/sposts', 'SpostController@store');
 
 
-//Social Profiles
+// Social Profiles
 Route::get('/social_profiles', 'HomeController@socialProfilesIndex')->name('social_profiles.index')->middleware('auth');
 
+// Pages routes
+Route::view('/faq', 'pages.faq')->name('faq');
+Route::view('/file-upload', 'pages.file-upload')->name('file-upload');
+Route::view('/settings', 'pages.settings')->name('settings');
 
 
  //Clear route cache:

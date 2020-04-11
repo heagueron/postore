@@ -32,24 +32,28 @@
                 <label>From</label><br/>
                 @foreach($user->twitter_profiles as $tp)
 
-                    <div class="custom-control custom-checkbox custom-control-inline mb-3">
-                        <input 
+                    <!-- <div class="custom-control custom-checkbox custom-control-inline mb-3"> -->
+                        <input hidden
                             type="checkbox" 
                             class="custom-control-input" 
                             id="{{'tp-' .$tp->id}}" 
                             name="twitter_accounts[]" 
                             value="{{$tp->id}}">
-                        <label class="custom-control-label" for="{{'tp-' .$tp->id}}">
+                        <!-- <label class="custom-control-label" for="{{'tp-' .$tp->id}}">
                             <i class="fab fa-twitter-square fa-2x"></i> {{$tp->handler}}
-                        </label>
-                    </div>
+                        </label> -->
+                    <!-- </div> -->
                 
-                    <!-- <div class="form-check-inline">
-                        <label class="form-check-label">
-                            <input type="checkbox" name="twitter_accounts[]" value="{{$tp->id}}"> 
-                            <label><i class="fab fa-twitter-square fa-2x"></i> {{$tp->handler}}</label>
-                        </label>
-                    </div> -->
+                    <label class="social-selector social-selector-inactive" 
+                        for="{{'tp-' .$tp->id}}" title="{{'@' . $tp->handler}}">
+                        <i class="fab fa-twitter-square" 
+                            style="font-size:1.2rem">
+                        </i>
+                        <img src="{{ $tp->avatar }}" class="show-avatar img-fluid" alt="" >
+                        <i class="fas fa-check-circle social-selector-check check-inactive"
+                            id="{{'check-' .$tp->id}}">
+                        </i>
+                    </label>
 
                 @endforeach
                 @if( session()->has('profile_error') )

@@ -57,7 +57,7 @@ class CleanSposts extends Command
                 \Storage::delete( 'public/' . $spost->media_4 );           
             }
         }
-        $this->info('All images cleared');
+        $this->info('All images removed');
 
 
         // Clean pivot table Sposts-Twitter profiles
@@ -66,7 +66,7 @@ class CleanSposts extends Command
 
 
         // Clean scheduled posts
-        Spost::truncate();
+        DB::table('sposts')->delete();
         $this->info('All scheduled posts cleared');
 
     }

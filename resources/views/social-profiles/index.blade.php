@@ -32,11 +32,10 @@
                     <form method="POST" action="{{ route('twitter_profiles.destroy', $tp->id) }}">
                         @csrf
                         @method('DELETE')
-                    
-                        <button type="submit" class="btn btn-danger unlink-social-profile" 
+                        <i class="fas fa-unlink" style="color:#e3342f; font-size:1.2rem;"
                             title="{{'Unlink @' .$tp->handler. ' account'}}">
-                            <i class="fas fa-unlink"></i>
-                        </button>
+                        </i>
+                        
                     </form> 
                 </div>
             @empty

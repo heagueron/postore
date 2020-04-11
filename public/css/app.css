@@ -10954,6 +10954,10 @@ a:focus {
   padding: 0.2rem 0.5rem;
 }
 
+.left-side-menu {
+  padding-top: 80px;
+}
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
 
@@ -10990,6 +10994,29 @@ a:focus {
   right: 2px;
   bottom: 2px;
   margin-bottom: 0;
+}
+
+.social-selector {
+  border: 2px solid #3490dc;
+  border-radius: 5px;
+  padding: 2px;
+  position: relative;
+}
+
+.social-selector .social-selector-check {
+  color: #38c172;
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+  font-size: 0.8rem;
+}
+
+.social-selector-inactive {
+  opacity: 0.3;
+}
+
+.check-inactive {
+  display: none;
 }
 
 .twitter-profile-option {

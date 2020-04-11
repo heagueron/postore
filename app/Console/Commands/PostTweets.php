@@ -5,11 +5,11 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use DB;
 
-use App\Stweet;
+use App\spost;
 use Carbon\Carbon;
 
 use App\ApiConnectors\TwitterGateway;
-
+use App\Traits\PublishPost;
 
 class PostTweets extends Command
 {
@@ -18,14 +18,22 @@ class PostTweets extends Command
      *
      * @var string
      */
-    protected $signature = 'postore:ptweets';
+    protected $signature = 'postore:post';
+
+    
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Post scheduled tweets';
+    protected $description = 'Post scheduled messages';
+
+    /**
+     * The trait to publish twitter posts
+     *
+     */
+    use PublishPost;
 
     /**
      * Create a new command instance.
@@ -42,32 +50,45 @@ class PostTweets extends Command
      *
      * @return mixed
      */
-    public function handle( TwitterGateway $twitter )
+    public function handle()
     {
-        $users = \App\User::has('twitter_profiles')->get();
         $sent = 0;
+        
+        // Twitter posts
+        $twitter_profiles = \App\TwitterProfile::all();
+        foreach ($twitter_profiles as $tp) {
+            $userDate = Carbon::now()->timezone($tp->user->timezone)->toDateTimeString();
 
-        foreach ($users as $user){ // TODO: Build a different TwitterGateway class for everyuser! 
-            $userDate = Carbon::now()->timezone($user->timezone)->toDateTimeString();
-            $this->info('Posting on behalf of: ' .$user->name. 'at' .$userDate);
-
-            $stweets = DB::table('stweets')->where([
-                [ 'twitter_profile_id', '=', $user->id ],
+            $sposts = $tp->sposts()->where([
                 [ 'posted', '=', 0 ],
                 [ 'post_date', '<=', $userDate ]
             ])->get();
 
-            foreach($stweets as $stweet){
-                $twitter->connection->post("statuses/update", ["status" => $stweet->text]);
-                $model = Stweet::find($stweet->id);
-                $model->posted = 1;
-                $model->updated_at = $userDate;
-                $model->save();
+            //$this->info('Profile ' . $tp->handler . ' has ' . $sposts->count() . ' posts.');
+
+            if( $sposts->count() > 0 ){
+
+                $this->info('Will send ' . $sposts->count() . ' posts on behalf of: @' .$tp->handler. ' at ' .$userDate);
+
+                // $twitter = new TwitterGateway( $tp->id, false);
+
+                foreach ($sposts as $spost) {
+                    //dd($spost);
+                   // Trait to publish a post to a set of social profiles (one in this case)
+                    $publish = $this->publishTwitter( $spost, array($tp->id) );
+                    if($publish != 'success'){
+                        dd('register a job failure');
+                    }
+                    $this->info('.');
+                }
+                $sent += $sposts->count();    
             }
-            $sent += count($stweets);
+
         }
-        
-        $this->info('Total pending tweets posted: ' . $sent);
-        
+        if( $sent > 0 ){
+           $this->info('Total posts sent: ' . $sent); 
+        } else {
+            $this->info('No post scheduled for current datetime'); 
+        }  
     }
 }

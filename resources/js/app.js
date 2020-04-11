@@ -75,11 +75,5 @@ $( document ).ready(function(e) {
         }      
     });
 
-    
-
-
-
-
-
 });
 

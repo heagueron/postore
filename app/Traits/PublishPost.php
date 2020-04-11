@@ -27,11 +27,11 @@ trait PublishPost
     {   
         $this->mediaIds     = [];
         $this->profileIds   = $ids;
-
+        
         // Check and register media files
         // Build the twitter connection class
         $this->twitter = new TwitterGateway( $this->profileIds[0], false);
-
+        //dd($spost,$this->profileIds,$this->twitter);
         if( !is_null( $spost->media_1 ) ){
             if( ! $this->registerMedia( 'public/' . $spost->media_1 ) ) {
                 return 'There was a problem uploading your media files. Contact support.';

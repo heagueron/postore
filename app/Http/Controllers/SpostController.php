@@ -82,7 +82,7 @@ class SpostController extends Controller
      */
 
     public function store(StoreSpost $request)
-    {   
+    {   //dd(request());
         $date       = Carbon::createFromDate( request()->post_date );
         $now        = Carbon::now()->timezone(auth()->user()->timezone)->toDateTimeLocalString();
         $minDate    = Carbon::createFromDate( $now );

@@ -97,35 +97,37 @@
 
         <div class="row">
 
-            <div class="col-md-2 col-sm-12" style="display:none;" id="p-sidebar">
+            <div class="col-md-2 left-side-menu" style="display:none;" id="p-sidebar">
 
                 <div class="postore_left_icon_menu">
                     <ul class="list-unstyled components" style="border:none;">
                         <li class="mb-3">
+                            <a href="{{ route('sposts.schedule') }}">SC</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="{{ route('social_profiles.index') }}">SA</a>
+                        </li>
+                        <!-- <li class="mb-3">
                             <a href="#">DR</a>
                         </li>
                         <li class="mb-3">
                             <a href="#">DR</a>
-                        </li>
+                        </li> -->
                         <li class="mb-3">
-                            <a href="#">DR</a>
-                        </li>
+                            <a href="{{ route('file-upload') }}">FU</a>
+                        </li class="mb-3">
+
                         <li class="mb-3">
-                            <a href="#">DR</a>
+                            <a href="{{ route('settings') }}">ST</a>
                         </li>
+
                         <li class="mb-3">
-                            <a href="#">DR</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="#">DR</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="#">DR</a>
+                            <a href="{{ route('faq') }}">FQ</a>
                         </li>
                     </ul>
                 </div>
 
-                <div class="postore_left_expanded_menu">
+                <div class="postore_left_expanded_menu col-sm-12">
 
                     <ul class="list-unstyled components" style="border:none;">
  
@@ -135,27 +137,28 @@
                         <li class="mb-3">
                             <a href="{{ route('social_profiles.index') }}">SOCIAL ACCOUNTS</a>
                         </li>
-                        <li class="mb-3">
+                        <!-- <li class="mb-3">
                             <a href="#">TIMETABLES</a>
                         </li>
                         <li class="mb-3">
                             <a href="#">DRAFTS</a>
-                        </li>
+                        </li> -->
+
                         <li class="mb-3">
-                            <a href="#">FILE UPLOADS</a>
-                        </li>
+                            <a href="{{ route('file-upload') }}">FILE UPLOADS</a>
+                        </li class="mb-3">
+
                         <li class="mb-3">
-                            <a href="#">SETTINGS</a>
+                            <a href="{{ route('settings') }}">SETTINGS</a>
                         </li>
+
                         <li class="mb-3">
-                            <a href="#">HELP</a>
+                            <a href="{{ route('faq') }}">FAQ</a>
                         </li>
+
                     </ul> 
                 </div>
-                
-
-                
-                
+ 
             </div>
 
             <div class="col-12" id="p-content">
