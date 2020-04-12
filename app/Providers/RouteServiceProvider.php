@@ -23,6 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
     public const SCHEDULER = '/sposts/schedule';
+    public const CHECK_AVATARS = 'home/check_avatars';
 
     /**
      * Define your route model bindings, pattern filters, etc.

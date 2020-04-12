@@ -89,9 +89,6 @@ a, a:hover, a:focus {
  }
 
 
-
-
-
 // SPost
 .post-text-container{
     margin-bottom: 5px;
@@ -146,13 +143,7 @@ twitter-profile-option-active{
 }
 
 // Media files
-.avatar-preview{
-    // width: 240px;
-    // height: 240px;
-    // display: grid;
-    // grid-template-columns: 200px 200px 200px 200px;
-    // grid-gap: 10px;
-}
+
 .imagePreview{
     width: 240px;
     height: 240px; 
@@ -172,10 +163,6 @@ twitter-profile-option-active{
         cursor: pointer;
         z-index: 10;
     }
-}
-
-.show-post-date{
-
 }
 
 .show-image-1{

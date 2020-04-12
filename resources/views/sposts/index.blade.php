@@ -2,6 +2,7 @@
 
 {{-- LARGE DEVICES --}}
 <table class="table table-sm posts-table-large" >
+
   <thead>
     <tr>
       <th scope="col" style="width: 300px;">Post on</th>
@@ -80,14 +81,15 @@
             </td>
         </tr>
     @empty
-        <p>No scheduled post pending</p>
+        <p class="posts-table-large">No scheduled post pending</p>
     @endforelse
   </tbody>
 
 </table>
 
 {{-- SMALL DEVICES --}}
-<table class="table table-sm posts-table-small" >
+<table class="table table-sm posts-table-small " >
+
   <thead>
     <tr>
       <th scope="col">Content</th>
@@ -174,7 +176,7 @@
             </td>
         </tr>
     @empty
-        <p>No scheduled post pending</p>
+        <p class="posts-table-small">No scheduled post pending</p>
     @endforelse
   </tbody>
 

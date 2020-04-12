@@ -104,7 +104,7 @@
                             <a href="{{ route('sposts.schedule') }}"><i class="far fa-calendar-alt"></i></a>
                         </li>
                         <li class="mb-3" title="Social Accounts">
-                            <a href="{{ route('social_profiles.index') }}"><i class="fas fa-user-friends"></i></a>
+                            <a href="{{ route('social_profiles.index') }}"><i class="fas fa-user"></i></a>
                         </li>
 
                         <li class="mb-3" title="File Upload">
@@ -137,7 +137,7 @@
                         </li>
                         <li class="mb-3">
                             <a href="{{ route('social_profiles.index') }}">
-                                <i class="fas fa-user-friends mr-2"></i>
+                                <i class="fas fa-user mr-2"></i>
                                 <span>SOCIAL ACCOUNTS</span>
                             </a>
                         </li>
@@ -175,7 +175,7 @@
  
             </div>
 
-            <div class="" style="width:100vh" id="p-content">
+            <div style="flex:5" id="p-content">
                 <main class="py-4">
                     @if( session()->has('message') )
                         <div class="alert alert-primary" role="alert">
