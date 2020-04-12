@@ -22,6 +22,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
+    public const SCHEDULER = '/sposts/schedule';
 
     /**
      * Define your route model bindings, pattern filters, etc.

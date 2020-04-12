@@ -38,8 +38,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md bg-primary navbar-dark shadow-sm">
-            
-                <div id="sidebarCollapse" class="mr-5"><i class="fas fa-bars fa-2x"></i></div>
+
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Postore
                 </a>
@@ -50,12 +49,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('sposts.schedule') }}">Scheduler</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Statistics</a>
-                        </li>
+                        </li> -->
 
                     </ul>
 
@@ -95,34 +94,33 @@
             
         </nav>
 
-        <div class="row">
+        <div class="d-flex flex-row">
 
-            <div class="col-md-2 left-side-menu" style="display:none;" id="p-sidebar">
+            <div class="left-side-menu" id="p-sidebar">
 
                 <div class="postore_left_icon_menu">
-                    <ul class="list-unstyled components" style="border:none;">
-                        <li class="mb-3">
-                            <a href="{{ route('sposts.schedule') }}">SC</a>
+                    <ul class="list-unstyled components left-menu-icons" style="border:none;">
+                        <li class="mb-3" title="Scheduler">
+                            <a href="{{ route('sposts.schedule') }}"><i class="far fa-calendar-alt"></i></a>
                         </li>
-                        <li class="mb-3">
-                            <a href="{{ route('social_profiles.index') }}">SA</a>
+                        <li class="mb-3" title="Social Accounts">
+                            <a href="{{ route('social_profiles.index') }}"><i class="fas fa-user-friends"></i></a>
                         </li>
-                        <!-- <li class="mb-3">
-                            <a href="#">DR</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="#">DR</a>
-                        </li> -->
-                        <li class="mb-3">
-                            <a href="{{ route('file-upload') }}">FU</a>
+
+                        <li class="mb-3" title="File Upload">
+                            <a href="{{ route('file-upload') }}"><i class="fas fa-upload"></i></a>
                         </li class="mb-3">
 
-                        <li class="mb-3">
-                            <a href="{{ route('settings') }}">ST</a>
+                        <li class="mb-3" title="Settings">
+                            <a href="{{ route('settings') }}"><i class="fas fa-cog"></i></a>
                         </li>
 
-                        <li class="mb-3">
-                            <a href="{{ route('faq') }}">FQ</a>
+                        <li class="mb-3" title="Become Pro">
+                            <a href="{{ route('upgrade') }}"><i class="fas fa-rocket"></i></a>
+                        </li>
+
+                        <li class="mb-3" title="Frequently Asked Questions">
+                            <a href="{{ route('faq') }}"><i class="far fa-question-circle"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -132,28 +130,44 @@
                     <ul class="list-unstyled components" style="border:none;">
  
                         <li class="mb-3">
-                            <a href="{{ route('sposts.schedule') }}">SCHEDULER</a>
+                            <a href="{{ route('sposts.schedule') }}">
+                                <i class="far fa-calendar-alt mr-2"></i>
+                                <span>SCHEDULE</span>
+                            </a>
                         </li>
                         <li class="mb-3">
-                            <a href="{{ route('social_profiles.index') }}">SOCIAL ACCOUNTS</a>
+                            <a href="{{ route('social_profiles.index') }}">
+                                <i class="fas fa-user-friends mr-2"></i>
+                                <span>SOCIAL ACCOUNTS</span>
+                            </a>
                         </li>
-                        <!-- <li class="mb-3">
-                            <a href="#">TIMETABLES</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="#">DRAFTS</a>
-                        </li> -->
 
                         <li class="mb-3">
-                            <a href="{{ route('file-upload') }}">FILE UPLOADS</a>
+                            <a href="{{ route('file-upload') }}">
+                                <i class="fas fa-upload mr-2"></i>
+                                <span>FILE UPLOAD</span>
+                            </a>
                         </li class="mb-3">
 
                         <li class="mb-3">
-                            <a href="{{ route('settings') }}">SETTINGS</a>
+                            <a href="{{ route('settings') }}">
+                                <i class="fas fa-cog mr-2"></i>
+                                <span>SETTINGS</span>
+                            </a>
+                        </li>
+
+                        <li class="mb-3" title="Become Pro">
+                            <a href="{{ route('upgrade') }}">
+                                <i class="fas fa-rocket mr-2"></i>
+                                <span>UPGRADE</span>
+                            </a>
                         </li>
 
                         <li class="mb-3">
-                            <a href="{{ route('faq') }}">FAQ</a>
+                            <a href="{{ route('faq') }}">
+                                <i class="far fa-question-circle mr-2"></i>
+                                <span>FAQ</span>
+                            </a>
                         </li>
 
                     </ul> 
@@ -161,7 +175,7 @@
  
             </div>
 
-            <div class="col-12" id="p-content">
+            <div class="" style="width:100vh" id="p-content">
                 <main class="py-4">
                     @if( session()->has('message') )
                         <div class="alert alert-primary" role="alert">

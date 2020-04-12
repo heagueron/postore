@@ -52873,21 +52873,6 @@ var app = new Vue({
 });
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 var path = "http://localhost:8000/";
-$(document).ready(function (e) {
-  // Left sidebar navigation
-  $('#sidebarCollapse').on('click', function (e) {
-    e.stopPropagation();
-    e.preventDefault();
-
-    if ($('#p-sidebar').css("display") == 'none') {
-      $('#p-content').removeClass('col-12').addClass('col-md-10 col-sm-12');
-      $('#p-sidebar').css("display", "block");
-    } else {
-      $('#p-sidebar').css("display", "none");
-      $('#p-content').removeClass('col-md-10 col-sm-12').addClass('col-12');
-    }
-  });
-});
 
 /***/ }),
 

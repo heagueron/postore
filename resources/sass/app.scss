@@ -75,26 +75,21 @@ a, a:hover, a:focus {
 }
 
 .left-side-menu{
-    padding-top: 80px;
+    padding-top: 100px;
+    border-right: 2px solid #dee2e6;
 }
 
-@media only screen and (max-width: 768px) {
-    /* For mobile phones: */
-    .postore_left_icon_menu {
-      display: block;
-    }
-    .postore_left_expanded_menu {
-        display: none;
-    }
+.left-menu-icons li a i{
+   font-size: 1rem;
+   color: rgb(2, 46, 56); 
 }
-@media only screen and (min-width: 768px) {
-    .postore_left_icon_menu {
-        display: none;
-      }
-    .postore_left_expanded_menu {
-        display: block;
-    }
-}
+.left-menu-icons li a i:hover{
+    //font-size: 1.1rem;
+    color:$blue; 
+ }
+
+
+
 
 
 // SPost
@@ -178,6 +173,11 @@ twitter-profile-option-active{
         z-index: 10;
     }
 }
+
+.show-post-date{
+
+}
+
 .show-image-1{
     // width: 200px;
     // height: 200px;
@@ -252,4 +252,39 @@ i.fab.fa-twitter{
     flex-direction: column;
     justify-content: center; /*centers items on the line (the x-axis by default)*/
     align-items: center; /*centers items on the cross-axis (y by default)*/
+}
+
+
+// Media queries
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .postore_left_icon_menu {
+      display: block;
+    }
+    .postore_left_expanded_menu {
+        display: none;
+    }
+    .posts-table-small{
+        display: block;
+    }
+    .posts-table-large{
+        display: none;
+    }
+    .show-post-text{
+        font-size: 10px;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .postore_left_icon_menu {
+        display: none;
+      }
+    .postore_left_expanded_menu {
+        display: block;
+    }
+    .posts-table-small{
+        display: none;
+    }
+    .posts-table-large{
+        display: block;
+    }
 }
