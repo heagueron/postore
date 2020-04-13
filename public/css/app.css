@@ -10985,8 +10985,6 @@ a:focus {
 }
 
 .social-selector {
-  border: 2px solid #3490dc;
-  border-radius: 5px;
   padding: 2px;
   position: relative;
 }
@@ -10994,9 +10992,20 @@ a:focus {
 .social-selector .social-selector-check {
   color: #38c172;
   position: absolute;
-  right: 1px;
-  bottom: 1px;
-  font-size: 0.8rem;
+  left: 2px;
+  bottom: -3px;
+  font-size: 1.1rem;
+  background-color: white;
+  border-radius: 100%;
+  margin-left: -2px;
+}
+
+.social-selector .social-selector-twitter {
+  position: absolute;
+  right: -3px;
+  top: -3px;
+  background-color: white;
+  font-size: 1.2rem;
 }
 
 .social-selector-inactive {

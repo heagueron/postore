@@ -6,8 +6,8 @@
   <thead>
     <tr>
       <th scope="col" style="width: 300px;">Post on</th>
-      <th scope="col" style="width: 1200px;">Content</th>
-      <th scope="col" style="width: 300px;">Profiles</th>
+      <th scope="col" style="width: 1200px;">Share</th>
+      <th scope="col" style="width: 300px;">From</th>
     </tr>
   </thead>
 
@@ -75,9 +75,57 @@
               @endif
             </td>
             <td class="show-post-text">
-                @foreach( $spost->twitter_profiles as $twitterProfile)
-                    <i class="fab fa-twitter-square fa-2x"></i> {{ $twitterProfile->handler }}<br>
+
+                @foreach( $spost->twitter_profiles as $tp)
+
+                    <label class="social-selector" title="{{'@' . $tp->handler}}">
+                        <i class="fab fa-twitter-square social-selector-twitter">
+                        </i>
+                        <img src="{{ $tp->avatar }}" class="show-avatar img-fluid" alt="" >           
+                    </label>
+
                 @endforeach
+
+                <div class="dropdown dropleft">
+  
+                  <button type="button" 
+                      class="dropdown-toggle" 
+                      data-toggle="dropdown"
+                      style="border:none; background-color:white;">
+                    <i class="fas fa-cog"></i>
+                  </button>
+                    <div class="dropdown-menu">
+
+                      <a class="dropdown-item" href="{{ route('sposts.edit', $spost->id) }}">Edit</a>
+                      
+                      <form method="POST" action="{{ route('sposts.send_now', $spost->id) }}">
+                        @csrf
+                        @method('POST')
+                        <button 
+                          class="dropdown-item" 
+                          type="submit"
+                          style="border:none; background-color:white;"
+                          title="Send Now this scheduled post">
+                          Send Now
+                        </button>
+                      </form>
+
+                      <form method="POST" action="{{ route('sposts.destroy', $spost->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button 
+                          class="dropdown-item" 
+                          type="submit"
+                          style="border:none; background-color:white;"
+                          title="Delete this scheduled post">
+                          Delete the spost
+                        </button>
+                      </form>
+
+                      
+                    </div>
+              </div>
+
             </td>
         </tr>
     @empty
@@ -92,8 +140,8 @@
 
   <thead>
     <tr>
-      <th scope="col">Content</th>
-      <th scope="col">Profiles</th>
+      <th scope="col">Share</th>
+      <th scope="col">From</th>
     </tr>
   </thead>
 
@@ -159,19 +207,27 @@
 
               </div>
               @endif
+
+              <div class="mt-1">
+                <span style="font-weight: bold; color:#212529; font-size: 0.8rem;" title="To be posted on">{{ $spost->post_date }}</span>
+              </div>
+
             </td>
             
             <td class="show-post-text d-flex align-items-start flex-column">
               <div class="mb-auto">
-                @foreach( $spost->twitter_profiles as $twitterProfile)
-                    <i class="fab fa-twitter-square fa-2x"></i> {{ '@' . $twitterProfile->handler }}<br>
+                @foreach( $spost->twitter_profiles as $tp)
+
+                  <label class="social-selector" title="{{'@' . $tp->handler}}">
+                      <i class="fab fa-twitter-square social-selector-twitter">
+                      </i>
+                      <img src="{{ $tp->avatar }}" class="show-avatar img-fluid" alt="" >           
+                  </label>
+
                 @endforeach
               </div>
-              <div class="mt-4">
-                <p style="margin-bottom: 2px;font-weight: bold; color:#212529; font-size: 0.8rem;">Post On</p>
-                <p style="margin-bottom: 2px;">{{ Str::of($spost->post_date)->before(' ') }}</p>
-                <p>{{ Str::of($spost->post_date)->after(' ') }}</p>
-              </div>
+
+              <i class="fas fa-cog"></i>
                 
             </td>
         </tr>

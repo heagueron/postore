@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use DB;
 
 use App\Http\Requests\StoreSpost;
 use App\Traits\PublishPost;
@@ -127,6 +128,91 @@ class SpostController extends Controller
         return redirect('/sposts/schedule')->with('flash', 'New post scheduled!');
 
     }
+
+    /**
+     * Edit a spost.
+     *
+     * @param  Spost $spost
+     * @return Response
+     */
+    public function edit(Spost $spost)
+    {
+        $user = \Auth::user();
+        $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
+        $currentDate = Str::of($now)->limit(16,'');
+
+        //dd("ok, edit spost with text: ", $spost->text);
+        return view('sposts.edit', compact('user', 'spost', 'currentDate') );
+    }
+
+    /**
+     * Update a spost.
+     *
+     * @param  Spost $spost
+     * @return Response
+     */
+    public function update(Spost $spost)
+    {
+        dd("update the post with text: ", $spost->text);
+    }
+
+    
+    /**
+     * Delete a spost.
+     *
+     * @param  Spost $spost
+     * @return Response
+     */
+    public function destroy(Spost $spost)
+    {
+        // Delete media files
+        if(\Storage::exists( 'public/' . $spost->media_1 )){
+            \Storage::delete( 'public/' . $spost->media_1 );           
+        }
+        if(\Storage::exists( 'public/' . $spost->media_2 )){
+            \Storage::delete( 'public/' . $spost->media_2 );           
+        }
+        if(\Storage::exists( 'public/' . $spost->media_3 )){
+            \Storage::delete( 'public/' . $spost->media_3 );           
+        }
+        if(\Storage::exists( 'public/' . $spost->media_4 )){
+            \Storage::delete( 'public/' . $spost->media_4 );           
+        }
+
+        // Delete from pivot table Sposts-Twitter profiles
+        DB::table('spost_twitter_profile')->where('spost_id',$spost->id)->delete();
+
+        // Delete the scheduled post
+        $spost->delete();
+
+        return back()->with('info', 'Schedule post successfully removed.');
+    }
+
+
+
+    /**
+     * Send a spost.
+     *
+     * @param  Spost $spost
+     * @return Response
+     */
+    public function sendNow(Spost $spost)
+    {
+        $tpIds = [];
+        foreach ($spost->twitter_profiles as $tp) {
+            array_push($tpIds,$tp->id);
+        }
+
+        // Trait to publish a post to a set of social profiles
+        $publish = $this->publishTwitter( $spost, $tpIds );
+        if($publish != 'success'){
+            return view('sposts.publish_failure', compact('publish') );
+        }
+        // TODO: Also publish on other social networks.
+
+        return back()->with('info', 'The post was successfully published.');
+    }
+
 
     /**
      * Store the incoming spost media files.

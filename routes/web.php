@@ -35,7 +35,7 @@ Route::get('/twitter_profiles/convertToken', 'TwitterProfileController@convertTo
 //Route::get('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@show');
 //Route::get('/twitter_profiles/{twitter_profile}/edit', 'TwitterProfileController@edit')->name('twitter_profiles.edit')->middleware('auth');;
 //Route::patch('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@update')->name('twitter_profiles.update')->middleware('auth');;
-Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@destroy')->name('twitter_profiles.destroy')->middleware('auth');;
+Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@destroy')->name('twitter_profiles.destroy')->middleware('auth');
 
 
 
@@ -43,7 +43,11 @@ Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@d
 Route::get('/sposts', 'SpostController@index')->name('sposts.index');
 Route::get('/sposts/create', 'SpostController@create')->name('sposts.create');
 Route::post('/sposts', 'SpostController@store');
-Route::post('/sposts/sendNow', 'SpostController@sendNow')->name('sposts.send_now');
+Route::post('/sposts/{spost}', 'SpostController@sendNow')->name('sposts.send_now')->middleware('auth');
+Route::get('/sposts/{spost}/edit', 'SpostController@edit')->name('sposts.edit')->middleware('auth');
+Route::patch('/sposts/{spost}', 'SpostController@update')->name('sposts.update')->middleware('auth');
+Route::delete('/sposts/{spost}', 'SpostController@destroy')->name('sposts.destroy')->middleware('auth');
+
 
 Route::post('/sposts/imageUpload', 'SpostController@imageUpload')->name('sposts.image');
 

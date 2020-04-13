@@ -1,36 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Scheduler')
+@section('title', 'Edit')
 
 @section('content')
-
-@if( !session()->has('errors') && !session()->has('date_error') )
-<button class="add-new-post-button btn btn-primary"  id="add_new_post" title="Add new post" tabindex=""> 
-    <i class="fas fa-plus"></i> 
-    <span class="ml-3">Add new post</span> 
-</button>
-@endif
-
-@if( session()->has('info') )
-    <div class="alert alert-info alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Info: </strong> {{ session()->get('info')}}
-    </div>
-@endif
-
 {{-- Scheduled Post (Spost) Form --}}
 
-@if( session()->has('errors') || session()->has('date_error') )
-    <div id="new-scheduled-post" style="display:block">
-@else
-    <div id="new-scheduled-post" style="display:none">
-@endif
 
-    <h3 class="inline-block" id="new-compose-title">New Post</h3>
+    <div id="new-scheduled-post">
+
+
+    <h3 class="inline-block" id="new-compose-title">Update Post</h3>
     <hr>
     <div id="create_post_content">
 
-        <form action="/sposts" method="post" enctype="multipart/form-data">
+        <form action="{{ route('sposts.update', $spost->id) }}" method="post" enctype="multipart/form-data">
             @csrf
 
             {{-- Social profiles --}}
@@ -43,7 +26,8 @@
                         class="custom-control-input" 
                         id="{{'tp-' .$tp->id}}" 
                         name="twitter_accounts[]" 
-                        value="{{$tp->id}}">
+                        value="{{$tp->id}}"
+                        checked>
                 
                     <label class="social-selector social-selector-inactive" 
                         for="{{'tp-' .$tp->id}}" title="{{'@' . $tp->handler}}">
@@ -62,14 +46,17 @@
                 @endif
             </div>
             
-            {{-- New post text content --}}
+            {{-- Post text content --}}
             <div class="form-group post-text-group">
                 <textarea name="text" class="form-control post-text-container" autocomplete="off" 
                         rows="4" cols="50" id="post_text" placeholder="What would you like to tell?"
                         maxlength="280">
-                    {{ old('text') }}
+                    {{ !is_null( old('text'))? old('text') : $spost->text }}
                 </textarea>
-                <p id="post-character-count" class="post-character-count" value="0">0</p>
+                <p id="post-character-count" class="post-character-count" 
+                    value="{{ !is_null( old('text'))? strlen(old('text')) : strlen($spost->text) }}">
+                    0
+                </p>
                 @error('text') <div class="alert alert-danger">{{ $message }}</div> @enderror
             </div>
                 
@@ -131,15 +118,6 @@
 
     </div>
 
-</div>
-
-
-
-
-
-{{-- Scheduled Posts (sposts) --}}
-<div class="mt-4">
-@include('sposts.index')
 </div>
 
 

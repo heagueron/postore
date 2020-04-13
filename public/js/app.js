@@ -53206,7 +53206,17 @@ $(document).ready(function (e) {
       $(e.target).parent().toggleClass('social-selector-inactive');
       $(e.target).parent().find('i.social-selector-check').toggleClass('check-inactive');
     }
-  });
+  }); // Edit spost
+  // if( $("#p-content").has("#ta") ){
+  //     console.log('showing some twitter accounts');
+  // }
+  // if ( jQuery.contains( $("#p-content"), $("#ta") ) ) {
+  //     console.log('showing some twitter accounts');
+  // }
+
+  if ($("#ta").length) {
+    console.log('showing some twitter accounts');
+  }
 });
 
 /***/ }),

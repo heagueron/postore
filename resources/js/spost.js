@@ -43,4 +43,15 @@ $( document ).ready(function(e) {
         }
     })
 
+    // Edit spost
+    // if( $("#p-content").has("#ta") ){
+    //     console.log('showing some twitter accounts');
+    // }
+    // if ( jQuery.contains( $("#p-content"), $("#ta") ) ) {
+    //     console.log('showing some twitter accounts');
+    // }
+    if ( $("#ta").length ) {
+        console.log('showing some twitter accounts');
+    }
+
 })
