@@ -100,26 +100,26 @@
 
                 <div class="postore_left_icon_menu">
                     <ul class="list-unstyled components left-menu-icons" style="border:none;">
-                        <li class="mb-3" title="Scheduler">
+                        <li class="mb-3 icon-menu-option" title="Scheduler" data-toggle="tooltip">
                             <a href="{{ route('sposts.schedule') }}"><i class="far fa-calendar-alt"></i></a>
                         </li>
-                        <li class="mb-3" title="Social Accounts">
+                        <li class="mb-3 icon-menu-option" title="Social Accounts" data-toggle="tooltip">
                             <a href="{{ route('social_profiles.index') }}"><i class="fas fa-user"></i></a>
                         </li>
 
-                        <li class="mb-3" title="File Upload">
+                        <li class="mb-3 icon-menu-option" title="File Upload" data-toggle="tooltip">
                             <a href="{{ route('file-upload') }}"><i class="fas fa-upload"></i></a>
                         </li class="mb-3">
 
-                        <li class="mb-3" title="Settings">
+                        <li class="mb-3 icon-menu-option" title="Settings" data-toggle="tooltip">
                             <a href="{{ route('settings') }}"><i class="fas fa-cog"></i></a>
                         </li>
 
-                        <li class="mb-3" title="Become Pro">
+                        <li class="mb-3 icon-menu-option" title="Become Pro" data-toggle="tooltip">
                             <a href="{{ route('upgrade') }}"><i class="fas fa-rocket"></i></a>
                         </li>
 
-                        <li class="mb-3" title="Frequently Asked Questions">
+                        <li class="mb-3 icon-menu-option" title="Frequently Asked Questions" data-toggle="tooltip">
                             <a href="{{ route('faq') }}"><i class="far fa-question-circle"></i></a>
                         </li>
                     </ul>

@@ -52827,9 +52827,12 @@ __webpack_require__.r(__webpack_exports__);
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /**
- * Sposts functions
+ * Sposts globals and functions
  */
 
+
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+var PATH = "http://localhost:8000/";
 
 __webpack_require__(/*! ./spost */ "./resources/js/spost.js");
 
@@ -52871,8 +52874,6 @@ var app = new Vue({
     datetime: vuejs_datetimepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
-var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-var path = "http://localhost:8000/";
 
 /***/ }),
 
@@ -53198,6 +53199,7 @@ $(document).ready(function (e) {
   $(".social-selector").on('click', function (e) {
     e.preventDefault;
     e.stopImmediatePropagation;
+    console.log('Ouch!');
 
     if ($(e.target).hasClass('social-selector')) {
       $(e.target).toggleClass('social-selector-inactive');
@@ -53206,17 +53208,58 @@ $(document).ready(function (e) {
       $(e.target).parent().toggleClass('social-selector-inactive');
       $(e.target).parent().find('i.social-selector-check').toggleClass('check-inactive');
     }
-  }); // Edit spost
-  // if( $("#p-content").has("#ta") ){
-  //     console.log('showing some twitter accounts');
-  // }
-  // if ( jQuery.contains( $("#p-content"), $("#ta") ) ) {
-  //     console.log('showing some twitter accounts');
-  // }
+  }); // Edit Scheduled post
+  // Check if edit spost page is loaded
 
-  if ($("#ta").length) {
-    console.log('showing some twitter accounts');
-  }
+  if ($(".edit-spost").length) {
+    // Grab the social profiles
+    var spostId = $(".edit-spost").attr('id').slice(5);
+    var PATH = "http://localhost:8000/";
+    $.ajax({
+      url: "".concat(PATH, "sposts/detail/").concat(spostId),
+      type: "GET",
+      data: {},
+      dataType: 'json',
+      beforeSend: function beforeSend() {},
+      success: function success(response) {
+        setTwitterProfilesInput(response.activeTwitterProfiles);
+      },
+      complete: function complete() {}
+    }); // Adjust text positioning and count
+
+    var trimmedText = $("#post_text").html().trim();
+    $("#post_text").html(trimmedText);
+    $("#post-character-count").html(trimmedText.length);
+  } // Activate Twitter Profiles Options
+
+
+  var setTwitterProfilesInput = function setTwitterProfilesInput(activeTwitterProfiles) {
+    activeTwitterProfiles.forEach(function (atp) {
+      $("#tp-".concat(atp)).attr('checked', true);
+      $("#tp-".concat(atp)).next().toggleClass('social-selector-inactive');
+      $("#tp-".concat(atp)).next().find('i.social-selector-check').toggleClass('check-inactive');
+    });
+  }; // Activate tooltips
+
+
+  $(".social-selector").tooltip();
+  $(".icon-menu-option").tooltip();
+  $(".fa-cog").tooltip(); // Show spost options menu
+
+  $(".show-post-options-trigger").on("click", function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    $(".show-post-options-menu").each(function () {
+      $(this).addClass('hidden-options-menu');
+    });
+    $(this).next().removeClass('hidden-options-menu');
+  }); // Hide spost options menu on any click
+
+  $(document).on("click", function (e) {
+    $(".show-post-options-menu").each(function () {
+      $(this).addClass('hidden-options-menu');
+    });
+  });
 });
 
 /***/ }),

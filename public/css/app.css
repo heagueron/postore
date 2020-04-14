@@ -11032,6 +11032,51 @@ twitter-profile-option-active {
   border-radius: 5px;
 }
 
+.show-post-options-container {
+  position: relative;
+}
+
+.show-post-options-container .show-post-options-menu {
+  position: absolute;
+  left: -60px;
+  top: 0;
+}
+
+.show-post-options-trigger {
+  margin-left: 12px;
+}
+
+.show-post-options-menu {
+  background-color: white;
+  border: 0px solid;
+  box-shadow: 0.1px 0.1px 4px 0px #3490dc;
+  z-index: 5;
+  border-radius: 2px;
+}
+
+.show-post-options-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.show-post-options-item:hover {
+  background-color: #edf3f5;
+}
+
+.post-options-btn {
+  border: none;
+  background-color: white;
+}
+
+.post-options-btn:hover {
+  border: none;
+  background-color: #edf3f5;
+}
+
+.hidden-options-menu {
+  display: none;
+}
+
 .imagePreview {
   width: 240px;
   height: 240px;

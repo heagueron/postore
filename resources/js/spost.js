@@ -34,6 +34,7 @@ $( document ).ready(function(e) {
     $(".social-selector").on('click', function(e){
         e.preventDefault
         e.stopImmediatePropagation
+        console.log('Ouch!')
         if( $(e.target).hasClass('social-selector')){
             $(e.target).toggleClass('social-selector-inactive')
             $(e.target).find('i.social-selector-check').toggleClass('check-inactive')
@@ -43,15 +44,64 @@ $( document ).ready(function(e) {
         }
     })
 
-    // Edit spost
-    // if( $("#p-content").has("#ta") ){
-    //     console.log('showing some twitter accounts');
-    // }
-    // if ( jQuery.contains( $("#p-content"), $("#ta") ) ) {
-    //     console.log('showing some twitter accounts');
-    // }
-    if ( $("#ta").length ) {
-        console.log('showing some twitter accounts');
+    // Edit Scheduled post
+    // Check if edit spost page is loaded
+    if ( $(".edit-spost").length ) {
+
+        // Grab the social profiles
+        const spostId = $(".edit-spost").attr('id').slice(5);
+
+        var PATH = "http://localhost:8000/";
+        $.ajax({
+            url : `${PATH}sposts/detail/${spostId}` ,
+            type : "GET",
+            data: {},
+            dataType : 'json',
+            beforeSend: function(){
+            },
+            success : function(response) {
+                setTwitterProfilesInput(response.activeTwitterProfiles)
+            },
+            complete: function () {
+            }
+        });
+
+        // Adjust text positioning and count
+        const trimmedText = $("#post_text").html().trim();
+        $("#post_text").html(trimmedText)
+        $("#post-character-count").html(trimmedText.length)
+    
     }
+
+    // Activate Twitter Profiles Options
+    const setTwitterProfilesInput = (activeTwitterProfiles) => {
+        activeTwitterProfiles.forEach(atp => {
+            $(`#tp-${atp}`).attr('checked', true)
+            $(`#tp-${atp}`).next().toggleClass('social-selector-inactive')
+            $(`#tp-${atp}`).next().find('i.social-selector-check').toggleClass('check-inactive')
+        });
+    }
+
+    // Activate tooltips
+    $(".social-selector").tooltip()
+    $(".icon-menu-option").tooltip()
+    $(".fa-cog").tooltip()
+
+    // Show spost options menu
+    $(".show-post-options-trigger").on("click", function(e){
+        e.stopPropagation()
+        e.preventDefault()
+        $(".show-post-options-menu").each(function(){
+            $(this).addClass('hidden-options-menu')
+        })
+        $(this).next().removeClass('hidden-options-menu')
+    })
+
+    // Hide spost options menu on any click
+    $(document).on("click", function(e){
+        $(".show-post-options-menu").each(function(){
+            $(this).addClass('hidden-options-menu')
+        });
+    })
 
 })

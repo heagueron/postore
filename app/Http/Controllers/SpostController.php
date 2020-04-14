@@ -136,13 +136,35 @@ class SpostController extends Controller
      * @return Response
      */
     public function edit(Spost $spost)
-    {
+    {   
         $user = \Auth::user();
-        $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
-        $currentDate = Str::of($now)->limit(16,'');
+        // $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
+        // $currentDate = Str::of($now)->limit(16,'');
+
+        $date2 = Carbon::createFromDate( $spost->post_date )->toDateTimeLocalString();
+        $currentDate= Str::of($date2)->limit(16,'');
+        //dd($currentDate,$d2);
 
         //dd("ok, edit spost with text: ", $spost->text);
         return view('sposts.edit', compact('user', 'spost', 'currentDate') );
+    }
+
+    /**
+     * Detail of a spost.
+     *
+     * @param  Spost $spost
+     * @return Response
+     */
+    public function detail(Spost $spost)
+    {
+        $tpIds = [];
+        foreach ($spost->twitter_profiles as $tp) {
+            array_push($tpIds,$tp->id);
+        }
+        return response()->json([
+            'controller'            => 'SpostController@detail',
+            'activeTwitterProfiles' => $tpIds,
+        ],200);
     }
 
     /**
@@ -151,9 +173,39 @@ class SpostController extends Controller
      * @param  Spost $spost
      * @return Response
      */
-    public function update(Spost $spost)
+    public function update(Spost $spost, StoreSpost $request)
     {
-        dd("update the post with text: ", $spost->text);
+        $date       = Carbon::createFromDate( request()->post_date );
+        $now        = Carbon::now()->timezone(auth()->user()->timezone)->toDateTimeLocalString();
+        $minDate    = Carbon::createFromDate( $now );
+
+        // Check date
+        if ( ! $date->gte( $minDate ) ) {
+            return back()->withInput()
+                ->with('date_error', 'Please select a date after current date');
+        }
+
+        // Update the scheduled post
+        $spost->update([
+            'text'                  => request()->text,
+            'post_date'             => $date->toDateTimeString(),
+            'media_1'               => request()->media_1,
+            'media_2'               => request()->media_2,
+            'media_3'               => request()->media_3,
+            'media_4'               => request()->media_4,
+            'media_files_count'     => request()->media_files_count,
+        ]);
+
+        // Update media
+        
+        // Update social profiles
+        foreach ( request()->twitter_accounts as $key=>$value ) {
+            if ( !$spost->twitter_profiles()->where('twitter_profile_id',$value)->exists() ) {
+                $spost->twitter_profiles()->syncWithoutDetaching([$value]);
+            }
+        }
+
+        return redirect('/sposts/schedule')->with('flash', 'Post updated!');
     }
 
     
@@ -164,7 +216,7 @@ class SpostController extends Controller
      * @return Response
      */
     public function destroy(Spost $spost)
-    {
+    {   
         // Delete media files
         if(\Storage::exists( 'public/' . $spost->media_1 )){
             \Storage::delete( 'public/' . $spost->media_1 );           
@@ -197,7 +249,7 @@ class SpostController extends Controller
      * @return Response
      */
     public function sendNow(Spost $spost)
-    {
+    {   
         $tpIds = [];
         foreach ($spost->twitter_profiles as $tp) {
             array_push($tpIds,$tp->id);

@@ -7,8 +7,10 @@
 require('./bootstrap');
 
 /**
- * Sposts functions
+ * Sposts globals and functions
  */
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+var PATH = "http://localhost:8000/";
 require('./spost');
 require('./media');
 
@@ -56,7 +58,6 @@ const app = new Vue({
     }
 });
 
-var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-var path = "http://localhost:8000/";
+
 
 

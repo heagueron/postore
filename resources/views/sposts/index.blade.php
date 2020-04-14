@@ -78,7 +78,7 @@
 
                 @foreach( $spost->twitter_profiles as $tp)
 
-                    <label class="social-selector" title="{{'@' . $tp->handler}}">
+                    <label class="social-selector" title="{{'@' . $tp->handler}}"  data-toggle="tooltip">
                         <i class="fab fa-twitter-square social-selector-twitter">
                         </i>
                         <img src="{{ $tp->avatar }}" class="show-avatar img-fluid" alt="" >           
@@ -86,8 +86,8 @@
 
                 @endforeach
 
-                <div class="dropdown dropleft">
-  
+                <!-- <div class="dropdown dropleft">
+
                   <button type="button" 
                       class="dropdown-toggle" 
                       data-toggle="dropdown"
@@ -124,7 +124,44 @@
 
                       
                     </div>
-              </div>
+                </div> -->
+
+                {{--show-post-options-container--}}
+                <div class="show-post-options-container">
+
+                  <div class="show-post-options-trigger" id="{{'trigger-' .$spost->id}}">
+                    <i class="fas fa-cog" title="Schedule post options" data-toggle="tooltip"></i>
+                  </div>
+                  
+                  <div class="show-post-options-menu hidden-options-menu" id="{{'menu-' .$spost->id}}">
+
+                    <div class="show-post-options-item">
+                      <a class="ml-2" href="{{ route('sposts.edit', $spost->id) }}">Edit</a>
+                    </div>
+
+                    <div class="show-post-options-item">
+                      <form method="POST" action="{{ route('sposts.send_now', $spost->id) }}">
+                        @csrf @method('POST')
+                        <button type="submit" class="post-options-btn"
+                          title="Send Now this scheduled post">
+                          Send Now
+                        </button>
+                      </form>
+                    </div>
+
+                    <div class="show-post-options-item">
+                      <form method="POST" action="{{ route('sposts.destroy', $spost->id) }}">
+                          @csrf @method('DELETE')
+                          <button type="submit" class="post-options-btn"
+                            title="Delete this scheduled post">
+                            Delete the spost
+                          </button>
+                      </form>
+                    </div>
+
+                  </div>
+                </div>
+
 
             </td>
         </tr>

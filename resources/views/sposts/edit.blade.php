@@ -15,9 +15,14 @@
 
         <form action="{{ route('sposts.update', $spost->id) }}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
 
             {{-- Social profiles --}}
             <div class="form-group social-profiles-container mt-2">
+
+                <!--Hidden to identify edit page load-->
+                <input hidden class="edit-spost" type="text" id="{{'edit-' . $spost->id}}">
+
                 <label>From</label><br/>
                 @foreach($user->twitter_profiles as $tp)
 
@@ -26,8 +31,7 @@
                         class="custom-control-input" 
                         id="{{'tp-' .$tp->id}}" 
                         name="twitter_accounts[]" 
-                        value="{{$tp->id}}"
-                        checked>
+                        value="{{$tp->id}}">
                 
                     <label class="social-selector social-selector-inactive" 
                         for="{{'tp-' .$tp->id}}" title="{{'@' . $tp->handler}}">
@@ -37,7 +41,6 @@
                         <i class="fas fa-check-circle social-selector-check check-inactive"
                             id="{{'check-' .$tp->id}}">
                         </i>
-                        
                     </label>
 
                 @endforeach
@@ -54,8 +57,7 @@
                     {{ !is_null( old('text'))? old('text') : $spost->text }}
                 </textarea>
                 <p id="post-character-count" class="post-character-count" 
-                    value="{{ !is_null( old('text'))? strlen(old('text')) : strlen($spost->text) }}">
-                    0
+                    value="{{ !is_null( old('text'))? strlen(trim(old('text'))) : strlen(trim($spost->text)) }}">
                 </p>
                 @error('text') <div class="alert alert-danger">{{ $message }}</div> @enderror
             </div>
@@ -109,10 +111,10 @@
             </div>       
             
             <input hidden name="user_id" value="{{ $user->id }}" id="post-user-id">
-            <input hidden name="send-now" value="false" id="send-now-flag">
+            <!-- <input hidden name="send-now" value="false" id="send-now-flag"> -->
 
-            <button class="btn btn-primary" type="submit" id="submit-schedule">Schedule the post</button>
-            <button class="btn btn-success" id="post_now">Post it now!</button>
+            <button class="btn btn-primary" type="submit" id="submit-schedule">Save changes</button>
+            <!-- <button class="btn btn-success" id="post_now">Post it now!</button> -->
             
         </form>
 
