@@ -11044,6 +11044,7 @@ twitter-profile-option-active {
 
 .show-post-options-trigger {
   margin-left: 12px;
+  cursor: pointer;
 }
 
 .show-post-options-menu {
@@ -11055,7 +11056,7 @@ twitter-profile-option-active {
 }
 
 .show-post-options-item {
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
 }
 
@@ -11075,6 +11076,34 @@ twitter-profile-option-active {
 
 .hidden-options-menu {
   display: none;
+}
+
+.show-other-profiles-container {
+  position: relative;
+}
+
+.show-other-profiles-container .show-other-profiles {
+  position: absolute;
+  left: -60px;
+  top: 0;
+  background-color: white;
+  border: 0px solid;
+  box-shadow: 0.1px 0.1px 4px 0px #3490dc;
+  z-index: 5;
+  border-radius: 2px;
+}
+
+.show-other-profiles-trigger {
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.hidden-other-profiles {
+  display: none;
+}
+
+.show-other-profiles-item {
+  padding: 10px;
 }
 
 .imagePreview {

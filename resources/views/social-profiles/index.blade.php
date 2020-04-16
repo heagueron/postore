@@ -20,7 +20,7 @@
         </div>
         <div class="social-profile-list">
             @forelse( auth()->user()->twitter_profiles as $tp)
-                <div class="social-profile-item d-flex justify-content-between align-items-baseline">
+                <div class="social-profile-item d-flex justify-content-between align-items-baseline mb-2">
                     <div class="social-profile-info">
                         <img src="{{ $tp->avatar }}" class="show-avatar img-fluid" alt="" >   
                         <label class="pl-2">

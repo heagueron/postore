@@ -76,6 +76,34 @@
             </td>
             <td class="show-post-text">
 
+                {{-- Reduced twitter_profiles list --}}
+                <!-- {{$spost->twitter_profiles()->first()->handler}} -->
+                {{-- First twitter_profile --}}
+                <label class="social-selector" title="{{'@' . $spost->twitter_profiles()->first()->handler}}"  data-toggle="tooltip">
+                  <i class="fab fa-twitter-square social-selector-twitter"></i>
+                  <img src="{{ $spost->twitter_profiles()->first()->avatar }}" class="show-avatar img-fluid" alt="" >           
+                </label>
+
+                {{-- All that will post this --}}
+                @if( $spost->twitter_profiles()->count() > 1)
+                  <div class="show-other-profiles-container">
+                    
+                    <div class="show-other-profiles-trigger" id="{{'other-profiles-' .$spost->id}}">
+                      <i class="fas fa-ellipsis-h" title="All that will post this" data-toggle="tooltip"></i>
+                    </div>
+
+                    <div class="show-other-profiles hidden-other-profiles" id="{{'other-profiles-' .$spost->id}}">
+                      @foreach( $spost->twitter_profiles as $tp)
+                        <div class="show-other-profiles-item">
+                          {{'@' .$tp->handler}}
+                        </div>
+                      @endforeach
+                    </div>
+
+                  </div>
+                @endif
+
+                <!-- {{-- Full twitter_profiles list --}}
                 @foreach( $spost->twitter_profiles as $tp)
 
                     <label class="social-selector" title="{{'@' . $tp->handler}}"  data-toggle="tooltip">
@@ -85,46 +113,7 @@
                     </label>
 
                 @endforeach
-
-                <!-- <div class="dropdown dropleft">
-
-                  <button type="button" 
-                      class="dropdown-toggle" 
-                      data-toggle="dropdown"
-                      style="border:none; background-color:white;">
-                    <i class="fas fa-cog"></i>
-                  </button>
-                    <div class="dropdown-menu">
-
-                      <a class="dropdown-item" href="{{ route('sposts.edit', $spost->id) }}">Edit</a>
-                      
-                      <form method="POST" action="{{ route('sposts.send_now', $spost->id) }}">
-                        @csrf
-                        @method('POST')
-                        <button 
-                          class="dropdown-item" 
-                          type="submit"
-                          style="border:none; background-color:white;"
-                          title="Send Now this scheduled post">
-                          Send Now
-                        </button>
-                      </form>
-
-                      <form method="POST" action="{{ route('sposts.destroy', $spost->id) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button 
-                          class="dropdown-item" 
-                          type="submit"
-                          style="border:none; background-color:white;"
-                          title="Delete this scheduled post">
-                          Delete the spost
-                        </button>
-                      </form>
-
-                      
-                    </div>
-                </div> -->
+                {{-- End Full twitter_profiles list --}} -->
 
                 {{--show-post-options-container--}}
                 <div class="show-post-options-container">
@@ -154,7 +143,7 @@
                           @csrf @method('DELETE')
                           <button type="submit" class="post-options-btn"
                             title="Delete this scheduled post">
-                            Delete the spost
+                            Delete the post
                           </button>
                       </form>
                     </div>

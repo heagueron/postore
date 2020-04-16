@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
 use DB;
-
-use App\Http\Requests\StoreSpost;
-use App\Traits\PublishPost;
 use App\Spost;
+use Carbon\Carbon;
+use App\Traits\PublishPost;
+
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Requests\StoreSpost;
+use Illuminate\Support\Facades\Storage;
 
 
 class SpostController extends Controller
@@ -157,13 +158,34 @@ class SpostController extends Controller
      */
     public function detail(Spost $spost)
     {
+        // Get twitter profiles for the scheduled post
         $tpIds = [];
         foreach ($spost->twitter_profiles as $tp) {
             array_push($tpIds,$tp->id);
         }
+
+        // Get media files for the scheduled post
+        if(\Storage::exists( 'public/' . $spost->media_1 )){
+            $strMedia1 = Storage::get(  'public/' . $spost->media_1  ); 
+        }
+        if(\Storage::exists( 'public/' . $spost->media_2 )){
+            $strMedia2 = Storage::get(  'public/' . $spost->media_2  );
+        }
+        if(\Storage::exists( 'public/' . $spost->media_3 )){
+            $strMedia3 = Storage::get(  'public/' . $spost->media_3  );   
+        }
+        if(\Storage::exists( 'public/' . $spost->media_4 )){
+            $strMedia4 = Storage::get(  'public/' . $spost->media_4  );
+        }
+
         return response()->json([
             'controller'            => 'SpostController@detail',
             'activeTwitterProfiles' => $tpIds,
+            'strMedia1'             => utf8_encode($strMedia1),
+            'strMedia2'             => utf8_encode($strMedia2),
+            'strMedia3'             => utf8_encode($strMedia3),
+            'strMedia4'             => utf8_encode($strMedia4)
+
         ],200);
     }
 
@@ -174,7 +196,7 @@ class SpostController extends Controller
      * @return Response
      */
     public function update(Spost $spost, StoreSpost $request)
-    {
+    {   
         $date       = Carbon::createFromDate( request()->post_date );
         $now        = Carbon::now()->timezone(auth()->user()->timezone)->toDateTimeLocalString();
         $minDate    = Carbon::createFromDate( $now );
@@ -205,7 +227,7 @@ class SpostController extends Controller
             }
         }
 
-        return redirect('/sposts/schedule')->with('flash', 'Post updated!');
+        return redirect('/sposts/schedule')->with('flash', 'Post updated.');
     }
 
     

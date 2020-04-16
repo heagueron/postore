@@ -47,7 +47,7 @@ Route::post('/sposts/{spost}', 'SpostController@sendNow')->name('sposts.send_now
 Route::get('/sposts/{spost}/edit', 'SpostController@edit')->name('sposts.edit')->middleware('auth');
 Route::patch('/sposts/{spost}', 'SpostController@update')->name('sposts.update')->middleware('auth');
 Route::delete('/sposts/{spost}', 'SpostController@destroy')->name('sposts.destroy')->middleware('auth');
-Route::get('/sposts/detail/{spost}', 'SpostController@detail')->name('sposts.detail')->middleware('auth');
+Route::get('/sposts/detail/{spost}', 'SpostController@detail')->name('sposts.detail');
 
 Route::post('/sposts/imageUpload', 'SpostController@imageUpload')->name('sposts.image');
 

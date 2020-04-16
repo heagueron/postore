@@ -26,7 +26,7 @@
     <div id="new-scheduled-post" style="display:none">
 @endif
 
-    <h3 class="inline-block" id="new-compose-title">New Post</h3>
+    <h3 class="inline-block" id="new-compose-title">New Scheduled Post</h3>
     <hr>
     <div id="create_post_content">
 
@@ -36,27 +36,31 @@
             {{-- Social profiles --}}
             <div class="form-group social-profiles-container mt-2">
                 <label>From</label><br/>
-                @foreach($user->twitter_profiles as $tp)
-
-                    <input hidden
-                        type="checkbox" 
-                        class="custom-control-input" 
-                        id="{{'tp-' .$tp->id}}" 
-                        name="twitter_accounts[]" 
-                        value="{{$tp->id}}">
-                
-                    <label class="social-selector social-selector-inactive" 
-                        for="{{'tp-' .$tp->id}}" title="{{'@' . $tp->handler}}">
-                        <i class="fab fa-twitter-square social-selector-twitter"></i>
-
-                        <img src="{{ $tp->avatar }}" class="show-avatar img-fluid" alt="" >
-                        <i class="fas fa-check-circle social-selector-check check-inactive"
-                            id="{{'check-' .$tp->id}}">
-                        </i>
+                <div class="d-flex">
+                    @foreach($user->twitter_profiles as $tp)
+                        <div class="mr-3">
+                            <input hidden
+                                type="checkbox" 
+                                class="custom-control-input" 
+                                id="{{'tp-' .$tp->id}}" 
+                                name="twitter_accounts[]" 
+                                value="{{$tp->id}}">
                         
-                    </label>
+                            <label class="social-selector social-selector-inactive" 
+                                for="{{'tp-' .$tp->id}}" title="{{'@' . $tp->handler}}">
+                                <i class="fab fa-twitter-square social-selector-twitter"></i>
 
-                @endforeach
+                                <img src="{{ $tp->avatar }}" class="show-avatar img-fluid" alt="" >
+                                <i class="fas fa-check-circle social-selector-check check-inactive"
+                                    id="{{'check-' .$tp->id}}">
+                                </i>
+                                
+                            </label>
+                        </div>
+
+                    @endforeach
+                </div>
+                
                 @if( session()->has('profile_error') )
                     <div class="alert alert-danger">{{ session()->get('profile_error') }}</div>
                 @endif

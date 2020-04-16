@@ -34,7 +34,6 @@ $( document ).ready(function(e) {
     $(".social-selector").on('click', function(e){
         e.preventDefault
         e.stopImmediatePropagation
-        console.log('Ouch!')
         if( $(e.target).hasClass('social-selector')){
             $(e.target).toggleClass('social-selector-inactive')
             $(e.target).find('i.social-selector-check').toggleClass('check-inactive')
@@ -51,7 +50,7 @@ $( document ).ready(function(e) {
         // Grab the social profiles
         const spostId = $(".edit-spost").attr('id').slice(5);
 
-        var PATH = "http://localhost:8000/";
+        let PATH = "http://localhost:8000/";
         $.ajax({
             url : `${PATH}sposts/detail/${spostId}` ,
             type : "GET",
@@ -61,6 +60,13 @@ $( document ).ready(function(e) {
             },
             success : function(response) {
                 setTwitterProfilesInput(response.activeTwitterProfiles)
+                // const imageArray = [];
+                // if (response.strMedia1){ imageArray.push(response.strMedia1)}
+                // if (response.strMedia2){ imageArray.push(response.strMedia2)}
+                // if (response.strMedia3){ imageArray.push(response.strMedia3)}
+                // if (response.strMedia4){ imageArray.push(response.strMedia4)}
+                // //console.log(imageArray)
+                // if(imageArray.length > 0) setMedia(imageArray) 
             },
             complete: function () {
             }
@@ -86,6 +92,8 @@ $( document ).ready(function(e) {
     $(".social-selector").tooltip()
     $(".icon-menu-option").tooltip()
     $(".fa-cog").tooltip()
+    $(".fa-ellipsis-h").tooltip()
+
 
     // Show spost options menu
     $(".show-post-options-trigger").on("click", function(e){
@@ -94,13 +102,32 @@ $( document ).ready(function(e) {
         $(".show-post-options-menu").each(function(){
             $(this).addClass('hidden-options-menu')
         })
+        $(".show-other-profiles").each(function(){
+            $(this).addClass('hidden-other-profiles')
+        });
         $(this).next().removeClass('hidden-options-menu')
+    })
+
+    // Show other profiles for a spost in index
+    $(".show-other-profiles-trigger").on("click", function(e){
+        e.stopPropagation()
+        e.preventDefault()
+        $(".show-other-profiles").each(function(){
+            $(this).addClass('hidden-other-profiles')
+        })
+        $(".show-post-options-menu").each(function(){
+            $(this).addClass('hidden-options-menu')
+        });
+        $(this).next().removeClass('hidden-other-profiles')
     })
 
     // Hide spost options menu on any click
     $(document).on("click", function(e){
         $(".show-post-options-menu").each(function(){
             $(this).addClass('hidden-options-menu')
+        });
+        $(".show-other-profiles").each(function(){
+            $(this).addClass('hidden-other-profiles')
         });
     })
 

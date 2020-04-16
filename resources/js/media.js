@@ -100,7 +100,7 @@ $( document ).ready(function(e) {
 
         switch (mediaCount) {
 
-            // showMedia signature: (element, position, heigth, width, column)
+            // showMedia signature: (element from filesToRender array, position, heigth, width, column)
             case 1:
                 showMedia(0,1,240,240,1);         
             break;
@@ -165,5 +165,49 @@ $( document ).ready(function(e) {
         renderFiles();
         
     }
+
+    // Check if edit spost page is loaded
+    if ( $(".edit-spost").length ) {
+
+        // Adjust text positioning and count
+        const trimmedText = $("#post_text").html().trim();
+        $("#post_text").html(trimmedText)
+        $("#post-character-count").html(trimmedText.length)
+
+        // Media files
+        filesToRender   =   [];
+        sessionStorage.clear();   
+        
+        
+    }
+
+
+    const setMedia = ( images ) => {
+
+        const entries = Object.entries(images)
+
+        for (const [media, mediaStr] of entries) {
+            // Create element
+            // Get sub index and store image in session
+            let subIndex = media.slice(5,6);
+            sessionStorage.setItem(`bg${subIndex}`, mediaStr );
+            //console.log(subIndex)
+
+            // Build image preview node
+            let bg = sessionStorage.getItem(`bg${subIndex}`);
+            let spot = $(`<div class="imagePreview">
+                            <i class="far fa-times-circle removeMedia"></i></span>
+                        </div>`);
+            spot.css('background-image', `url( ${bg} )`);
+            spot.attr('data-session-key',`bg${subIndex}`);
+            spot.attr('data-input',`imageUpload${subIndex-1}`);
+
+            // Add to files array and render
+            filesToRender.push(spot);
+        }
+        renderFiles();
+
+    }
+
 
 })
