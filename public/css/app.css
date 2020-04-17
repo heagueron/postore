@@ -11106,6 +11106,11 @@ twitter-profile-option-active {
   padding: 10px;
 }
 
+.image-preview-container {
+  width: 240px;
+  height: 240px;
+}
+
 .imagePreview {
   width: 240px;
   height: 240px;
@@ -11117,7 +11122,8 @@ twitter-profile-option-active {
   position: relative;
 }
 
-.imagePreview .removeMedia {
+.imagePreview .removeMedia,
+.imagePreview .removeMedia2 {
   position: absolute;
   right: 5px;
   top: 5px;
@@ -11128,24 +11134,36 @@ twitter-profile-option-active {
   z-index: 10;
 }
 
+.mic-1 {
+  width: 240px;
+  height: 240px;
+}
+
 .show-image-1 {
-  width: 340px;
-  height: 190px;
-  margin: 5px;
+  width: 240px;
+  height: 240px;
   border-radius: 14px;
+}
+
+.mic-2 {
+  width: 120px;
+  height: 240px;
 }
 
 .show-image-2 {
-  width: 170px;
-  height: 190px;
-  margin: 5px;
+  width: 120px;
+  height: 240px;
   border-radius: 14px;
 }
 
+.mic-3 {
+  width: 120px;
+  height: 120px;
+}
+
 .show-image-3 {
-  width: 170px;
-  height: 95px;
-  margin: 5px;
+  width: 120px;
+  height: 120px;
   border-radius: 14px;
 }
 

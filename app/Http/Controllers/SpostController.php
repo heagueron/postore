@@ -62,17 +62,12 @@ class SpostController extends Controller
         
         // Set media array
         foreach ($sposts as $spost) {
-            $media = [];
-            if( !is_null($spost->media_1) ) { array_push($media, $spost->media_1); }
-            if( !is_null($spost->media_2) ) { array_push($media, $spost->media_2); }
-            if( !is_null($spost->media_3) ) { array_push($media, $spost->media_3); }
-            if( !is_null($spost->media_4) ) { array_push($media, $spost->media_4); }
-            $spost->media   =   $media;
+            $this->setSpostMedia($spost);
         }
         
         $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
         $currentDate = Str::of($now)->limit(16,'');
-        
+        //dd($sposts);
         return view('sposts.schedule', compact('user', 'sposts', 'currentDate'));
     }
 
@@ -144,9 +139,10 @@ class SpostController extends Controller
 
         $date2 = Carbon::createFromDate( $spost->post_date )->toDateTimeLocalString();
         $currentDate= Str::of($date2)->limit(16,'');
-        //dd($currentDate,$d2);
+        
+        $this->setSpostMedia($spost);
 
-        //dd("ok, edit spost with text: ", $spost->text);
+        //dd("ok, edit spost: ", $spost);
         return view('sposts.edit', compact('user', 'spost', 'currentDate') );
     }
 
@@ -196,7 +192,7 @@ class SpostController extends Controller
      * @return Response
      */
     public function update(Spost $spost, StoreSpost $request)
-    {   
+    {   dd(request());
         $date       = Carbon::createFromDate( request()->post_date );
         $now        = Carbon::now()->timezone(auth()->user()->timezone)->toDateTimeLocalString();
         $minDate    = Carbon::createFromDate( $now );
@@ -303,5 +299,47 @@ class SpostController extends Controller
                 'media_4' => is_null( request()->media_4 ) ? null : request()->media_4->store('uploads', 'public'),
             ]);
     }
+
+    /**
+     * Prepare spost media data
+     *
+     * @param  Spost $spost
+     * @return void
+     */
+    private function setSpostMedia($spost)
+    {
+        $media = [];
+        $names = [];
+        $inputs = [];
+
+        if( !is_null($spost->media_1) ) { 
+            array_push($media, $spost->media_1);
+            array_push($names, 'media_1');
+            array_push($inputs, 0);
+            }
+
+        if( !is_null($spost->media_2) ) {
+            array_push($media, $spost->media_2);
+            array_push($names, 'media_2');
+            array_push($inputs, 1);
+            }
+
+        if( !is_null($spost->media_3) ) {
+            array_push($media, $spost->media_3);
+            array_push($names, 'media_3');
+            array_push($inputs, 2);
+            }
+
+        if( !is_null($spost->media_4) ) {
+            array_push($media, $spost->media_4);
+            array_push($names, 'media_4');
+            array_push($inputs, 3);
+            }
+        $spost->media   =   $media;
+        $spost->names   =   $names;
+        $spost->inputs  =   $inputs;
+
+    }
+
 
 }

@@ -53016,21 +53016,14 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 // Media files
 $(document).ready(function (e) {
   var filesToRender = [];
   sessionStorage.clear();
   $("#add-media-button").on('click', function (e) {
     //e.stopPropagation()
-    e.preventDefault();
+    e.preventDefault(); //console.log(e)
+
     var mediaCount = parseInt($("#media_files_count").val());
 
     if (mediaCount < 4) {
@@ -53165,6 +53158,167 @@ $(document).ready(function (e) {
     });
     filesToRender = newArray;
     renderFiles();
+  };
+  /**********************************************
+   * Functions for editing media
+   * 
+   **********************************************/
+  //filesToRender   =   [];
+
+
+  var filesToShow = []; // Assign input and open local browser to select file
+
+  $("#add-media-button2").on('click', function (e) {
+    //e.stopPropagation()
+    e.preventDefault();
+    console.log('Lets edit!');
+
+    for (var i = 0; i < 4; i++) {
+      var input = $("#imageUpload".concat(i));
+
+      if (input.length && input.attr('data-assigned') == "false") {
+        console.log(input);
+        input.click();
+        break;
+      }
+    }
+  }); // Remove media
+
+  var removeMedia2 = function removeMedia2(element) {
+    console.log('remove element:');
+    console.log(element);
+    element.remove(); // Update media count
+
+    var mediaCount = parseInt($("#media_files_count").val());
+    mediaCount -= 1;
+    $("#media_files_count").val(mediaCount);
+    $("#add-media-button2").css('display', 'block'); // Clean input set, if present.
+
+    var targetInputId = element.attr("data-input");
+
+    if ($("#".concat(targetInputId)).length) {
+      $("#".concat(targetInputId)).remove();
+      console.log('removed input:');
+      console.log($("#".concat(targetInputId)));
+    } // Recreates the input
+
+
+    var targetName = parseInt(targetInputId.substr(11, 1)) + 1;
+    targetName = "media_".concat(targetName); // Create an input for the available slot
+
+    var newInput = $("<input type='file' \n            id=\"".concat(targetInputId, "\" \n            name=\"").concat(targetName, "\"\n            style=\"display:none\"\n            data-assigned=\"false\" \n            accept=\".png, .jpg, .jpeg\" />"));
+    newInput.appendTo("#media-files-container");
+    activateInputEvent2(newInput); // Indicate change in media input:
+
+    $("#ck-".concat(targetName)).val(1); // Remove from filesToShow array
+
+    var newArray = filesToShow.filter(function (element) {
+      return element.attr("data-input") != targetInputId;
+    });
+    filesToShow = newArray;
+    renderFiles();
+  }; // Append media
+
+
+  var showMedia2 = function showMedia2(element, heigth, width, column) {
+    var spot = filesToShow[element];
+    spot.css('height', heigth).css('width', width);
+    spot.addClass('imagePreview');
+
+    if (spot.has('img')) {
+      spot.css('border-radius', '14px');
+      spot.find('img').css('height', heigth).css('width', width).css('border-radius', '14px');
+    }
+
+    spot.appendTo("#mediaColumn".concat(column));
+    spot.find('i').on('click', function (e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      removeMedia2(spot);
+    });
+  }; // Organize grid for files preview
+
+
+  var renderFiles2 = function renderFiles2() {
+    // Empty preview columns
+    $("#mediaColumn1").empty();
+    $("#mediaColumn2").empty();
+    console.log('Organize grid for files preview -2');
+    var mediaCount = filesToShow.length;
+
+    switch (mediaCount) {
+      // showMedia2 signature: (element from filesToShow array, heigth, width, column)
+      case 1:
+        showMedia2(0, 240, 240, 1);
+        break;
+
+      case 2:
+        showMedia2(0, 240, 110, 1);
+        showMedia2(1, 240, 110, 2);
+        break;
+
+      case 3:
+        showMedia2(0, 240, 110, 1);
+        showMedia2(1, 110, 110, 2);
+        showMedia2(2, 110, 110, 2);
+        break;
+
+      case 4:
+        showMedia2(0, 110, 110, 1);
+        showMedia2(1, 110, 110, 1);
+        showMedia2(2, 110, 110, 2);
+        showMedia2(3, 110, 110, 2);
+        break;
+
+      case 0:
+        console.log("No image to preview!");
+        break;
+
+      default:
+        console.log("Maximun image files count exceeded!");
+        break;
+    }
+  }; // File image read
+
+
+  function readURL2(input) {
+    console.log("Ready to Reading file when editing");
+
+    if (input.files && input.files[0]) {
+      console.log("reading new file via input: ".concat(input.name.slice(6, 7)));
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // Get sub index from input and store image in session
+        var subIndex = input.name.slice(6, 7); // Build image preview node
+
+        var spot = $("<div>\n                                <i class=\"far fa-times-circle removeMedia2\"></i></span>\n                            </div>");
+        spot.attr('data-name', "media_".concat(subIndex));
+        spot.attr('data-input', "imageUpload".concat(subIndex - 1));
+        spot.css('background-image', "url(".concat(e.target.result, ")"));
+        spot.attr('data-input', input.id); // Add to files array and render
+
+        filesToShow.push(spot); // Mark input as assigned
+
+        $("#imageUpload".concat(subIndex - 1)).attr('data-assigned', 'true'); // Signal media as 'changed'
+
+        $("#ck-media_".concat(subIndex)).val(1); // Update media counter
+
+        var mediaCount = parseInt($("#media_files_count").val());
+        mediaCount += 1;
+        $("#media_files_count").val(mediaCount);
+        if (mediaCount > 3) $("#add-media-button2").css('display', 'none');
+        renderFiles2();
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  var activateInputEvent2 = function activateInputEvent2(targetInput) {
+    targetInput.change(function () {
+      readURL2(this);
+    });
   }; // Check if edit spost page is loaded
 
 
@@ -53172,37 +53326,25 @@ $(document).ready(function (e) {
     // Adjust text positioning and count
     var trimmedText = $("#post_text").html().trim();
     $("#post_text").html(trimmedText);
-    $("#post-character-count").html(trimmedText.length); // Media files
+    $("#post-character-count").html(trimmedText.length); // Check which media files we got when edit page loaded
 
-    filesToRender = [];
-    sessionStorage.clear();
-  }
+    for (var i = 1; i < 5; i++) {
+      if ($("#ck-media_".concat(i)).attr('data-media-present')) {
+        var media = "ck-media_".concat(i).slice(3);
+        var element = $("[data-name=".concat(media, "]")).clone(true); // console.log(`present: ${media} like:`)
+        // console.log(element)
 
-  var setMedia = function setMedia(images) {
-    var entries = Object.entries(images);
-
-    for (var _i = 0, _entries = entries; _i < _entries.length; _i++) {
-      var _entries$_i = _slicedToArray(_entries[_i], 2),
-          media = _entries$_i[0],
-          mediaStr = _entries$_i[1];
-
-      // Create element
-      // Get sub index and store image in session
-      var subIndex = media.slice(5, 6);
-      sessionStorage.setItem("bg".concat(subIndex), mediaStr); //console.log(subIndex)
-      // Build image preview node
-
-      var bg = sessionStorage.getItem("bg".concat(subIndex));
-      var spot = $("<div class=\"imagePreview\">\n                            <i class=\"far fa-times-circle removeMedia\"></i></span>\n                        </div>");
-      spot.css('background-image', "url( ".concat(bg, " )"));
-      spot.attr('data-session-key', "bg".concat(subIndex));
-      spot.attr('data-input', "imageUpload".concat(subIndex - 1)); // Add to files array and render
-
-      filesToRender.push(spot);
+        element.removeClass();
+        element.find('img').removeClass();
+        filesToShow.push(element);
+      } else {
+        // Create an input for the available slot
+        var newInput = $("<input type='file' \n                    id=\"imageUpload".concat(i - 1, "\" \n                    name=\"media_").concat(i, "\"\n                    style=\"display:none\"\n                    data-assigned=\"false\" \n                    accept=\".png, .jpg, .jpeg\" />"));
+        newInput.appendTo("#media-files-container");
+        activateInputEvent2(newInput);
+      }
     }
-
-    renderFiles();
-  };
+  }
 });
 
 /***/ }),

@@ -68,37 +68,111 @@
             </div>
                 
             {{-- Media file loader --}}
+            @if($spost->media_files_count > 0)
+
             <div class="media-files-container" id="media-files-container">
 
-                {{-- Hidden to identify removed media (by setting value to 1) --}}
-                <input hidden name="ck-media-1" id="ck-media-1" value="0" 
+                {{-- Hidden to identify a) if media is changed (by setting value to 1) and b) media present --}}
+                <input hidden name="ck-media_1" id="ck-media_1" value="0" 
                     data-media-present="{{is_null($spost->media_1)? false : true }}">
-
-                <input hidden name="ck-media-2" id="ck-media-2" value="0"
-                    data-media-present="{{is_null($spost->media_2)? false : true }}">
-                    
-                <input hidden name="ck-media-3" id="ck-media-3" value="0"
+                <input hidden name="ck-media_2" id="ck-media_2" value="0"
+                    data-media-present="{{is_null($spost->media_2)? false : true }}">           
+                <input hidden name="ck-media_3" id="ck-media_3" value="0"
                     data-media-present="{{is_null($spost->media_3)? false : true }}">
-
-                <input hidden name="ck-media-4" id="ck-media-4" value="0"
+                <input hidden name="ck-media_4" id="ck-media_4" value="0"
                     data-media-present="{{is_null($spost->media_4)? false : true }}">
-
+                
                 {{-- Hidden to identify media count --}}
                 <input hidden name="media_files_count" value="{{$spost->media_files_count}}" id="media_files_count">
 
-                {{-- The inputs will be created via jaavascript according to the media files received --}}
+                {{-- The inputs will be created via javascript according to the media files received --}}
                 <!-- <input hidden type='file' id="imageUpload0" name="media_1" accept=".png, .jpg, .jpeg" />
                 <input hidden type='file' id="imageUpload1" name="media_2" accept=".png, .jpg, .jpeg" />
                 <input hidden type='file' id="imageUpload2" name="media_3" accept=".png, .jpg, .jpeg" />
                 <input hidden type='file' id="imageUpload3" name="media_4" accept=".png, .jpg, .jpeg" /> -->
 
                 {{-- Preview media files --}}
-                <div class="avatar-preview d-flex mb-2" id="image-preview-container">
-                    <div class="d-flex flex-column" id="previewColumn1"></div>
-                    <div class="d-flex flex-column" id="previewColumn2"></div>
+                <div class="d-flex mb-2 image-preview-container" id="image-preview-container">
+                @switch($spost->media_files_count)
+                  @case(1)
+                    <div class="d-flex flex-column" id="mediaColumn1" >
+                      <div class="imagePreview mic-1" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
+                        <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-1 img-fluid" alt="" >
+                        <i class="far fa-times-circle removeMedia2"></i>
+                      </div>
+                    </div>    
+
+                  @break
+
+                  @case(2)
+                    <div class="d-flex flex-column"  id="mediaColumn1" >
+                      <div class="imagePreview mic-2" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
+                        <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-2 img-fluid" alt="" >
+                        <i class="far fa-times-circle removeMedia2"></i>
+                      </div>
+                    </div> 
+
+                    <div class="d-flex flex-column" id="mediaColumn2">
+                      <div class="imagePreview mic-2" data-name="{{$spost->names[1]}}" data-input="{{'imageUpload' .$spost->inputs[1]}}">
+                        <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-2 img-fluid" alt="" >
+                        <i class="far fa-times-circle removeMedia2"></i>
+                      </div>
+                    </div> 
+
+                  @break
+                  
+                  @case(3)
+                    <div class="d-flex flex-column"  id="mediaColumn1" >
+                      <div class="imagePreview mic-2" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
+                        <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-2 img-fluid" alt="" >
+                        <i class="far fa-times-circle removeMedia2"></i>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-column" id="mediaColumn2">
+                      <div class="imagePreview mic-3" data-name="{{$spost->names[1]}}" data-input="{{'imageUpload' .$spost->inputs[1]}}">
+                        <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-3 img-fluid" alt="" >
+                        <i class="far fa-times-circle removeMedia2"></i> 
+                     </div>
+                      <div class="imagePreview mic-3" data-name="{{$spost->names[2]}}" data-input="{{'imageUpload' .$spost->inputs[2]}}">
+                        <img src="{{ asset('storage/' . $spost->media[2]) }}" class="show-image-3 img-fluid" alt="" >
+                        <i class="far fa-times-circle removeMedia2"></i>
+                      </div>
+                    </div> 
+                  @break
+
+                  @case(4)
+                    <div class="d-flex flex-column"  id="mediaColumn1" >
+                      <div class="imagePreview mic-3" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
+                        <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-3 img-fluid" alt="" >
+                        <i class="far fa-times-circle removeMedia2"></i>
+                      </div>
+                      <div class="imagePreview mic-3" data-name="{{$spost->names[1]}}" data-input="{{'imageUpload' .$spost->inputs[1]}}">
+                        <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-3 img-fluid" alt="" >
+                        <i class="far fa-times-circle removeMedia2"></i>
+                      </div>
+
+                    </div>
+
+                    <div class="d-flex flex-column" id="mediaColumn2">
+                      <div class="imagePreview mic-3" data-name="{{$spost->names[2]}}" data-input="{{'imageUpload' .$spost->inputs[2]}}">
+                        <img src="{{ asset('storage/' . $spost->media[2]) }}" class="show-image-3 img-fluid" alt="" >
+                        <i class="far fa-times-circle removeMedia2"></i>
+                      </div>
+                      <div class="imagePreview mic-3" data-name="{{$spost->names[3]}}" data-input="{{'imageUpload' .$spost->inputs[3]}}">
+                        <img src="{{ asset('storage/' . $spost->media[3]) }}" class="show-image-3 img-fluid" alt="" >
+                        <i class="far fa-times-circle removeMedia2"></i>
+                      </div>
+                    </div>
+
+                  @break
+
+                  @default
+                      Default case...
+                @endswitch
                 </div>
-
-
+                
+                {{-- End Preview Media Files --}}
 
                 @error('media_1') <div class="alert alert-danger">{{ $message }}</div> @enderror
                 @error('media_2') <div class="alert alert-danger">{{ $message }}</div> @enderror
@@ -107,12 +181,18 @@
 
                 {{-- Add media button --}}
                 @if( $spost->media_files_count < 4 )
-                    <button class="add-media-button btn btn-primary mb-4"  id="add-media-button" title="Add media" tabindex=""> 
-                        <i class="fab fa-instagram"></i> 
-                        <span class="ml-2">Add file</span> 
-                    </button>
+                <!-- <button class="add-media-button btn btn-primary mb-4"  id="add-media-button" title="Add media" tabindex=""> 
+                    <i class="fab fa-instagram"></i> 
+                    <span class="ml-2">Add file</span> 
+                </button> -->
+                <button class="add-media-button btn btn-primary mb-4"  id="add-media-button2" title="Add media" tabindex=""> 
+                    <i class="fab fa-instagram"></i> 
+                    <span class="ml-2">Add file - v2</span> 
+                </button>
                 @endif
+
             </div>
+            @endif
 
             {{-- Date and time picker --}}
             <div class="form-group datetime-container" title="Choose a date and a time">
