@@ -199,10 +199,10 @@
                 <input 
                     class="form-control" 
                     type="datetime-local" 
-                    value="{{$currentDate}}" 
+                    value="{{ $currentDate }}" 
                     name='post_date' 
                     id="post_date"
-                    min="{{ $currentDate }}">
+                    min="{{ $minDate }}">
                 
                 @if( session()->has('date_error') )
                     <div class="alert alert-danger">

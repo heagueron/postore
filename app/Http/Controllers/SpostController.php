@@ -134,16 +134,19 @@ class SpostController extends Controller
     public function edit(Spost $spost)
     {   
         $user = \Auth::user();
-        // $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
-        // $currentDate = Str::of($now)->limit(16,'');
 
+        // Use current local date as minDate
+        $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
+        $minDate = Str::of($now)->limit(16,'');
+
+        // Use current post_date field as date to show
         $date2 = Carbon::createFromDate( $spost->post_date )->toDateTimeLocalString();
         $currentDate= Str::of($date2)->limit(16,'');
         
         $this->setSpostMedia($spost);
 
         //dd("ok, edit spost: ", $spost);
-        return view('sposts.edit', compact('user', 'spost', 'currentDate') );
+        return view( 'sposts.edit', compact('user', 'spost', 'minDate', 'currentDate') );
     }
 
     /**
@@ -192,7 +195,7 @@ class SpostController extends Controller
      * @return Response
      */
     public function update(Spost $spost, StoreSpost $request)
-    {   dd(request());
+    {   //dd(request());
         $date       = Carbon::createFromDate( request()->post_date );
         $now        = Carbon::now()->timezone(auth()->user()->timezone)->toDateTimeLocalString();
         $minDate    = Carbon::createFromDate( $now );
@@ -207,21 +210,60 @@ class SpostController extends Controller
         $spost->update([
             'text'                  => request()->text,
             'post_date'             => $date->toDateTimeString(),
-            'media_1'               => request()->media_1,
-            'media_2'               => request()->media_2,
-            'media_3'               => request()->media_3,
-            'media_4'               => request()->media_4,
             'media_files_count'     => request()->media_files_count,
         ]);
 
-        // Update media
+        // Update media 
+        if( request()->input('ck-media_1') ){
+            // Clean storage file, if present
+            if(\Storage::exists( 'public/' . $spost->media_1 )){
+                \Storage::delete( 'public/' . $spost->media_1 );           
+            }
+            // Update 
+            $spost->update([ 'media_1' => request()->media_1]); // creates uploadedFile
+            $spost->update([
+                'media_1' => is_null( request()->media_1 ) ? null : request()->media_1->store('uploads', 'public')
+            ]);
+        }
+
+        if( request()->input('ck-media_2') ){
+            // Clean storage file, if present
+            if(\Storage::exists( 'public/' . $spost->media_2 )){
+                \Storage::delete( 'public/' . $spost->media_2 );           
+            }
+            // Update
+            $spost->update([ 'media_2' => request()->media_2]); // creates uploadedFile
+            $spost->update([
+                'media_2' => is_null( request()->media_2 ) ? null : request()->media_2->store('uploads', 'public')
+            ]);
+        }
+
+        if( request()->input('ck-media_3') ){
+            // Clean storage file, if present
+            if(\Storage::exists( 'public/' . $spost->media_3 )){
+                \Storage::delete( 'public/' . $spost->media_3 );           
+            }
+            // Update
+            $spost->update([ 'media_3' => request()->media_3]); // creates uploadedFile
+            $spost->update([
+                'media_3' => is_null( request()->media_3 ) ? null : request()->media_3->store('uploads', 'public')
+            ]);
+        }
+
+        if( request()->input('ck-media_4') ){
+            // Clean storage file, if present
+            if(\Storage::exists( 'public/' . $spost->media_4 )){
+                \Storage::delete( 'public/' . $spost->media_4 );           
+            }
+            // Update
+            $spost->update([ 'media_4' => request()->media_4]); // creates uploadedFile
+            $spost->update([
+                'media_4' => is_null( request()->media_4 ) ? null : request()->media_4->store('uploads', 'public')
+            ]);
+        }
         
         // Update social profiles
-        foreach ( request()->twitter_accounts as $key=>$value ) {
-            if ( !$spost->twitter_profiles()->where('twitter_profile_id',$value)->exists() ) {
-                $spost->twitter_profiles()->syncWithoutDetaching([$value]);
-            }
-        }
+        $spost->twitter_profiles()->sync( array_values( request()->twitter_accounts ) );
 
         return redirect('/sposts/schedule')->with('flash', 'Post updated.');
     }
@@ -299,6 +341,7 @@ class SpostController extends Controller
                 'media_4' => is_null( request()->media_4 ) ? null : request()->media_4->store('uploads', 'public'),
             ]);
     }
+
 
     /**
      * Prepare spost media data

@@ -53124,7 +53124,7 @@ $(document).ready(function (e) {
         break;
 
       case 0:
-        console.log("No image to preview!");
+        console.log("No image to preview /1 !");
         break;
 
       default:
@@ -53198,8 +53198,6 @@ $(document).ready(function (e) {
 
     if ($("#".concat(targetInputId)).length) {
       $("#".concat(targetInputId)).remove();
-      console.log('removed input:');
-      console.log($("#".concat(targetInputId)));
     } // Recreates the input
 
 
@@ -53216,12 +53214,12 @@ $(document).ready(function (e) {
       return element.attr("data-input") != targetInputId;
     });
     filesToShow = newArray;
-    renderFiles();
+    renderFiles2();
   }; // Append media
 
 
   var showMedia2 = function showMedia2(element, heigth, width, column) {
-    var spot = filesToShow[element];
+    var spot = filesToShow[element].clone();
     spot.css('height', heigth).css('width', width);
     spot.addClass('imagePreview');
 
@@ -53243,7 +53241,7 @@ $(document).ready(function (e) {
     // Empty preview columns
     $("#mediaColumn1").empty();
     $("#mediaColumn2").empty();
-    console.log('Organize grid for files preview -2');
+    console.log('Organize grid for files preview /2');
     var mediaCount = filesToShow.length;
 
     switch (mediaCount) {
@@ -53330,13 +53328,23 @@ $(document).ready(function (e) {
 
     for (var i = 1; i < 5; i++) {
       if ($("#ck-media_".concat(i)).attr('data-media-present')) {
-        var media = "ck-media_".concat(i).slice(3);
-        var element = $("[data-name=".concat(media, "]")).clone(true); // console.log(`present: ${media} like:`)
-        // console.log(element)
+        (function () {
+          // Media present
+          // Create a clone of that media
+          var media = "media_".concat(i);
+          var element = $("[data-name=".concat(media, "]")).clone(true);
+          element.removeClass();
+          element.find('img').removeClass(); // Insert clone in filesToShow array
 
-        element.removeClass();
-        element.find('img').removeClass();
-        filesToShow.push(element);
+          filesToShow.push(element); // Activate remove event on shown media
+
+          $("[data-name=".concat(media, "]")).find('i').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            removeMedia2($("[data-name=".concat(media, "]")));
+            renderFiles2();
+          });
+        })();
       } else {
         // Create an input for the available slot
         var newInput = $("<input type='file' \n                    id=\"imageUpload".concat(i - 1, "\" \n                    name=\"media_").concat(i, "\"\n                    style=\"display:none\"\n                    data-assigned=\"false\" \n                    accept=\".png, .jpg, .jpeg\" />"));

@@ -125,7 +125,7 @@ $( document ).ready(function(e) {
                 showMedia(3,4,115,115,2);
             break;
             case 0:
-                console.log("No image to preview!")
+                console.log("No image to preview /1 !")
             break;
             default:
                 console.log("Maximun image files count exceeded!")
@@ -211,13 +211,10 @@ $( document ).ready(function(e) {
         // Clean input set, if present.
         let targetInputId = element.attr("data-input");
         if( $(`#${targetInputId}`).length ){
-            $(`#${targetInputId}`).remove();
-            console.log('removed input:')
-            console.log( $(`#${targetInputId}`) )
+            $(`#${targetInputId}`).remove()
         }
         
         // Recreates the input
-
         let targetName=parseInt( targetInputId.substr(11,1) ) +1;
         targetName = `media_${targetName}`;
 
@@ -239,14 +236,15 @@ $( document ).ready(function(e) {
             return element.attr("data-input") != targetInputId;
         })
         filesToShow = newArray
-        renderFiles();
+
+        renderFiles2();
         
     }
 
     // Append media
     const showMedia2 = (element, heigth, width, column) => {
 
-        let spot = filesToShow[element]
+        let spot = filesToShow[element].clone()
 
         spot.css('height',heigth).css('width',width)
         spot.addClass('imagePreview')
@@ -258,9 +256,9 @@ $( document ).ready(function(e) {
         spot.appendTo(`#mediaColumn${column}`)
 
         spot.find('i').on('click', function(e){ 
-            e.preventDefault();
+            e.preventDefault()
             e.stopImmediatePropagation();
-            removeMedia2(spot);
+            removeMedia2(spot)
         })
 
     }
@@ -272,7 +270,7 @@ $( document ).ready(function(e) {
         $("#mediaColumn1").empty()
         $("#mediaColumn2").empty()
 
-        console.log('Organize grid for files preview -2')
+        console.log('Organize grid for files preview /2')
 
         const mediaCount = filesToShow.length;
 
@@ -369,14 +367,25 @@ $( document ).ready(function(e) {
 
         // Check which media files we got when edit page loaded
         for(let i=1; i<5; i++){
-            if( $(`#ck-media_${i}`).attr('data-media-present') ){
-                let media   = `ck-media_${i}`.slice(3)
+            if( $(`#ck-media_${i}`).attr('data-media-present') ){ // Media present
+
+                // Create a clone of that media
+                let media   = `media_${i}`
                 let element = $(`[data-name=${media}]`).clone(true)
-                // console.log(`present: ${media} like:`)
-                // console.log(element)
                 element.removeClass()
                 element.find('img').removeClass()
+
+                // Insert clone in filesToShow array
                 filesToShow.push( element )
+
+                // Activate remove event on shown media
+                $(`[data-name=${media}]`).find('i').on('click', function(e){ 
+                    e.preventDefault()
+                    e.stopPropagation()
+                    removeMedia2( $(`[data-name=${media}]`) )
+                    renderFiles2()
+                })
+
             } else{
                 // Create an input for the available slot
                 let newInput = $(`<input type='file' 
