@@ -52,7 +52,7 @@ Route::get('/sposts/detail/{spost}', 'SpostController@detail')->name('sposts.det
 Route::post('/sposts/imageUpload', 'SpostController@imageUpload')->name('sposts.image');
 
 Route::get('/sposts/schedule', 'SpostController@schedule')->name('sposts.schedule');
-//Route::post('/sposts', 'SpostController@store');
+Route::get('/sposts/archive', 'SpostController@archive')->name('sposts.archive');
 
 
 // Social Profiles

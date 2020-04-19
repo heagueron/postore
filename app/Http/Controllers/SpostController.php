@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use DB;
 use App\Spost;
 use Carbon\Carbon;
-use App\Traits\PublishPost;
+
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSpost;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\PublishPost;
+use App\Traits\TwitterEngagement;
 
 
 class SpostController extends Controller
 {
     use PublishPost;
+    use TwitterEngagement;
 
     public function __construct()
     {
@@ -39,7 +42,7 @@ class SpostController extends Controller
     }
 
     /**
-     * Create a scheduled post (spost).
+     * Show scheduled posts and create new(spost).
      *
      * @param  null
      * @return view
@@ -325,6 +328,41 @@ class SpostController extends Controller
         return back()->with('info', 'The post was successfully published.');
     }
 
+    /**
+     * Show archived posts with engagement statistics.
+     *
+     * @param  null
+     * @return view
+     */
+    public function archive()
+    {
+        $user = \Auth::user();
+
+        // Check if user has at least one social network profile
+        if ( empty($user->twitter_profiles->all() )){
+            // TODO: add check for other social network profiles (Linkedin, Instagram, Facebook)
+            // Go ahead and create a twitter profile in postore app (not just a Twitter user).
+            return redirect('/social_profiles'); 
+        }
+
+        $sposts = $user->sposts()
+            ->where('posted', true)
+            ->orderBy('created_at', 'desc')
+            ->simplePaginate(5);
+        
+        // Set media array
+        foreach ($sposts as $spost) {
+            $this->setSpostMedia($spost);
+            // Trait to publish a post to a set of social profiles
+            $spost->engagement = $this->getEngagement($spost) != null 
+                ? $this->getEngagement($spost) 
+                : null;
+        }
+        //dd($sposts);
+
+        return view('sposts.archive', compact('user', 'sposts'));
+
+    }
 
     /**
      * Store the incoming spost media files.
@@ -383,6 +421,8 @@ class SpostController extends Controller
         $spost->inputs  =   $inputs;
 
     }
+
+
 
 
 }

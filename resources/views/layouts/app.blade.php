@@ -106,6 +106,10 @@
                         <li class="mb-3 icon-menu-option" title="Social Accounts" data-toggle="tooltip">
                             <a href="{{ route('social_profiles.index') }}"><i class="fas fa-user"></i></a>
                         </li>
+                        
+                        <li class="mb-3 icon-menu-option" title="Archive" data-toggle="tooltip">
+                            <a href="{{ route('sposts.archive') }}"><i class="fas fa-archive"></i></a>
+                        </li>
 
                         <li class="mb-3 icon-menu-option" title="File Upload" data-toggle="tooltip">
                             <a href="{{ route('file-upload') }}"><i class="fas fa-upload"></i></a>
@@ -139,6 +143,13 @@
                             <a href="{{ route('social_profiles.index') }}">
                                 <i class="fas fa-user mr-2"></i>
                                 <span>SOCIAL ACCOUNTS</span>
+                            </a>
+                        </li>
+
+                        <li class="mb-3">
+                            <a href="{{ route('sposts.archive') }}">
+                                <i class="fas fa-archive mr-2"></i>
+                                <span>ARCHIVE</span>
                             </a>
                         </li>
 
