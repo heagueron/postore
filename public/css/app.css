@@ -11013,7 +11013,7 @@ a:focus {
 }
 
 .check-inactive {
-  display: none;
+  display: none !important;
 }
 
 .twitter-profile-option {
@@ -11104,6 +11104,10 @@ twitter-profile-option-active {
 
 .show-other-profiles-item {
   padding: 10px;
+}
+
+.disabled {
+  cursor: none !important;
 }
 
 .image-preview-container {

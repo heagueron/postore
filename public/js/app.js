@@ -53059,7 +53059,10 @@ $(document).ready(function (e) {
         filesToRender.push(spot);
         renderFiles(); // Update media counter
 
-        $("#media_files_count").val(mediaCount);
+        $("#media_files_count").val(mediaCount); // Make sure schedule and post_now buttons get enabled
+
+        $("#submit-schedule").removeClass('disabled');
+        $("#post_now").removeClass('disabled');
       };
 
       reader.readAsDataURL(input.files[0]);
@@ -53140,7 +53143,14 @@ $(document).ready(function (e) {
 
     var mediaCount = parseInt($("#media_files_count").val());
     mediaCount -= 1;
-    $("#media_files_count").val(mediaCount); // Remove from session
+    $("#media_files_count").val(mediaCount);
+
+    if (mediaCount < 1 && $("#post_text").val().length < 1) {
+      // Disable schedule and post_now buttons
+      $("#submit-schedule").addClass('disabled');
+      $("#post_now").addClass('disabled');
+    } // Remove from session
+
 
     var key = element.attr("data-session-key");
     sessionStorage.removeItem(key); // Clean input set:
@@ -53275,7 +53285,10 @@ $(document).ready(function (e) {
       default:
         console.log("Maximun image files count exceeded!");
         break;
-    }
+    } // Make sure submit-update button is enabled
+
+
+    $("#submit-update").removeClass('disabled');
   }; // File image read
 
 
@@ -53351,7 +53364,18 @@ $(document).ready(function (e) {
         newInput.appendTo("#media-files-container");
         activateInputEvent2(newInput);
       }
-    }
+    } // Enable submit-update button on changes
+
+
+    $("#post_text").on("keyup", function () {
+      $("#submit-update").removeClass('disabled');
+    });
+    $("#post_date").on("change", function () {
+      $("#submit-update").removeClass('disabled');
+    });
+    $("[name=\"twitter_accounts[]\"]").on("change", function () {
+      $("#submit-update").removeClass('disabled');
+    });
   }
 });
 
@@ -53368,27 +53392,32 @@ $(document).ready(function (e) {
 $(document).ready(function (e) {
   // Show New SPost Form
   $("#add_new_post").on('click', function (e) {
-    //e.stopPropagation();
     e.preventDefault();
-    $("#add_new_post").css("display", "none"); //$("#new-compose-title").css("display","block");
-
+    $("#add_new_post").css("display", "none");
     $("#new-scheduled-post").css("display", "block");
   }); // Inmediate posting
 
   $("#post_now").on('click', function (e) {
     e.stopPropagation();
     e.preventDefault();
-    console.log("POST NOW!");
-    $("#send-now-flag").val(true);
+    $("#send-now-flag").val(true); // Inform the server is an inmediate posting
+
     setTimeout(function () {
       $("#submit-schedule").click();
     }, 500);
-  }); // Post character count
+  }); // Post character count - Schedule/Send Now buttons
 
   $("#post_text").on("keyup", function () {
-    var count = $(this).val().length; //console.log(count)
-
+    var count = $(this).val().length;
     $("#post-character-count").html(count);
+
+    if ($(this).val().length > 0 || parseInt($("#media_files_count").val()) > 0) {
+      $("#submit-schedule").removeClass('disabled');
+      $("#post_now").removeClass('disabled');
+    } else {
+      $("#submit-schedule").addClass('disabled');
+      $("#post_now").addClass('disabled');
+    }
   }); // Social account selector
 
   $(".social-selector").on('click', function (e) {
@@ -53402,7 +53431,16 @@ $(document).ready(function (e) {
       $(e.target).parent().toggleClass('social-selector-inactive');
       $(e.target).parent().find('i.social-selector-check').toggleClass('check-inactive');
     }
-  }); // Edit Scheduled post
+  });
+  $(".show-post-options-item").hover(function () {
+    $(this).find('button').css("background-color", "#edf3f5");
+  }, function () {
+    $(this).find('button').css("background-color", "#ffffff");
+  });
+  /************************************
+   * Edit Scheduled post
+   * 
+   ************************************/
   // Check if edit spost page is loaded
 
   if ($(".edit-spost").length) {
@@ -53416,13 +53454,7 @@ $(document).ready(function (e) {
       dataType: 'json',
       beforeSend: function beforeSend() {},
       success: function success(response) {
-        setTwitterProfilesInput(response.activeTwitterProfiles); // const imageArray = [];
-        // if (response.strMedia1){ imageArray.push(response.strMedia1)}
-        // if (response.strMedia2){ imageArray.push(response.strMedia2)}
-        // if (response.strMedia3){ imageArray.push(response.strMedia3)}
-        // if (response.strMedia4){ imageArray.push(response.strMedia4)}
-        // //console.log(imageArray)
-        // if(imageArray.length > 0) setMedia(imageArray) 
+        setTwitterProfilesInput(response.activeTwitterProfiles);
       },
       complete: function complete() {}
     }); // Adjust text positioning and count

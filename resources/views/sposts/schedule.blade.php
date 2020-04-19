@@ -128,8 +128,8 @@
             <input hidden name="user_id" value="{{ $user->id }}" id="post-user-id">
             <input hidden name="send-now" value="false" id="send-now-flag">
 
-            <button class="btn btn-primary" type="submit" id="submit-schedule">Schedule the post</button>
-            <button class="btn btn-success" id="post_now">Post it now!</button>
+            <button class="btn btn-primary disabled" type="submit" id="submit-schedule">Schedule the post</button>
+            <button class="btn btn-success disabled" id="post_now">Post it now!</button>
             
         </form>
 

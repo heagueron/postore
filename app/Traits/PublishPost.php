@@ -69,7 +69,7 @@ trait PublishPost
             //dd('$response: ',$response);
 
             if ( $twitter->connection->getLastHttpCode() == 200 ) {
-                // Success
+                // Success. Store the status id in pivot 'spost_twitter_profile'
                 $spost->twitter_profiles()->syncWithoutDetaching([
                     $value => [ 'twitter_status_id' => $response->id ]
                 ]); 
@@ -82,9 +82,7 @@ trait PublishPost
                          
         }
         
-        $spost->update([
-            'posted'                => true,
-        ]);
+        $spost->update( [ 'posted' => true ] );
 
         return 'success';
 

@@ -65,6 +65,8 @@ Route::view('/settings', 'pages.settings')->name('settings');
 Route::view('/upgrade', 'pages.upgrade')->name('upgrade');
 
 
+
+// SUPPORT AND MAINTENANCE ROUTES 
  //Clear route cache:
  Route::get('/route-cache', function() {
     $exitCode = Artisan::call('route:cache');
@@ -113,7 +115,7 @@ Route::get('/tap', function() {
 Route::get('/tap2', function() {
 
     // Build the twitter connection class
-    $twitter = new TwitterGateway( 8, false);
+    $twitter = new TwitterGateway( 11, false);
 
     $response2 = $twitter->connection
         ->get("account/verify_credentials", ["skip_status" => "true"]);
@@ -127,6 +129,19 @@ Route::get('/tap2', function() {
     //     ->buildOauth($url, $requestMethod)
     //     ->performRequest();
 
-    dd($response2->profile_image_url_https);
+    //dd($response2->profile_image_url_https);
+    dd($response2);
+
+});
+
+Route::get('/tap3', function() {
+    //GET statuses/show/:id
+    // GET TWEET ENGAGEMENT
+    $twitter = new TwitterGateway( 1, false);
+
+    $response3 = $twitter->connection
+        ->get("statuses/show", ["id" => "1250421157339074561"]);
+
+    dd($response3);
     
 });

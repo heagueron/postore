@@ -4,10 +4,8 @@ $( document ).ready(function(e) {
 
     // Show New SPost Form
     $("#add_new_post").on('click', function (e) {
-        //e.stopPropagation();
         e.preventDefault();
         $("#add_new_post").css("display","none");
-        //$("#new-compose-title").css("display","block");
         $("#new-scheduled-post").css("display","block");
     });
 
@@ -15,19 +13,24 @@ $( document ).ready(function(e) {
     $("#post_now").on('click', function (e) {
         e.stopPropagation();
         e.preventDefault();
-        console.log("POST NOW!");
-        $("#send-now-flag").val(true);
+        $("#send-now-flag").val(true); // Inform the server is an inmediate posting
         setTimeout(() => {
             $("#submit-schedule").click();
         }, 500);
-        
     });
 
-    // Post character count
+    // Post character count - Schedule/Send Now buttons
     $("#post_text").on("keyup", function(){
         let count = $(this).val().length
-        //console.log(count)
         $("#post-character-count").html(count)
+
+        if( $(this).val().length > 0 || parseInt( $("#media_files_count").val() ) > 0) {
+            $("#submit-schedule").removeClass('disabled')
+            $("#post_now").removeClass('disabled')
+        } else{
+            $("#submit-schedule").addClass('disabled')
+            $("#post_now").addClass('disabled')
+        }
     })
 
     // Social account selector
@@ -43,13 +46,25 @@ $( document ).ready(function(e) {
         }
     })
 
-    // Edit Scheduled post
+    $(".show-post-options-item").hover(
+        function(){
+          $(this).find('button').css("background-color", "#edf3f5");
+      }, 
+      function(){
+        $(this).find('button').css("background-color", "#ffffff");
+    });
+
+
+
+    /************************************
+     * Edit Scheduled post
+     * 
+     ************************************/
     // Check if edit spost page is loaded
     if ( $(".edit-spost").length ) {
 
         // Grab the social profiles
         const spostId = $(".edit-spost").attr('id').slice(5);
-
         let PATH = "http://localhost:8000/";
         $.ajax({
             url : `${PATH}sposts/detail/${spostId}` ,
@@ -60,13 +75,6 @@ $( document ).ready(function(e) {
             },
             success : function(response) {
                 setTwitterProfilesInput(response.activeTwitterProfiles)
-                // const imageArray = [];
-                // if (response.strMedia1){ imageArray.push(response.strMedia1)}
-                // if (response.strMedia2){ imageArray.push(response.strMedia2)}
-                // if (response.strMedia3){ imageArray.push(response.strMedia3)}
-                // if (response.strMedia4){ imageArray.push(response.strMedia4)}
-                // //console.log(imageArray)
-                // if(imageArray.length > 0) setMedia(imageArray) 
             },
             complete: function () {
             }

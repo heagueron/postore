@@ -219,7 +219,7 @@
             <input hidden name="user_id" value="{{ $user->id }}" id="post-user-id">
             <!-- <input hidden name="send-now" value="false" id="send-now-flag"> -->
 
-            <button class="btn btn-primary" type="submit" id="submit-schedule">Save changes</button>
+            <button class="btn btn-primary disabled" type="submit" id="submit-update">Save changes</button>
             <a type="button" role="button" href="{{ route('sposts.schedule') }}" class="btn btn-success">Cancel</a>
             <!-- <button class="btn btn-success" id="post_now">Post it now!</button> -->
             

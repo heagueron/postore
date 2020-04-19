@@ -58,6 +58,10 @@ $( document ).ready(function(e) {
 
                 // Update media counter
                 $("#media_files_count").val(mediaCount);
+
+                // Make sure schedule and post_now buttons get enabled
+                $("#submit-schedule").removeClass('disabled')
+                $("#post_now").removeClass('disabled')
             }
             reader.readAsDataURL(input.files[0]);
         }    
@@ -142,6 +146,11 @@ $( document ).ready(function(e) {
         let mediaCount = parseInt( $("#media_files_count").val())
         mediaCount -=1
         $("#media_files_count").val(mediaCount)
+
+        if( mediaCount < 1 && ( $("#post_text").val().length < 1) ){ // Disable schedule and post_now buttons
+            $("#submit-schedule").addClass('disabled')
+            $("#post_now").addClass('disabled')
+        }
 
         // Remove from session
         let key = element.attr("data-session-key");
@@ -303,6 +312,9 @@ $( document ).ready(function(e) {
             break;
         }
 
+        // Make sure submit-update button is enabled
+        $("#submit-update").removeClass('disabled')
+
     }
 
 
@@ -397,7 +409,20 @@ $( document ).ready(function(e) {
                 newInput.appendTo("#media-files-container")
                 activateInputEvent2( newInput )
             }
-        }  
+        }
+        
+        // Enable submit-update button on changes
+        $("#post_text").on("keyup", function(){
+            $("#submit-update").removeClass('disabled')
+        })
+
+        $("#post_date").on("change", function(){
+            $("#submit-update").removeClass('disabled')
+        })
+
+        $(`[name="twitter_accounts[]"]`).on("change", function(){
+            $("#submit-update").removeClass('disabled')
+        })
 
     }
 
