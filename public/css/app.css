@@ -11029,7 +11029,7 @@ twitter-profile-option-active {
 .show-avatar {
   width: 35px;
   height: 35px;
-  border-radius: 5px;
+  border-radius: 100%;
 }
 
 .show-post-options-container {
@@ -11038,7 +11038,7 @@ twitter-profile-option-active {
 
 .show-post-options-container .show-post-options-menu {
   position: absolute;
-  left: -60px;
+  left: -10px;
   top: 0;
 }
 
@@ -11053,6 +11053,7 @@ twitter-profile-option-active {
   box-shadow: 0.1px 0.1px 4px 0px #3490dc;
   z-index: 5;
   border-radius: 2px;
+  width: 140px;
 }
 
 .show-post-options-item {
@@ -11078,13 +11079,26 @@ twitter-profile-option-active {
   display: none;
 }
 
+.show-social-selector {
+  padding: 2px;
+  position: relative;
+}
+
+.show-social-selector .show-social-selector-twitter {
+  position: absolute;
+  right: -3px;
+  top: -3px;
+  background-color: white;
+  font-size: 1.2rem;
+}
+
 .show-other-profiles-container {
   position: relative;
 }
 
 .show-other-profiles-container .show-other-profiles {
   position: absolute;
-  left: -60px;
+  right: -70px;
   top: 0;
   background-color: white;
   border: 0px solid;
@@ -11229,6 +11243,10 @@ i.fab.fa-twitter {
   /*centers items on the cross-axis (y by default)*/
 }
 
+.show-post-engagement {
+  margin-left: 45px !important;
+}
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
 
@@ -11248,8 +11266,23 @@ i.fab.fa-twitter {
     display: none;
   }
 
+  .show-post-date {
+    font-size: 10px !important;
+    margin-left: 10px;
+  }
+
   .show-post-text {
-    font-size: 10px;
+    font-size: 14px !important;
+  }
+
+  .container,
+  li {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .content-row {
+    margin-left: 2px;
   }
 }
 
@@ -11268,6 +11301,22 @@ i.fab.fa-twitter {
 
   .posts-table-large {
     display: block;
+  }
+
+  .show-post-date {
+    font-size: 12px !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .show-post-text {
+    margin-left: 15px !important;
+    font-size: 14px !important;
+    width: 400px !important;
+  }
+
+  .show-post-engagement {
+    margin-left: 15px !important;
   }
 }
 

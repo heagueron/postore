@@ -53418,19 +53418,6 @@ $(document).ready(function (e) {
       $("#submit-schedule").addClass('disabled');
       $("#post_now").addClass('disabled');
     }
-  }); // Social account selector
-
-  $(".social-selector").on('click', function (e) {
-    e.preventDefault;
-    e.stopImmediatePropagation;
-
-    if ($(e.target).hasClass('social-selector')) {
-      $(e.target).toggleClass('social-selector-inactive');
-      $(e.target).find('i.social-selector-check').toggleClass('check-inactive');
-    } else {
-      $(e.target).parent().toggleClass('social-selector-inactive');
-      $(e.target).parent().find('i.social-selector-check').toggleClass('check-inactive');
-    }
   });
   $(".show-post-options-item").hover(function () {
     $(this).find('button').css("background-color", "#edf3f5");
@@ -53438,10 +53425,30 @@ $(document).ready(function (e) {
     $(this).find('button').css("background-color", "#ffffff");
   });
   /************************************
+   * Create Scheduled post
+   * 
+   ************************************/
+
+  if ($("#create_post_content").length || $(".edit-spost").length) {
+    $(".social-selector").on('click', function (e) {
+      e.preventDefault;
+      e.stopImmediatePropagation;
+
+      if ($(e.target).hasClass('social-selector')) {
+        $(e.target).toggleClass('social-selector-inactive');
+        $(e.target).find('i.social-selector-check').toggleClass('check-inactive');
+      } else {
+        $(e.target).parent().toggleClass('social-selector-inactive');
+        $(e.target).parent().find('i.social-selector-check').toggleClass('check-inactive');
+      }
+    });
+  }
+  /************************************
    * Edit Scheduled post
    * 
    ************************************/
   // Check if edit spost page is loaded
+
 
   if ($(".edit-spost").length) {
     // Grab the social profiles
@@ -53477,7 +53484,11 @@ $(document).ready(function (e) {
   $(".social-selector").tooltip();
   $(".icon-menu-option").tooltip();
   $(".fa-cog").tooltip();
-  $(".fa-ellipsis-h").tooltip(); // Show spost options menu
+  $(".fa-ellipsis-h").tooltip();
+  $(".fa-retweet").tooltip();
+  $(".fa-heart").tooltip();
+  $(".show-post-date").tooltip();
+  $(".show-social-selector").tooltip(); // Show spost options menu
 
   $(".show-post-options-trigger").on("click", function (e) {
     e.stopPropagation();

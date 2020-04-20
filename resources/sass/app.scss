@@ -151,14 +151,14 @@ twitter-profile-option-active{
 .show-avatar{
     width: 35px;
     height: 35px;
-    border-radius: 5px;
+    border-radius: 100%;
 }
 
 .show-post-options-container{
     position: relative;
     .show-post-options-menu{
         position: absolute;
-        left: -60px;
+        left: -10px;
         top: 0;
 
     }
@@ -176,6 +176,7 @@ twitter-profile-option-active{
     box-shadow: .1px .1px 4px 0px $blue;
     z-index: 5;
     border-radius: 2px;
+    width: 140px;
 }
 
 .show-post-options-item {
@@ -201,12 +202,28 @@ twitter-profile-option-active{
     display: none;
 }
 
+.show-social-selector{
+    // border: 2px solid #3490dc;
+    // border-radius: 5px;
+    padding: 2px;
+    position: relative;
+    .show-social-selector-twitter{
+        position: absolute;
+        right: -3px;
+        top: -3px;
+        background-color: white;
+        font-size: 1.2rem;
+        //border-radius: 100%;
+        //margin-right: -12px;
+    }
+}
+
 // Show other profiles for a spost in index
 .show-other-profiles-container{
     position: relative;
     .show-other-profiles{
         position: absolute;
-        left: -60px;
+        right: -70px;
         top: 0;
         background-color: white;
         border: 0px solid;
@@ -374,6 +391,9 @@ i.fab.fa-twitter{
     align-items: center; /*centers items on the cross-axis (y by default)*/
 }
 
+.show-post-engagement{
+    margin-left: 45px !important;
+}
 
 // Media queries
 @media only screen and (max-width: 768px) {
@@ -390,9 +410,22 @@ i.fab.fa-twitter{
     .posts-table-large{
         display: none;
     }
-    .show-post-text{
-        font-size: 10px;
+    .show-post-date{
+        font-size: 10px !important;
+        margin-left: 10px;
     }
+    .show-post-text{
+        font-size: 14px !important;
+        //width: 400px !important;
+    }
+    .container, li{
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+    }
+    .content-row{
+        margin-left: 2px;
+    }
+
 }
 @media only screen and (min-width: 768px) {
     .postore_left_icon_menu {
@@ -406,5 +439,18 @@ i.fab.fa-twitter{
     }
     .posts-table-large{
         display: block;
+    }
+    .show-post-date{
+        font-size: 12px !important;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .show-post-text{
+        margin-left: 15px !important;
+        font-size: 14px !important;
+        width: 400px !important;
+    }
+    .show-post-engagement{
+        margin-left: 15px !important;
     }
 }

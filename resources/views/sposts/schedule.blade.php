@@ -5,10 +5,10 @@
 @section('content')
 
 @if( !session()->has('errors') && !session()->has('date_error') )
-<button class="add-new-post-button btn btn-primary"  id="add_new_post" title="Add new post" tabindex=""> 
-    <i class="fas fa-plus"></i> 
-    <span class="ml-3">Add new post</span> 
-</button>
+    <button class="add-new-post-button btn btn-primary"  id="add_new_post" title="Add new post" tabindex=""> 
+        <i class="fas fa-plus"></i> 
+        <span class="ml-3">Add new post</span> 
+    </button>
 @endif
 
 @if( session()->has('info') )
@@ -26,6 +26,7 @@
     <div id="new-scheduled-post" style="display:none">
 @endif
 
+    {{-- New New Scheduled Post --}}
     <h3 class="inline-block" id="new-compose-title">New Scheduled Post</h3>
     <hr>
     <div id="create_post_content">
@@ -138,12 +139,17 @@
 </div>
 
 
-
-
-
 {{-- Scheduled Posts (sposts) --}}
 <div class="mt-4">
-@include('sposts.index')
+    <ul class="list-group list-group-flush">
+        @forelse ($sposts as $spost)
+            <li class="list-group-item">
+               <x-spost-item mode="index" :spost="$spost"/> 
+            </li>
+        @empty
+            <h3>No post scheduled</h3>
+        @endforelse
+    </ul>
 </div>
 
 

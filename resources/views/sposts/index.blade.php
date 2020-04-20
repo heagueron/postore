@@ -3,24 +3,24 @@
 {{-- LARGE DEVICES --}}
 <table class="table table-sm posts-table-large" >
 
-  <thead>
+  <!-- <thead>
     <tr>
       <th scope="col" style="width: 300px;">Post on</th>
       <th scope="col" style="width: 1200px;">Share</th>
       <th scope="col" style="width: 300px;">From</th>
     </tr>
-  </thead>
+  </thead> -->
 
   <tbody>
     @forelse( $sposts as $spost )
         <tr>
 
-            <td class="show-post-text">
+            <td class="show-post-date">
               <p style="margin-bottom: 2px;">{{ Str::of($spost->post_date)->before(' ') }}</p>
               <p>{{ Str::of($spost->post_date)->after(' ') }}</p>
             </td>
 
-            <td>
+            <td class="ml-3 ">
               <div class="show-post-text">
                 @foreach( explode("\r\n", $spost->text) as $line )
                     {{ $line }}<br/>
@@ -194,12 +194,12 @@
 {{-- SMALL DEVICES --}}
 <table class="table table-sm posts-table-small " >
 
-  <thead>
+  <!-- <thead>
     <tr>
       <th scope="col">Share</th>
       <th scope="col">From</th>
     </tr>
-  </thead>
+  </thead> -->
 
   <tbody>
     @forelse( $sposts as $spost )
