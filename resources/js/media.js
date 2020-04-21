@@ -190,13 +190,21 @@ $( document ).ready(function(e) {
 
     // Assign input and open local browser to select file
     $("#add-media-button2").on('click', function (e) {
-        //e.stopPropagation()
+        e.stopPropagation()
         e.preventDefault()
-        console.log('Lets edit!')
+        console.log('Lets edit bro!')
 
         for(let i=0; i<4; i++){
+            
             let input = $(`#imageUpload${i}`)
+            console.log(i)
+            console.log("EVALUATING INPUT:")
+            console.log(`#imageUpload${i}`)
+            console.log(input.length)
+            console.log(input.attr('data-assigned'))
+
             if( input.length && input.attr('data-assigned') == "false"){
+                console.log("SELECTED input:")
                 console.log(input)
                 input.click()
                 break
@@ -377,7 +385,7 @@ $( document ).ready(function(e) {
         $("#post-character-count").html(trimmedText.length)
 
 
-        // Check which media files we got when edit page loaded
+        // Check which media files we got when edit page gets loaded
         for(let i=1; i<5; i++){
             if( $(`#ck-media_${i}`).attr('data-media-present') ){ // Media present
 
@@ -408,6 +416,10 @@ $( document ).ready(function(e) {
                     accept=".png, .jpg, .jpeg" />`)
                 newInput.appendTo("#media-files-container")
                 activateInputEvent2( newInput )
+                console.log("CREATED INPUT: ")
+                console.log(newInput)
+                console.log(newInput.length)
+                console.log(newInput.attr("data-assigned"))
             }
         }
         

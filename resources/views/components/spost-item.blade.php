@@ -162,9 +162,19 @@
 
             @endif
         </div>
-        <div class="show-post-date col-sm-3" title="Post date" data-toggle="tooltip">
-            <p class="mb-1">{{ Str::of($spost->post_date)->before(' ') }}</p>
-            <p>{{ Str::of($spost->post_date)->after(' ') }}</p>
+        <div class="show-post-date col-sm-3">
+            <!-- <div class="date-lg">
+                <p class="mb-1 show-date-node" title="Post date" data-toggle="tooltip">
+                    {{ Str::of($spost->post_date)->before(' ') }}
+                </p>
+                <p>{{ Str::of($spost->post_date)->after(' ') }}</p>
+            </div> -->
+            <div class="d-flex">
+                <p class="mb-1 show-date-node" title="Post date" data-toggle="tooltip">
+                    {{ $spost->post_date }}
+                </p>
+            </div>
+            
         </div>
     </div>
 

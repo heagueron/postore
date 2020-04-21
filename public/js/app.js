@@ -53179,14 +53179,20 @@ $(document).ready(function (e) {
   var filesToShow = []; // Assign input and open local browser to select file
 
   $("#add-media-button2").on('click', function (e) {
-    //e.stopPropagation()
+    e.stopPropagation();
     e.preventDefault();
-    console.log('Lets edit!');
+    console.log('Lets edit bro!');
 
     for (var i = 0; i < 4; i++) {
       var input = $("#imageUpload".concat(i));
+      console.log(i);
+      console.log("EVALUATING INPUT:");
+      console.log("#imageUpload".concat(i));
+      console.log(input.length);
+      console.log(input.attr('data-assigned'));
 
       if (input.length && input.attr('data-assigned') == "false") {
+        console.log("SELECTED input:");
         console.log(input);
         input.click();
         break;
@@ -53337,7 +53343,7 @@ $(document).ready(function (e) {
     // Adjust text positioning and count
     var trimmedText = $("#post_text").html().trim();
     $("#post_text").html(trimmedText);
-    $("#post-character-count").html(trimmedText.length); // Check which media files we got when edit page loaded
+    $("#post-character-count").html(trimmedText.length); // Check which media files we got when edit page gets loaded
 
     for (var i = 1; i < 5; i++) {
       if ($("#ck-media_".concat(i)).attr('data-media-present')) {
@@ -53363,6 +53369,10 @@ $(document).ready(function (e) {
         var newInput = $("<input type='file' \n                    id=\"imageUpload".concat(i - 1, "\" \n                    name=\"media_").concat(i, "\"\n                    style=\"display:none\"\n                    data-assigned=\"false\" \n                    accept=\".png, .jpg, .jpeg\" />"));
         newInput.appendTo("#media-files-container");
         activateInputEvent2(newInput);
+        console.log("CREATED INPUT: ");
+        console.log(newInput);
+        console.log(newInput.length);
+        console.log(newInput.attr("data-assigned"));
       }
     } // Enable submit-update button on changes
 
@@ -53487,7 +53497,7 @@ $(document).ready(function (e) {
   $(".fa-ellipsis-h").tooltip();
   $(".fa-retweet").tooltip();
   $(".fa-heart").tooltip();
-  $(".show-post-date").tooltip();
+  $(".show-date-node").tooltip();
   $(".show-social-selector").tooltip(); // Show spost options menu
 
   $(".show-post-options-trigger").on("click", function (e) {
@@ -53500,7 +53510,7 @@ $(document).ready(function (e) {
       $(this).addClass('hidden-other-profiles');
     });
     $(this).next().removeClass('hidden-options-menu');
-  }); // Show other profiles for a spost in index
+  }); // Show full profiles for a spost in index
 
   $(".show-other-profiles-trigger").on("click", function (e) {
     e.stopPropagation();
@@ -53512,7 +53522,7 @@ $(document).ready(function (e) {
       $(this).addClass('hidden-options-menu');
     });
     $(this).next().removeClass('hidden-other-profiles');
-  }); // Hide spost options menu on any click
+  }); // Hide spost options menu and full profiles list boxes on any click
 
   $(document).on("click", function (e) {
     $(".show-post-options-menu").each(function () {

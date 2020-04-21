@@ -179,19 +179,21 @@
                 @error('media_3') <div class="alert alert-danger">{{ $message }}</div> @enderror
                 @error('media_4') <div class="alert alert-danger">{{ $message }}</div> @enderror
 
-                {{-- Add media button --}}
-                @if( $spost->media_files_count < 4 )
-                <!-- <button class="add-media-button btn btn-primary mb-4"  id="add-media-button" title="Add media" tabindex=""> 
-                    <i class="fab fa-instagram"></i> 
-                    <span class="ml-2">Add file</span> 
-                </button> -->
-                <button class="add-media-button btn btn-primary mb-4"  id="add-media-button2" title="Add media" tabindex=""> 
-                    <i class="fab fa-instagram"></i> 
-                    <span class="ml-2">Add file - v2</span> 
-                </button>
-                @endif
+                
 
             </div>
+            @endif
+
+            {{-- Add media button --}}
+            @if( $spost->media_files_count < 4 )
+              <!-- <button class="add-media-button btn btn-primary mb-4"  id="add-media-button" title="Add media" tabindex=""> 
+                  <i class="fab fa-instagram"></i> 
+                  <span class="ml-2">Add file</span> 
+              </button> -->
+              <button class="add-media-button btn btn-primary mb-4"  id="add-media-button2" title="Add media" tabindex=""> 
+                  <i class="fab fa-instagram"></i> 
+                  <span class="ml-2">Add file - v2</span> 
+              </button>
             @endif
 
             {{-- Date and time picker --}}

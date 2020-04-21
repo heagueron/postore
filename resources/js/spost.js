@@ -109,7 +109,7 @@ $( document ).ready(function(e) {
     $(".fa-ellipsis-h").tooltip()
     $(".fa-retweet").tooltip()
     $(".fa-heart").tooltip()
-    $(".show-post-date").tooltip()
+    $(".show-date-node").tooltip()
     $(".show-social-selector").tooltip()
 
 
@@ -126,7 +126,7 @@ $( document ).ready(function(e) {
         $(this).next().removeClass('hidden-options-menu')
     })
 
-    // Show other profiles for a spost in index
+    // Show full profiles for a spost in index
     $(".show-other-profiles-trigger").on("click", function(e){
         e.stopPropagation()
         e.preventDefault()
@@ -139,7 +139,7 @@ $( document ).ready(function(e) {
         $(this).next().removeClass('hidden-other-profiles')
     })
 
-    // Hide spost options menu on any click
+    // Hide spost options menu and full profiles list boxes on any click
     $(document).on("click", function(e){
         $(".show-post-options-menu").each(function(){
             $(this).addClass('hidden-options-menu')
