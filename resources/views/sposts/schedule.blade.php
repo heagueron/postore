@@ -34,75 +34,8 @@
         <form action="/sposts" method="post" enctype="multipart/form-data">
             @csrf
 
-            {{-- Social profiles --}}
-            <div class="form-group social-profiles-container mt-2">
-                <label>From</label><br/>
-                <div class="d-flex">
-                    @foreach($user->twitter_profiles as $tp)
-                        <div class="mr-3">
-                            <input hidden
-                                type="checkbox" 
-                                class="custom-control-input" 
-                                id="{{'tp-' .$tp->id}}" 
-                                name="twitter_accounts[]" 
-                                value="{{$tp->id}}">
-                        
-                            <label class="social-selector social-selector-inactive" 
-                                for="{{'tp-' .$tp->id}}" title="{{'@' . $tp->handler}}">
-                                <i class="fab fa-twitter-square social-selector-twitter"></i>
-
-                                <img src="{{ $tp->avatar }}" class="show-avatar img-fluid" alt="" >
-                                <i class="fas fa-check-circle social-selector-check check-inactive"
-                                    id="{{'check-' .$tp->id}}">
-                                </i>
-                                
-                            </label>
-                        </div>
-
-                    @endforeach
-                </div>
-                
-                @if( session()->has('profile_error') )
-                    <div class="alert alert-danger">{{ session()->get('profile_error') }}</div>
-                @endif
-            </div>
-            
-            {{-- New post text content --}}
-            <div class="form-group post-text-group">
-                <textarea name="text" class="form-control post-text-container" autocomplete="off" 
-                        rows="4" cols="50" id="post_text" placeholder="What would you like to tell?"
-                        maxlength="280">
-                    {{ old('text') }}
-                </textarea>
-                <p id="post-character-count" class="post-character-count" value="0">0</p>
-                @error('text') <div class="alert alert-danger">{{ $message }}</div> @enderror
-            </div>
-                
-            {{-- Media file loader --}}
-            <div class="media-files-container" id="media-files-container">
-                <input hidden name="media_files_count" value="0" id="media_files_count">
-                <input hidden type='file' id="imageUpload0" name="media_1" accept=".png, .jpg, .jpeg" />
-                <input hidden type='file' id="imageUpload1" name="media_2" accept=".png, .jpg, .jpeg" />
-                <input hidden type='file' id="imageUpload2" name="media_3" accept=".png, .jpg, .jpeg" />
-                <input hidden type='file' id="imageUpload3" name="media_4" accept=".png, .jpg, .jpeg" />
-
-                {{-- Preview media files --}}
-                <div class="avatar-preview d-flex mb-2" id="image-preview-container">
-                    <div class="d-flex flex-column" id="previewColumn1"></div>
-                    <div class="d-flex flex-column" id="previewColumn2"></div>
-                    <!-- <div id="imagePreview" class="imagePreview"></div> -->
-                </div>
-                @error('media_1') <div class="alert alert-danger">{{ $message }}</div> @enderror
-                @error('media_2') <div class="alert alert-danger">{{ $message }}</div> @enderror
-                @error('media_3') <div class="alert alert-danger">{{ $message }}</div> @enderror
-                @error('media_4') <div class="alert alert-danger">{{ $message }}</div> @enderror
-                {{-- Add media button --}}
-                <button class="add-media-button btn btn-primary mb-4"  id="add-media-button" title="Add media" tabindex=""> 
-                    <i class="fab fa-instagram"></i> 
-                    <span class="ml-2">Add file</span> 
-                </button>
-                
-            </div>
+            {{-- New SpostForm Component --}}
+            <x-spost-form mode="schedule" :spost="$spost"/>
 
             {{-- Date and time picker --}}
             <div class="form-group datetime-container" title="Choose a date and a time">

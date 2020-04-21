@@ -53016,378 +53016,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Media files
-$(document).ready(function (e) {
-  var filesToRender = [];
-  sessionStorage.clear();
-  $("#add-media-button").on('click', function (e) {
-    //e.stopPropagation()
-    e.preventDefault(); //console.log(e)
-
-    var mediaCount = parseInt($("#media_files_count").val());
-
-    if (mediaCount < 4) {
-      for (var i = 1; i < 5; i++) {
-        if (!sessionStorage.getItem("bg".concat(i))) {
-          var targetInput = $("#imageUpload".concat(i - 1));
-          targetInput.click();
-          break;
-        }
-      }
-    } else {
-      console.log("Maximum media file number reached.");
-    }
-  });
-
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      var mediaCount = parseInt($("#media_files_count").val());
-      mediaCount += 1;
-
-      reader.onload = function (e) {
-        // Get sub index from input and store image in session
-        var subIndex = input.name.slice(6, 7);
-        sessionStorage.setItem("bg".concat(subIndex), 'url(' + e.target.result + ')'); // Build image preview node
-
-        var bg = sessionStorage.getItem("bg".concat(subIndex));
-        var spot = $("<div class=\"imagePreview\">\n                                <i class=\"far fa-times-circle removeMedia\"></i></span>\n                            </div>");
-        spot.css('background-image', bg);
-        spot.attr('data-session-key', "bg".concat(subIndex));
-        spot.attr('data-input', input.id); // Add to files array and render
-
-        filesToRender.push(spot);
-        renderFiles(); // Update media counter
-
-        $("#media_files_count").val(mediaCount); // Make sure schedule and post_now buttons get enabled
-
-        $("#submit-schedule").removeClass('disabled');
-        $("#post_now").removeClass('disabled');
-      };
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  } // When a image is removed, its input is re-created,
-  // and looses its change handler. Here it is restored
-
-
-  var activateInputEvent = function activateInputEvent(targetInput) {
-    targetInput.change(function () {
-      readURL(this);
-    });
-  }; // Input events
-
-
-  $("#imageUpload0, #imageUpload1, #imageUpload2, #imageUpload3").change(function () {
-    readURL(this);
-  }); // Show media file
-
-  var showMedia = function showMedia(element, position, heigth, width, column) {
-    if ($("*[data-preview-position=".concat(position, "]")).length) {
-      $("*[data-preview-position=".concat(position, "]")).remove();
-    }
-
-    var spot = filesToRender[element];
-    spot.attr("data-preview-position", position);
-    spot.css('height', heigth).css('width', width);
-    spot.appendTo("#previewColumn".concat(column));
-    spot.children().on('click', function (e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      removeMedia(spot);
-    });
-  }; // Organize grid for files preview
-
-
-  var renderFiles = function renderFiles() {
-    var mediaCount = filesToRender.length;
-
-    switch (mediaCount) {
-      // showMedia signature: (element from filesToRender array, position, heigth, width, column)
-      case 1:
-        showMedia(0, 1, 240, 240, 1);
-        break;
-
-      case 2:
-        showMedia(0, 1, 240, 115, 1);
-        showMedia(1, 2, 240, 115, 2);
-        break;
-
-      case 3:
-        showMedia(0, 1, 240, 115, 1);
-        showMedia(1, 2, 115, 115, 2);
-        showMedia(2, 4, 115, 115, 2);
-        break;
-
-      case 4:
-        showMedia(0, 1, 115, 115, 1);
-        showMedia(1, 3, 115, 115, 1);
-        showMedia(2, 2, 115, 115, 2);
-        showMedia(3, 4, 115, 115, 2);
-        break;
-
-      case 0:
-        console.log("No image to preview /1 !");
-        break;
-
-      default:
-        console.log("Maximun image files count exceeded!");
-        break;
-    }
-
-    $(".avatar-preview").css("display", "block");
-  };
-
-  var removeMedia = function removeMedia(element) {
-    element.remove(); // Update media count
-
-    var mediaCount = parseInt($("#media_files_count").val());
-    mediaCount -= 1;
-    $("#media_files_count").val(mediaCount);
-
-    if (mediaCount < 1 && $("#post_text").val().length < 1) {
-      // Disable schedule and post_now buttons
-      $("#submit-schedule").addClass('disabled');
-      $("#post_now").addClass('disabled');
-    } // Remove from session
-
-
-    var key = element.attr("data-session-key");
-    sessionStorage.removeItem(key); // Clean input set:
-
-    var targetInputId = element.attr("data-input");
-    $("#".concat(targetInputId)).remove();
-    var targetName = parseInt(targetInputId.substr(11, 1)) + 1;
-    targetName = "media_".concat(targetName);
-    var newInput = $("<input type='file' \n            id=\"".concat(targetInputId, "\" \n            name=\"").concat(targetName, "\"\n            style=\"display:none\" \n            accept=\".png, .jpg, .jpeg\" />"));
-    newInput.appendTo("#media-files-container");
-    activateInputEvent(newInput); // Remove from filesToRender array
-
-    var newArray = filesToRender.filter(function (element) {
-      return element.attr("data-session-key") != key;
-    });
-    filesToRender = newArray;
-    renderFiles();
-  };
-  /**********************************************
-   * Functions for editing media
-   * 
-   **********************************************/
-  //filesToRender   =   [];
-
-
-  var filesToShow = []; // Assign input and open local browser to select file
-
-  $("#add-media-button2").on('click', function (e) {
-    e.stopPropagation();
-    e.preventDefault();
-    console.log('Lets edit bro!');
-
-    for (var i = 0; i < 4; i++) {
-      var input = $("#imageUpload".concat(i));
-      console.log(i);
-      console.log("EVALUATING INPUT:");
-      console.log("#imageUpload".concat(i));
-      console.log(input.length);
-      console.log(input.attr('data-assigned'));
-
-      if (input.length && input.attr('data-assigned') == "false") {
-        console.log("SELECTED input:");
-        console.log(input);
-        input.click();
-        break;
-      }
-    }
-  }); // Remove media
-
-  var removeMedia2 = function removeMedia2(element) {
-    console.log('remove element:');
-    console.log(element);
-    element.remove(); // Update media count
-
-    var mediaCount = parseInt($("#media_files_count").val());
-    mediaCount -= 1;
-    $("#media_files_count").val(mediaCount);
-    $("#add-media-button2").css('display', 'block'); // Clean input set, if present.
-
-    var targetInputId = element.attr("data-input");
-
-    if ($("#".concat(targetInputId)).length) {
-      $("#".concat(targetInputId)).remove();
-    } // Recreates the input
-
-
-    var targetName = parseInt(targetInputId.substr(11, 1)) + 1;
-    targetName = "media_".concat(targetName); // Create an input for the available slot
-
-    var newInput = $("<input type='file' \n            id=\"".concat(targetInputId, "\" \n            name=\"").concat(targetName, "\"\n            style=\"display:none\"\n            data-assigned=\"false\" \n            accept=\".png, .jpg, .jpeg\" />"));
-    newInput.appendTo("#media-files-container");
-    activateInputEvent2(newInput); // Indicate change in media input:
-
-    $("#ck-".concat(targetName)).val(1); // Remove from filesToShow array
-
-    var newArray = filesToShow.filter(function (element) {
-      return element.attr("data-input") != targetInputId;
-    });
-    filesToShow = newArray;
-    renderFiles2();
-  }; // Append media
-
-
-  var showMedia2 = function showMedia2(element, heigth, width, column) {
-    var spot = filesToShow[element].clone();
-    spot.css('height', heigth).css('width', width);
-    spot.addClass('imagePreview');
-
-    if (spot.has('img')) {
-      spot.css('border-radius', '14px');
-      spot.find('img').css('height', heigth).css('width', width).css('border-radius', '14px');
-    }
-
-    spot.appendTo("#mediaColumn".concat(column));
-    spot.find('i').on('click', function (e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      removeMedia2(spot);
-    });
-  }; // Organize grid for files preview
-
-
-  var renderFiles2 = function renderFiles2() {
-    // Empty preview columns
-    $("#mediaColumn1").empty();
-    $("#mediaColumn2").empty();
-    console.log('Organize grid for files preview /2');
-    var mediaCount = filesToShow.length;
-
-    switch (mediaCount) {
-      // showMedia2 signature: (element from filesToShow array, heigth, width, column)
-      case 1:
-        showMedia2(0, 240, 240, 1);
-        break;
-
-      case 2:
-        showMedia2(0, 240, 110, 1);
-        showMedia2(1, 240, 110, 2);
-        break;
-
-      case 3:
-        showMedia2(0, 240, 110, 1);
-        showMedia2(1, 110, 110, 2);
-        showMedia2(2, 110, 110, 2);
-        break;
-
-      case 4:
-        showMedia2(0, 110, 110, 1);
-        showMedia2(1, 110, 110, 1);
-        showMedia2(2, 110, 110, 2);
-        showMedia2(3, 110, 110, 2);
-        break;
-
-      case 0:
-        console.log("No image to preview!");
-        break;
-
-      default:
-        console.log("Maximun image files count exceeded!");
-        break;
-    } // Make sure submit-update button is enabled
-
-
-    $("#submit-update").removeClass('disabled');
-  }; // File image read
-
-
-  function readURL2(input) {
-    console.log("Ready to Reading file when editing");
-
-    if (input.files && input.files[0]) {
-      console.log("reading new file via input: ".concat(input.name.slice(6, 7)));
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        // Get sub index from input and store image in session
-        var subIndex = input.name.slice(6, 7); // Build image preview node
-
-        var spot = $("<div>\n                                <i class=\"far fa-times-circle removeMedia2\"></i></span>\n                            </div>");
-        spot.attr('data-name', "media_".concat(subIndex));
-        spot.attr('data-input', "imageUpload".concat(subIndex - 1));
-        spot.css('background-image', "url(".concat(e.target.result, ")"));
-        spot.attr('data-input', input.id); // Add to files array and render
-
-        filesToShow.push(spot); // Mark input as assigned
-
-        $("#imageUpload".concat(subIndex - 1)).attr('data-assigned', 'true'); // Signal media as 'changed'
-
-        $("#ck-media_".concat(subIndex)).val(1); // Update media counter
-
-        var mediaCount = parseInt($("#media_files_count").val());
-        mediaCount += 1;
-        $("#media_files_count").val(mediaCount);
-        if (mediaCount > 3) $("#add-media-button2").css('display', 'none');
-        renderFiles2();
-      };
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  var activateInputEvent2 = function activateInputEvent2(targetInput) {
-    targetInput.change(function () {
-      readURL2(this);
-    });
-  }; // Check if edit spost page is loaded
-
-
-  if ($(".edit-spost").length) {
-    // Adjust text positioning and count
-    var trimmedText = $("#post_text").html().trim();
-    $("#post_text").html(trimmedText);
-    $("#post-character-count").html(trimmedText.length); // Check which media files we got when edit page gets loaded
-
-    for (var i = 1; i < 5; i++) {
-      if ($("#ck-media_".concat(i)).attr('data-media-present')) {
-        (function () {
-          // Media present
-          // Create a clone of that media
-          var media = "media_".concat(i);
-          var element = $("[data-name=".concat(media, "]")).clone(true);
-          element.removeClass();
-          element.find('img').removeClass(); // Insert clone in filesToShow array
-
-          filesToShow.push(element); // Activate remove event on shown media
-
-          $("[data-name=".concat(media, "]")).find('i').on('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            removeMedia2($("[data-name=".concat(media, "]")));
-            renderFiles2();
-          });
-        })();
-      } else {
-        // Create an input for the available slot
-        var newInput = $("<input type='file' \n                    id=\"imageUpload".concat(i - 1, "\" \n                    name=\"media_").concat(i, "\"\n                    style=\"display:none\"\n                    data-assigned=\"false\" \n                    accept=\".png, .jpg, .jpeg\" />"));
-        newInput.appendTo("#media-files-container");
-        activateInputEvent2(newInput);
-        console.log("CREATED INPUT: ");
-        console.log(newInput);
-        console.log(newInput.length);
-        console.log(newInput.attr("data-assigned"));
-      }
-    } // Enable submit-update button on changes
-
-
-    $("#post_text").on("keyup", function () {
-      $("#submit-update").removeClass('disabled');
-    });
-    $("#post_date").on("change", function () {
-      $("#submit-update").removeClass('disabled');
-    });
-    $("[name=\"twitter_accounts[]\"]").on("change", function () {
-      $("#submit-update").removeClass('disabled');
-    });
-  }
-});
+$(document).ready(function (e) {});
 
 /***/ }),
 
@@ -53400,7 +53029,9 @@ $(document).ready(function (e) {
 
 // Scheduled Post Spost Functions
 $(document).ready(function (e) {
-  // Show New SPost Form
+  // Global to handle image nodes array
+  var filesToShow3 = []; // Show New SPost Form
+
   $("#add_new_post").on('click', function (e) {
     e.preventDefault();
     $("#add_new_post").css("display", "none");
@@ -53433,13 +53064,9 @@ $(document).ready(function (e) {
     $(this).find('button').css("background-color", "#edf3f5");
   }, function () {
     $(this).find('button').css("background-color", "#ffffff");
-  });
-  /************************************
-   * Create Scheduled post
-   * 
-   ************************************/
+  }); // Activate social profiles selector
 
-  if ($("#create_post_content").length || $(".edit-spost").length) {
+  if ($("#create_post_content").length || $("#edit_post_content").length) {
     $(".social-selector").on('click', function (e) {
       e.preventDefault;
       e.stopImmediatePropagation;
@@ -53452,43 +53079,7 @@ $(document).ready(function (e) {
         $(e.target).parent().find('i.social-selector-check').toggleClass('check-inactive');
       }
     });
-  }
-  /************************************
-   * Edit Scheduled post
-   * 
-   ************************************/
-  // Check if edit spost page is loaded
-
-
-  if ($(".edit-spost").length) {
-    // Grab the social profiles
-    var spostId = $(".edit-spost").attr('id').slice(5);
-    var PATH = "http://localhost:8000/";
-    $.ajax({
-      url: "".concat(PATH, "sposts/detail/").concat(spostId),
-      type: "GET",
-      data: {},
-      dataType: 'json',
-      beforeSend: function beforeSend() {},
-      success: function success(response) {
-        setTwitterProfilesInput(response.activeTwitterProfiles);
-      },
-      complete: function complete() {}
-    }); // Adjust text positioning and count
-
-    var trimmedText = $("#post_text").html().trim();
-    $("#post_text").html(trimmedText);
-    $("#post-character-count").html(trimmedText.length);
-  } // Activate Twitter Profiles Options
-
-
-  var setTwitterProfilesInput = function setTwitterProfilesInput(activeTwitterProfiles) {
-    activeTwitterProfiles.forEach(function (atp) {
-      $("#tp-".concat(atp)).attr('checked', true);
-      $("#tp-".concat(atp)).next().toggleClass('social-selector-inactive');
-      $("#tp-".concat(atp)).next().find('i.social-selector-check').toggleClass('check-inactive');
-    });
-  }; // Activate tooltips
+  } // Activate tooltips
 
 
   $(".social-selector").tooltip();
@@ -53531,7 +53122,271 @@ $(document).ready(function (e) {
     $(".show-other-profiles").each(function () {
       $(this).addClass('hidden-other-profiles');
     });
+  }); // Assign input and open local browser to select file
+
+  $("#add-media-button3").on('click', function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log('Lets add an image bro!');
+
+    for (var i = 0; i < 4; i++) {
+      var input = $("#imageUpload".concat(i));
+
+      if (input.length && input.attr('data-assigned') == "false") {
+        console.log("SELECTED input:");
+        console.log(input);
+        input.click();
+        break;
+      }
+    }
   });
+
+  var activateInputEvent3 = function activateInputEvent3(targetInput) {
+    targetInput.change(function () {
+      readURL3(this);
+    });
+  }; //Remove media
+
+
+  var removeMedia3 = function removeMedia3(element) {
+    console.log('remove element:');
+    console.log(element);
+    element.remove(); // Update media count
+
+    var mediaCount = parseInt($("#media_files_count").val());
+    mediaCount -= 1;
+    $("#media_files_count").val(mediaCount);
+    $("#add-media-button2").css('display', 'block'); // Clean input set, if present.
+
+    var targetInputId = element.attr("data-input");
+
+    if ($("#".concat(targetInputId)).length) {
+      $("#".concat(targetInputId)).remove();
+    } // Recreates the input
+
+
+    var targetName = parseInt(targetInputId.substr(11, 1)) + 1;
+    targetName = "media_".concat(targetName); // Create an input for the available slot
+
+    var newInput = $("<input type='file' \n            id=\"".concat(targetInputId, "\" \n            name=\"").concat(targetName, "\"\n            style=\"display:none\"\n            data-assigned=\"false\" \n            accept=\".png, .jpg, .jpeg\" />"));
+    newInput.appendTo("#media-files-container");
+    activateInputEvent3(newInput); // Indicate change in media input, if editing
+
+    if ($("#ce-selector").val() == 'edit') {
+      $("#ck-".concat(targetName)).val(1);
+    } // Remove from filesToShow3 array
+
+
+    var newArray = filesToShow3.filter(function (element) {
+      return element.attr("data-input") != targetInputId;
+    });
+    filesToShow3 = newArray;
+    console.log('calling render3 from remove3');
+    renderFiles3();
+  }; // Append media
+
+
+  var showMedia3 = function showMedia3(element, heigth, width, column) {
+    var spot = filesToShow3[element].clone();
+    spot.addClass('imagePreview');
+    spot.css('height', heigth).css('width', width);
+
+    if (spot.has('img')) {
+      spot.css('border-radius', '14px');
+      spot.find('img').css('height', heigth).css('width', width).css('border-radius', '14px');
+    }
+
+    spot.appendTo("#mediaColumn".concat(column));
+    console.log('spot creado at showMedia3:');
+    console.log(spot); // Add remove trigger
+
+    spot.find('i').on('click', function (e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      removeMedia3(spot);
+    });
+    $('.image-preview-container').css('display', 'block');
+  }; // Organize grid for files preview
+
+
+  var renderFiles3 = function renderFiles3() {
+    // Empty preview columns
+    $("#mediaColumn1").empty();
+    $("#mediaColumn2").empty();
+    console.log('Organize grid for files preview /3');
+    var mediaCount = filesToShow3.length;
+    console.log(mediaCount);
+
+    switch (mediaCount) {
+      // showMedia3 signature: (element from filesToShow array, heigth, width, column)
+      case 1:
+        showMedia3(0, 240, 240, 1);
+        break;
+
+      case 2:
+        showMedia3(0, 240, 110, 1);
+        showMedia3(1, 240, 110, 2);
+        break;
+
+      case 3:
+        showMedia3(0, 240, 110, 1);
+        showMedia3(1, 110, 110, 2);
+        showMedia3(2, 110, 110, 2);
+        break;
+
+      case 4:
+        showMedia3(0, 110, 110, 1);
+        showMedia3(1, 110, 110, 1);
+        showMedia3(2, 110, 110, 2);
+        showMedia3(3, 110, 110, 2);
+        break;
+
+      case 0:
+        console.log("No image to preview!");
+        break;
+
+      default:
+        console.log("Maximun image files count exceeded!");
+        break;
+    } // Make sure submit-update button is enabled
+
+
+    $("#submit-update").removeClass('disabled');
+  }; // File image read
+
+
+  function readURL3(input) {
+    console.log("Ready to Read a file ... ");
+
+    if (input.files && input.files[0]) {
+      console.log("reading new file via input: ".concat(input.name.slice(6, 7)));
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // Get sub index from input and store image in session
+        var subIndex = input.name.slice(6, 7); // Build image preview node
+
+        var spot = $("<div>\n                                <i class=\"far fa-times-circle removeMedia2\"></i></span>\n                            </div>");
+        spot.attr('data-name', "media_".concat(subIndex));
+        spot.attr('data-input', "imageUpload".concat(subIndex - 1));
+        spot.css('background-image', "url(".concat(e.target.result, ")"));
+        spot.attr('data-input', input.id); // Add to files array and render
+
+        filesToShow3.push(spot); // Mark input as assigned
+
+        $("#imageUpload".concat(subIndex - 1)).attr('data-assigned', 'true'); // Signal media as 'changed', if editing
+
+        if ($("#ce-selector").val() == 'edit') {
+          $("#ck-media_".concat(subIndex)).val(1);
+        } // Update media counter
+
+
+        var mediaCount = parseInt($("#media_files_count").val());
+        mediaCount += 1;
+        $("#media_files_count").val(mediaCount);
+        console.log('media file count: ' + $("#media_files_count").val());
+        if (mediaCount > 3) $("#add-media-button3").css('display', 'none');
+        console.log('calling render3 from readUrl3');
+        renderFiles3();
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  /************************************
+   * Create Scheduled post
+   * 
+   ************************************/
+
+
+  if ($("#ce-selector").val() == 'schedule') {
+    // Input events
+    $("#imageUpload0, #imageUpload1, #imageUpload2, #imageUpload3").change(function () {
+      readURL3(this);
+    });
+  }
+  /************************************
+   * Edit Scheduled post
+   * 
+   ************************************/
+  // Check if edit spost page is loaded
+
+
+  if ($("#ce-selector").val() == 'edit') {
+    // Grab the social profiles
+    var spostId = $(".edit-spost").attr('id').slice(5);
+    var PATH = "http://localhost:8000/";
+    $.ajax({
+      url: "".concat(PATH, "sposts/detail/").concat(spostId),
+      type: "GET",
+      data: {},
+      dataType: 'json',
+      beforeSend: function beforeSend() {},
+      success: function success(response) {
+        setTwitterProfilesInput(response.activeTwitterProfiles);
+      },
+      complete: function complete() {}
+    }); // Adjust text positioning and count
+
+    var trimmedText = $("#post_text").html().trim();
+    $("#post_text").html(trimmedText);
+    $("#post-character-count").html(trimmedText.length); // Show media container when there are any
+
+    if ($("#media_files_count").val() > 0) {
+      $('.image-preview-container').css('display', 'block');
+    } // Check which media files we got when edit page gets loaded
+
+
+    for (var i = 1; i < 5; i++) {
+      if ($("#ck-media_".concat(i)).attr('data-media-present')) {
+        (function () {
+          // Media present
+          // Create a clone of that media
+          var media = "media_".concat(i);
+          var element = $("[data-name=".concat(media, "]")).clone(true);
+          element.removeClass();
+          element.find('img').removeClass(); // Insert clone in filesToShow array
+
+          filesToShow3.push(element); // Activate remove event on shown media
+
+          $("[data-name=".concat(media, "]")).find('i').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            removeMedia3($("[data-name=".concat(media, "]"))); //renderFiles3()
+          });
+          console.log("received this image:");
+          console.log(element);
+        })();
+      } else {
+        // Create an input for the available slot
+        var newInput = $("<input type='file' \n                    id=\"imageUpload".concat(i - 1, "\" \n                    name=\"media_").concat(i, "\"\n                    style=\"display:none\"\n                    data-assigned=\"false\" \n                    accept=\".png, .jpg, .jpeg\" />"));
+        newInput.appendTo("#media-files-container");
+        activateInputEvent3(newInput);
+        console.log("created this input:");
+        console.log(newInput);
+      }
+    } // Enable submit-update button on changes
+
+
+    $("#post_text").on("keyup", function () {
+      $("#submit-update").removeClass('disabled');
+    });
+    $("#post_date").on("change", function () {
+      $("#submit-update").removeClass('disabled');
+    });
+    $("[name=\"twitter_accounts[]\"]").on("change", function () {
+      $("#submit-update").removeClass('disabled');
+    });
+  } // Activate Twitter Profiles Options
+
+
+  var setTwitterProfilesInput = function setTwitterProfilesInput(activeTwitterProfiles) {
+    activeTwitterProfiles.forEach(function (atp) {
+      $("#tp-".concat(atp)).attr('checked', true);
+      $("#tp-".concat(atp)).next().toggleClass('social-selector-inactive');
+      $("#tp-".concat(atp)).next().find('i.social-selector-check').toggleClass('check-inactive');
+    });
+  };
 });
 
 /***/ }),

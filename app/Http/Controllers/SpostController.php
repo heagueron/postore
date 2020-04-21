@@ -71,7 +71,10 @@ class SpostController extends Controller
         $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
         $currentDate = Str::of($now)->limit(16,'');
         //dd($sposts);
-        return view('sposts.schedule', compact('user', 'sposts', 'currentDate'));
+        // For the SpostForm component
+        $spost = new Spost();
+
+        return view('sposts.schedule', compact('user', 'sposts', 'currentDate', 'spost'));
     }
 
     /**
