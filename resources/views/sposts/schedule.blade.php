@@ -36,28 +36,6 @@
 
             {{-- New SpostForm Component --}}
             <x-spost-form mode="schedule" :spost="$spost"/>
-
-            {{-- Date and time picker --}}
-            <div class="form-group datetime-container" title="Choose a date and a time">
-                <input 
-                    class="form-control" 
-                    type="datetime-local" 
-                    value="{{$currentDate}}" 
-                    name='post_date' 
-                    id="post_date"
-                    min="{{ $currentDate }}">
-                
-                @if( session()->has('date_error') )
-                    <div class="alert alert-danger">
-                        {{ session()->get('date_error') }}
-                    </div>
-                @endif
-                @error('post_date')
-                    <div class="alert alert-danger">
-                        {{ $message }}
-                    </div> 
-                @enderror
-            </div>       
             
             <input hidden name="user_id" value="{{ $user->id }}" id="post-user-id">
             <input hidden name="send-now" value="false" id="send-now-flag">
@@ -70,7 +48,6 @@
     </div>
 
 </div>
-
 
 {{-- Scheduled Posts (sposts) --}}
 <div class="mt-4">

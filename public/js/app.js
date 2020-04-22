@@ -52836,8 +52836,6 @@ var PATH = "http://localhost:8000/";
 
 __webpack_require__(/*! ./spost */ "./resources/js/spost.js");
 
-__webpack_require__(/*! ./media */ "./resources/js/media.js");
-
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * Handle events for flash messages
@@ -53006,17 +53004,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_template_id_e4161ed6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./resources/js/media.js":
-/*!*******************************!*\
-  !*** ./resources/js/media.js ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(document).ready(function (e) {});
 
 /***/ }),
 

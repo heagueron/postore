@@ -69,12 +69,15 @@ class SpostController extends Controller
         }
         
         $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
-        $currentDate = Str::of($now)->limit(16,'');
+        //$currentDate = Str::of($now)->limit(16,'');
+        
         //dd($sposts);
         // For the SpostForm component
         $spost = new Spost();
+        $spost->currentDate = Str::of($now)->limit(16,'');
+        $spost->minDate = Str::of($now)->limit(16,'');
 
-        return view('sposts.schedule', compact('user', 'sposts', 'currentDate', 'spost'));
+        return view('sposts.schedule', compact('user', 'sposts', 'spost'));
     }
 
     /**
@@ -143,16 +146,17 @@ class SpostController extends Controller
 
         // Use current local date as minDate
         $now = Carbon::now()->timezone($user->timezone)->toDateTimeLocalString();
-        $minDate = Str::of($now)->limit(16,'');
+        //$minDate = Str::of($now)->limit(16,'');
+        $spost->minDate = Str::of($now)->limit(16,'');
 
         // Use current post_date field as date to show
         $date2 = Carbon::createFromDate( $spost->post_date )->toDateTimeLocalString();
-        $currentDate= Str::of($date2)->limit(16,'');
-        
+        //$currentDate= Str::of($date2)->limit(16,'');
+        $spost->currentDate= Str::of($date2)->limit(16,'');
+
         $this->setSpostMedia($spost);
 
-        //dd("ok, edit spost: ", $spost);
-        return view( 'sposts.edit', compact('user', 'spost', 'minDate', 'currentDate') );
+        return view( 'sposts.edit', compact('user', 'spost') );
     }
 
     /**

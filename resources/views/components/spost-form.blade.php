@@ -83,79 +83,82 @@
         {{-- Preview media files --}}
         <div class="d-flex mb-2 image-preview-container" style="display:none !important;">
             @switch($spost->media_files_count)
-                @case(1)
-                <div class="d-flex flex-column" id="mediaColumn1" >
-                    <div class="imagePreview mic-1" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
-                        <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-1 img-fluid" alt="" >
-                        <i class="far fa-times-circle removeMedia2"></i>
-                    </div>
-                </div>
-                <div class="d-flex flex-column" id="mediaColumn2" ></div>   
 
-                @break
+                @case(0)
+                    <div class="d-flex flex-column" id="mediaColumn1" ></div>
+                    <div class="d-flex flex-column" id="mediaColumn2" ></div>
+                    @break
+
+                @case(1)
+                    <div class="d-flex flex-column" id="mediaColumn1" >
+                        <div class="imagePreview mic-1" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
+                            <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-1 img-fluid" alt="" >
+                            <i class="far fa-times-circle removeMedia2"></i>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column" id="mediaColumn2" ></div>   
+                    @break
 
                 @case(2)
-                <div class="d-flex flex-column"  id="mediaColumn1" >
-                    <div class="imagePreview mic-2" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
-                        <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-2 img-fluid" alt="" >
-                        <i class="far fa-times-circle removeMedia2"></i>
-                    </div>
-                </div> 
+                    <div class="d-flex flex-column"  id="mediaColumn1" >
+                        <div class="imagePreview mic-2" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
+                            <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-2 img-fluid" alt="" >
+                            <i class="far fa-times-circle removeMedia2"></i>
+                        </div>
+                    </div> 
 
-                <div class="d-flex flex-column" id="mediaColumn2">
-                    <div class="imagePreview mic-2" data-name="{{$spost->names[1]}}" data-input="{{'imageUpload' .$spost->inputs[1]}}">
-                        <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-2 img-fluid" alt="" >
-                        <i class="far fa-times-circle removeMedia2"></i>
-                    </div>
-                </div> 
-
-                @break
+                    <div class="d-flex flex-column" id="mediaColumn2">
+                        <div class="imagePreview mic-2" data-name="{{$spost->names[1]}}" data-input="{{'imageUpload' .$spost->inputs[1]}}">
+                            <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-2 img-fluid" alt="" >
+                            <i class="far fa-times-circle removeMedia2"></i>
+                        </div>
+                    </div> 
+                    @break
                 
                 @case(3)
-                <div class="d-flex flex-column"  id="mediaColumn1" >
-                    <div class="imagePreview mic-2" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
-                        <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-2 img-fluid" alt="" >
-                        <i class="far fa-times-circle removeMedia2"></i>
+                    <div class="d-flex flex-column"  id="mediaColumn1" >
+                        <div class="imagePreview mic-2" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
+                            <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-2 img-fluid" alt="" >
+                            <i class="far fa-times-circle removeMedia2"></i>
+                        </div>
                     </div>
-                </div>
 
-                <div class="d-flex flex-column" id="mediaColumn2">
-                    <div class="imagePreview mic-3" data-name="{{$spost->names[1]}}" data-input="{{'imageUpload' .$spost->inputs[1]}}">
-                        <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-3 img-fluid" alt="" >
-                        <i class="far fa-times-circle removeMedia2"></i> 
-                    </div>
-                    <div class="imagePreview mic-3" data-name="{{$spost->names[2]}}" data-input="{{'imageUpload' .$spost->inputs[2]}}">
-                        <img src="{{ asset('storage/' . $spost->media[2]) }}" class="show-image-3 img-fluid" alt="" >
-                        <i class="far fa-times-circle removeMedia2"></i>
-                    </div>
-                </div> 
-                @break
+                    <div class="d-flex flex-column" id="mediaColumn2">
+                        <div class="imagePreview mic-3" data-name="{{$spost->names[1]}}" data-input="{{'imageUpload' .$spost->inputs[1]}}">
+                            <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-3 img-fluid" alt="" >
+                            <i class="far fa-times-circle removeMedia2"></i> 
+                        </div>
+                        <div class="imagePreview mic-3" data-name="{{$spost->names[2]}}" data-input="{{'imageUpload' .$spost->inputs[2]}}">
+                            <img src="{{ asset('storage/' . $spost->media[2]) }}" class="show-image-3 img-fluid" alt="" >
+                            <i class="far fa-times-circle removeMedia2"></i>
+                        </div>
+                    </div> 
+                    @break
 
                 @case(4)
-                <div class="d-flex flex-column"  id="mediaColumn1" >
-                    <div class="imagePreview mic-3" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
-                        <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-3 img-fluid" alt="" >
-                        <i class="far fa-times-circle removeMedia2"></i>
-                    </div>
-                    <div class="imagePreview mic-3" data-name="{{$spost->names[1]}}" data-input="{{'imageUpload' .$spost->inputs[1]}}">
-                        <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-3 img-fluid" alt="" >
-                        <i class="far fa-times-circle removeMedia2"></i>
+                    <div class="d-flex flex-column"  id="mediaColumn1" >
+                        <div class="imagePreview mic-3" data-name="{{$spost->names[0]}}" data-input="{{'imageUpload' .$spost->inputs[0]}}">
+                            <img src="{{ asset('storage/' . $spost->media[0]) }}" class="show-image-3 img-fluid" alt="" >
+                            <i class="far fa-times-circle removeMedia2"></i>
+                        </div>
+                        <div class="imagePreview mic-3" data-name="{{$spost->names[1]}}" data-input="{{'imageUpload' .$spost->inputs[1]}}">
+                            <img src="{{ asset('storage/' . $spost->media[1]) }}" class="show-image-3 img-fluid" alt="" >
+                            <i class="far fa-times-circle removeMedia2"></i>
+                        </div>
+
                     </div>
 
-                </div>
-
-                <div class="d-flex flex-column" id="mediaColumn2">
-                    <div class="imagePreview mic-3" data-name="{{$spost->names[2]}}" data-input="{{'imageUpload' .$spost->inputs[2]}}">
-                        <img src="{{ asset('storage/' . $spost->media[2]) }}" class="show-image-3 img-fluid" alt="" >
-                        <i class="far fa-times-circle removeMedia2"></i>
+                    <div class="d-flex flex-column" id="mediaColumn2">
+                        <div class="imagePreview mic-3" data-name="{{$spost->names[2]}}" data-input="{{'imageUpload' .$spost->inputs[2]}}">
+                            <img src="{{ asset('storage/' . $spost->media[2]) }}" class="show-image-3 img-fluid" alt="" >
+                            <i class="far fa-times-circle removeMedia2"></i>
+                        </div>
+                        <div class="imagePreview mic-3" data-name="{{$spost->names[3]}}" data-input="{{'imageUpload' .$spost->inputs[3]}}">
+                            <img src="{{ asset('storage/' . $spost->media[3]) }}" class="show-image-3 img-fluid" alt="" >
+                            <i class="far fa-times-circle removeMedia2"></i>
+                        </div>
                     </div>
-                    <div class="imagePreview mic-3" data-name="{{$spost->names[3]}}" data-input="{{'imageUpload' .$spost->inputs[3]}}">
-                        <img src="{{ asset('storage/' . $spost->media[3]) }}" class="show-image-3 img-fluid" alt="" >
-                        <i class="far fa-times-circle removeMedia2"></i>
-                    </div>
-                </div>
-
-                @break
+                    @break
 
             @endswitch
         </div> <!-- End image-preview-container -->
@@ -176,6 +179,26 @@
     
     </div>
 
-
+    {{-- Date and time picker --}}
+    <div class="form-group datetime-container" title="Choose a date and a time">
+        <input 
+            class="form-control" 
+            type="datetime-local" 
+            value="{{ $spost->currentDate }}" 
+            name='post_date' 
+            id="post_date"
+            min="{{ $spost->minDate }}">
+        
+        @if( session()->has('date_error') )
+            <div class="alert alert-danger">
+                {{ session()->get('date_error') }}
+            </div>
+        @endif
+        @error('post_date')
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div> 
+        @enderror
+    </div>
 
 </div>
