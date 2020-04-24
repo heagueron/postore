@@ -11079,6 +11079,10 @@ twitter-profile-option-active {
   display: none;
 }
 
+.hideElement {
+  display: none !important;
+}
+
 .show-social-selector {
   padding: 2px;
   position: relative;

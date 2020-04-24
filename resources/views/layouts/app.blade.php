@@ -188,6 +188,7 @@
 
             <div style="flex:5" id="p-content">
                 <main class="py-4">
+                
                     @if( session()->has('message') )
                         <div class="alert alert-primary" role="alert">
                             <strong>{{ session()->get('message')}}</strong>
@@ -199,6 +200,7 @@
                     <div class="container">
                         @yield('content')
                     </div> 
+
                 </main>
             </div>
 

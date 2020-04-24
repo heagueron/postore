@@ -174,7 +174,7 @@ $( document ).ready(function(e) {
             return element.attr("data-input") != targetInputId;
         })
         filesToShow3 = newArray
-        console.log('calling render3 from remove3')
+
         renderFiles3();
         
     }
@@ -202,7 +202,7 @@ $( document ).ready(function(e) {
             removeMedia3(spot)
         })
 
-        $('.image-preview-container').css('display', 'block')
+        $('.image-preview-container').css('display', 'block').removeClass('hideElement')
 
     }
 
@@ -216,7 +216,7 @@ $( document ).ready(function(e) {
         console.log('Organize grid for files preview /3')
 
         const mediaCount = filesToShow3.length;
-        console.log(mediaCount)
+
         switch (mediaCount) {
 
             // showMedia3 signature: (element from filesToShow array, heigth, width, column)
@@ -240,6 +240,7 @@ $( document ).ready(function(e) {
             break;
             case 0:
                 console.log("No image to preview!")
+                $('.image-preview-container').addClass('hideElement')
             break;
             default:
                 console.log("Maximun image files count exceeded!")

@@ -1,13 +1,12 @@
 <?php namespace App\Traits;
 
-use finfo;
-use App\Spost;
 use Illuminate\Support\Str;
-use Illuminate\Http\UploadedFile;
 use App\ApiConnectors\TwitterGateway;
-
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
+
+use App\Spost;
+use App\TwitterProfile;
+
 
 trait PublishPost
 {
@@ -16,6 +15,7 @@ trait PublishPost
     protected $mediaIdsList;
     protected $registerMediaResult;
     protected $twitter;
+    protected $additionalOwnersList;
 
     /**
      * Publish the post.
@@ -27,6 +27,10 @@ trait PublishPost
     {   
         $this->mediaIds     = [];
         $this->profileIds   = $ids;
+
+        if( $spost->media_files_count > 0 ){
+            $this->additionalOwnersList = implode( ',', $this->getAdditionalOwners() );
+        }
         
         // Check and register media files
         // Build the twitter connection class
@@ -69,7 +73,7 @@ trait PublishPost
             //dd('$response: ',$response);
 
             if ( $twitter->connection->getLastHttpCode() == 200 ) {
-                // Success. Store the status id in pivot 'spost_twitter_profile'
+                // Success. Store the twitter status id received in pivot 'spost_twitter_profile'
                 $spost->twitter_profiles()->syncWithoutDetaching([
                     $value => [ 'twitter_status_id' => $response->id ]
                 ]); 
@@ -89,15 +93,25 @@ trait PublishPost
     }
 
 
-    public function registerMedia($media){
+    private function registerMedia($media){
 
         $strFile = Storage::get( $media );
-        $response = $this->twitter->connection
-                ->upload( 'media/upload', [ 'media' => $strFile ] );
 
-        //dd($response);
+        $parameters = [
+            'media' => $strFile,
+            'additional_owners' => $this->additionalOwnersList
+        ];
+        $response = $this->twitter->connection->upload('media/upload', $parameters);
+
+        // $response = $this->twitter->connection
+        //         ->upload( 
+        //             'media/upload', 
+        //             ['media' => $strFile, 'additional_owners' => $additionalOwners ] 
+        //         );
+
         if ( $this->twitter->connection->getLastHttpCode() == 200 ) {
             array_push( $this->mediaIds, $response->media_id );
+            // dd($response);
             return  true;
         } else { 
             return false;
@@ -105,72 +119,30 @@ trait PublishPost
 
     }
 
+    private function getAdditionalOwners() {
+
+        $additionalOwnersArray = [];    // Will hold the profiles twitter ids
+
+        $otherProfiles = array_slice($this->profileIds,1);  // All profiles but the first.
+
+        foreach( $otherProfiles as $oP ) {
+
+            $tp = TwitterProfile::where('id', '=', $oP)->first();
+            if ($tp != null) {
+                array_push( $additionalOwnersArray, $tp->twitter_user_id);
+            }
+
+        }
+
+        return $additionalOwnersArray;
+
+    }
 
 
-    // private function checkRegisterMedia($spost)
-    // {
-    //     // Build the twitter connection class
-    //     $twitter = new TwitterGateway( $this->profileIds[0], false);
 
-    //     // Media 1
-    //     if( !is_null( $spost->media_1 ) ){
 
-    //         $media1 = Storage::get( 'public/' . $spost->media_1 );
 
-    //         $response = $twitter->connection
-    //             ->upload( 'media/upload', [ 'media' => $media1 ] );
 
-    //         if ( $twitter->connection->getLastHttpCode() == 200 ) {
-    //             array_push( $this->mediaIds, $response->media_id ); 
-    //         } else { return 'Upload media failed';}
-             
-    //     } 
-
-    //     // Media 2
-    //     if( !is_null( $spost->media_2 )){
-
-    //         $media2 = Storage::get( 'public/' . $spost->media_2 );
-
-    //         $response = $twitter->connection
-    //             ->upload( 'media/upload', [ 'media' => $media2 ] );
-
-    //         if ( $twitter->connection->getLastHttpCode() == 200 ) {
-    //             array_push( $this->mediaIds, $response->media_id ); 
-    //         } else { return 'Upload media failed';}
-
-    //     }
-
-    //     // Media 3
-    //     if( !is_null( $spost->media_3 )){
-
-    //         $media3 = Storage::get( 'public/' . $spost->media_3 );
-
-    //         $response = $twitter->connection
-    //             ->upload( 'media/upload', [ 'media' => $media3 ] );
-            
-    //         if ( $twitter->connection->getLastHttpCode() == 200 ) {
-    //             array_push( $this->mediaIds, $response->media_id ); 
-    //         } else { return 'Upload media failed';}
-      
-    //     }
-
-    //     // Media 4
-    //     if( !is_null( $spost->media_4 )){
-
-    //         $media4 = Storage::get( 'public/' . $spost->media_4 );
-
-    //         $response = $twitter->connection
-    //             ->upload( 'media/upload', [ 'media' => $media4 ] );
-            
-    //         if ( $twitter->connection->getLastHttpCode() == 200 ) {
-    //             array_push( $this->mediaIds, $response->media_id ); 
-    //         } else { return 'Upload media failed';}
-      
-    //     }
-
-    //     return 'success';
-
-    // }
 
 
    

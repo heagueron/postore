@@ -76,7 +76,7 @@ class HomeController extends Controller
                 $tp->update(['avatar'   => $currentAvatar]);
             }
         }
-
+   
         return redirect()->route('sposts.schedule')->with('flash', 'All Twitter avatars updated');
 
     }

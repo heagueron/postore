@@ -53168,7 +53168,6 @@ $(document).ready(function (e) {
       return element.attr("data-input") != targetInputId;
     });
     filesToShow3 = newArray;
-    console.log('calling render3 from remove3');
     renderFiles3();
   }; // Append media
 
@@ -53192,7 +53191,7 @@ $(document).ready(function (e) {
       e.stopImmediatePropagation();
       removeMedia3(spot);
     });
-    $('.image-preview-container').css('display', 'block');
+    $('.image-preview-container').css('display', 'block').removeClass('hideElement');
   }; // Organize grid for files preview
 
 
@@ -53202,7 +53201,6 @@ $(document).ready(function (e) {
     $("#mediaColumn2").empty();
     console.log('Organize grid for files preview /3');
     var mediaCount = filesToShow3.length;
-    console.log(mediaCount);
 
     switch (mediaCount) {
       // showMedia3 signature: (element from filesToShow array, heigth, width, column)
@@ -53230,6 +53228,7 @@ $(document).ready(function (e) {
 
       case 0:
         console.log("No image to preview!");
+        $('.image-preview-container').addClass('hideElement');
         break;
 
       default:

@@ -76,7 +76,7 @@ class SpostController extends Controller
         $spost = new Spost();
         $spost->currentDate = Str::of($now)->limit(16,'');
         $spost->minDate = Str::of($now)->limit(16,'');
-
+        //dd($sposts);
         return view('sposts.schedule', compact('user', 'sposts', 'spost'));
     }
 
@@ -399,34 +399,47 @@ class SpostController extends Controller
         $media = [];
         $names = [];
         $inputs = [];
+        $nullImages = 0;
 
         if( !is_null($spost->media_1) ) { 
             array_push($media, $spost->media_1);
             array_push($names, 'media_1');
             array_push($inputs, 0);
-            }
+            
+            } else { $nullImages += 1; }
 
         if( !is_null($spost->media_2) ) {
             array_push($media, $spost->media_2);
             array_push($names, 'media_2');
             array_push($inputs, 1);
-            }
+            $nullImages += 1;
+            } else { $nullImages += 1; }
 
         if( !is_null($spost->media_3) ) {
             array_push($media, $spost->media_3);
             array_push($names, 'media_3');
             array_push($inputs, 2);
-            }
+            $nullImages += 1;
+            } else { $nullImages += 1; }
 
         if( !is_null($spost->media_4) ) {
             array_push($media, $spost->media_4);
             array_push($names, 'media_4');
             array_push($inputs, 3);
-            }
+            $nullImages += 1;
+            } else { $nullImages += 1; }
+        
+
+        $imageFilesCount = 4 - $nullImages;
+
+        $spost->update([
+            'media_files_count' => $imageFilesCount
+        ]);
+
         $spost->media   =   $media;
         $spost->names   =   $names;
         $spost->inputs  =   $inputs;
-
+            //dd($spost);
     }
 
 
