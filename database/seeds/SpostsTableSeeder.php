@@ -16,6 +16,24 @@ class SpostsTableSeeder extends Seeder
 
         \DB::table('sposts')->delete();
         
+        \DB::table('sposts')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'text' => 'Sunny beach day. Enjoy.',
+                'post_date' => '2020-04-27 16:23:00',
+                'posted' => 0,
+                'user_id' => 1,
+                'media_1' => NULL,
+                'media_2' => NULL,
+                'media_3' => NULL,
+                'media_4' => NULL,
+                'video' => 'uploads/AXhOTiwzoNLdyRnPjfZesHPsjeKb6CkvwEFd3F1R.mp4',
+                'media_files_count' => 0,
+                'created_at' => '2020-04-26 20:23:54',
+                'updated_at' => '2020-04-26 20:23:54',
+            ),
+        ));
         
         
     }
