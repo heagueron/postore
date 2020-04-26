@@ -79,11 +79,16 @@ a, a:hover, a:focus {
     border-right: 2px solid #dee2e6;
 }
 
-.left-menu-icons li a i{
-   font-size: 1rem;
+.left-menu-icons li a i,
+.add-media-btns span i
+{
+   font-size: 1.2rem;
    color: rgb(2, 46, 56); 
 }
-.left-menu-icons li a i:hover{
+
+.left-menu-icons li a i:hover,
+.add-media-btns span i:hover
+{
     //font-size: 1.1rem;
     color:$blue; 
  }
@@ -133,7 +138,7 @@ a, a:hover, a:focus {
 }
 
 .social-selector-inactive{
-    opacity: 0.3;
+    opacity: 0.3 !important;
 }
 
 .check-inactive{
@@ -285,6 +290,7 @@ twitter-profile-option-active{
     }
 }
 
+
 // .media-item-container{
 //     background-size: cover;
 //     background-repeat: no-repeat;
@@ -341,6 +347,11 @@ twitter-profile-option-active{
     border-radius: 14px;
 }
 
+// .add-media-btns {
+//     color: $blue;
+// }
+
+// PAGES
 .page-title{
     font-size: 2.5rem;
     padding-bottom: 15px;

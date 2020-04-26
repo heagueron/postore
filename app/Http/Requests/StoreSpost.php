@@ -31,6 +31,7 @@ class StoreSpost extends FormRequest
             'media_2'               => 'nullable|file|image|max:5000',
             'media_3'               => 'nullable|file|image|max:5000',
             'media_4'               => 'nullable|file|image|max:5000',
+            'video'                 => 'nullable|file|mimetypes:video/x-msvideo,video/mp4',
             'twitter_accounts'      => 'required',
             "twitter_accounts.*"    => "required|string",
         ];
@@ -44,7 +45,8 @@ class StoreSpost extends FormRequest
             'post_date.required'        => 'Please select a date and time to schedule your post.',
             'twitter_accounts.required' => 'Please select at least one social profile.',
             'media_1.file'              => 'Media file(s) could not be uploaded.',
-            'twitter_accounts.*.required'   => 'Please select at least one social account.'
+            'twitter_accounts.*.required'   => 'Please select at least one social account.',
+            'video.mimetypes'           => 'Accepted videos are .avi and .mp4'
         ];
     }
 }

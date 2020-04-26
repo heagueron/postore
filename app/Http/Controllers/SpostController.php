@@ -110,10 +110,11 @@ class SpostController extends Controller
             'media_3'               => request()->media_3,
             'media_4'               => request()->media_4,
             'media_files_count'     => request()->media_files_count,
+            'video'                 => request()->video
         ]);
    
         // Add media to the model
-        if( request()->media_files_count > 0 ){
+        if( request()->media_files_count > 0 or !is_null( request()->video ) ){
             $this->storeMedia($spost);
         } 
         
@@ -380,10 +381,11 @@ class SpostController extends Controller
     private function storeMedia($spost)
     {
         $spost->update([
-                'media_1' => is_null( request()->media_1 ) ? null : request()->media_1->store('uploads', 'public'),
-                'media_2' => is_null( request()->media_2 ) ? null : request()->media_2->store('uploads', 'public'),
-                'media_3' => is_null( request()->media_3 ) ? null : request()->media_3->store('uploads', 'public'),
-                'media_4' => is_null( request()->media_4 ) ? null : request()->media_4->store('uploads', 'public'),
+                'media_1'   => is_null( request()->media_1 ) ? null : request()->media_1->store('uploads', 'public'),
+                'media_2'   => is_null( request()->media_2 ) ? null : request()->media_2->store('uploads', 'public'),
+                'media_3'   => is_null( request()->media_3 ) ? null : request()->media_3->store('uploads', 'public'),
+                'media_4'   => is_null( request()->media_4 ) ? null : request()->media_4->store('uploads', 'public'),
+                'video'     => is_null( request()->video ) ? null   : request()->video->store('uploads', 'public'),
             ]);
     }
 

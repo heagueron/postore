@@ -68,6 +68,8 @@ $( document ).ready(function(e) {
     $(".fa-heart").tooltip()
     $(".show-date-node").tooltip()
     $(".show-social-selector").tooltip()
+    $("#add-media-button3").tooltip()
+    $("#add-video-button3").tooltip()
 
 
     // Show spost options menu
@@ -111,29 +113,51 @@ $( document ).ready(function(e) {
     $("#add-media-button3").on('click', function (e) {
         e.stopPropagation()
         e.preventDefault()
-        console.log('Lets add an image bro!')
+        // Check video existence
+        if( $("#videoUpload").attr('data-assigned') == "false" ){
+            console.log('Lets add an image bro! ... and disable videos')
 
-        for(let i=0; i<4; i++){
-            
-            let input = $(`#imageUpload${i}`)
+            for(let i=0; i<4; i++){
+                
+                let input = $(`#imageUpload${i}`)
 
-            if( input.length && input.attr('data-assigned') == "false"){
-                console.log("SELECTED input:")
-                console.log(input)
-                input.click()
-                break
-            } 
+                if( input.length && input.attr('data-assigned') == "false"){
+                    console.log("SELECTED input:")
+                    console.log(input)
+                    input.click()
+                    break
+                } 
+            }
+        } else {
+            console.log("A video is already present. No image allowed.")
+        }
+        
+    })
+
+    // Video input
+    $("#add-video-button3").on('click', function (e) {
+        e.stopPropagation()
+        e.preventDefault()
+        // Check that there is no image or video already present 
+        if( $("#media_files_count").val() == 0 && $("#videoUpload").attr('data-assigned') == 'false') {
+           console.log('Lets add a video bro! ... and disable images')
+           $("#videoUpload").click()
+        } else {
+            console.log("Image files already present ... ")
         }
     })
 
     const activateInputEvent3 = ( targetInput ) => {
+        
         targetInput.change(function() {
+            console.log(`change on input: ${targetInput}`)
             readURL3(this);
         })
+
     }
 
-    //Remove media
-    const removeMedia3 = ( element ) =>{
+    // Remove media (Images)
+    const removeMedia3 = ( element ) => {
         console.log('remove element:')
         console.log(element)
         element.remove();
@@ -142,7 +166,7 @@ $( document ).ready(function(e) {
         let mediaCount = parseInt( $("#media_files_count").val())
         mediaCount -=1
         $("#media_files_count").val(mediaCount)
-        $(`#add-media-button2`).css('display','block')
+        $(`#add-media-button3`).css('display','block')
 
         // Clean input set, if present.
         let targetInputId = element.attr("data-input");
@@ -179,10 +203,41 @@ $( document ).ready(function(e) {
         
     }
 
+    // Remove video
+    const removeVideo = ( element ) => {
+        console.log(`Remove that video ... `)
+        element.remove();
+
+        // Clean input set, if present.
+        if( $(`#videoUpload`).length ){
+            $(`#videoUpload`).remove()
+        }
+
+        // Recreates the input
+        let newInput = $(`<input type='file' 
+            id="videoUpload" 
+            name="video"
+            style="display:none"
+            data-assigned="false" 
+            accept=".mp4, .avi, .gif" />`)
+        newInput.appendTo("#media-files-container")
+        activateInputEvent3( newInput )
+
+        // Indicate change in video input, if editing
+        if( $("#ce-selector").val() == 'edit'){
+            $(`#ck-video`).val(1)
+        }
+
+        // Remove the preview area. Enable images and video inputs
+        $('.image-preview-container').addClass('hideElement')
+        $("#add-media-button3").css('display', 'block')
+        $("#add-video-button3").css('display', 'block')
+    } 
+
     // Append media
     const showMedia3 = (element, heigth, width, column) => {
 
-        let spot = filesToShow3[element].clone()
+        let spot = filesToShow3[element].clone(true)
 
         spot.addClass('imagePreview')
         spot.css('height',heigth).css('width',width)
@@ -204,6 +259,26 @@ $( document ).ready(function(e) {
 
         $('.image-preview-container').css('display', 'block').removeClass('hideElement')
 
+    }
+
+    // Append video
+    const showVideo = ( videoElement ) => {
+        let spot = videoElement.clone(true)
+        spot.addClass('imagePreview')
+        spot.css('height','240px').css('width','240px')
+
+        // if( spot.has('img') ) { // When editing
+        //     spot.css('border-radius', '14px')
+        //     spot.find('img').css('height',heigth).css('width',width).css('border-radius', '14px')
+        // }
+        spot.appendTo(`#mediaColumn1`)
+        // Add remove trigger
+        spot.find('i').on('click', function(e){ 
+            e.preventDefault()
+            e.stopImmediatePropagation();
+            removeVideo(spot)
+        })
+        $('.image-preview-container').css('display', 'block').removeClass('hideElement')
     }
 
     // Organize grid for files preview
@@ -241,6 +316,7 @@ $( document ).ready(function(e) {
             case 0:
                 console.log("No image to preview!")
                 $('.image-preview-container').addClass('hideElement')
+                $("#add-video-button3").css('display', 'block')
             break;
             default:
                 console.log("Maximun image files count exceeded!")
@@ -256,43 +332,94 @@ $( document ).ready(function(e) {
     function readURL3(input) {
         console.log("Ready to Read a file ... ")
         if (input.files && input.files[0]) {
-            console.log(`reading new file via input: ${input.name.slice(6,7)}`)
+            // console.log(`reading new file via input: ${input.name.slice(6,7)}`)
             var reader = new FileReader()
 
             reader.onload = function(e) {
 
-                // Get sub index from input and store image in session
-                let subIndex = input.name.slice(6,7)
+                if( input.name != 'video'){
 
-                // Build image preview node
-                let spot = $(`<div>
-                                <i class="far fa-times-circle removeMedia2"></i></span>
-                            </div>`);
-                spot.attr('data-name',`media_${subIndex}`)
-                spot.attr('data-input', `imageUpload${subIndex-1}`)            
-                spot.css('background-image', `url(${e.target.result})`);
- 
-                spot.attr('data-input',input.id);
+                    // Get sub index from input and store image in session
+                    let subIndex = input.name.slice(6,7)
 
-                // Add to files array and render
-                filesToShow3.push(spot);
+                    // Build image preview node
+                    let spot = $(`<div>
+                                    <i class="far fa-times-circle removeMedia2"></i></span>
+                                </div>`);
+                    spot.attr('data-name',`media_${subIndex}`)
+                    spot.attr('data-input', `imageUpload${subIndex-1}`)            
+                    spot.css('background-image', `url(${e.target.result})`);
+                    spot.attr('data-input',input.id);
 
-                // Mark input as assigned
-                $(`#imageUpload${subIndex-1}`).attr('data-assigned','true')
+                    // Add to files array and render
+                    filesToShow3.push(spot);
 
-                // Signal media as 'changed', if editing
-                if( $("#ce-selector").val() == 'edit'){
-                   $(`#ck-media_${subIndex}`).val(1) 
+                    // Mark input as assigned
+                    $(`#imageUpload${subIndex-1}`).attr('data-assigned','true')
+
+                    // Signal media as 'changed', if editing
+                    if( $("#ce-selector").val() == 'edit'){
+                    $(`#ck-media_${subIndex}`).val(1) 
+                    }
+
+                    // Update media counter
+                    let mediaCount = parseInt( $("#media_files_count").val() );
+                    mediaCount +=1;
+                    $("#media_files_count").val(mediaCount)
+                    if( mediaCount > 3 ) $(`#add-media-button3`).css('display','none')
+
+                    // Organice the media files
+                    renderFiles3();
+
+                    $("#add-video-button3").css('display','none')
+
+                } else {
+
+                    // Build video preview node
+                    let spot = $(`<div>                                 
+                                    <i class="far fa-times-circle removeMedia2"></i></span>
+                                </div>`)
+
+                    let video = $(`<video controls="" preload="none" style="width:100%; height:100%"></video`)
+
+                    let source = $(`<source type="video/mp4">`)
+                    source.attr('src',`${e.target.result}`)
+                    source.appendTo(video)
+
+                    video.appendTo(spot)
+
+                    spot.attr('data-name','video')
+                    spot.attr('data-input', 'videoUpload')            
+                    //spot.css('background-image', `url(${e.target.result})`);
+                    spot.attr('data-input',input.id);
+
+                    // Mark input as assigned
+                    $(`#videoUpload`).attr('data-assigned','true')
+
+                    // Signal video as 'changed', if editing
+                    if( $("#ce-selector").val() == 'edit'){
+                        $(`#ck-video`).val(1) 
+                    }
+
+                    // Disable image and video buttons
+                    $("#add-media-button3").css('display','none')
+                    $("#add-video-button3").css('display','none')
+
+                    // Preview the video
+                    showVideo(spot)
+
                 }
                 
-                // Update media counter
-                let mediaCount = parseInt( $("#media_files_count").val() );
-                mediaCount +=1;
-                $("#media_files_count").val(mediaCount)
-                console.log( 'media file count: '+$("#media_files_count").val() )
-                if( mediaCount > 3 ) $(`#add-media-button3`).css('display','none')
-                console.log('calling render3 from readUrl3')
-                renderFiles3();
+
+                // If image, disable video and viceversa
+                console.log('input.name')
+                console.log(input.name)
+                if( input.name != 'video'){
+                    
+                } else {
+                    $("#add-media-button3").css('display','none')
+                    $("#add-video-button3").css('display','none')
+                }
                 
             }
             reader.readAsDataURL(input.files[0]);
@@ -305,9 +432,19 @@ $( document ).ready(function(e) {
      ************************************/
     if ( $("#ce-selector").val() == 'schedule'){
         // Input events
-        $("#imageUpload0, #imageUpload1, #imageUpload2, #imageUpload3").change(function() {
+        $(`#imageUpload0, 
+            #imageUpload1, 
+            #imageUpload2, 
+            #imageUpload3,
+            #videoUpload`).change(function() {
             readURL3(this);
         })
+    }
+
+    if ( $("#post_text").html() != '' ){
+        const trimmedText = $("#post_text").html().trim();
+        $("#post_text").html(trimmedText)
+        $("#post-character-count").html(trimmedText.length)
     }
 
     /************************************

@@ -115,7 +115,7 @@ Route::get('/tap', function() {
 Route::get('/tap2', function() {
 
     // Build the twitter connection class
-    $twitter = new TwitterGateway( 11, false);
+    $twitter = new TwitterGateway( 15, false);
 
     $response2 = $twitter->connection
         ->get("account/verify_credentials", ["skip_status" => "true"]);

@@ -10959,12 +10959,14 @@ a:focus {
   border-right: 2px solid #dee2e6;
 }
 
-.left-menu-icons li a i {
-  font-size: 1rem;
+.left-menu-icons li a i,
+.add-media-btns span i {
+  font-size: 1.2rem;
   color: #022e38;
 }
 
-.left-menu-icons li a i:hover {
+.left-menu-icons li a i:hover,
+.add-media-btns span i:hover {
   color: #3490dc;
 }
 
@@ -11009,7 +11011,7 @@ a:focus {
 }
 
 .social-selector-inactive {
-  opacity: 0.3;
+  opacity: 0.3 !important;
 }
 
 .check-inactive {

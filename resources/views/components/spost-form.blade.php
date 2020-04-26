@@ -29,6 +29,7 @@
                 </div>
             @endforeach
         </div>
+        @error('twitter_accounts') <div class="alert alert-danger">{{ $message }}</div> @enderror
         @if( session()->has('profile_error') )
             <div class="alert alert-danger">{{ session()->get('profile_error') }}</div>
         @endif
@@ -59,6 +60,7 @@
         <input hidden type='file' id="imageUpload1" name="media_2" data-assigned="false" accept=".png, .jpg, .jpeg" />
         <input hidden type='file' id="imageUpload2" name="media_3" data-assigned="false" accept=".png, .jpg, .jpeg" />
         <input hidden type='file' id="imageUpload3" name="media_4" data-assigned="false" accept=".png, .jpg, .jpeg" />
+        <input hidden type='file' id="videoUpload"  name="video"   data-assigned="false" accept=".mp4, .avi, .gif" />
 
         {{-- Preview media files --}}
         <div class="d-flex mb-2 image-preview-container" style="display:none !important;">
@@ -79,6 +81,8 @@
             data-media-present="{{is_null($spost->media_3)? false : true }}">
         <input hidden name="ck-media_4" id="ck-media_4" value="0"
             data-media-present="{{is_null($spost->media_4)? false : true }}">
+        <input hidden name="ck-video" id="ck-video" value="0"
+            data-media-present="{{is_null($spost->video)? false : true }}">
 
         {{-- Preview media files --}}
         <div class="d-flex mb-2 image-preview-container" style="display:none !important;">
@@ -170,12 +174,24 @@
         @error('media_2') <div class="alert alert-danger">{{ $message }}</div> @enderror
         @error('media_3') <div class="alert alert-danger">{{ $message }}</div> @enderror
         @error('media_4') <div class="alert alert-danger">{{ $message }}</div> @enderror
+        @error('video') <div class="alert alert-danger">{{ $message }}</div> @enderror
         
         {{-- Add media button --}}
-        <button class="add-media-button btn btn-primary mb-4"  id="add-media-button3" title="Add media" tabindex=""> 
+        <!-- <button class="add-media-button btn btn-primary mb-4"  id="add-media-button3" title="Add media" tabindex=""> 
             <i class="fab fa-instagram"></i> 
             <span class="ml-2">Add image</span> 
-        </button>
+        </button> -->
+        <div class="add-media-btns d-flex mb-4">
+
+            <span id="add-media-button3" title="Add image" data-toggle="tooltip" style="margin-right: 10px !important;">
+                <i class="fab fa-instagram"></i>
+            </span> 
+
+            <span id="add-video-button3" title="Add video" data-toggle="tooltip"> 
+                <i class="fas fa-video"></i>
+            </span>
+
+        </div>
     
     </div>
 
