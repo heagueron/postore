@@ -11,7 +11,8 @@ require('./bootstrap');
  */
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 var PATH = "http://localhost:8000/";
-require('./spost');
+//require('./spost');
+require('./autocomplete');
 
 window.Vue = require('vue');
 

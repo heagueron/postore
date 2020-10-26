@@ -1,11 +1,11 @@
 <?php namespace App\Traits;
 
-use Illuminate\Support\Str;
-use App\ApiConnectors\TwitterGateway;
-use Illuminate\Support\Facades\Storage;
-
 use App\Spost;
 use App\TwitterProfile;
+use Illuminate\Support\Str;
+
+use App\ApiConnectors\TwitterGateway;
+use Illuminate\Support\Facades\Storage;
 
 
 trait PublishPost
@@ -27,8 +27,9 @@ trait PublishPost
     {   
         $this->mediaIds     = [];
         $this->profileIds   = $ids;
+        $this->additionalOwnersList = null;
 
-        if( $spost->media_files_count > 0 ){
+        if( count($ids)>1 and ($spost->media_files_count > 0 or !is_null( $spost->video ))  ){
             $this->additionalOwnersList = implode( ',', $this->getAdditionalOwners() );
         }
         
@@ -54,6 +55,11 @@ trait PublishPost
         if( !is_null( $spost->media_4 ) ){
             if( ! $this->registerMedia( 'public/' . $spost->media_4 ) ) {
                 return 'There was a problem uploading your media files. Contact support.';
+            } 
+        }
+        if( !is_null( $spost->video ) ){
+            if( ! $this->registerVideo( 'public/' . $spost->video ) ) {
+                return 'There was a problem uploading your video. Contact support.';
             } 
         }
         $this->mediaIdsList = implode(',', $this->mediaIds);
@@ -94,24 +100,50 @@ trait PublishPost
 
 
     private function registerMedia($media){
-
+        
         $strFile = Storage::get( $media );
 
-        $parameters = [
-            'media' => $strFile,
-            'additional_owners' => $this->additionalOwnersList
-        ];
+        if( is_null($this->additionalOwnersList)){
+            $parameters = [ 'media' => $strFile ];
+        } else {
+            $parameters = [
+                'media'             => $strFile,
+                'additional_owners' => $this->additionalOwnersList
+            ];
+        }
         $response = $this->twitter->connection->upload('media/upload', $parameters);
-
-        // $response = $this->twitter->connection
-        //         ->upload( 
-        //             'media/upload', 
-        //             ['media' => $strFile, 'additional_owners' => $additionalOwners ] 
-        //         );
 
         if ( $this->twitter->connection->getLastHttpCode() == 200 ) {
             array_push( $this->mediaIds, $response->media_id );
-            // dd($response);
+            return  true;
+        } else { 
+            return false;
+        }
+
+    }
+
+    private function registerVideo( $videoPath ){
+        
+        Storage::setVisibility( $videoPath, 'public' );
+        
+        if( is_null($this->additionalOwnersList)){
+            $parameters = [ 
+                'media'         => $videoPath,
+                'media_type'    => 'video/mp4' // TODO: dynamic!
+            ];
+        } else {
+            $parameters = [
+                'media'             => $videoPath,
+                'media_type'        => 'video/mp4',
+                'additional_owners' => $this->additionalOwnersList
+            ];
+        }
+
+        // upload signature: public function upload($path, array $parameters = [], $chunked = false)
+        $response = $this->twitter->connection->upload('media/upload', $parameters, true);
+
+        if ( $this->twitter->connection->getLastHttpCode() == 200 ) {
+            array_push( $this->mediaIds, $response->media_id );
             return  true;
         } else { 
             return false;

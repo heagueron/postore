@@ -17,7 +17,7 @@
             @method('PATCH')
 
             {{-- New SpostForm Component --}}
-            <x-spost-form mode="edit" :spost="$spost"/>
+            <x-spost-form mode="edit" :spost="$spost"  />
             
             <input hidden name="user_id" value="{{ $user->id }}" id="post-user-id">
             <!-- <input hidden name="send-now" value="false" id="send-now-flag"> -->

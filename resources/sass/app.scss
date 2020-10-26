@@ -291,25 +291,6 @@ twitter-profile-option-active{
 }
 
 
-// .media-item-container{
-//     background-size: cover;
-//     background-repeat: no-repeat;
-//     background-position: center;
-//     //margin: 5px;
-//     border-radius: 14px;
-//     position: relative;
-//     //margin-bottom: 10px;
-//     .removeMedia2{
-//         position: absolute;
-//         right: 5px;
-//         top: 10px;
-//         color: white;
-//         background-color: grey;
-//         border-radius: 100%;
-//         cursor: pointer;
-//         z-index: 10;
-//     }
-// }
 
 .mic-1{
     width: 240px;
@@ -471,3 +452,215 @@ i.fab.fa-twitter{
     }
     
 }
+
+nav {
+    margin-bottom: 1rem;
+}
+
+.nav__option{
+
+    transition: 
+        transform 250ms ease-in-out,
+        background-color 250ms ease-in-out;
+
+    &:hover {
+        transform: scale(1.2);
+        background-color: lightslategray;
+
+        .nav__option__link {
+            color: white !important;
+        }  
+    }
+    
+}
+
+/* REMOTE POSITIONS */
+
+
+
+
+
+
+.hero {
+    //background-image: url( {{asset('storage/images/logo.png')}} );
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: 50% 47%;
+    padding: 0 20px 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-button-container .post-button {
+    margin-top: 20px;
+    padding: 7px 10px;
+}
+
+.post-button {
+    background-color: #f33d3d;
+    color: #fff;
+    text-decoration: none;
+    font-size: .9em;
+    padding: 14px 28px 12px;
+    /*border-radius: 5px;*/
+    display: inline-block;
+    box-shadow: 0 4px 4px -2px rgba(180,181,182,.2);
+    transition: all .2s;
+    &:hover {
+        color: white;
+        background-color: #f30808;
+    }
+}
+
+/* Autocomplete */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #f9f9f9;
+    font: 16px Arial;  
+  }
+  
+  /*the container must be positioned relative:*/
+  .autocomplete {
+    position: relative;
+    display: inline-block;
+  }
+  
+  input {
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  input[type=text] {
+    background-color: #f1f1f1;
+    width: 100%;
+  }
+  
+  input[type=submit] {
+    background-color: DodgerBlue;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+  
+  .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff; 
+    border-bottom: 1px solid #d4d4d4; 
+  }
+  
+  /*when hovering an item:*/
+  .autocomplete-items div:hover {
+    background-color: #e9e9e9; 
+  }
+  
+  /*when navigating through the items using the arrow keys:*/
+  .autocomplete-active {
+    background-color: DodgerBlue !important; 
+    color: #ffffff; 
+  }
+
+/* SEARCH CONTAINER */
+  .search-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0;
+    padding-left: 0;
+    /*input[type=text] {
+        float: right;
+        padding: 6px;
+        margin-top: 8px;
+        font-size: 17px;
+        border: none;
+    }
+    button {
+        float: right;
+        padding: 6px 10px;
+        margin-top: 8px;
+        margin-right: 16px;
+        background: #ddd;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #ccc;
+    }*/
+}
+
+/* Categories */
+.categories {
+    overflow-x:hidden;
+    overflow-y:hidden;
+    display: flex;
+    margin: 30px auto;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Banners */
+.banner-post-job {
+    background-color: lightsteelblue;
+    font-weight: bold;
+    overflow-x:hidden;
+    overflow-y:hidden;
+    display: flex;
+    margin: 30px auto;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Job listing */
+
+.card-header {
+    background-color:white !important;
+}
+
+.apply-button{
+    /*display: none;*/
+    &:hover{
+        /*display: block;*/
+        background-color: #f33d3d;
+        color: #fff;
+        text-decoration: none;
+        font-size: .9em;
+        padding: 14px 28px 12px;
+        /*border-radius: 5px;*/
+        display: inline-block;
+        box-shadow: 0 4px 4px -2px rgba(180,181,182,.2);
+        transition: all .2s;
+    }
+    
+}
+
+.rp-tag :hover {
+    background-color: black !important;
+    color: white !important;
+}
+
+
+
+
+
+
+
+

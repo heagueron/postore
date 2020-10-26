@@ -13,9 +13,26 @@ use App\ApiConnectors\TwitterAPIExchange;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/', function () {
+//     return view('landing');
+// })->name('landing');
+
+Route::get('/', 'RemjobController@index')->name('landing');
+
+
+// REMOTE JOBS
+Route::get('/job_tags', 'RemJobController@job_tags')->name('remjobs.job_tags');
+Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term')->middleware('cors');
+
+Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job');
+Route::get('/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
+
+Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job');
+
 
 Auth::routes();
 

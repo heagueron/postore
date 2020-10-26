@@ -2,16 +2,15 @@
 
 use Illuminate\Database\Seeder;
 
-class StweetsTableSeeder extends Seeder
+class RemjobSeeder extends Seeder
 {
-
     /**
-     * Auto generated seed file
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        // Nothing to seed ...  
+        factory(App\Remjob::class, 10)->create();
     }
 }

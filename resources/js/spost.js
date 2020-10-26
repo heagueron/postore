@@ -451,6 +451,7 @@ $( document ).ready(function(e) {
      * Edit Scheduled post
      * 
      ************************************/
+    
     // Check if edit spost page is loaded
     if ( $("#ce-selector").val() == 'edit' ) {
 

@@ -21,7 +21,7 @@ class SpostTwitterProfileTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'spost_id' => 1,
-                'twitter_profile_id' => 15,
+                'twitter_profile_id' => 1,
                 'twitter_status_id' => NULL,
                 'created_at' => '2020-04-26 20:23:54',
                 'updated_at' => '2020-04-26 20:23:54',

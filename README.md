@@ -23,3 +23,12 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 Postore is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## TODOS
+
+In TwitterOAuth library, to send videos
+
+test both
+//$fs = Storage::disk('local')->getDriver();
+        $fs = Storage::getDriver(); 
