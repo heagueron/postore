@@ -25,40 +25,41 @@ class CategorySeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'name' => 'Software Developers',
+                'name' => 'dev',
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),
             2 => 
             array (
                 'id' => 3,
-                'name' => 'Client Service',
+                'name' => 'customer-support',
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),
             3 => 
             array (
                 'id' => 4,
-                'name' => 'Marketing',
+                'name' => 'marketing',
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),
             4 => 
             array (
                 'id' => 5,
-                'name' => 'Design',
+                'name' => 'design',
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),
             5 => 
             array (
                 'id' => 6,
-                'name' => 'Others',
+                'name' => 'non-tech',
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),
         ));
         
+
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Remjob;
+use Carbon\Carbon;
 use Illuminate\View\Component;
 
 class Jobrow extends Component
@@ -14,12 +15,12 @@ class Jobrow extends Component
      */
 
     public $remjob;
-    public $currentTagSet;
+    // public $currentTagSet;
 
     public function __construct(Remjob $remjob)
     {
         $this->remjob = $remjob;
-        $this->currentTagSet = 'javascript';
+        // $this->currentTagSet = 'javascript';
     }
 
     /**

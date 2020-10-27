@@ -13,12 +13,16 @@
     </div>
 
     <div class="search-container">
-        <form autocomplete="off" action="/action_page.php">
+        <!-- <form autocomplete="off" action=""> -->
             <div class="autocomplete" style="width:300px;">
                 <input id="myInput" type="text" name="search-term" placeholder="Start typing to find jobs ...">
             </div>
-            <input type="submit" value="Send">
-        </form>
+            <!-- <input type="submit" value="Send"> -->
+            <a  alt="Search jobs by tag" id="hero-search-link"
+                href="{{  route( 'remjobs.searchByTags', 'remote-dev-jobs' )  }}"  
+                class="post-button">{{ __('Send') }}
+            </a>
+        <!-- </form> -->
     </div>
 
     <!-- <div class="search-container">

@@ -52872,6 +52872,11 @@ var app = new Vue({
     datetime: vuejs_datetimepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
+/* Activate bootstrap tooltips */
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
 
 /***/ }),
 
@@ -52906,9 +52911,9 @@ function autocomplete(inp) {
 
 
     console.log("we have a search term, ".concat(val));
-    var PATH = "http://127.0.0.1:8000/";
+    var PATH = "http://127.0.0.1:8000";
     arr = [];
-    fetch("".concat(PATH, "job_tags/").concat(val)).then(function (response) {
+    fetch("".concat(PATH, "/job_tags/").concat(val)).then(function (response) {
       return response.json();
     }).then(function (suggestions) {
       suggestions.filtered_job_tags.map(function (suggestion) {
@@ -52947,7 +52952,9 @@ function autocomplete(inp) {
           /*close the list of autocompleted values,
           (or any other open lists of autocompleted values:*/
 
-          closeAllLists();
+          closeAllLists(); // Set selected tag in the search link 
+
+          document.getElementById("hero-search-link").setAttribute("href", "".concat(PATH, "/remote-").concat(inp.value, "-jobs"));
         });
         /*append the new element as a child of the options list:*/
 
@@ -53027,9 +53034,21 @@ function autocomplete(inp) {
   });
 }
 
+var collapseControl = function collapseControl() {
+  // Prevent presentation of job description when click on a tag
+  var badges = document.querySelectorAll('.job-badget');
+  badges.forEach(function (badge) {
+    badge.addEventListener("click", function (event) {
+      event.stopPropagation();
+    });
+  });
+}; // Delay to allow for elements to appear before assigning event listeners.
+
+
 setTimeout(function () {
   /*initiate the autocomplete function on the "myInput" element, and pass along the remote job tags array as possible autocomplete values:*/
   autocomplete(document.getElementById("myInput"));
+  collapseControl();
 }, 500);
 
 /***/ }),

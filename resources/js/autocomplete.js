@@ -15,10 +15,10 @@ function autocomplete(inp) {
 
         /* GET THE OPTIONS ARRAY FROM THE SERVER */
         console.log(`we have a search term, ${val}`);
-        const PATH = "http://127.0.0.1:8000/";
+        const PATH = "http://127.0.0.1:8000";
 
         arr = [];
-        fetch(`${PATH}job_tags/${val}`)
+        fetch(`${PATH}/job_tags/${val}`)
         .then( response => response.json() )
         .then( suggestions => {
 
@@ -56,6 +56,12 @@ function autocomplete(inp) {
                   /*close the list of autocompleted values,
                   (or any other open lists of autocompleted values:*/
                   closeAllLists();
+
+                  // Set selected tag in the search link 
+                  document.getElementById("hero-search-link")
+                  .setAttribute( "href", `${PATH}/remote-${inp.value}-jobs` );
+
+
               });
   
               /*append the new element as a child of the options list:*/
@@ -135,9 +141,23 @@ function autocomplete(inp) {
 
 
   }
-  
-  
+
+  const collapseControl = () => {
+
+    // Prevent presentation of job description when click on a tag
+    const badges = document.querySelectorAll('.job-badget');
+    badges.forEach(function(badge) {
+      badge.addEventListener("click", function(event){
+        event.stopPropagation()
+      })
+    });
+
+
+  }
+
+  // Delay to allow for elements to appear before assigning event listeners.
   setTimeout(() => {
     /*initiate the autocomplete function on the "myInput" element, and pass along the remote job tags array as possible autocomplete values:*/
     autocomplete( document.getElementById("myInput") );
+    collapseControl();
   }, 500);

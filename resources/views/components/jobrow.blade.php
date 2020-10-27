@@ -1,7 +1,7 @@
 
 <div class="card" style="margin:10px;" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}">
     
-    <div class="card-header">
+    <div class="card-header job-box">
 
         <div class="row" style="align-content: center !important;">
 
@@ -19,16 +19,23 @@
             </div>
 
             <div class="col-4 pr-2 pl-1 mt-3">
+
                 @foreach( $remjob->tags as $tag )
-                    <a href="{{'remote-'.$currentTagSet.'+'.$tag->name.'-jobs'}}">
-                        <span class="badge badge-pill badge-light rp-tag">{{ $tag->name }}</span>&nbsp;
-                    </a>
-                    
+                    <a href="{{'remote-'.$tag->name.'-jobs'}}" class="job-badget">
+                        <span 
+                            class="badge badge-pill badge-light rp-tag"  
+                            title="{{'select '.$tag->name.' jobs'}}"
+                            data-toggle="tooltip"
+                            data-placement="top">
+                            {{ $tag->name }}
+                        </span>&nbsp;
+                    </a>                 
                 @endforeach
+
             </div>
 
             <div class="col-1 pr-2 pl-1 mt-3">
-                {{__('post age')}}
+                <p class="job-date">{{ $remjob->created_at->diffForHumans() }}</p>
             </div>
 
             <div class="col-2 pr-2 pl-1 mt-3">

@@ -29,6 +29,7 @@ Route::get('/job_tags', 'RemJobController@job_tags')->name('remjobs.job_tags');
 Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term')->middleware('cors');
 
 Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job');
+Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store');
 Route::get('/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
 
 Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job');

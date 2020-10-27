@@ -18,6 +18,8 @@ class RemjobController extends Controller
     {
         $remjobs = Remjob::all();
         //dd( $remjobs );
+        session([ 'selectedTag' => '' ]);
+
         return view( 'landing', compact('remjobs') );
 
     }
@@ -60,9 +62,20 @@ class RemjobController extends Controller
      * @param  \App\Remjob  $remjob
      * @return \Illuminate\Http\Response
      */
-    public function searchByTags( $tags )
+    public function searchByTags( $tags, Request $request )
     {
-        dd( $tags );
+        $tagsLength = ( Str::length( $tags ) ) - 12;
+        $tagsText = Str::substr($tags, 7, $tagsLength);
+
+        $tag = Tag::where( 'name', 'like', $tagsText )->first();
+
+        if( $tag->remjobs()->count() > 0 ) {
+            $remjobs = $tag->remjobs()->get();
+            return view( 'landing', compact('remjobs') );
+        }
+
+        dd($tag->name.' has no remjobs posted');
+        
     }
 
     /**
@@ -132,20 +145,6 @@ class RemjobController extends Controller
      */
     public function search_job_tags_by_term($search_term)
     {
-        // $job_tags1 = array(
-        //     array('tag' => 'javascript'),
-        //     array('tag' => 'node'),
-        //     array('tag' => 'php'),
-        //     array('tag' => 'java'),
-        //     array('tag' => 'python'),
-        //     array('tag' => 'angular'),
-        //     array('tag' => 'react'),
-        //     array('tag' => 'vue'),
-        //     array('tag' => 'devops'),
-        //     array('tag' => 'docker'),
-        //     array('tag' => 'engineer'),
-        // );
-
         $job_tags = Tag::all();
 
         $filtered_job_tags = array();
@@ -166,5 +165,6 @@ class RemjobController extends Controller
         //     'array2' => $job_tags
         // ],200);
     }
+
 
 }

@@ -59,5 +59,11 @@ const app = new Vue({
 });
 
 
+/* Activate bootstrap tooltips */
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
+
 
 

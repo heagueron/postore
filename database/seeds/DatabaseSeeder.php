@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Tag;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -22,6 +24,20 @@ class DatabaseSeeder extends Seeder
         $this->call(TagSeeder::class);
         $this->call(RemjobSeeder::class);  
         //$this->call(RemjobTagSeeder::class);
+
+        // Seed main categories:
+        $mainCategories = ['dev', 'customer-support', 'marketing', 'design', 'non-tech'];
+        foreach( $mainCategories as $mc ){
+
+            $tag = Tag::where( 'name', '=', $mc )->first();
+            if ($tag === null) {
+                // tag doesn't exist
+                $newTag = new Tag();
+                $newTag->name = $mc;
+                $newTag->save();
+            }
+            
+        }
 
         // Register in pivot tables
 

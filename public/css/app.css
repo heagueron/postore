@@ -11399,7 +11399,7 @@ input {
   border: 1px solid transparent;
   background-color: #f1f1f1;
   padding: 10px;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 input[type=text] {
@@ -11504,6 +11504,10 @@ input[type=submit] {
 
 .card-header {
   background-color: white !important;
+}
+
+.job-date {
+  font-size: 0.75em;
 }
 
 .apply-button {
