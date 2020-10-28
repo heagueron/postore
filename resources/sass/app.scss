@@ -585,26 +585,7 @@ nav {
     align-items: center;
     padding-right: 0;
     padding-left: 0;
-    /*input[type=text] {
-        float: right;
-        padding: 6px;
-        margin-top: 8px;
-        font-size: 17px;
-        border: none;
-    }
-    button {
-        float: right;
-        padding: 6px 10px;
-        margin-top: 8px;
-        margin-right: 16px;
-        background: #ddd;
-        font-size: 17px;
-        border: none;
-        cursor: pointer;
-    }
-    button:hover {
-        background: #ccc;
-    }*/
+
 }
 
 /* Categories */
@@ -661,9 +642,18 @@ nav {
     color: white !important;
 }
 
-
-
-
+.rp-jobrow {
+    &__apply{
+        display: none;
+        background-color: #f33d3d !important;
+        color: #fff !important;
+        text-decoration: none !important;
+        font-size: .9em !important;
+        padding: 14px 28px 12px !important;
+        box-shadow: 0 4px 4px -2px rgba(180,181,182,.2) !important;
+        transition: all .2s !important;
+    }
+}
 
 
 

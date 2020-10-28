@@ -1,0 +1,611 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+#p-sidebar {
+  min-height: 100vh;
+  background: white;
+  color: black;
+  transition: all 0.3s;
+}
+
+#p-sidebar .sidebar-header {
+  padding: 20px;
+}
+
+#p-sidebar ul.components {
+  padding: 20px 0;
+  border-bottom: 1px solid #47748b;
+}
+
+#p-sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+#p-sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+}
+
+#p-sidebar ul li a:hover {
+  color: #7386D5;
+  background: #fff;
+}
+
+#p-sidebar ul li.active > a, a[aria-expanded="true"] {
+  color: #fff;
+  background: #6d7fcc;
+}
+
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #6d7fcc;
+}
+
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: #999;
+}
+
+a, a:hover, a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.fa-twitter-square {
+  color: Dodgerblue;
+}
+
+#post_date {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 1.2rem;
+  display: block;
+  padding: 0.2rem 0.5rem;
+}
+
+.left-side-menu {
+  padding-top: 100px;
+  border-right: 2px solid #dee2e6;
+}
+
+.left-menu-icons li a i,
+.add-media-btns span i {
+  font-size: 1.2rem;
+  color: #022e38;
+}
+
+.left-menu-icons li a i:hover,
+.add-media-btns span i:hover {
+  color: #3490dc;
+}
+
+.post-text-container {
+  margin-bottom: 5px;
+  background-color: #f2f2f2;
+}
+
+.post-text-group {
+  position: relative;
+}
+
+.post-text-group .post-character-count {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  margin-bottom: 0;
+}
+
+.social-selector {
+  padding: 2px;
+  position: relative;
+}
+
+.social-selector .social-selector-check {
+  color: #38c172;
+  position: absolute;
+  left: 2px;
+  bottom: -3px;
+  font-size: 1.1rem;
+  background-color: white;
+  border-radius: 100%;
+  margin-left: -2px;
+}
+
+.social-selector .social-selector-twitter {
+  position: absolute;
+  right: -3px;
+  top: -3px;
+  background-color: white;
+  font-size: 1.2rem;
+}
+
+.social-selector-inactive {
+  opacity: 0.3 !important;
+}
+
+.check-inactive {
+  display: none !important;
+}
+
+.twitter-profile-option {
+  border: 1px solid blue;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+twitter-profile-option-active {
+  border: 3px solid blue;
+}
+
+.show-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+}
+
+.show-post-options-container {
+  position: relative;
+}
+
+.show-post-options-container .show-post-options-menu {
+  position: absolute;
+  left: -10px;
+  top: 0;
+}
+
+.show-post-options-trigger {
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.show-post-options-menu {
+  background-color: white;
+  border: 0px solid;
+  box-shadow: 0.1px 0.1px 4px 0px #3490dc;
+  z-index: 5;
+  border-radius: 2px;
+  width: 140px;
+}
+
+.show-post-options-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.show-post-options-item:hover {
+  background-color: #edf3f5;
+}
+
+.post-options-btn {
+  border: none;
+  background-color: white;
+}
+
+.post-options-btn:hover {
+  border: none;
+  background-color: #edf3f5;
+}
+
+.hidden-options-menu {
+  display: none;
+}
+
+.hideElement {
+  display: none !important;
+}
+
+.show-social-selector {
+  padding: 2px;
+  position: relative;
+}
+
+.show-social-selector .show-social-selector-twitter {
+  position: absolute;
+  right: -3px;
+  top: -3px;
+  background-color: white;
+  font-size: 1.2rem;
+}
+
+.show-other-profiles-container {
+  position: relative;
+}
+
+.show-other-profiles-container .show-other-profiles {
+  position: absolute;
+  right: -70px;
+  top: 0;
+  background-color: white;
+  border: 0px solid;
+  box-shadow: 0.1px 0.1px 4px 0px #3490dc;
+  z-index: 5;
+  border-radius: 2px;
+}
+
+.show-other-profiles-trigger {
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.hidden-other-profiles {
+  display: none;
+}
+
+.show-other-profiles-item {
+  padding: 10px;
+}
+
+.disabled {
+  cursor: none !important;
+}
+
+.image-preview-container {
+  width: 240px;
+  height: 240px;
+}
+
+.imagePreview {
+  width: 240px;
+  height: 240px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 5px;
+  border-radius: 14px;
+  position: relative;
+}
+
+.imagePreview .removeMedia, .imagePreview .removeMedia2 {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: white;
+  background-color: grey;
+  border-radius: 100%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.mic-1 {
+  width: 240px;
+  height: 240px;
+}
+
+.show-image-1 {
+  width: 240px;
+  height: 240px;
+  border-radius: 14px;
+}
+
+.mic-2 {
+  width: 120px;
+  height: 240px;
+}
+
+.show-image-2 {
+  width: 120px;
+  height: 240px;
+  border-radius: 14px;
+}
+
+.mic-3 {
+  width: 120px;
+  height: 120px;
+}
+
+.show-image-3 {
+  width: 120px;
+  height: 120px;
+  border-radius: 14px;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  padding-bottom: 15px;
+}
+
+.page-subtitle {
+  background-color: #f2f2f2;
+  margin-bottom: 30px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.social-profiles-content {
+  margin-top: 10px;
+}
+
+.social-profile-header {
+  margin-bottom: 10px;
+}
+
+.social-profile-name {
+  font-size: large;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.social-profile-list {
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.social-profile-item {
+  padding-left: 10px;
+}
+
+.btn-add-tw {
+  background-color: #3490dc;
+  color: white;
+  margin-top: 10px;
+}
+
+i.fab.fa-twitter {
+  color: white;
+}
+
+.failure-publish {
+  overflow: hidden;
+  position: absolute;
+  width: 80%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*centers items on the line (the x-axis by default)*/
+  align-items: center;
+  /*centers items on the cross-axis (y by default)*/
+}
+
+.show-post-engagement {
+  margin-left: 45px !important;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .postore_left_icon_menu {
+    display: block;
+  }
+  .postore_left_expanded_menu {
+    display: none;
+  }
+  .posts-table-small {
+    display: block;
+  }
+  .posts-table-large {
+    display: none;
+  }
+  .show-post-date {
+    font-size: 10px !important;
+    margin-left: 10px;
+  }
+  .show-post-text {
+    font-size: 14px !important;
+  }
+  .container, li {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+  .content-row {
+    margin-left: 2px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .postore_left_icon_menu {
+    display: none;
+  }
+  .postore_left_expanded_menu {
+    display: block;
+  }
+  .posts-table-small {
+    display: none;
+  }
+  .posts-table-large {
+    display: block;
+  }
+  .show-post-date {
+    font-size: 12px !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .show-post-text {
+    margin-left: 15px !important;
+    font-size: 14px !important;
+    width: 400px !important;
+  }
+  .show-post-engagement {
+    margin-left: 15px !important;
+  }
+}
+
+nav {
+  margin-bottom: 1rem;
+}
+
+.nav__option {
+  transition: transform 250ms ease-in-out, background-color 250ms ease-in-out;
+}
+
+.nav__option:hover {
+  transform: scale(1.2);
+  background-color: lightslategray;
+}
+
+.nav__option:hover .nav__option__link {
+  color: white !important;
+}
+
+/* REMOTE POSITIONS */
+.hero {
+  width: 100%;
+  height: 250px;
+  background-size: cover;
+  background-position: 50% 47%;
+  padding: 0 20px 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-button-container .post-button {
+  margin-top: 20px;
+  padding: 7px 10px;
+}
+
+.post-button {
+  background-color: #f33d3d;
+  color: #fff;
+  text-decoration: none;
+  font-size: .9em;
+  padding: 14px 28px 12px;
+  /*border-radius: 5px;*/
+  display: inline-block;
+  box-shadow: 0 4px 4px -2px rgba(180, 181, 182, 0.2);
+  transition: all .2s;
+}
+
+.post-button:hover {
+  color: white;
+  background-color: #f30808;
+}
+
+/* Autocomplete */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f9f9f9;
+  font: 16px Arial;
+}
+
+/*the container must be positioned relative:*/
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 17px;
+}
+
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+/* SEARCH CONTAINER */
+.search-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+/* Categories */
+.categories {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  display: flex;
+  margin: 30px auto;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Banners */
+.banner-post-job {
+  background-color: lightsteelblue;
+  font-weight: bold;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  display: flex;
+  margin: 30px auto;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Job listing */
+.card-header {
+  background-color: white !important;
+}
+
+.job-date {
+  font-size: 0.75em;
+}
+
+.apply-button {
+  /*display: none;*/
+}
+
+.apply-button:hover {
+  /*display: block;*/
+  background-color: #f33d3d;
+  color: #fff;
+  text-decoration: none;
+  font-size: .9em;
+  padding: 14px 28px 12px;
+  /*border-radius: 5px;*/
+  display: inline-block;
+  box-shadow: 0 4px 4px -2px rgba(180, 181, 182, 0.2);
+  transition: all .2s;
+}
+
+.rp-tag :hover {
+  background-color: black !important;
+  color: white !important;
+}
+
+.rp-jobrow__apply {
+  display: none;
+  background-color: #f33d3d !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  font-size: .9em !important;
+  padding: 14px 28px 12px !important;
+  box-shadow: 0 4px 4px -2px rgba(180, 181, 182, 0.2) !important;
+  transition: all .2s !important;
+}

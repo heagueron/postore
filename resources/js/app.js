@@ -64,6 +64,46 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
 
+/* Prevent presentation of job description when click on a tag */
+const collapseControl = () => {
+
+    const badges = document.querySelectorAll('.job-badget');
+    badges.forEach(function(badge) {
+        badge.addEventListener("click", function(event){
+        event.stopPropagation()
+        })
+    });
+
+}
+
+/* Constrols presence of Apply Button */
+const applyControl = () => {
+
+    var x = document.getElementsByClassName("job-box");
+      for (var i = 0; i < x.length; i++) {
+
+        let applyElement = x[i].querySelector('.rp-jobrow__apply');
+        //console.log(applyElement);
+
+        x[i].addEventListener('mouseenter', e => {
+            //console.log("inside job row");  
+            applyElement.style.display = "block";
+        });
+
+        x[i].addEventListener('mouseleave', e => {
+            //console.log("outside job row");
+            applyElement.style.display = "none";
+        });
+
+      }
+}
+
+// Delay to allow for elements to appear before assigning event listeners.
+  setTimeout(() => {
+    collapseControl();
+    applyControl();
+}, 500);
+
 
 
 

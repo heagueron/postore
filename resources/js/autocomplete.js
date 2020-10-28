@@ -142,22 +142,22 @@ function autocomplete(inp) {
 
   }
 
-  const collapseControl = () => {
+  // const collapseControl = () => {
 
-    // Prevent presentation of job description when click on a tag
-    const badges = document.querySelectorAll('.job-badget');
-    badges.forEach(function(badge) {
-      badge.addEventListener("click", function(event){
-        event.stopPropagation()
-      })
-    });
+  //   // Prevent presentation of job description when click on a tag
+  //   const badges = document.querySelectorAll('.job-badget');
+  //   badges.forEach(function(badge) {
+  //     badge.addEventListener("click", function(event){
+  //       event.stopPropagation()
+  //     })
+  //   });
 
 
-  }
+  // }
 
   // Delay to allow for elements to appear before assigning event listeners.
   setTimeout(() => {
     /*initiate the autocomplete function on the "myInput" element, and pass along the remote job tags array as possible autocomplete values:*/
     autocomplete( document.getElementById("myInput") );
-    collapseControl();
+    //collapseControl();
   }, 500);

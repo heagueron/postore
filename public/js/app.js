@@ -52877,6 +52877,45 @@ var app = new Vue({
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
+/* Prevent presentation of job description when click on a tag */
+
+var collapseControl = function collapseControl() {
+  var badges = document.querySelectorAll('.job-badget');
+  badges.forEach(function (badge) {
+    badge.addEventListener("click", function (event) {
+      event.stopPropagation();
+    });
+  });
+};
+/* Constrols presence of Apply Button */
+
+
+var applyControl = function applyControl() {
+  var x = document.getElementsByClassName("job-box");
+
+  var _loop = function _loop() {
+    var applyElement = x[i].querySelector('.rp-jobrow__apply'); //console.log(applyElement);
+
+    x[i].addEventListener('mouseenter', function (e) {
+      //console.log("inside job row");  
+      applyElement.style.display = "block";
+    });
+    x[i].addEventListener('mouseleave', function (e) {
+      //console.log("outside job row");
+      applyElement.style.display = "none";
+    });
+  };
+
+  for (var i = 0; i < x.length; i++) {
+    _loop();
+  }
+}; // Delay to allow for elements to appear before assigning event listeners.
+
+
+setTimeout(function () {
+  collapseControl();
+  applyControl();
+}, 500);
 
 /***/ }),
 
@@ -53032,23 +53071,21 @@ function autocomplete(inp) {
   document.addEventListener("click", function (e) {
     closeAllLists(e.target);
   });
-}
-
-var collapseControl = function collapseControl() {
-  // Prevent presentation of job description when click on a tag
-  var badges = document.querySelectorAll('.job-badget');
-  badges.forEach(function (badge) {
-    badge.addEventListener("click", function (event) {
-      event.stopPropagation();
-    });
-  });
-}; // Delay to allow for elements to appear before assigning event listeners.
+} // const collapseControl = () => {
+//   // Prevent presentation of job description when click on a tag
+//   const badges = document.querySelectorAll('.job-badget');
+//   badges.forEach(function(badge) {
+//     badge.addEventListener("click", function(event){
+//       event.stopPropagation()
+//     })
+//   });
+// }
+// Delay to allow for elements to appear before assigning event listeners.
 
 
 setTimeout(function () {
   /*initiate the autocomplete function on the "myInput" element, and pass along the remote job tags array as possible autocomplete values:*/
-  autocomplete(document.getElementById("myInput"));
-  collapseControl();
+  autocomplete(document.getElementById("myInput")); //collapseControl();
 }, 500);
 
 /***/ }),

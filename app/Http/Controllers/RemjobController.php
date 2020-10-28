@@ -68,6 +68,9 @@ class RemjobController extends Controller
         $tagsText = Str::substr($tags, 7, $tagsLength);
 
         $tag = Tag::where( 'name', 'like', $tagsText )->first();
+        if ($tag === null) {
+            return view('404');
+        }
 
         if( $tag->remjobs()->count() > 0 ) {
             $remjobs = $tag->remjobs()->get();

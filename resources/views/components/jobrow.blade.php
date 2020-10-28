@@ -3,7 +3,7 @@
     
     <div class="card-header job-box">
 
-        <div class="row" style="align-content: center !important;">
+        <div class="row rp-jobrow" style="align-content: center !important;">
 
             <div class="col pr-2 pl-1">
                 {{__('logo')}}
@@ -24,7 +24,7 @@
                     <a href="{{'remote-'.$tag->name.'-jobs'}}" class="job-badget">
                         <span 
                             class="badge badge-pill badge-light rp-tag"  
-                            title="{{'select '.$tag->name.' jobs'}}"
+                            title="{{'browse '.$tag->name.' jobs'}}"
                             data-toggle="tooltip"
                             data-placement="top">
                             {{ $tag->name }}
@@ -39,7 +39,13 @@
             </div>
 
             <div class="col-2 pr-2 pl-1 mt-3">
-                {{__('apply button')}}
+                <a href="{{ $remjob->apply_link }}"
+                    class="rp-jobrow__apply" 
+                    target="_blank">
+                    
+                    {{ __('Apply to this job') }}
+
+                </a>
             </div>
 
         </div>
