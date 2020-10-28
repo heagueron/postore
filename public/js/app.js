@@ -52877,12 +52877,18 @@ var app = new Vue({
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
-/* Prevent presentation of job description when click on a tag */
+/* Prevent presentation of job description when click on a tag or company name */
 
 var collapseControl = function collapseControl() {
-  var badges = document.querySelectorAll('.job-badget');
-  badges.forEach(function (badge) {
-    badge.addEventListener("click", function (event) {
+  var tagBadges = document.querySelectorAll('.job-badget');
+  var companyBadges = document.querySelectorAll('.company-badge');
+  tagBadges.forEach(function (tagbadge) {
+    tagbadge.addEventListener("click", function (event) {
+      event.stopPropagation();
+    });
+  });
+  companyBadges.forEach(function (companybadge) {
+    companybadge.addEventListener("click", function (event) {
       event.stopPropagation();
     });
   });

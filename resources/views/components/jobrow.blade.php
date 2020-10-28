@@ -3,22 +3,35 @@
     
     <div class="card-header job-box">
 
-        <div class="row rp-jobrow" style="align-content: center !important;">
+        <div class="row rp-jobrow">
 
-            <div class="col pr-2 pl-1">
-                {{__('logo')}}
+            <div class="col pr-2 pl-1 d-flex justify-content-center align-content-center ">
+                @if( $remjob->company_logo != null )
+                    <img src="{{ asset('storage/' . $remjob->company_logo ) }}" alt="LOGO" >
+                @else
+                    <p style="font-size:2.0rem;">{{ Str::of( $remjob->company_name )->substr(0, 1) }}</p>
+                @endif
+                
             </div>
 
             <div class="col-3 pr-2 pl-1">
-                <h6 class="mb-1"> {{ $remjob->company_name }} </h6>
-                <h5 class="mb-1"> {{ ucwords( $remjob->position ) }} </h5>
-                <span class="badge badge-secondary mb-1">{{ $remjob->location }}</span>
+
+                <h5 class="mb-1 rp-job-title"> {{ ucwords( $remjob->position ) }} </h5>
+
+                <a  class="mb-1 company-badge"
+                    href="{{  route( 'remjobs.searchByCompany', $remjob->company_slug )  }}"  
+                    >
+                    {{ $remjob->company_name }}
+                </a>
+                
+                <p class="rp-location">{{$remjob->location}}</p>
+
             </div>
 
-            <div class="col pr-2 pl-1 mt-3">
+            <div class="col pr-2 pl-1 d-flex justify-content-center align-content-center">
             </div>
 
-            <div class="col-4 pr-2 pl-1 mt-3">
+            <div class="col-4 pr-2 pl-1 d-flex justify-content-center align-content-center">
 
                 @foreach( $remjob->tags as $tag )
                     <a href="{{'remote-'.$tag->name.'-jobs'}}" class="job-badget">
@@ -34,11 +47,11 @@
 
             </div>
 
-            <div class="col-1 pr-2 pl-1 mt-3">
+            <div class="col-1 pr-2 pl-1 d-flex justify-content-center align-content-center">
                 <p class="job-date">{{ $remjob->created_at->diffForHumans() }}</p>
             </div>
 
-            <div class="col-2 pr-2 pl-1 mt-3">
+            <div class="col-2 pr-2 pl-1 d-flex justify-content-center align-content-center">
                 <a href="{{ $remjob->apply_link }}"
                     class="rp-jobrow__apply" 
                     target="_blank">

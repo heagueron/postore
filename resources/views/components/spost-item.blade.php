@@ -143,6 +143,7 @@
                         </div>
 
                     </div>
+                    
 
                     <div class="d-flex flex-column" id="mediaColumn2">
                         <div class="media-item-container" data-name="{{$spost->names[2]}}">

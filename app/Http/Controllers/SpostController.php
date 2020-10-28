@@ -22,7 +22,7 @@ class SpostController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -49,7 +49,9 @@ class SpostController extends Controller
      */
     public function schedule()
     {
-        $user = \Auth::user();
+        //$user = \Auth::user();
+        $user = \App\User::find(1);
+        //dd( $user->twitter_profiles() );
 
         // Check if user has at least one social network profile
         if ( empty($user->twitter_profiles->all() )){

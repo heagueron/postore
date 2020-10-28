@@ -31,6 +31,7 @@ Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term'
 Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job');
 Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store');
 Route::get('/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
+Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
 
 Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job');
 

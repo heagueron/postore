@@ -20,7 +20,8 @@ class SpostForm extends Component
     {
         $this->spost = $spost;
         $this->mode  = $mode;
-        $this->user  = auth()->user();
+        // $this->user  = auth()->user();
+        $this->user  = \App\User::find(1);
     }
 
     /**

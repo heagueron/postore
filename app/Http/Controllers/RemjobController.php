@@ -18,7 +18,7 @@ class RemjobController extends Controller
     {
         $remjobs = Remjob::all();
         //dd( $remjobs );
-        session([ 'selectedTag' => '' ]);
+        //session([ 'selectedTag' => '' ]);
 
         return view( 'landing', compact('remjobs') );
 
@@ -59,10 +59,10 @@ class RemjobController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Remjob  $remjob
+     * @param  string $tags
      * @return \Illuminate\Http\Response
      */
-    public function searchByTags( $tags, Request $request )
+    public function searchByTags( $tags )
     {
         $tagsLength = ( Str::length( $tags ) ) - 12;
         $tagsText = Str::substr($tags, 7, $tagsLength);
@@ -72,12 +72,23 @@ class RemjobController extends Controller
             return view('404');
         }
 
-        if( $tag->remjobs()->count() > 0 ) {
-            $remjobs = $tag->remjobs()->get();
-            return view( 'landing', compact('remjobs') );
-        }
+        $remjobs = $tag->remjobs()->get();
+        
+        return view( 'landing', compact('remjobs') );
+        
+    }
 
-        dd($tag->name.' has no remjobs posted');
+    /**
+     * Display the specified resource.
+     *
+     * @param  string $company_name
+     * @return \Illuminate\Http\Response
+     */
+    public function searchByCompany( $company_slug )
+    {
+        $remjobs = Remjob::where( 'company_slug', 'like', $company_slug )->get();
+        
+        return view( 'landing', compact('remjobs') );
         
     }
 

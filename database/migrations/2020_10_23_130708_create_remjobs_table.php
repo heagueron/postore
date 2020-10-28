@@ -16,7 +16,8 @@ class CreateRemjobsTable extends Migration
         Schema::create('remjobs', function (Blueprint $table) {
             $table->charset = 'utf8';
             $table->id();
-            $table->string('company_name');
+            $table->string('company_name')->unique();
+            $table->string('company_slug')->unique();
             $table->string('position');
             $table->longText('text');
             $table->unsignedInteger('category_id');
@@ -26,6 +27,7 @@ class CreateRemjobsTable extends Migration
             $table->integer('min_salary');
             $table->integer('max_salary');       
             $table->string('location');
+            $table->string('company_logo')->nullable();
             $table->timestamps();
         });
     }

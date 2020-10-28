@@ -17,9 +17,15 @@
         </div> -->
 
         <div class="card-container"  id="rp-accordion">
-            @foreach( $remjobs as $remjob)
+
+            @forelse ( $remjobs as $remjob )
                 <x-jobrow :remjob="$remjob" />
-            @endforeach
+            @empty
+                <p class="d-flex justify-content-center align-content-center">
+                    {{ __('There are not remote jobs posted in the selected category.') }}
+                </p>
+            @endforelse
+
         </div>
 
     </div>

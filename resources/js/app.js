@@ -64,12 +64,20 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
 
-/* Prevent presentation of job description when click on a tag */
+/* Prevent presentation of job description when click on a tag or company name */
 const collapseControl = () => {
 
-    const badges = document.querySelectorAll('.job-badget');
-    badges.forEach(function(badge) {
-        badge.addEventListener("click", function(event){
+    const tagBadges = document.querySelectorAll('.job-badget');
+    const companyBadges = document.querySelectorAll('.company-badge');
+    
+    tagBadges.forEach(function(tagbadge) {
+        tagbadge.addEventListener("click", function(event){
+        event.stopPropagation()
+        })
+    });
+
+    companyBadges.forEach(function(companybadge) {
+        companybadge.addEventListener("click", function(event){
         event.stopPropagation()
         })
     });

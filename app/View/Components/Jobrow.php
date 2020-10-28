@@ -5,6 +5,7 @@ namespace App\View\Components;
 use App\Remjob;
 use Carbon\Carbon;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class Jobrow extends Component
 {
