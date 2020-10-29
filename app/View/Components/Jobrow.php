@@ -16,12 +16,11 @@ class Jobrow extends Component
      */
 
     public $remjob;
-    // public $currentTagSet;
 
     public function __construct(Remjob $remjob)
     {
         $this->remjob = $remjob;
-        // $this->currentTagSet = 'javascript';
+        
     }
 
     /**

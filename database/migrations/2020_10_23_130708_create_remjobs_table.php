@@ -22,11 +22,9 @@ class CreateRemjobsTable extends Migration
             $table->longText('text');
             $table->unsignedInteger('category_id');
             $table->string('apply_link');
-            $table->boolean('show_salary');
-            $table->enum('salary_type', ['yearly', 'monthly', 'weekly', 'hourly']);
             $table->integer('min_salary');
             $table->integer('max_salary');       
-            $table->string('location');
+            $table->string('locations');
             $table->string('company_logo')->nullable();
             $table->timestamps();
         });

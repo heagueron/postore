@@ -31,7 +31,9 @@ class RemjobController extends Controller
      */
     public function create()
     {
-        return view( 'remjobs.create' );
+        $categories = \App\Category::all();
+        // dd($categories);
+        return view( 'remjobs.create', compact('categories') );
     }
 
     /**

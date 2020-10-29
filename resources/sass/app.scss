@@ -669,6 +669,91 @@ nav {
     font-size: 0.85rem;
 }
 
+.company-brand {
+    font-weight: bold !important;
+    &:hover{
+        color:  #4CAF50 !important;
+    }
+}
+
+/* POST JOB FORM */
+.rp-group{
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 7px;
+    margin: 28px;
+    position: relative;
+
+    &__title {
+        background:#f9f9f9;
+        margin-top: -16px;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #444;
+        font-weight: 800;
+        display: table;
+        padding-left: 7px;
+        padding-right: 7px;
+        position: absolute;
+        /* right: 14px; */
+        /* right: 50%; */
+        left: 50%;
+        border-radius: 40%;
+        transform: translateX(-50%);
+    }
+    &__head {
+        font-weight: 800;
+        color: #444;
+        display: block;
+        margin: 16px;
+        margin-bottom: 0;
+        margin-top: 18px;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+    &__info{
+        vertical-align: middle;
+        font-size: 12px;
+        margin-left: 18px;
+        color: #999;
+        display: inline-block;
+        margin-top: -8px;
+    }
+    &__salary{
+        display: block;
+        margin: 16px;
+        margin-bottom: 0;
+        margin-top: 18px;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+}
+
+textarea, select, input[type="text"], input[type="email"] {
+    box-shadow: none;
+    appearance: none;
+    padding: 7px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    margin: 14px !important;
+    font-size: 16px !important;
+    margin-top: 7px !important;
+    margin-bottom: 14px !important;
+    background: #fbfbfb !important;
+    width: calc(100% - 28px) !important;
+}
+
+// .salary{
+//     &__range{
+//         display: flex;
+//     }
+// }
+
 
 
 

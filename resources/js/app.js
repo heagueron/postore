@@ -84,7 +84,7 @@ const collapseControl = () => {
 
 }
 
-/* Constrols presence of Apply Button */
+/* Controls presence of Apply Button */
 const applyControl = () => {
 
     var x = document.getElementsByClassName("job-box");
@@ -105,6 +105,7 @@ const applyControl = () => {
 
       }
 }
+
 
 // Delay to allow for elements to appear before assigning event listeners.
   setTimeout(() => {

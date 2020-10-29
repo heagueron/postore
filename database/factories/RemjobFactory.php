@@ -13,6 +13,19 @@ $factory->define(Remjob::class, function (Faker $faker) {
 
     $companyName = $faker->unique()->company;
 
+    $positionLocation = '';
+    $locationCount = rand(1,3);
+    for ($x = 0; $x < $locationCount; $x++) {
+        $locationItem = $faker->randomElement([ $faker->country, 'EU', 'USA', 'Asia', 'WORLDWIDE']);
+        if( $locationItem == 'WORLDWIDE' ) {
+            $positionLocation = 'WORLDWIDE';
+            break;
+        }
+        if( Str::contains('$positionLocation', '$locationItem') ) {
+            continue;
+        } 
+        $positionLocation .= ' '.$locationItem;
+    }
 
     return [
         'company_name'  => $companyName,
@@ -21,11 +34,9 @@ $factory->define(Remjob::class, function (Faker $faker) {
         'category_id'   => $faker->randomElement(['1', '2', '3', '4', '5', '6']),
         'text'          => $faker->text($maxNbChars = 600),
         'apply_link'    => $faker->url,
-        'show_salary'   => $faker->randomElement([false, true]),
-        'salary_type'   => $faker->randomElement(['yearly', 'monthly', 'weekly', 'hourly']),
         'min_salary'    => $minSalary,
         'max_salary'    => $minSalary * 2,
-        'location'      => $faker->country,
+        'locations'     => $positionLocation,
         'company_logo'  => $faker->randomElement([
                                 'logos/logo1.png',
                                 'logos/logo2.png',

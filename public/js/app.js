@@ -52893,7 +52893,7 @@ var collapseControl = function collapseControl() {
     });
   });
 };
-/* Constrols presence of Apply Button */
+/* Controls presence of Apply Button */
 
 
 var applyControl = function applyControl() {

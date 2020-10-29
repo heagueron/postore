@@ -19,41 +19,47 @@ class CategorySeeder extends Seeder
             array (
                 'id' => 1,
                 'name' => 'Remote Jobs',
+                'tag'  => '', 
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),
             1 => 
             array (
                 'id' => 2,
-                'name' => 'dev',
+                'name' => 'Software Development',
+                'tag'   => 'dev',
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),
             2 => 
             array (
                 'id' => 3,
-                'name' => 'customer-support',
+                'name' => 'Client Service',
+                'tag' => 'customer-support',
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),
             3 => 
             array (
                 'id' => 4,
-                'name' => 'marketing',
+                'name' => 'Marketing',
+                'tag' => 'marketing',
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),
             4 => 
             array (
                 'id' => 5,
-                'name' => 'design',
+                'name' => 'Design',
+                'tag' => 'design',
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),
             5 => 
             array (
                 'id' => 6,
-                'name' => 'non-tech',
+                'name' => 'Non Tech',
+                'tag' => 'non-tech',
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),

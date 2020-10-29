@@ -18,13 +18,15 @@
 
                 <h5 class="mb-1 rp-job-title"> {{ ucwords( $remjob->position ) }} </h5>
 
-                <a  class="mb-1 company-badge"
+                <a  class="mb-1 company-badge company-brand"
+                    title="{{'browse '.$remjob->company_name.' jobs'}}"
+                    data-toggle="tooltip"
                     href="{{  route( 'remjobs.searchByCompany', $remjob->company_slug )  }}"  
                     >
                     {{ $remjob->company_name }}
                 </a>
                 
-                <p class="rp-location">{{$remjob->location}}</p>
+                <p class="rp-location"> {{ strtoupper( $remjob->locations ) }} </p>
 
             </div>
 
@@ -76,9 +78,21 @@
             <p>{{ $remjob->location }}</p>
             @endif
 
-            <p> {{__('See all jobs at ')}}
-                <a href="#" style="color:black;">{{ $remjob->company_name }}</a>
-            </p>
+            <div class="d-flex">
+
+                <p class="mr-2"> {{__('See all jobs at ')}}</p>
+                <p>
+                    <a class="company-brand" href="{{  route( 'remjobs.searchByCompany', $remjob->company_slug )  }}" >
+                        {{ $remjob->company_name }}
+                    </a>
+                </p>
+                
+
+
+            </div>
+                
+            
+    
 
         </div>
     </div>

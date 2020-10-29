@@ -12,7 +12,7 @@
                 <a href="{{route('remjobs.searchByTags', 'remote-dev-jobs')}}" class="nav-link" alt="Desarrollo de software" style="text-align: center;">
                     💻
                     <br>
-                    {{ __('Software Developers') }}
+                    {{ __('Software Development') }}
                 </a>
             </div>
             
