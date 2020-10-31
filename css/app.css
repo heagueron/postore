@@ -456,7 +456,7 @@ nav {
 }
 
 .post-button {
-  background-color: #f33d3d;
+  background-color: #4CAF50;
   color: #fff;
   text-decoration: none;
   font-size: .9em;
@@ -469,7 +469,7 @@ nav {
 
 .post-button:hover {
   color: white;
-  background-color: #f30808;
+  background-color: #4CAF50;
 }
 
 /* Autocomplete */
@@ -583,7 +583,7 @@ input[type=submit] {
 
 .apply-button:hover {
   /*display: block;*/
-  background-color: #f33d3d;
+  background-color: #4CAF50;
   color: #fff;
   text-decoration: none;
   font-size: .9em;
@@ -601,11 +601,91 @@ input[type=submit] {
 
 .rp-jobrow__apply {
   display: none;
-  background-color: #f33d3d !important;
+  background-color: #4CAF50 !important;
   color: #fff !important;
   text-decoration: none !important;
   font-size: .9em !important;
-  padding: 14px 28px 12px !important;
+  padding: 10px !important;
   box-shadow: 0 4px 4px -2px rgba(180, 181, 182, 0.2) !important;
   transition: all .2s !important;
+  height: 40px;
+}
+
+.rp-job-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.rp-location {
+  color: black !important;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.company-brand {
+  font-weight: bold !important;
+}
+
+.company-brand:hover {
+  color: #4CAF50 !important;
+}
+
+/* POST JOB FORM */
+.rp-group {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 7px;
+  margin: 28px;
+  position: relative;
+}
+
+.rp-group__title {
+  background: #f9f9f9;
+  margin-top: -16px;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #444;
+  font-weight: 800;
+  display: table;
+  padding-left: 7px;
+  padding-right: 7px;
+  position: absolute;
+  /* right: 14px; */
+  /* right: 50%; */
+  left: 50%;
+  border-radius: 40%;
+  transform: translateX(-50%);
+}
+
+.rp-group__head {
+  font-weight: 800;
+  color: #444;
+  display: block;
+  margin: 16px;
+  margin-bottom: 0;
+  margin-top: 18px;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.rp-group__info {
+  vertical-align: middle;
+  font-size: 12px;
+  margin-left: 18px;
+  color: #999;
+  display: inline-block;
+  margin-top: -8px;
+}
+
+.rp-group__salary {
+  display: block;
+  margin: 16px;
+  margin-bottom: 0;
+  margin-top: 18px;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-size: 14px;
 }

@@ -31,8 +31,6 @@
 
     <div id="app">
 
-        <main>
-
 
             @yield('content')
 
@@ -44,8 +42,7 @@
             @endif
 
             <flash  class="alert-flash" message="{{ session('flash') }}"></flash>
-            
-        </main>
+
         
     </div>
     

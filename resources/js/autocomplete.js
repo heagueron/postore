@@ -158,6 +158,8 @@ function autocomplete(inp) {
   // Delay to allow for elements to appear before assigning event listeners.
   setTimeout(() => {
     /*initiate the autocomplete function on the "myInput" element, and pass along the remote job tags array as possible autocomplete values:*/
-    autocomplete( document.getElementById("myInput") );
-    //collapseControl();
+    const autocompleteInput = document.getElementById("myInput");
+    if( autocompleteInput != null ){
+      autocomplete( document.getElementById("myInput") );
+    }
   }, 500);

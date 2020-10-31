@@ -52832,9 +52832,11 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-var PATH = "http://localhost:8000/"; //require('./spost');
+var PATH = "http://127.0.0.1:8000"; //require('./spost');
 
 __webpack_require__(/*! ./autocomplete */ "./resources/js/autocomplete.js");
+
+__webpack_require__(/*! ./job-preview */ "./resources/js/job-preview.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
@@ -52898,13 +52900,14 @@ var collapseControl = function collapseControl() {
 
 var applyControl = function applyControl() {
   var x = document.getElementsByClassName("job-box");
+  if (x.length == 0) return;
 
   var _loop = function _loop() {
     var applyElement = x[i].querySelector('.rp-jobrow__apply'); //console.log(applyElement);
 
     x[i].addEventListener('mouseenter', function (e) {
       //console.log("inside job row");  
-      applyElement.style.display = "block";
+      applyElement.style.display = "flex";
     });
     x[i].addEventListener('mouseleave', function (e) {
       //console.log("outside job row");
@@ -52920,7 +52923,12 @@ var applyControl = function applyControl() {
 
 setTimeout(function () {
   collapseControl();
-  applyControl();
+  var heroSearchInput = document.getElementById("myInput");
+
+  if (heroSearchInput != null) {
+    console.log("active url is the job list page");
+    applyControl();
+  }
 }, 500);
 
 /***/ }),
@@ -53091,7 +53099,11 @@ function autocomplete(inp) {
 
 setTimeout(function () {
   /*initiate the autocomplete function on the "myInput" element, and pass along the remote job tags array as possible autocomplete values:*/
-  autocomplete(document.getElementById("myInput")); //collapseControl();
+  var autocompleteInput = document.getElementById("myInput");
+
+  if (autocompleteInput != null) {
+    autocomplete(document.getElementById("myInput"));
+  }
 }, 500);
 
 /***/ }),
@@ -53225,6 +53237,124 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_template_id_e4161ed6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/job-preview.js":
+/*!*************************************!*\
+  !*** ./resources/js/job-preview.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var previewControl = function previewControl() {
+  var PATH = "http://127.0.0.1:8000";
+  /* company_name and logo */
+
+  var companyNameElement = document.querySelector('input[name="company_name"]');
+  companyNameElement.addEventListener('keyup', function (e) {
+    if (e.target.value != '') {
+      document.querySelector('#preview_logo_container').innerHTML = '';
+      document.querySelector('#preview_company_container').innerHTML = e.target.value;
+    } else {
+      document.querySelector('#preview_logo_container').innerHTML = "<img src=\"".concat(PATH, "/storage/logos/logo1.png\" alt=\"logo\">");
+      document.querySelector('#preview_company_container').innerHTML = 'Company';
+    }
+  });
+  /* position */
+
+  var positionElement = document.querySelector('input[name="position"]');
+  positionElement.addEventListener('keyup', function (e) {
+    if (e.target.value != '') {
+      document.querySelector('#preview_position_container').innerHTML = e.target.value;
+    } else {
+      document.querySelector('#preview_position_container').innerHTML = 'Worldwide';
+    }
+  });
+  /* location */
+
+  var locationsElement = document.querySelector('input[name="locations"]');
+  locationsElement.addEventListener('keyup', function (e) {
+    if (e.target.value != '') {
+      document.querySelector('#preview_locations_container').innerHTML = e.target.value;
+    } else {
+      document.querySelector('#preview_locations_container').innerHTML = 'Worlwide';
+    }
+  });
+  /* tags */
+
+  if (typeof Storage !== "undefined") {
+    // Code for localStorage/sessionStorage.
+    localStorage.setItem("previewCategory", '');
+    localStorage.setItem("previewTags", '');
+  } else {
+    console.log('Sorry! No Web Storage support');
+  }
+
+  var categoryElement = document.querySelector("#categoryElement"); // main category change event
+
+  categoryElement.addEventListener('change', function (e) {
+    if (document.querySelector("#tag-".concat(e.target.value)) != null) {
+      var categoryTag = document.querySelector("#tag-".concat(e.target.value)).value;
+      localStorage.setItem("previewCategory", categoryTag);
+    } else {
+      localStorage.setItem("previewCategory", '');
+    }
+
+    renderTags();
+  }); // other tags change event 
+
+  var tagsElement = document.querySelector('input[name="tags"]');
+  tagsElement.addEventListener('keyup', function (e) {
+    if (e.target.value != '') {
+      console.log(e.target.value);
+      localStorage.setItem("previewTags", e.target.value);
+    } else {
+      console.log('no tag entered');
+      localStorage.setItem("previewTags", '');
+    }
+
+    renderTags();
+  }); // render the tags array in the preview section
+
+  var renderTags = function renderTags() {
+    var tagsArray = [];
+    var categoryTag = localStorage.getItem("previewCategory");
+    var otherTags = localStorage.getItem("previewTags");
+
+    if (otherTags != '') {
+      tagsArray = otherTags.split(",").map(function (tag) {
+        return tag.trim();
+      });
+    }
+
+    if (categoryTag) {
+      tagsArray.unshift(categoryTag);
+    }
+
+    console.log(tagsArray);
+    var previewTagsContainer = document.querySelector("#preview_tags_container");
+
+    if (tagsArray.length > 0) {
+      previewTagsContainer.innerHTML = '';
+    }
+
+    var tagsList = '';
+    tagsArray.forEach(function (tag) {
+      tagsList += "<span class=\"rp-tag-item\">".concat(tag, "</span>&nbsp;&nbsp;");
+    });
+    previewTagsContainer.innerHTML = tagsList;
+  };
+}; // Delay to allow for elements to appear before assigning event listeners.
+
+
+setTimeout(function () {
+  // Check if active url is the post a job page
+  if (window.location.href.indexOf("post-a-job") > -1) {
+    console.log("active url is the post a job page");
+    previewControl();
+  }
+}, 500);
 
 /***/ }),
 

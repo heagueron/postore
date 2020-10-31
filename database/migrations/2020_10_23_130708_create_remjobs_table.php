@@ -16,14 +16,14 @@ class CreateRemjobsTable extends Migration
         Schema::create('remjobs', function (Blueprint $table) {
             $table->charset = 'utf8';
             $table->id();
-            $table->string('company_name')->unique();
-            $table->string('company_slug')->unique();
+            $table->string('company_name');
+            $table->string('company_slug');
             $table->string('position');
             $table->longText('text');
             $table->unsignedInteger('category_id');
             $table->string('apply_link');
-            $table->integer('min_salary');
-            $table->integer('max_salary');       
+            $table->integer('min_salary')->nullable();
+            $table->integer('max_salary')->nullable();
             $table->string('locations');
             $table->string('company_logo')->nullable();
             $table->timestamps();

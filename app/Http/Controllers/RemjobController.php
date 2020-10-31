@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Remjob;
 use App\Tag;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreRemjob;
 use Illuminate\Support\Str;
 
 class RemjobController extends Controller
@@ -31,7 +32,7 @@ class RemjobController extends Controller
      */
     public function create()
     {
-        $categories = \App\Category::all();
+        $categories = \App\Category::where('id', '>', '1')->get();
         // dd($categories);
         return view( 'remjobs.create', compact('categories') );
     }
@@ -42,9 +43,11 @@ class RemjobController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRemjob $request)
     {
         dd($request);
+
+        // Generate company slug field
     }
 
     /**

@@ -15,7 +15,7 @@
     <div class="search-container">
         <!-- <form autocomplete="off" action=""> -->
             <div class="autocomplete" style="width:300px;">
-                <input id="myInput" type="text" name="search-term" placeholder="Start typing to find jobs ...">
+                <input id="myInput" class="rp-search-input" type="text" name="search-term" placeholder="Start typing to find jobs ...">
             </div>
             <!-- <input type="submit" value="Send"> -->
             <a  alt="Search jobs by tag" id="hero-search-link"

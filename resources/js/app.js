@@ -10,9 +10,10 @@ require('./bootstrap');
  * Sposts globals and functions
  */
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-var PATH = "http://localhost:8000/";
+var PATH = "http://127.0.0.1:8000";
 //require('./spost');
 require('./autocomplete');
+require('./job-preview');
 
 window.Vue = require('vue');
 
@@ -88,14 +89,17 @@ const collapseControl = () => {
 const applyControl = () => {
 
     var x = document.getElementsByClassName("job-box");
-      for (var i = 0; i < x.length; i++) {
+
+    if( x.length == 0 ) return;
+
+    for (var i = 0; i < x.length; i++) {
 
         let applyElement = x[i].querySelector('.rp-jobrow__apply');
         //console.log(applyElement);
 
         x[i].addEventListener('mouseenter', e => {
             //console.log("inside job row");  
-            applyElement.style.display = "block";
+            applyElement.style.display = "flex";
         });
 
         x[i].addEventListener('mouseleave', e => {
@@ -103,14 +107,23 @@ const applyControl = () => {
             applyElement.style.display = "none";
         });
 
-      }
+    }
 }
+
+
 
 
 // Delay to allow for elements to appear before assigning event listeners.
   setTimeout(() => {
+    
     collapseControl();
-    applyControl();
+
+    let heroSearchInput = document.getElementById("myInput");
+    if ( heroSearchInput != null ) {
+        console.log("active url is the job list page");
+        applyControl();
+    }
+    
 }, 500);
 
 
