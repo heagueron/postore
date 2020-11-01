@@ -26,13 +26,14 @@ class StoreRemjob extends FormRequest
     {
         return [  
             'company_name'  => ['required', 'max:50'],
-            'position'      => ['required', 'max:100'],       
-            'text'          => ['required', 'max:300'],
-            'category_id'   => ['required', Rule::in(['1','2','3','4','5','6'])],
+            'position'      => ['required', 'max:100'],
+            'tags'          => ['required', 'max:100'],      
+            'description'   => ['required', 'max:300'],
+            'category_id'   => [ Rule::in(['1','2','3','4','5','6']) ],
             'apply_link'    => ['required', 'url'],
-            'min_salary'    => ['nullable', 'max:7'], 
-            'max_salary'    => ['nullable', 'max:7'],
-            'locations'     => ['required', 'max:100'],
+            'min_salary'    => ['nullable', 'max:7', 'lte:max_salary'], 
+            'max_salary'    => ['nullable', 'max:7', 'gte:min_salary'],
+            'locations'     => ['max:100'],
             'company_logo'  => ['nullable','file','image','max:5000'],
 
         ];
@@ -42,27 +43,34 @@ class StoreRemjob extends FormRequest
     public function messages()
     {
         return [
-            'company_name.required'  => 'Please enter the name of your company.',
-            'company_name.max'       => 'Please enter a company name with less than 50 characters.',
+            'category_id.*'         => 'Please select a category from the provided list.',
 
-            'position.required'  => 'Please enter a name for the position.',
-            'position.max'       => 'Please enter a position name with less than 100 characters.',
+            'company_name.required' => 'Please enter the name of the company.',
+            'company_name.max'      => 'Please enter a company name with less than 50 characters.',
 
-            'text.required'  => 'Please enter a description for the position.',
-            'text.max'       => 'Please enter a position description with less than 300 characters.',
+            'position.required'     => 'Please enter a name for the position.',
+            'position.max'          => 'Please enter a position name with less than 100 characters.',
 
-            'category_id.required'  => 'Please select a category.',
+            'tags.required'         => 'Please enter some tags separated by comma (example: dev, java, php)',
+            'tags.max'              => 'The tags list must have less than 100 characters.',
+
+            'description.required'  => 'Please enter a description for the position.',
+            'description.max'       => 'Please enter a position description with less than 300 characters.',
             
-            'apply_link.required'  => 'Please enter a url link to apply for the position.',
-            'apply_link.url'       => 'Please enter a valid url link to apply for the position.',
+            'apply_link.required'   => 'Please enter a valid url link to apply for the position.',
+            'apply_link.url'        => 'Please enter a valid url link to apply for the position.',
 
-            'min_salary.max'       => 'Enter a minimun salary less than 999,999.',
+            'min_salary.max'        => 'Enter a minimun salary less than 999,999.',
+            'min_salary.lte'        => 'Minimun salary must be less than or equal to Maximun Salary',
 
-            'max_salary.max'       => 'Enter a maximun salary less than 999,999.',
+            'max_salary.max'        => 'Enter a maximun salary less than 999,999.',
+            'max_salary.gte'        => 'Maximun salary must be more than or equal to Minimun Salary',
 
-            'locations.required'  => 'Please enter a description for the position.',
-            'locations.max'       => 'Allowed locations must have less than 100 characters.',
+            'locations.max'         => 'Allowed locations must have less than 100 characters.',
 
+            'company_logo.file'     => 'Please select a image file for your company logo. Max 5000 bytes',
+            'company_logo.image'    => 'Please select a image file for your company logo. Max 5000 bytes',
+            'company_logo.max'      => 'Please select a image file for your company logo. Max 5000 bytes',
         ];
     }
 

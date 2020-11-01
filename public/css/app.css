@@ -11664,6 +11664,12 @@ input[type=submit] {
   font-size: 14px;
 }
 
+.rp-group__error {
+  color: red !important;
+  font-size: 0.75rem !important;
+  margin-left: 18px !important;
+}
+
 textarea,
 select,
 input[type=text]:not(.rp-search-input),

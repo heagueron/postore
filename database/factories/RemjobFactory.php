@@ -28,15 +28,16 @@ $factory->define(Remjob::class, function (Faker $faker) {
     }
 
     return [
-        'company_name'  => $companyName,
-        'company_slug'  => Str::slug($companyName, '-'),
         'position'      => $faker->randomElement(['administrator', 'operator', 'developer', 'devops', 'designer', 'coach']),
+        'description'   => $faker->text($maxNbChars = 600),
         'category_id'   => $faker->randomElement(['1', '2', '3', '4', '5', '6']),
-        'text'          => $faker->text($maxNbChars = 600),
-        'apply_link'    => $faker->url,
         'min_salary'    => $minSalary,
         'max_salary'    => $minSalary * 2,
         'locations'     => $positionLocation,
+        'apply_link'    => $faker->url,
+        'company_name'  => $companyName,
+        'company_slug'  => Str::slug($companyName, '-'),
+        'company_email' => $faker->email,
         'company_logo'  => $faker->randomElement([
                                 'logos/logo1.png',
                                 'logos/logo2.png',

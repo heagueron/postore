@@ -796,8 +796,14 @@ nav {
         text-transform: uppercase;
         font-size: 14px;
     }
-
+    &__error {
+        color: red !important;
+        font-size: 0.75rem !important;
+        margin-left: 18px !important;
+    }
 }
+
+
 
 textarea, select, input[type="text"]:not(.rp-search-input), input[type="email"] {
     box-shadow: none;

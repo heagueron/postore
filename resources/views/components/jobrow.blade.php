@@ -59,7 +59,7 @@
     </div>
     <div class="rp-row__body collapse" id="{{ 'position-' . $remjob->id}}"  data-parent="#rp-accordion">
         
-        <p>{{ $remjob->text }}</p>
+        <p>{{ $remjob->description }}</p>
 
         @if($remjob->locations)
             <h4>{{__('Location')}}</h4>
