@@ -7,7 +7,7 @@
 
         <!-- logo preview -->
         <div class="col" id="preview_logo_container">
-            <img src="{{ asset('storage/logos/logo1.png') }}" alt="logo">
+            <img src="{{ asset('storage/logos/logo1.png') }}" alt="logo" id="preview-logo" class="w-100">
         </div>
 
         <!-- position, company and location preview -->

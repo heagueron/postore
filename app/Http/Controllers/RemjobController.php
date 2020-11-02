@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Remjob;
 use App\Tag;
+use App\Remjob;
+use App\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRemjob;
-use Illuminate\Support\Str;
+
+use Carbon\Carbon;
 
 class RemjobController extends Controller
 {
@@ -17,7 +20,7 @@ class RemjobController extends Controller
      */
     public function index()
     {
-        $remjobs = Remjob::all();
+        $remjobs = Remjob::orderBy('created_at', 'desc')->get();
         //dd( $remjobs );
         //session([ 'selectedTag' => '' ]);
 
@@ -46,8 +49,42 @@ class RemjobController extends Controller
     public function store(StoreRemjob $request)
     {
         dd($request);
+        // Create the remote job post
+        $remjob = Remjob::create([
 
-        // Generate company slug field
+            'position'      => request()->position,
+            'description'   => request()->description,
+            'category_id'   => request()->category_id,
+            'min_salary'    => request()->min_salary,
+            'max_salary'    => request()->max_salary,
+            'locations'     => request()->locations,
+            'apply_link'    => request()->apply_link,
+            'company_name'  => request()->company_name,
+            'company_slug'  => Str::slug( request()->company_name, '-' ),
+            'company_email' => request()->company_email,
+      
+        ]);
+
+        $tagsIdToLink = []; // tags for the remjob-tag pivot table
+
+        $inputTags = explode(',', request()->tags );
+        $category = Category::find( request()->category_id );
+        array_unshift( $inputTags, $category->tag);
+
+        foreach ( $inputTags as $inputTag ) {
+            if( Tag::where('name',trim($inputTag) )-> exists() ) {
+                $foundTag = Tag::where('name',trim($inputTag) )->first();
+                array_push( $tagsIdToLink, $foundTag->id );
+            } else {
+                $newTag = Tag::create([ 'name' => trim($inputTag) ]);
+                array_push( $tagsIdToLink, $newTag->id );
+            }
+        }
+        // dd($tagsIdToLink);
+
+        $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
+
+        return redirect('/')->with('flash', 'New Remote Job posted!');
     }
 
     /**

@@ -2,7 +2,7 @@ const previewControl = () => {
 
     var PATH = "http://127.0.0.1:8000";
 
-    /* company_name and logo */
+    /* company_name */
     const companyNameElement = document.querySelector('input[name="company_name"]');
 
     // old values used when returning from validation errors
@@ -81,40 +81,43 @@ const previewControl = () => {
                 tagsArray.unshift(categoryTag)
             }
             
-            console.log(tagsArray)
-
+            // console.log(tagsArray)
             let previewTagsContainer = document.querySelector("#preview_tags_container");
-            
-            if( tagsArray.length > 0 ){            
-                previewTagsContainer.innerHTML = '';
-            }
-
             let tagsList = '';
 
-            tagsArray.forEach( function(tag) {
+            if( tagsArray.length == 0){
 
-                if( tag != ''){
-                tagsList += `<span class="rp-tag-item">${tag}</span>&nbsp;&nbsp;`;  
-                }
+                [1,2,3].forEach( function(number) {
+                    tagsList += `<span class="rp-tag-item">Tag${number}</span>&nbsp;&nbsp;`;  
+                });
 
-            });
+            } else {
+                tagsArray.forEach( function(tag) {
+                    if( tag != ''){
+                    tagsList += `<span class="rp-tag-item">${tag}</span>&nbsp;&nbsp;`;  
+                    }
+                });
+            }
 
             previewTagsContainer.innerHTML = tagsList;
  
         }
 
-        if ( sessionStorage.previewTags == null ) {
-            console.log('NO TAGS IN SESSION')
-            // Initialize preview category and tags items
-            sessionStorage.previewCategory = '';
-            sessionStorage.previewTags = '';
+        const categoryElement =  document.querySelector("#categoryElement");
+    
+        if( [2,3,4,5,6].includes(Number(categoryElement.value)) ){
+            // A category is selected
+            sessionStorage.previewCategory = document.querySelector(`#tag-${categoryElement.value}`).value;
         } else {
-            // old values used when returning from validation errors
-            renderTags();
+            sessionStorage.previewCategory = '';
         }
 
+        const tagsElement = document.querySelector('input[name="tags"]');
+        sessionStorage.previewTags = tagsElement.value;
+
+        renderTags();
+
         // main category change event
-        const categoryElement =  document.querySelector("#categoryElement");
 
         categoryElement.addEventListener('change', function (e) {
 
@@ -132,7 +135,6 @@ const previewControl = () => {
         });
 
         // other tags change event 
-        const tagsElement = document.querySelector('input[name="tags"]');
 
         tagsElement.addEventListener('keyup', function (e) {
 
@@ -152,7 +154,26 @@ const previewControl = () => {
     } else {
         console.log('Sorry! No Web Storage support');
     }
-   
+
+    /* logo */
+    
+    const logoInput = document.querySelector('input[name="company_logo"]');
+    logoInput.addEventListener('change', function() {
+        readURL(this);
+    })
+
+    const readURL = (input) => {
+
+        if ( input.files && input.files[0] ){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                document.querySelector("#company-logo-container").style.backgroundImage = `url(${e.target.result})`;
+                document.querySelector("#preview-logo").setAttribute("src", e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
 }
   
@@ -160,7 +181,7 @@ const previewControl = () => {
 setTimeout(() => {
     // Check if active url is the post a job page
     if ( window.location.href.indexOf("post-a-job") > -1 ) {
-        console.log("active url is the post a job page");
+        console.log("active url is: the post a job page");
         previewControl();
     }
 }, 500);

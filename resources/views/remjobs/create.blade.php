@@ -155,7 +155,7 @@
                 </div>                
                 <span class="rp-group__info">
                     Although it is not required, we recommend to enter salary data to help Google index the job.
-                    Remember to enter annual salary data in US $ (like 60,000).
+                    Remember to enter annual salary data in US $ (like 60000).
                 </span>
                 @error('min_salary') 
                     <p class="rp-group__error">{{ $message }}</p> 
@@ -196,22 +196,51 @@
                     @enderror
                 </div>
 
+                
+
+                
+
+            </div>
+
+
+            <!-- C O M P A N Y   D E T A I L S -->
+            <div class="rp-group">
+
+                <div class="rp-group__title">Company Details</div>
+
                 <!-- company_logo -->
                 <div>
                     <span class="rp-group__head">company_logo*</span>
-                    <input lang="en" type="file" class="form-control-file" id="company_logo"
-                            name="company_logo" data-name="company logo"
-                        >
+
+                    <div class="logo-box" id="company-logo-container">
+                        <p>💾 Upload</p>
+                        <input type="file" name="company_logo" class="input_company_logo" accept=".jpg,.png" id="company-logo-input">
+                    </div>
+
                     <span class="rp-group__info">
                         The company_logo.
                     </span>
                     @error('company_logo') 
                         <p class="rp-group__error">{{ $message }}</p> 
                     @enderror
+                    
                 </div>
-
                 
-
+                <!-- company_email -->
+                <div>
+                    <span class="rp-group__head">Company email*</span>
+                    <input  data-required="required" autocomplete="off" id="companyEmailElement"
+                            type="text" name="company_email" data-name="your company email"
+                            value="{{ !is_null( old('company_email'))? old('company_email') : '' }}"               
+                    >
+                    <span class="rp-group__info">
+                        Your company's email.
+                    </span>
+                    @error('company_email') 
+                        <p class="rp-group__error">{{ $message }}</p> 
+                    @enderror
+                </div>
+            
             </div>
 
         </form>

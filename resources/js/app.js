@@ -112,7 +112,6 @@ const applyControl = () => {
 
 
 
-
 // Delay to allow for elements to appear before assigning event listeners.
   setTimeout(() => {
     

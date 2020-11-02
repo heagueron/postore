@@ -35,7 +35,7 @@ class StoreRemjob extends FormRequest
             'max_salary'    => ['nullable', 'max:7', 'gte:min_salary'],
             'locations'     => ['max:100'],
             'company_logo'  => ['nullable','file','image','max:5000'],
-
+            'company_email' => ['required', 'email:rfc,dns'],
         ];
             
     }
