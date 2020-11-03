@@ -35,6 +35,8 @@ $factory->define(Remjob::class, function (Faker $faker) {
         'max_salary'    => $minSalary * 2,
         'locations'     => $positionLocation,
         'apply_link'    => $faker->url,
+        'apply_email'   => $faker->email,
+        'apply_mode'    => $faker->randomElement(['link', 'email']),
         'company_name'  => $companyName,
         'company_slug'  => Str::slug($companyName, '-'),
         'company_email' => $faker->email,

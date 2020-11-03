@@ -182,18 +182,70 @@
 
                 <!-- apply_link -->
                 <div>
-                    <span class="rp-group__head">apply_link*</span>
-                    <input  data-required="required" autocomplete="off" 
-                            type="text" name="apply_link" data-name="apply link"
-                            value="{{ !is_null( old('apply_link'))? old('apply_link') : '' }}"
-                            
+                    <span class="rp-group__head mb-1">apply mode*</span>
+
+                    @if( is_null(old('apply_mode')) or old('apply_mode') == 'link')
+                        <div class="custom-control custom-radio custom-control-inline ml-3">
+                            <input type="radio" class="custom-control-input" id="apply-link" name="apply_mode" value="link"
+                                checked="checked">
+                            <label class="custom-control-label pt-1" for="apply-link">Link</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="apply-email" name="apply_mode" value="email">
+                            <label class="custom-control-label pt-1" for="apply-email">Email</label>
+                        </div>
+
+                        <input  data-required="required" autocomplete="off" placeholder="https://..."
+                            style="display:block"
+                            type="text" name="apply_link" data-name="apply link" id="apply-link-input"
+                            value="{{ !is_null( old('apply_link'))? old('apply_link') : null }}"      
                         >
-                    <span class="rp-group__info">
-                        The job apply_link.
-                    </span>
+                        <input  data-required="required" autocomplete="off" style="display:none" placeholder="email@job.com"
+                            style="display:none"
+                            type="text" name="apply_email" data-name="apply email" id="apply-email-input" 
+                            value="{{ !is_null( old('apply_email'))? old('apply_email') : null }}"     
+                        >
+                        <span class="rp-group__info" id="apply-mode-info">
+                            The job apply link.
+                        </span>
+
+                    @else
+                        <div class="custom-control custom-radio custom-control-inline ml-3">
+                            <input type="radio" class="custom-control-input" id="apply-link" name="apply_mode" value="link">
+                            <label class="custom-control-label pt-1" for="apply-link">Link</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="apply-email" name="apply_mode" value="email"
+                            checked="checked" >
+                            <label class="custom-control-label pt-1" for="apply-email">Email</label>
+                        </div>
+
+                        <input  data-required="required" autocomplete="off" placeholder="https://..."
+                            style="display:none"
+                            type="text" name="apply_link" data-name="apply link" id="apply-link-input"
+                            value="{{ !is_null( old('apply_link'))? old('apply_link') : null }}"      
+                        >
+                        <input  data-required="required" autocomplete="off" placeholder="email@job.com"
+                            style="display:block"
+                            type="text" name="apply_email" data-name="apply email" id="apply-email-input" 
+                            value="{{ !is_null( old('apply_email'))? old('apply_email') : null }}"     
+                        >
+
+                        <span class="rp-group__info" id="apply-mode-info">
+                            The job apply email.
+                        </span>
+
+                    @endif
+
+                    
+
                     @error('apply_link') 
                         <p class="rp-group__error">{{ $message }}</p> 
                     @enderror
+                    @error('apply_email') 
+                        <p class="rp-group__error">{{ $message }}</p> 
+                    @enderror
+
                 </div>
 
                 
@@ -218,7 +270,7 @@
                     </div>
 
                     <span class="rp-group__info">
-                        The company_logo.
+                        The company logo.
                     </span>
                     @error('company_logo') 
                         <p class="rp-group__error">{{ $message }}</p> 

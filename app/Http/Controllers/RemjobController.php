@@ -49,6 +49,7 @@ class RemjobController extends Controller
     public function store(StoreRemjob $request)
     {
         dd($request);
+
         // Create the remote job post
         $remjob = Remjob::create([
 
@@ -65,7 +66,14 @@ class RemjobController extends Controller
       
         ]);
 
-        $tagsIdToLink = []; // tags for the remjob-tag pivot table
+        // Add media to the model
+        if( !is_null( request()->file ) ){
+            $this->storeMedia($spost);
+        }
+
+        // tags for the remjob-tag pivot table
+
+        $tagsIdToLink = []; // 
 
         $inputTags = explode(',', request()->tags );
         $category = Category::find( request()->category_id );
@@ -80,11 +88,13 @@ class RemjobController extends Controller
                 array_push( $tagsIdToLink, $newTag->id );
             }
         }
-        // dd($tagsIdToLink);
 
         $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
 
+
+        // Back to remote job list
         return redirect('/')->with('flash', 'New Remote Job posted!');
+
     }
 
     /**

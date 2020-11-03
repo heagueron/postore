@@ -53573,31 +53573,43 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./resources/js/job-preview.js ***!
   \*************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    isUndefined = _require.isUndefined;
 
 var previewControl = function previewControl() {
   var PATH = "http://127.0.0.1:8000";
   /* company_name */
 
-  var companyNameElement = document.querySelector('input[name="company_name"]'); // old values used when returning from validation errors
+  var companyNameElement = document.querySelector('input[name="company_name"]'); // old company_name when returning from validation errors
 
   if (companyNameElement.value != '') {
-    document.querySelector('#preview_company_container').innerHTML = companyNameElement.value;
-    document.querySelector('#preview_logo_container').innerHTML = '';
+    document.querySelector('#preview_company_container').innerHTML = companyNameElement.value; // remove preview logo
+    // document.querySelector('#preview_logo_container').innerHTML = '';
+    // document.querySelector("#company-logo-container").style.backgroundImage = null;
   }
 
   companyNameElement.addEventListener('keyup', function (e) {
     if (e.target.value != '') {
-      document.querySelector('#preview_logo_container').innerHTML = '';
+      if (sessionStorage.logo == null || sessionStorage.logo == undefined) {
+        console.log("sessionStorage.logo: ".concat(sessionStorage.logo));
+        console.log("removing preview_logo_container");
+        document.querySelector('#preview_logo_container').innerHTML = '';
+      }
+
       document.querySelector('#preview_company_container').innerHTML = e.target.value;
     } else {
-      document.querySelector('#preview_logo_container').innerHTML = "<img src=\"".concat(PATH, "/storage/logos/logo1.png\" alt=\"logo\">");
+      if (sessionStorage.logo == null || sessionStorage.logo == undefined) {
+        document.querySelector('#preview_logo_container').innerHTML = "<img src=\"".concat(PATH, "/storage/logos/logo1.png\" alt=\"logo\">");
+      }
+
       document.querySelector('#preview_company_container').innerHTML = 'Company';
     }
   });
   /* position */
 
-  var positionElement = document.querySelector('input[name="position"]'); // old values used when returning from validation errors
+  var positionElement = document.querySelector('input[name="position"]'); // old position when returning from validation errors
 
   if (positionElement.value != '') {
     document.querySelector('#preview_position_container').innerHTML = positionElement.value;
@@ -53612,7 +53624,7 @@ var previewControl = function previewControl() {
   });
   /* location */
 
-  var locationsElement = document.querySelector('input[name="locations"]'); // old values used when returning from validation errors
+  var locationsElement = document.querySelector('input[name="locations"]'); // old locations when returning from validation errors
 
   if (locationsElement.value != '') {
     document.querySelector('#preview_locations_container').innerHTML = locationsElement.value;
@@ -53699,29 +53711,59 @@ var previewControl = function previewControl() {
 
       renderTags();
     });
-  } else {
-    console.log('Sorry! No Web Storage support');
-  }
-  /* logo */
+    /* logo */
 
+    var logoInput = document.querySelector('input[name="company_logo"]'); // old logo when returning from validation errors
 
-  var logoInput = document.querySelector('input[name="company_logo"]');
-  logoInput.addEventListener('change', function () {
-    readURL(this);
-  });
-
-  var readURL = function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        document.querySelector("#company-logo-container").style.backgroundImage = "url(".concat(e.target.result, ")");
-        document.querySelector("#preview-logo").setAttribute("src", e.target.result);
-      };
-
-      reader.readAsDataURL(input.files[0]);
+    if (document.body.contains(document.querySelectorAll('.rp-group__error')[0]) && sessionStorage.logo) {
+      console.log('document has errors and got a logo');
+      document.querySelector("#company-logo-container").style.backgroundImage = "url(".concat(sessionStorage.logo, ")");
+      var previewLogo = "<img src=\"".concat(sessionStorage.logo, "\" alt=\"logo\" id=\"preview-logo\" class=\"w-100\">");
+      document.querySelector("#preview_logo_container").innerHTML = previewLogo;
     }
-  };
+
+    logoInput.addEventListener('change', function () {
+      readURL(this);
+    });
+
+    var readURL = function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          // show main logo
+          document.querySelector("#company-logo-container").style.backgroundImage = "url(".concat(e.target.result, ")"); // show logo on preview row
+
+          var previewLogo = "<img src=\"".concat(e.target.result, "\" alt=\"logo\" id=\"preview-logo\" class=\"w-100\">");
+          document.querySelector("#preview_logo_container").innerHTML = previewLogo; // store logo in session
+
+          sessionStorage.logo = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    };
+  } else {
+    alert("Sorry! No Web Storage support. Please use one of the following browsers and versions or a newer one:\n                Chrome 4.0 | Explorer 8.0 | FireFox 3.5 | Safari 4.0 | Opera 11.5");
+  }
+
+  var applyRadios = document.querySelectorAll('input[name="apply_mode"]');
+
+  for (var i = 0; i < applyRadios.length; i++) {
+    applyRadios[i].addEventListener('change', function () {
+      console.log("change!: ".concat(this.value));
+
+      if (this.value == 'link') {
+        document.getElementById('apply-email-input').style.display = "none";
+        document.getElementById('apply-link-input').style.display = "block";
+        document.getElementById('apply-mode-info').innerHTML = 'The job apply link.';
+      } else {
+        document.getElementById('apply-link-input').style.display = "none";
+        document.getElementById('apply-email-input').style.display = "block";
+        document.getElementById('apply-mode-info').innerHTML = 'The job apply email.';
+      }
+    });
+  }
 }; // Delay to allow for elements to appear before assigning event listeners.
 
 

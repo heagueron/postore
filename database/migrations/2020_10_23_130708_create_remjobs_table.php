@@ -22,7 +22,9 @@ class CreateRemjobsTable extends Migration
             $table->integer('min_salary')->nullable();
             $table->integer('max_salary')->nullable();
             $table->string('locations')->nullable();
-            $table->string('apply_link');
+            $table->string('apply_link')->nullable();
+            $table->string('apply_email')->nullable();
+            $table->enum('apply_mode',['link', 'email'])->default('link');
             $table->string('company_name');
             $table->string('company_slug');
             $table->string('company_email');
