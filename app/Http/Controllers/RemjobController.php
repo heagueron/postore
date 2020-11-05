@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRemjob;
 
+use Intervention\Image\Facades\Image;
+
 use Carbon\Carbon;
 
 class RemjobController extends Controller
@@ -48,7 +50,7 @@ class RemjobController extends Controller
      */
     public function store(StoreRemjob $request)
     {
-        dd($request);
+        //dd($request);
 
         // Create the remote job post
         $remjob = Remjob::create([
@@ -66,19 +68,21 @@ class RemjobController extends Controller
       
         ]);
 
-        // Add media to the model
-        if( !is_null( request()->file ) ){
-            $this->storeMedia($spost);
+        // Add media to the remote job model
+        if( !is_null( request()->company_logo ) ){
+            $this->storeMedia ($remjob );
         }
 
         // tags for the remjob-tag pivot table
-
         $tagsIdToLink = []; // 
 
         $inputTags = explode(',', request()->tags );
+
+        // Insert the Category tag in the first position of the array
         $category = Category::find( request()->category_id );
         array_unshift( $inputTags, $category->tag);
 
+        // Add every tag, if it does not exist, create it in the database.
         foreach ( $inputTags as $inputTag ) {
             if( Tag::where('name',trim($inputTag) )-> exists() ) {
                 $foundTag = Tag::where('name',trim($inputTag) )->first();
@@ -124,7 +128,7 @@ class RemjobController extends Controller
             return view('404');
         }
 
-        $remjobs = $tag->remjobs()->get();
+        $remjobs = $tag->remjobs()->orderBy('created_at', 'desc')->get();
         
         return view( 'landing', compact('remjobs') );
         
@@ -138,7 +142,7 @@ class RemjobController extends Controller
      */
     public function searchByCompany( $company_slug )
     {
-        $remjobs = Remjob::where( 'company_slug', 'like', $company_slug )->get();
+        $remjobs = Remjob::where( 'company_slug', 'like', $company_slug )->orderBy('created_at', 'desc')->get();
         
         return view( 'landing', compact('remjobs') );
         
@@ -178,31 +182,6 @@ class RemjobController extends Controller
         //
     }
 
-    /**
-     * Returns a list of job_tags
-     * @param  null
-     * @return \Illuminate\Http\Response
-     */
-    public function job_tags()
-    {
-        $job_tags = array(
-            array('tag' => 'javascript'),
-            array('tag' => 'node'),
-            array('tag' => 'php'),
-            array('tag' => 'java'),
-            array('tag' => 'python'),
-            array('tag' => 'angular'),
-            array('tag' => 'react'),
-            array('tag' => 'vue'),
-            array('tag' => 'devops'),
-            array('tag' => 'docker'),
-            array('tag' => 'engineer'),
-        );
-
-        return response()->json([
-            'job_tags' => $job_tags
-        ],200);
-    }
 
     /**
      * Returns a list of job_tags, filtered by a search_term
@@ -226,10 +205,24 @@ class RemjobController extends Controller
             'search_term'       => $search_term,
             'filtered_job_tags' => $filtered_job_tags
         ],200);
-        // return response()->json([
-        //     'array1'       => $$job_tags1,
-        //     'array2' => $job_tags
-        // ],200);
+
+    }
+
+    /**
+     * Store the incoming $remjob company_logo.
+     *
+     * @param Remjob $remjob
+     * @return void
+     */
+    private function storeMedia($remjob)
+    {
+        $remjob->update([
+            'company_logo' => request()->company_logo->store('logos', 'public')
+        ]);
+
+        $fixedLogo = Image::make( public_path('storage/' . $remjob->company_logo) )->fit(60, 60);
+        $fixedLogo->save();    
+
     }
 
 

@@ -837,6 +837,9 @@ textarea, select, input[type="text"]:not(.rp-search-input), input[type="email"] 
     background-repeat: no-repeat;
     margin: 14px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo-box input {
@@ -870,6 +873,14 @@ textarea, select, input[type="text"]:not(.rp-search-input), input[type="email"] 
         justify-content: center;
         align-items: center;
     }
+}
+
+.note-editor {
+    margin:14px !important;
+}
+
+.note-popover {
+    display: none !important;
 }
 
 

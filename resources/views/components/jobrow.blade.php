@@ -5,7 +5,7 @@
 
         <div class="col">
             @if( $remjob->company_logo != null )
-                <img src="{{ asset('storage/' . $remjob->company_logo ) }}" alt="LOGO" >
+                <img src="{{ asset('storage/' . $remjob->company_logo ) }}" alt="LOGO">
             @else
                 <p style="font-size:2.0rem;">{{ Str::of( $remjob->company_name )->substr(0, 1) }}</p>
             @endif
@@ -59,14 +59,15 @@
     </div>
     <div class="rp-row__body collapse" id="{{ 'position-' . $remjob->id}}"  data-parent="#rp-accordion">
         
-        <p>{{ $remjob->description }}</p>
+        <!-- <p>{{ $remjob->description }}</p> -->
+        <div class="p-5">{!! $remjob->description !!}</div>
 
         @if($remjob->locations)
-            <h4>{{__('Location')}}</h4>
-            <p>{{ $remjob->locations }}</p>
+            <h4 class="pl-5">{{__('Location')}}</h4>
+            <p class="pl-5">{{ $remjob->locations }}</p>
         @endif
 
-        <div class="d-flex">
+        <div class="d-flex pl-5">
 
             <p class="mr-2"> {{__('See all jobs at ')}}</p>
             <p>

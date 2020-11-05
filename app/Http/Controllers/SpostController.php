@@ -120,6 +120,7 @@ class SpostController extends Controller
             $this->storeMedia($spost);
         } 
         
+        
         // Attach social profiles
         $spost->twitter_profiles()->attach( array_values( request()->twitter_accounts ) );
 

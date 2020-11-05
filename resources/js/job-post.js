@@ -1,6 +1,6 @@
 const { isUndefined } = require("lodash");
 
-const previewControl = () => {
+const formControl = () => {
 
     var PATH = "http://127.0.0.1:8000";
 
@@ -10,13 +10,9 @@ const previewControl = () => {
     // old company_name when returning from validation errors
     if( companyNameElement.value != '' ){
         document.querySelector('#preview_company_container').innerHTML = companyNameElement.value;
-
-        // remove preview logo
-        // document.querySelector('#preview_logo_container').innerHTML = '';
-        // document.querySelector("#company-logo-container").style.backgroundImage = null;
-
     }
 
+    // company_name event
     companyNameElement.addEventListener('keyup', function (e) {
         
         if( e.target.value != '') {
@@ -43,6 +39,7 @@ const previewControl = () => {
         document.querySelector('#preview_position_container').innerHTML = positionElement.value;
     }
 
+    // position event
     positionElement.addEventListener('keyup', function (e) {
 
         if( e.target.value != '') {
@@ -61,6 +58,7 @@ const previewControl = () => {
         document.querySelector('#preview_locations_container').innerHTML = locationsElement.value;
     }
 
+    // position event
     locationsElement.addEventListener('keyup', function (e) {
 
         if( e.target.value != '') {
@@ -72,12 +70,9 @@ const previewControl = () => {
     });
 
     /* tags */
-
     if (typeof(Storage) !== "undefined") {
 
-        // Code for localStorage/sessionStorage.
-
-        // renders the tags array (from the Storage) in the preview section
+        // renders the tags array (from the Storage).
         const renderTags = () => {
 
             let tagsArray = [];
@@ -127,19 +122,15 @@ const previewControl = () => {
         const tagsElement = document.querySelector('input[name="tags"]');
         sessionStorage.previewTags = tagsElement.value;
 
-
         renderTags();   
 
 
         // main category change event
-
         categoryElement.addEventListener('change', function (e) {
 
             if( document.querySelector(`#tag-${e.target.value}`) != null ){
-
                 const categoryTag = document.querySelector(`#tag-${e.target.value}`).value;
                 sessionStorage.previewCategory = categoryTag;
-
             } else {
                 sessionStorage.previewCategory = '';
             }
@@ -149,14 +140,12 @@ const previewControl = () => {
         });
 
         // other tags change event 
-
         tagsElement.addEventListener('keyup', function (e) {
-
             if( e.target.value != '') {
-                console.log(e.target.value)
+                // console.log(e.target.value)
                 sessionStorage.previewTags = e.target.value;
             } else {
-                console.log('no tag entered')
+                // console.log('no tag entered')
                 sessionStorage.previewTags = '';
             }
 
@@ -171,12 +160,17 @@ const previewControl = () => {
 
         // old logo when returning from validation errors
         if( document.body.contains(document.querySelectorAll('.rp-group__error')[0]) && sessionStorage.logo ) {
-            console.log('document has errors and got a logo');
+            // console.log('document has errors and got a logo');
             document.querySelector("#company-logo-container").style.backgroundImage = `url(${sessionStorage.logo})`;
             const previewLogo = `<img src="${sessionStorage.logo}" alt="logo" id="preview-logo" class="w-100">`;
             document.querySelector("#preview_logo_container").innerHTML = previewLogo;
+        } else {
+            // If there are no errors, we must ensure to enter the form without logo image.
+            logoInput.value = null;
+            sessionStorage.logo = null;
         }
-        
+
+        // logo event
         logoInput.addEventListener('change', function() {
             readURL(this);
         })
@@ -208,6 +202,19 @@ const previewControl = () => {
     }
 
 
+    // link or email to apply
+    // make sure radio input and text input match
+    if ( document.querySelector('#apply-link').checked == true ) {
+        document.getElementById('apply-email-input').style.display="none";
+        document.getElementById('apply-link-input').style.display="block";
+        document.getElementById('apply-mode-info').innerHTML = 'The job apply link.'
+    } else {
+        document.getElementById('apply-link-input').style.display="none";
+        document.getElementById('apply-email-input').style.display="block";
+        document.getElementById('apply-mode-info').innerHTML = 'The job apply email.'
+    }
+
+    // apply_mode change event
     const applyRadios = document.querySelectorAll('input[name="apply_mode"]');
 
     for (let i = 0; i < applyRadios.length; i++) 
@@ -224,10 +231,7 @@ const previewControl = () => {
                 document.getElementById('apply-mode-info').innerHTML = 'The job apply email.'
             }
         });
-    }
-
-
-    
+    } 
 
 }
   
@@ -236,6 +240,9 @@ setTimeout(() => {
     // Check if active url is the post a job page
     if ( window.location.href.indexOf("post-a-job") > -1 ) {
         console.log("active url is: the post a job page");
-        previewControl();
+        formControl();
     }
+
+    
+
 }, 500);

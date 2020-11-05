@@ -28,6 +28,7 @@ class CreateRemjobsTable extends Migration
             $table->string('company_name');
             $table->string('company_slug');
             $table->string('company_email');
+            $table->string('company_twitter')->nullable();
             $table->string('company_logo')->nullable();
             $table->timestamps();
         });

@@ -13,7 +13,8 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 var PATH = "http://127.0.0.1:8000";
 //require('./spost');
 require('./autocomplete');
-require('./job-preview');
+require('./job-post');
+require('./summernote');
 
 window.Vue = require('vue');
 
@@ -63,6 +64,22 @@ const app = new Vue({
 /* Activate bootstrap tooltips */
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
+
+    $('#description').summernote({
+        placeholder: 'Remote job description',
+        tabsize: 2,
+        height: 300,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']],
+            ['view', ['help']]
+          ]
+      });
+
 })
 
 /* Prevent presentation of job description when click on a tag or company name */
@@ -124,7 +141,3 @@ const applyControl = () => {
     }
     
 }, 500);
-
-
-
-

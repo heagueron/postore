@@ -38,7 +38,7 @@
                             value="{{ !is_null( old('company_name'))? old('company_name') : '' }}"               
                     >
                     <span class="rp-group__info">
-                        Your company's brand or trade name. Please do not include Inc., Ltd., B.V., Pte., etc.
+                        Your company's brand or trade name.
                     </span>
                     @error('company_name') 
                         <p class="rp-group__error">{{ $message }}</p> 
@@ -168,10 +168,9 @@
                 <!-- description -->
                 <div>
                     <span class="rp-group__head">description*</span>
-                    <input  data-required="required" autocomplete="off" 
-                            type="text" name="description" data-name="job description"
-                            value="{{ !is_null( old('description'))? old('description') : '' }}"  
-                    >
+                    <textarea class="form-control" name="description" id="description" style="margin:14px">
+                        {{ !is_null( old('description'))? old('description') : '' }}
+                    </textarea>
                     <span class="rp-group__info">
                         The job description.
                     </span>
@@ -270,7 +269,7 @@
                     </div>
 
                     <span class="rp-group__info">
-                        The company logo.
+                        Your company logo.
                     </span>
                     @error('company_logo') 
                         <p class="rp-group__error">{{ $message }}</p> 
@@ -289,6 +288,21 @@
                         Your company's email.
                     </span>
                     @error('company_email') 
+                        <p class="rp-group__error">{{ $message }}</p> 
+                    @enderror
+                </div>
+
+                 <!-- company_twitter -->
+                 <div>
+                    <span class="rp-group__head">Company twitter profile</span>
+                    <input  autocomplete="off" id="companyTwitterElement"
+                            type="text" name="company_twitter" data-name="your company twitter"
+                            value="{{ !is_null( old('company_twitter'))? old('company_twitter') : '' }}"               
+                    >
+                    <span class="rp-group__info">
+                        Your company's twitter profile (no '@' please). We will tag (mention) this profile when we share the job in twitter. 
+                    </span>
+                    @error('company_twitter') 
                         <p class="rp-group__error">{{ $message }}</p> 
                     @enderror
                 </div>

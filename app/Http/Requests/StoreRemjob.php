@@ -28,7 +28,7 @@ class StoreRemjob extends FormRequest
             'company_name'  => ['required', 'max:50'],
             'position'      => ['required', 'max:100'],
             'tags'          => ['required', 'max:100'],      
-            'description'   => ['required', 'max:300'],
+            'description'   => ['required'],
             'category_id'   => [ Rule::in(['1','2','3','4','5','6']) ],
             'apply_link'    => ['exclude_if:apply-mode,==,email', 'nullable', 'url'],
             'apply_email'   => ['exclude_if:apply-mode,==,link', 'nullable','email'],
@@ -56,7 +56,6 @@ class StoreRemjob extends FormRequest
             'tags.max'              => 'The tags list must have less than 100 characters.',
 
             'description.required'  => 'Please enter a description for the position.',
-            'description.max'       => 'Please enter a position description with less than 300 characters.',
             
             'apply_link.required'   => 'A url link to apply is required.',
             'apply_link.url'        => 'Please enter a valid url link so candidates can apply for the position.',
