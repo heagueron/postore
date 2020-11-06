@@ -11478,7 +11478,7 @@ input[type=submit] {
   padding: 5px;
   /*padding-bottom: 0;*/
   /*word-wrap: break-word;*/
-  background-color: #fff;
+  /*background-color: #fff;*/
   /*background-clip: border-box;*/
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
@@ -11497,6 +11497,14 @@ input[type=submit] {
 .rp-row__body {
   padding: 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.rp-row__highlight {
+  background-color: #ffffb3;
+}
+
+.rp-row__standard {
+  background-color: #fff;
 }
 
 /* Job listing */
@@ -11737,5 +11745,9 @@ input[type=email] {
 
 .note-popover {
   display: none !important;
+}
+
+.panel-heading {
+  background-color: beige;
 }
 

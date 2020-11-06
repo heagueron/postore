@@ -309,6 +309,54 @@
             
             </div>
 
+            <!-- S T Y L E  T H E  J O B  P O S T -->
+            <div class="rp-group">
+
+                <div class="rp-group__title">STYLE THE JOB POST</div>
+
+                <div class="m-4">
+
+                    <div class="custom-control custom-checkbox mb-3">
+                        @if( !is_null( old('show_logo') ) and old('show_logo') == true )
+                            <input type="checkbox" class="custom-control-input" id="show-logo" name="show_logo" checked>
+                        @else 
+                            <input type="checkbox" class="custom-control-input" id="show-logo" name="show_logo">
+                        @endif               
+                        <label class="custom-control-label pt-1" for="show-logo">Show company logo ( +$15 )</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox mb-3">
+                        @if( !is_null( old('highlight_yellow') ) and old('highlight_yellow') == true )
+                            <input type="checkbox" class="custom-control-input" id="highlight-yellow" name="highlight_yellow" checked>
+                        @else
+                            <input type="checkbox" class="custom-control-input" id="highlight-yellow" name="highlight_yellow"> 
+                        @endif
+                        <label class="custom-control-label pt-1" for="highlight-yellow">Highlight the job post with yellow background ( +$15 )</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox mb-3">
+                        @if( !is_null( old('front_page_2w') ) and old('front_page_2w') == true )
+                            <input type="checkbox" class="custom-control-input" id="front-page-2w" name="front_page_2w" checked>
+                        @else
+                            <input type="checkbox" class="custom-control-input" id="front-page-2w" name="front_page_2w">
+                        @endif
+                        <label class="custom-control-label pt-1" for="front-page-2w">Show on front page for 2 weeks ( +$60 )</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox mb-3">
+                        @if( !is_null( old('front_category_2w') ) and old('front_category_2w') == true )
+                            <input type="checkbox" class="custom-control-input" id="front-category-2w" name="front_category_2w" checked>
+                        @else
+                            <input type="checkbox" class="custom-control-input" id="front-category-2w" name="front_category_2w">
+                        @endif
+                        <label class="custom-control-label pt-1" for="front-category-2w">Show on front page of category for 2 weeks ( +$60 )</label>
+                    </div>
+
+                </div>
+                
+            
+            </div>
+
         </form>
 
     </div>
@@ -317,6 +365,7 @@
 
     <div class="row job-post-preview">
 
+        
         <div class="col-10 job-post-preview__job">
             <x-jobrow-preview />   
         </div>

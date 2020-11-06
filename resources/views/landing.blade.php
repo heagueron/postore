@@ -16,7 +16,7 @@
             <a href="post-a-job.php" alt="Post a job" class="post-button">{{ __('Post a Job') }}</a>
         </div> -->
 
-        <div class="card-container"  id="rp-accordion">
+        <div  id="rp-accordion">
 
             @forelse ( $remjobs as $remjob )
                 <x-jobrow :remjob="$remjob" />

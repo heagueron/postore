@@ -30,7 +30,7 @@ $factory->define(Remjob::class, function (Faker $faker) {
     return [
         'position'      => $faker->randomElement(['administrator', 'operator', 'developer', 'devops', 'designer', 'coach']),
         'description'   => $faker->text($maxNbChars = 600),
-        'category_id'   => $faker->randomElement(['1', '2', '3', '4', '5', '6']),
+        'category_id'   => $faker->randomElement(['2', '3', '4', '5', '6']),
         'min_salary'    => $minSalary,
         'max_salary'    => $minSalary * 2,
         'locations'     => $positionLocation,

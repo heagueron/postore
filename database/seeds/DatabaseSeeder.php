@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RemjobSeeder::class);  
         //$this->call(RemjobTagSeeder::class);
 
-        // Seed main categories:
+        // Seed tags from main categories:
         $mainCategories = ['dev', 'customer-support', 'marketing', 'design', 'non-tech'];
         foreach( $mainCategories as $mc ){
 
@@ -40,13 +40,15 @@ class DatabaseSeeder extends Seeder
         }
 
         // Register in pivot tables
-
         foreach(App\Remjob::all() as $remjob) {
 
-            $tagCount = rand(1,5);
+            // Attach tag from main category 
+            $catTag = Tag::where( 'name', $remjob->category->tag )->first();
+            $remjob->tags()->attach( $catTag->id );
 
+            // Attach other ramdom tags
+            $tagCount = rand(1,4);
             $randomTags = App\Tag::all()->random( $tagCount );
-
             foreach( $randomTags as $randomTag){
                 $remjob->tags()->attach($randomTag->id);
             }

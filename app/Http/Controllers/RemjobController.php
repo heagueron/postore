@@ -22,9 +22,7 @@ class RemjobController extends Controller
      */
     public function index()
     {
-        $remjobs = Remjob::orderBy('created_at', 'desc')->get();
-        //dd( $remjobs );
-        //session([ 'selectedTag' => '' ]);
+        $remjobs = Remjob::orderBy('front_page_2w', 'desc')->orderBy('created_at', 'desc')->get();
 
         return view( 'landing', compact('remjobs') );
 
@@ -55,16 +53,23 @@ class RemjobController extends Controller
         // Create the remote job post
         $remjob = Remjob::create([
 
-            'position'      => request()->position,
-            'description'   => request()->description,
-            'category_id'   => request()->category_id,
-            'min_salary'    => request()->min_salary,
-            'max_salary'    => request()->max_salary,
-            'locations'     => request()->locations,
-            'apply_link'    => request()->apply_link,
-            'company_name'  => request()->company_name,
-            'company_slug'  => Str::slug( request()->company_name, '-' ),
-            'company_email' => request()->company_email,
+            'position'          => request()->position,
+            'description'       => request()->description,
+            'category_id'       => request()->category_id,
+            'min_salary'        => request()->min_salary,
+            'max_salary'        => request()->max_salary,
+            'locations'         => request()->locations,
+            'apply_link'        => request()->apply_link,
+            'apply_email'       => request()->apply_email,
+            'apply_mode'        => request()->apply_mode,
+            'company_name'      => request()->company_name,
+            'company_slug'      => Str::slug( request()->company_name, '-' ),
+            'company_email'     => request()->company_email,
+            'company_twitter'   => request()->company_twitter,
+            'show_logo'         => request()->show_logo,
+            'highlight_yellow'  => request()->highlight_yellow,
+            'front_page_2w'     => request()->front_page_2w,
+            'front_category_2w' => request()->front_category_2w,
       
         ]);
 
@@ -123,12 +128,26 @@ class RemjobController extends Controller
         $tagsLength = ( Str::length( $tags ) ) - 12;
         $tagsText = Str::substr($tags, 7, $tagsLength);
 
-        $tag = Tag::where( 'name', 'like', $tagsText )->first();
-        if ($tag === null) {
-            return view('404');
-        }
+        if( in_array( $tagsText, ['dev', 'customer-support', 'marketing', 'design', 'non-tech'] ) ){
+            // Search for a CATEGORY TAG
+            $category = Category::where( 'tag', 'like', $tagsText )->first();
+            //dd($category);
+            if( $category->has('remjobs') ){
+                $remjobs = $category->remjobs()->orderBy('front_category_2w', 'desc')->orderBy('created_at', 'desc')->get();
+            } else { $remjobs = null; }
+            
+        } else {
+            // Search for a normal TAG
+            $tag = Tag::where( 'name', 'like', $tagsText )->first();
+            if ($tag === null) {
+                return view('404');
+            }
+            if( $tag->has('remjobs') ){
+                $remjobs = $remjobs = $tag->remjobs()->orderBy('created_at', 'desc')->get();
+            } else { $remjobs = null; }
 
-        $remjobs = $tag->remjobs()->orderBy('created_at', 'desc')->get();
+            
+        }
         
         return view( 'landing', compact('remjobs') );
         

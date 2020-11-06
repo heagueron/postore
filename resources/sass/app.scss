@@ -619,10 +619,10 @@ nav {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    padding: 5px;
+    padding: 0px;
     /*padding-bottom: 0;*/
     /*word-wrap: break-word;*/
-    background-color: #fff;
+    /*background-color: #fff;*/
     /*background-clip: border-box;*/
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
@@ -639,7 +639,20 @@ nav {
         padding: 1.0rem;
         border-top:1px solid rgba(0, 0, 0, 0.125);
     }
+    &__highlight{
+        background-color: 	#ffffb3;
+    }
+    &__standard{
+        background-color: #fff;
+    }
 }
+
+.row{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+
 
 
 
@@ -819,11 +832,6 @@ textarea, select, input[type="text"]:not(.rp-search-input), input[type="email"] 
     width: calc(100% - 28px) !important;
 }
 
-// .salary{
-//     &__range{
-//         display: flex;
-//     }
-// }
 
 .logo-box {
     cursor: pointer;
@@ -881,6 +889,10 @@ textarea, select, input[type="text"]:not(.rp-search-input), input[type="email"] 
 
 .note-popover {
     display: none !important;
+}
+
+.panel-heading{
+    background-color: beige;
 }
 
 

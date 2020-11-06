@@ -1,10 +1,16 @@
 
-<div class="rp-row" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}">
 
-    <div class="row rp-row__header job-box">
+<div class="rp-row " style="padding:0">
+
+
+    @if( $remjob->highlight_yellow == 'on' )
+    <div class="row rp-row__header job-box rp-row__highlight" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}" style="margin-left:0;margin-right:0;">
+    @else
+    <div class="row rp-row__header job-box rp-row__standard" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}" style="margin-left:0;margin-right:0;">
+    @endif
 
         <div class="col">
-            @if( $remjob->company_logo != null )
+            @if( $remjob->company_logo != null and $remjob->show_logo == 'on' )
                 <img src="{{ asset('storage/' . $remjob->company_logo ) }}" alt="LOGO">
             @else
                 <p style="font-size:2.0rem;">{{ Str::of( $remjob->company_name )->substr(0, 1) }}</p>
@@ -47,16 +53,20 @@
         </div>
 
         <div class="col-2">
-            <a href="{{ $remjob->apply_link }}"
-                class="rp-jobrow__apply" 
-                target="_blank">
-                
-                {{ __('Apply to this job') }}
+            @if( $remjob->apply_email == null )
+                <a  href="{{ $remjob->apply_link }}"
+                    class="rp-jobrow__apply" target="_blank"> 
+            @else
+                <a  href="mailto:{{ $remjob->apply_email }}"  
+                    class="rp-jobrow__apply" target="_blank" rel="noindex nofollow">  
 
-            </a>
+            @endif
+                    {{ __('Apply to this job') }}
+                </a>
         </div>
 
     </div>
+
     <div class="rp-row__body collapse" id="{{ 'position-' . $remjob->id}}"  data-parent="#rp-accordion">
         
         <!-- <p>{{ $remjob->description }}</p> -->
