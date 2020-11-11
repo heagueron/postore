@@ -1,6 +1,6 @@
 <?php
 
-use App\ApiConnectors\TwitterAPIExchange;
+use App\Remjob;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +34,11 @@ Route::get('/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTa
 Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
 
 Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job');
+
+Route::get('/checkout/{id}', function ( $id ) {
+    $remjob = Remjob::find( $id );
+        return view( 'remjobs.checkout', compact('remjob') );
+})->name('checkout');
 
 
 Auth::routes();
@@ -115,6 +120,7 @@ Route::get('/view-clear', function() {
 
 use Illuminate\Support\Str;
 use App\ApiConnectors\TwitterGateway;
+use App\ApiConnectors\TwitterAPIExchange;
 
 Route::get('/tap', function() {
 

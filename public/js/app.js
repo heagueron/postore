@@ -53599,15 +53599,15 @@ var formControl = function formControl() {
 
   companyNameElement.addEventListener('keyup', function (e) {
     if (e.target.value != '') {
-      if (sessionStorage.logo == null || sessionStorage.logo == undefined) {
-        console.log("sessionStorage.logo: ".concat(sessionStorage.logo));
-        console.log("removing preview_logo_container");
+      // Company name has data
+      if (!document.querySelector('#company-logo-input').value) {
         document.querySelector('#preview_logo_container').innerHTML = '';
       }
 
       document.querySelector('#preview_company_container').innerHTML = e.target.value;
     } else {
-      if (sessionStorage.logo == null || sessionStorage.logo == undefined) {
+      // Company name empty
+      if (!document.querySelector('#company-logo-input').value) {
         document.querySelector('#preview_logo_container').innerHTML = "<img src=\"".concat(PATH, "/storage/logos/logo1.png\" alt=\"logo\">");
       }
 
@@ -53794,10 +53794,15 @@ var formControl = function formControl() {
 
 
 setTimeout(function () {
-  // Check if active url is the post a job page
+  console.log(window.location.href); // Check if active url is the post a job page
+
   if (window.location.href.indexOf("post-a-job") > -1) {
     console.log("active url is: the post a job page");
     formControl();
+  }
+
+  if (window.location.href.indexOf("checkout") > -1) {
+    console.log('On checkout page ... ');
   }
 }, 500);
 

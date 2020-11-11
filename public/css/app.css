@@ -11475,7 +11475,7 @@ input[type=submit] {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 5px;
+  padding: 0px;
   /*padding-bottom: 0;*/
   /*word-wrap: break-word;*/
   /*background-color: #fff;*/
@@ -11505,6 +11505,11 @@ input[type=submit] {
 
 .rp-row__standard {
   background-color: #fff;
+}
+
+.row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
 }
 
 /* Job listing */
@@ -11557,7 +11562,7 @@ input[type=submit] {
   color: #fff !important;
   text-decoration: none !important;
   font-size: 0.9em !important;
-  padding: 10px !important;
+  padding: 10px 20px 10px 20px !important;
   box-shadow: 0 4px 4px -2px rgba(180, 181, 182, 0.2) !important;
   transition: all 0.2s !important;
   height: 40px;
@@ -11576,6 +11581,32 @@ input[type=submit] {
   transition: all 0.2s !important;
   height: 40px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rp-jobrow__apply__checkout {
+  background-color: #4CAF50 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  font-size: 0.9em !important;
+  padding: 10px 20px 10px 20px !important;
+  box-shadow: 0 4px 4px -2px rgba(180, 181, 182, 0.2) !important;
+  transition: all 0.2s !important;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.rp-jobrow__cancel {
+  background-color: grey !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  font-size: 0.9em !important;
+  padding: 10px 20px 10px 20px !important;
+  box-shadow: 0 4px 4px -2px rgba(180, 181, 182, 0.2) !important;
+  transition: all 0.2s !important;
+  height: 40px;
   justify-content: center;
   align-items: center;
 }

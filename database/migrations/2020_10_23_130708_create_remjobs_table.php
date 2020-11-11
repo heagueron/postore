@@ -39,6 +39,14 @@ class CreateRemjobsTable extends Migration
 
             $table->enum('front_category_2w',['on', null ])->default(null)->nullable();
 
+            $table->boolean('active')->default(0);
+            $table->boolean('paid')->default(0);
+            $table->string('gumroad_license')->nullable();
+            $table->string('gumroad_product_id')->nullable();
+
+            $table->integer('total')->nullable();
+            $table->string('gumroad_link')->nullable();
+
             $table->timestamps();
         });
     }

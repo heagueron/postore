@@ -30,8 +30,8 @@ class StoreRemjob extends FormRequest
             'tags'          => ['required', 'max:100'],      
             'description'   => ['required'],
             'category_id'   => [ Rule::in(['1','2','3','4','5','6']) ],
-            'apply_link'    => ['exclude_if:apply-mode,==,email', 'nullable', 'url'],
-            'apply_email'   => ['exclude_if:apply-mode,==,link', 'nullable','email'],
+            'apply_link'    => ['exclude_if:apply_mode,==,email', 'url'],
+            'apply_email'   => ['exclude_if:apply_mode,==,link', 'email'],
             'min_salary'    => ['nullable', 'max:7', 'lte:max_salary'], 
             'max_salary'    => ['nullable', 'max:7', 'gte:min_salary'],
             'locations'     => ['max:100'],
@@ -60,8 +60,8 @@ class StoreRemjob extends FormRequest
             'apply_link.required'   => 'A url link to apply is required.',
             'apply_link.url'        => 'Please enter a valid url link so candidates can apply for the position.',
 
-            'apply_email.required'   => 'A email to apply is required.',
-            'apply_email.url'        => 'Please enter a valid email so candidates can apply for the position.',
+            'apply_email.required'  => 'A email to apply is required.',
+            'apply_email.email'     => 'Please enter a valid email so candidates can apply for the position.',
 
             'min_salary.max'        => 'Enter a minimun salary less than 999,999.',
             'min_salary.lte'        => 'Minimun salary must be less than or equal to Maximun Salary',

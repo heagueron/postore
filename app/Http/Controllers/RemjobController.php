@@ -48,7 +48,7 @@ class RemjobController extends Controller
      */
     public function store(StoreRemjob $request)
     {
-        //dd($request);
+        //dd($request()->show_logo);
 
         // Create the remote job post
         $remjob = Remjob::create([
@@ -72,6 +72,8 @@ class RemjobController extends Controller
             'front_category_2w' => request()->front_category_2w,
       
         ]);
+
+        //dd( request(),  $remjob->show_logo, $remjob->highlight_yellow, $remjob->front_page_2w, $remjob->front_category_2w);
 
         // Add media to the remote job model
         if( !is_null( request()->company_logo ) ){
@@ -100,9 +102,23 @@ class RemjobController extends Controller
 
         $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
 
+        // Calculate job post total
+        $jobPostTotal = 15
+            + ($remjob->show_logo * 15)
+            + ($remjob->highlight_yellow * 15)
+            + ($remjob->front_page_2w * 30)
+            + ($remjob->front_category_2w * 15);
+
+        $remjob->update([ 'total' => $jobPostTotal ]);
+
+        //dd($remjob->total);
+        // Store the new Remjob id...
+        session([ 'newRemjobId' => $remjob->id ]);
+
+        return redirect()->route( 'checkout', [$remjob] );
 
         // Back to remote job list
-        return redirect('/')->with('flash', 'New Remote Job posted!');
+        //return redirect('/')->with('flash', 'New Remote Job posted!');
 
     }
 
@@ -146,7 +162,6 @@ class RemjobController extends Controller
                 $remjobs = $remjobs = $tag->remjobs()->orderBy('created_at', 'desc')->get();
             } else { $remjobs = null; }
 
-            
         }
         
         return view( 'landing', compact('remjobs') );

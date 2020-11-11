@@ -3,14 +3,14 @@
 <div class="rp-row " style="padding:0">
 
 
-    @if( $remjob->highlight_yellow == 'on' )
+    @if( $remjob->highlight_yellow )
     <div class="row rp-row__header job-box rp-row__highlight" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}" style="margin-left:0;margin-right:0;">
     @else
     <div class="row rp-row__header job-box rp-row__standard" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}" style="margin-left:0;margin-right:0;">
     @endif
 
         <div class="col">
-            @if( $remjob->company_logo != null and $remjob->show_logo == 'on' )
+            @if( $remjob->company_logo != null and $remjob->show_logo )
                 <img src="{{ asset('storage/' . $remjob->company_logo ) }}" alt="LOGO">
             @else
                 <p style="font-size:2.0rem;">{{ Str::of( $remjob->company_name )->substr(0, 1) }}</p>
@@ -61,7 +61,7 @@
                     class="rp-jobrow__apply" target="_blank" rel="noindex nofollow">  
 
             @endif
-                    {{ __('Apply to this job') }}
+                    {{ __('Apply') }}
                 </a>
         </div>
 

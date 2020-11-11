@@ -21,7 +21,7 @@
     <hr class="m-5">
 
     <div class="container">
-    
+
         <form action="{{ route('remjobs.store') }}" method="post" enctype="multipart/form-data" id="post-job-form">
             @csrf
 
@@ -317,7 +317,7 @@
                 <div class="m-4">
 
                     <div class="custom-control custom-checkbox mb-3">
-                        @if( !is_null( old('show_logo') ) and old('show_logo') == true )
+                        @if( !is_null( old('show_logo') ) and old('show_logo') == 'on' )
                             <input type="checkbox" class="custom-control-input" id="show-logo" name="show_logo" checked>
                         @else 
                             <input type="checkbox" class="custom-control-input" id="show-logo" name="show_logo">
@@ -326,7 +326,7 @@
                     </div>
 
                     <div class="custom-control custom-checkbox mb-3">
-                        @if( !is_null( old('highlight_yellow') ) and old('highlight_yellow') == true )
+                        @if( !is_null( old('highlight_yellow') ) and old('highlight_yellow') == 'on' )
                             <input type="checkbox" class="custom-control-input" id="highlight-yellow" name="highlight_yellow" checked>
                         @else
                             <input type="checkbox" class="custom-control-input" id="highlight-yellow" name="highlight_yellow"> 
@@ -335,21 +335,21 @@
                     </div>
 
                     <div class="custom-control custom-checkbox mb-3">
-                        @if( !is_null( old('front_page_2w') ) and old('front_page_2w') == true )
+                        @if( !is_null( old('front_page_2w') ) and old('front_page_2w') == 'on' )
                             <input type="checkbox" class="custom-control-input" id="front-page-2w" name="front_page_2w" checked>
                         @else
                             <input type="checkbox" class="custom-control-input" id="front-page-2w" name="front_page_2w">
                         @endif
-                        <label class="custom-control-label pt-1" for="front-page-2w">Show on front page for 2 weeks ( +$60 )</label>
+                        <label class="custom-control-label pt-1" for="front-page-2w">Show on front page for 2 weeks ( +$30 )</label>
                     </div>
 
                     <div class="custom-control custom-checkbox mb-3">
-                        @if( !is_null( old('front_category_2w') ) and old('front_category_2w') == true )
+                        @if( !is_null( old('front_category_2w') ) and old('front_category_2w') == 'on' )
                             <input type="checkbox" class="custom-control-input" id="front-category-2w" name="front_category_2w" checked>
                         @else
                             <input type="checkbox" class="custom-control-input" id="front-category-2w" name="front_category_2w">
                         @endif
-                        <label class="custom-control-label pt-1" for="front-category-2w">Show on front page of category for 2 weeks ( +$60 )</label>
+                        <label class="custom-control-label pt-1" for="front-category-2w">Show on front page of category for 2 weeks ( +$15 )</label>
                     </div>
 
                 </div>

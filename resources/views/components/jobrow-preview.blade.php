@@ -41,7 +41,7 @@
         <!-- apply button preview -->
         <div class="col-2 pr-2 pl-1 d-flex justify-content-center align-content-center">
             <p class="rp-jobrow__preview"> 
-                {{ __('Apply to this job') }}
+                {{ __('Apply') }}
             </p>
         </div>
 
