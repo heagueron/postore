@@ -25,20 +25,38 @@ Route::get('/', 'RemjobController@index')->name('landing');
 
 
 // REMOTE JOBS
-Route::get('/job_tags', 'RemJobController@job_tags')->name('remjobs.job_tags');
 Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term')->middleware('cors');
 
 Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job');
 Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store');
-Route::get('/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
-Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
 
-Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job');
+// Route::get('/edit-remote-job/{remjob}', 'RemJobController@edit')->name('edit-remote-job')->middleware('auth');
+// Route::patch('/{remjob}', 'RemJobController@update')->name('update-remote-job')->middleware('auth');
+
+
+// REMOTE JOBS SEARCH
+Route::get('/remjobs/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
+Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
 
 Route::get('/checkout/{id}', function ( $id ) {
     $remjob = Remjob::find( $id );
         return view( 'remjobs.checkout', compact('remjob') );
 })->name('checkout');
+
+// ADMIN ROUTES
+// Route::prefix('admin')->middleware('auth')->group(function () {
+//     Route::get('remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
+//     Route::get('/remjobs/{remjob}/edit', 'Admin\RemjobController@edit')->name('admin.remjobs.edit');
+//     Route::delete('/remjobs/{remjob}', 'Admin\RemjobController@destroy')->name('admin.remjobs.destroy');
+// });
+
+Route::group( 
+    ['prefix' => 'admin','middleware' => ['auth', 'admin']], 
+    function () {
+        Route::get('remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
+        Route::get('/remjobs/{remjob}/edit', 'Admin\RemjobController@edit')->name('admin.remjobs.edit');
+        Route::delete('/remjobs/{remjob}', 'Admin\RemjobController@destroy')->name('admin.remjobs.destroy');
+});
 
 
 Auth::routes();
@@ -67,9 +85,12 @@ Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@d
 Route::get('/sposts', 'SpostController@index')->name('sposts.index');
 Route::get('/sposts/create', 'SpostController@create')->name('sposts.create');
 Route::post('/sposts', 'SpostController@store');
+
 Route::post('/sposts/{spost}', 'SpostController@sendNow')->name('sposts.send_now')->middleware('auth');
+
 Route::get('/sposts/{spost}/edit', 'SpostController@edit')->name('sposts.edit')->middleware('auth');
 Route::patch('/sposts/{spost}', 'SpostController@update')->name('sposts.update')->middleware('auth');
+
 Route::delete('/sposts/{spost}', 'SpostController@destroy')->name('sposts.destroy')->middleware('auth');
 Route::get('/sposts/detail/{spost}', 'SpostController@detail')->name('sposts.detail');
 

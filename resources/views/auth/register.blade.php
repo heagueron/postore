@@ -1,4 +1,4 @@
-@extends('layouts.start')
+@extends('layouts.auth')
 
 @section('content')
 <div class="container d-flex flex-column">

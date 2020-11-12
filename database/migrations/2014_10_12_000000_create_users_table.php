@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('is_admin')->nullable();
             $table->string('timezone', 60)->nullable();
             $table->enum('category',['basic', 'pro'])->default('basic');
             $table->rememberToken();

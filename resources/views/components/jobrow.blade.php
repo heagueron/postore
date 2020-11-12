@@ -36,7 +36,7 @@
 
         <div class="col-4 pb-7">
             @foreach( $remjob->tags as $tag )
-                <a href="{{'remote-'.$tag->name.'-jobs'}}" class="job-badget">
+                <a href="{{  route( 'remjobs.searchByTags', 'remote-'.$tag->name.'-jobs' )  }}"  class="job-badget">
                     <button 
                         class="rp-tag-item"  
                         title="{{'browse '.$tag->name.' jobs'}}"

@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('title', 'POSTORE')
+@section('title', 'Remote Jobs')
 
 @section('content')
 <div class="container">

@@ -109,7 +109,10 @@ class RemjobController extends Controller
             + ($remjob->front_page_2w * 30)
             + ($remjob->front_category_2w * 15);
 
-        $remjob->update([ 'total' => $jobPostTotal ]);
+        $remjob->update([ 
+            'total'        => $jobPostTotal,
+            'gumroad_link' => $this->determineGumroadLink( $remjob ), 
+        ]);
 
         //dd($remjob->total);
         // Store the new Remjob id...
@@ -257,6 +260,49 @@ class RemjobController extends Controller
         $fixedLogo = Image::make( public_path('storage/' . $remjob->company_logo) )->fit(60, 60);
         $fixedLogo->save();    
 
+    }
+
+    private function determineGumroadLink( $remjob ) {
+        $l = $remjob->show_logo;
+        $h = $remjob->highlight_yellow;
+        $fp = $remjob->front_page_2w;
+        $fc = $remjob->front_category_2w;
+
+        if ( !$l and !$h and !$fp and !$fc ) {
+            $gumroadLink = 'link-0000';
+        } elseif ( !$l and !$h and !$fp and $fc ) {
+            $gumroadLink = 'link-0001';
+        } elseif ( !$l and !$h and $fp and !$fc ) {
+            $gumroadLink = 'link-0010';
+        } elseif ( !$l and !$h and $fp and $fc ) {
+            $gumroadLink = 'link-0011';
+        } elseif ( !$l and $h and !$fp and !$fc ) {
+            $gumroadLink = 'link-0100';
+        } elseif ( !$l and $h and !$fp and $fc ) {
+            $gumroadLink = 'link-0101';
+        } elseif ( !$l and $h and $fp and !$fc ) {
+            $gumroadLink = 'link-0110';
+        } elseif ( !$l and $h and $fp and $fc ) {
+            $gumroadLink = 'link-0111';
+        } elseif ( $l and !$h and !$fp and !$fc ) {
+            $gumroadLink = 'link-1000';
+        } elseif ( $l and !$h and !$fp and $fc ) {
+            $gumroadLink = 'link-1001';
+        } elseif ( $l and !$h and $fp and !$fc ) {
+            $gumroadLink = 'link-1010';
+        } elseif ( $l and !$h and $fp and $fc ) {
+            $gumroadLink = 'link-1011';
+        } elseif ( $l and $h and !$fp and !$fc ) {
+            $gumroadLink = 'link-1100';
+        } elseif ( $l and $h and !$fp and $fc ) {
+            $gumroadLink = 'link-1101';
+        } elseif ( $l and $h and $fp and !$fc ) {
+            $gumroadLink = 'link-1110';
+        } elseif ( $l and $h and $fp and $fc ) {
+            $gumroadLink = 'link-1111';
+        }
+
+        return $gumroadLink;
     }
 
 

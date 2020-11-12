@@ -28,14 +28,14 @@
         <div class="rp-row " style="padding:0">
 
 
-            @if( $remjob->highlight_yellow == 'on' )
+            @if( $remjob->highlight_yellow )
             <div class="row rp-row__header job-box rp-row__highlight">
             @else
             <div class="row rp-row__header job-box rp-row__standard">
             @endif
 
                 <div class="col">
-                    @if( $remjob->company_logo != null and $remjob->show_logo == 'on' )
+                    @if( $remjob->company_logo != null and $remjob->show_logo )
                         <img src="{{ asset('storage/' . $remjob->company_logo ) }}" alt="LOGO">
                     @else
                         <p style="font-size:2.0rem;">{{ Str::of( $remjob->company_name )->substr(0, 1) }}</p>
@@ -126,7 +126,7 @@
     <thead>
       <tr>
         <th>{{__('Your Job Post has')}}</th>
-        <th>$</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -154,22 +154,19 @@
 
       <tr>
         <td><strong>{{__('Total')  }}</strong></td>
-        <td>{{ $remjob->total }}</td>
+        <td><strong>${{ $remjob->total }}</strong></td>
       </tr>
 
     </tbody>
   </table>
 
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-center">
 
-        <a href="#" target="_blank"
-            class="rp-jobrow__cancel"> 
-            {{ __('Back') }}
-        </a>
         <a  href="#" target="_blank"
             class="rp-jobrow__apply__checkout"> 
             {{ __('Buy this') }}
         </a>
+        <p>LINK: {{ $remjob->gumroad_link }}</p>
 
   </div>
 

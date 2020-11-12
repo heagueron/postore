@@ -48,6 +48,7 @@
             @endif
 
             <flash  class="alert-flash" message="{{ session('flash') }}"></flash>
+            <fail  class="alert-flash" message="{{ session('fail') }}"></fail>
 
         
     </div>

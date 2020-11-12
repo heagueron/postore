@@ -33,7 +33,10 @@ class SpostController extends Controller
      */
     public function index()
     {
-        $user = \Auth::user();
+        // $user = \Auth::user();
+        $user = \App\User::find(1);
+
+        //dd( $user );
 
         $sposts = $user->sposts()->orderBy('created_at', 'desc')->get();
 
