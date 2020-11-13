@@ -54012,7 +54012,30 @@ var formControl = function formControl() {
         document.getElementById('apply-mode-info').innerHTML = 'The job apply email.';
       }
     });
-  }
+  } // Get company data from database
+
+
+  companyEmailElement = document.querySelector('#companyEmailElement');
+  companyEmailElement.addEventListener('change', function () {
+    console.log("change! email entered: ".concat(this.value));
+    fetch("".concat(PATH, "/companies/search_company_by_email/").concat(this.value)).then(function (response) {
+      return response.json();
+    }).then(function (result) {
+      console.log(result);
+
+      if (result.company) {
+        console.log('hay datos');
+        document.querySelector('#companyNameElement').value = result.company.name;
+        document.querySelector('#companyIdElement').value = result.company.id;
+
+        if (result.company.twitter) {
+          document.querySelector('#companyTwitterElement').value = result.company.twitter;
+        }
+      } else {
+        console.log('no hay datos');
+      }
+    });
+  });
 }; // Delay to allow for elements to appear before assigning event listeners.
 
 

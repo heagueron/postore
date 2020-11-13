@@ -16,7 +16,7 @@
             @csrf
             @method('PATCH')
 
-            {{-- New SpostForm Component --}}
+            {{-- SpostForm Component --}}
             <x-spost-form mode="edit" :spost="$spost"  />
             
             <input hidden name="user_id" value="{{ $user->id }}" id="post-user-id">

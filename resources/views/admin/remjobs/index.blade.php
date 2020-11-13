@@ -19,7 +19,7 @@
                 
                 @forelse($remjobs as $remjob)
                     <tr>
-                        <td>{{ $remjob->company_name }}</td>
+                        <td>{{ $remjob->company->name }}</td>
                         <td>{{ $remjob->position }}</td>
                         <td>{{ $remjob->created_at }}</td>
                         <td class="d-flex justify-content-between">

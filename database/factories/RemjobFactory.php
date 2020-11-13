@@ -11,8 +11,6 @@ $factory->define(Remjob::class, function (Faker $faker) {
 
     $minSalary = $faker->numberBetween($min = 1000, $max = 5000);
 
-    $companyName = $faker->unique()->company;
-
     $positionLocation = '';
     $locationCount = rand(1,3);
     for ($x = 0; $x < $locationCount; $x++) {
@@ -37,17 +35,8 @@ $factory->define(Remjob::class, function (Faker $faker) {
         'apply_link'    => $faker->url,
         'apply_email'   => $faker->email,
         'apply_mode'    => $faker->randomElement(['link', 'email']),
-        'company_name'  => $companyName,
-        'company_slug'  => Str::slug($companyName, '-'),
-        'company_email' => $faker->email,
-        'company_logo'  => $faker->randomElement([
-                                'logos/logo1.png',
-                                'logos/logo2.png',
-                                'logos/logo3.png',
-                                'logos/logo4.png',
-                                'logos/logo5.png',
-                                null
-                            ]),
+        
+        
     ];
 });
 

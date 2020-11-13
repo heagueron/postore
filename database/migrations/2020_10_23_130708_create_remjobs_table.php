@@ -25,18 +25,12 @@ class CreateRemjobsTable extends Migration
             $table->string('apply_link')->nullable();
             $table->string('apply_email')->nullable();
             $table->enum('apply_mode',['link', 'email'])->default('link');
-            $table->string('company_name');
-            $table->string('company_slug');
-            $table->string('company_email');
-            $table->string('company_twitter')->nullable();
-            $table->string('company_logo')->nullable();
+            
+            $table->unsignedInteger('company_id')->nullable();
 
             $table->enum('show_logo',['on', null ])->default(null)->nullable();
-
             $table->enum('highlight_yellow',['on', null ])->default(null)->nullable();
-
             $table->enum('front_page_2w',['on', null ])->default(null)->nullable();
-
             $table->enum('front_category_2w',['on', null ])->default(null)->nullable();
 
             $table->boolean('active')->default(0);

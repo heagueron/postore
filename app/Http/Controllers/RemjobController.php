@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tag;
 use App\Remjob;
 use App\Category;
+use App\Company;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRemjob;
@@ -48,7 +49,7 @@ class RemjobController extends Controller
      */
     public function store(StoreRemjob $request)
     {
-        //dd($request()->show_logo);
+        //dd( request() );
 
         // Create the remote job post
         $remjob = Remjob::create([
@@ -62,10 +63,6 @@ class RemjobController extends Controller
             'apply_link'        => request()->apply_link,
             'apply_email'       => request()->apply_email,
             'apply_mode'        => request()->apply_mode,
-            'company_name'      => request()->company_name,
-            'company_slug'      => Str::slug( request()->company_name, '-' ),
-            'company_email'     => request()->company_email,
-            'company_twitter'   => request()->company_twitter,
             'show_logo'         => request()->show_logo,
             'highlight_yellow'  => request()->highlight_yellow,
             'front_page_2w'     => request()->front_page_2w,
@@ -73,11 +70,21 @@ class RemjobController extends Controller
       
         ]);
 
-        //dd( request(),  $remjob->show_logo, $remjob->highlight_yellow, $remjob->front_page_2w, $remjob->front_category_2w);
+        // Company
+        if( is_null( request()->company_id ) ){
+            // Create company
+            $company = Company::create([
+                'name'  => request()->company_name,
+                'slug'  => Str::slug( request()->company_name, '-' ),
+                'email' => request()->company_email,
+            ]);
+        } else {
+            $company = Company::findOrFail( request()->company_id );
+        }
 
-        // Add media to the remote job model
+        // Add media to the company model
         if( !is_null( request()->company_logo ) ){
-            $this->storeMedia ($remjob );
+            $this->storeMedia( $company );
         }
 
         // tags for the remjob-tag pivot table
@@ -110,15 +117,18 @@ class RemjobController extends Controller
             + ($remjob->front_category_2w * 15);
 
         $remjob->update([ 
-            'total'        => $jobPostTotal,
-            'gumroad_link' => $this->determineGumroadLink( $remjob ), 
+            'total'         => $jobPostTotal,
+            'gumroad_link'  => $this->determineGumroadLink( $remjob ),
+            'company_id'    => $company->id, 
         ]);
 
-        //dd($remjob->total);
         // Store the new Remjob id...
         session([ 'newRemjobId' => $remjob->id ]);
 
-        return redirect()->route( 'checkout', [$remjob] );
+        // Head to preview and checkout page
+        //return redirect()->route( 'checkout', [$remjob] );
+
+        return redirect()->route( 'checkout', [ $company->slug.'-'.Str::slug( request()->position, '-' ).'-'.$remjob->id ] );
 
         // Back to remote job list
         //return redirect('/')->with('flash', 'New Remote Job posted!');
@@ -179,7 +189,8 @@ class RemjobController extends Controller
      */
     public function searchByCompany( $company_slug )
     {
-        $remjobs = Remjob::where( 'company_slug', 'like', $company_slug )->orderBy('created_at', 'desc')->get();
+        $company = Company::where( 'slug', 'like', $company_slug )->first();
+        $remjobs = Remjob::where( 'company_id', $company->id )->orderBy('created_at', 'desc')->get();
         
         return view( 'landing', compact('remjobs') );
         
@@ -251,15 +262,15 @@ class RemjobController extends Controller
      * @param Remjob $remjob
      * @return void
      */
-    private function storeMedia($remjob)
+    private function storeMedia( $company )
     {
-        $remjob->update([
-            'company_logo' => request()->company_logo->store('logos', 'public')
+        $company->update([
+            'logo' => request()->company_logo->store('logos', 'public')
         ]);
 
-        $fixedLogo = Image::make( public_path('storage/' . $remjob->company_logo) )->fit(60, 60);
+        $fixedLogo = Image::make( public_path('storage/' . $company->logo) )->fit(60, 60);
         $fixedLogo->save();    
-
+        return;
     }
 
     private function determineGumroadLink( $remjob ) {

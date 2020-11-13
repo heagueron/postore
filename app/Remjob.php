@@ -8,6 +8,11 @@ class Remjob extends Model
 {
     protected $guarded = [];
 
+    public function company()
+    {
+        return $this->belongsTo(\App\Company::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(\App\Category::class);

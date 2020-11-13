@@ -30,17 +30,35 @@
 
                 <div class="rp-group__title">JOB</div>
                 
-                <!-- company_name -->
+                <!-- company name -->
                 <div>
                     <span class="rp-group__head">Company name*</span>
                     <input  data-required="required" autocomplete="off" id="companyNameElement"
                             type="text" name="company_name" data-name="your company name"
                             value="{{ !is_null( old('company_name'))? old('company_name') : '' }}"               
                     >
+                    {{-- Hidden input to hold company id --}}
+                    <input type="hidden" id="companyIdElement" name="company_id" value="{{ !is_null( old('company_id'))? old('company_id') : '' }}">
+                    
                     <span class="rp-group__info">
-                        Your company's brand or trade name.
+                        Your company's brand or trade name. If you have posted here before, enter your company email below and your logo.
                     </span>
                     @error('company_name') 
+                        <p class="rp-group__error">{{ $message }}</p> 
+                    @enderror
+                </div>
+
+                <!-- company_email -->
+                <div>
+                    <span class="rp-group__head">Company email*</span>
+                    <input  data-required="required" autocomplete="off" id="companyEmailElement"
+                            type="text" name="company_email" data-name="your company email"
+                            value="{{ !is_null( old('company_email'))? old('company_email') : '' }}"               
+                    >
+                    <span class="rp-group__info">
+                        Your company's email.
+                    </span>
+                    @error('company_email') 
                         <p class="rp-group__error">{{ $message }}</p> 
                     @enderror
                 </div>
@@ -257,7 +275,7 @@
             <!-- C O M P A N Y   D E T A I L S -->
             <div class="rp-group">
 
-                <div class="rp-group__title">Company Details</div>
+                <div class="rp-group__title">More Company Details</div>
 
                 <!-- company_logo -->
                 <div>
@@ -277,20 +295,6 @@
                     
                 </div>
                 
-                <!-- company_email -->
-                <div>
-                    <span class="rp-group__head">Company email*</span>
-                    <input  data-required="required" autocomplete="off" id="companyEmailElement"
-                            type="text" name="company_email" data-name="your company email"
-                            value="{{ !is_null( old('company_email'))? old('company_email') : '' }}"               
-                    >
-                    <span class="rp-group__info">
-                        Your company's email.
-                    </span>
-                    @error('company_email') 
-                        <p class="rp-group__error">{{ $message }}</p> 
-                    @enderror
-                </div>
 
                  <!-- company_twitter -->
                  <div>

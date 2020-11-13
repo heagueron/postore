@@ -235,6 +235,27 @@ const formControl = () => {
         });
     } 
 
+    // Get company data from database
+    companyEmailElement = document.querySelector('#companyEmailElement');
+    companyEmailElement.addEventListener('change', function() {
+        console.log(`change! email entered: ${this.value}`);
+        fetch(`${PATH}/companies/search_company_by_email/${this.value}`)
+        .then( response => response.json() )
+        .then( result => {
+            console.log(result)
+            if( result.company ) {
+                console.log( 'hay datos' );
+                document.querySelector('#companyNameElement').value = result.company.name;
+                document.querySelector('#companyIdElement').value = result.company.id;
+                if( result.company.twitter ){
+                   document.querySelector('#companyTwitterElement').value = result.company.twitter; 
+                }
+            } else {
+                console.log( 'no hay datos' );
+            }
+        });
+    });
+
 }
   
 // Delay to allow for elements to appear before assigning event listeners.

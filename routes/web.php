@@ -38,24 +38,26 @@ Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store');
 Route::get('/remjobs/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
 Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
 
-Route::get('/checkout/{id}', function ( $id ) {
-    $remjob = Remjob::find( $id );
+// CHECKOUT
+Route::get('/checkout/{longSlug}', function ( $longSlug ) {
+    $remjob = Remjob::find( Str::afterLast( $longSlug, '-') );
         return view( 'remjobs.checkout', compact('remjob') );
 })->name('checkout');
 
 // ADMIN ROUTES
-// Route::prefix('admin')->middleware('auth')->group(function () {
-//     Route::get('remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
-//     Route::get('/remjobs/{remjob}/edit', 'Admin\RemjobController@edit')->name('admin.remjobs.edit');
-//     Route::delete('/remjobs/{remjob}', 'Admin\RemjobController@destroy')->name('admin.remjobs.destroy');
-// });
-
 Route::group( 
     ['prefix' => 'admin','middleware' => ['auth', 'admin']], 
     function () {
         Route::get('remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
         Route::get('/remjobs/{remjob}/edit', 'Admin\RemjobController@edit')->name('admin.remjobs.edit');
         Route::delete('/remjobs/{remjob}', 'Admin\RemjobController@destroy')->name('admin.remjobs.destroy');
+});
+
+// COMPANY ROUTES
+Route::group( 
+    ['prefix' => 'companies'], 
+    function () {
+        Route::get('search_company_by_email/{email}', 'CompanyController@search_company_by_email');
 });
 
 

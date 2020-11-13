@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
 
         // Remote Jobs
         $this->call(CategorySeeder::class);
+        $this->call(CompanySeeder::class);
         $this->call(TagSeeder::class);
         $this->call(RemjobSeeder::class);  
         //$this->call(RemjobTagSeeder::class);
@@ -39,6 +40,8 @@ class DatabaseSeeder extends Seeder
             
         }
 
+        $companyIds = array_values( App\Company::pluck('id')->toArray() );
+
         // Register in pivot tables
         foreach(App\Remjob::all() as $remjob) {
 
@@ -52,8 +55,14 @@ class DatabaseSeeder extends Seeder
             foreach( $randomTags as $randomTag){
                 $remjob->tags()->attach($randomTag->id);
             }
+
+            // Company
+            $remjob->update([ 
+                'company_id'    => array_rand( $companyIds ),
+            ]);
             
         }
+
 
     }
 }

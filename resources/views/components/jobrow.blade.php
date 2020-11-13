@@ -10,21 +10,21 @@
     @endif
 
         <div class="col">
-            @if( $remjob->company_logo != null and $remjob->show_logo )
-                <img src="{{ asset('storage/' . $remjob->company_logo ) }}" alt="LOGO">
+            @if( $remjob->company->logo != null and $remjob->show_logo )
+                <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="LOGO">
             @else
-                <p style="font-size:2.0rem;">{{ Str::of( $remjob->company_name )->substr(0, 1) }}</p>
+                <p style="font-size:2.0rem;">{{ Str::of( $remjob->company->name )->substr(0, 1) }}</p>
             @endif
         </div>
 
         <div class="col-3 mt-3">
             <h5 class="mb-1 rp-job-title"> {{ ucwords( $remjob->position ) }} </h5>
             <a  class="mb-1 company-badge company-brand"
-                title="{{'browse '.$remjob->company_name.' jobs'}}"
+                title="{{'browse '.$remjob->company->name.' jobs'}}"
                 data-toggle="tooltip"
-                href="{{  route( 'remjobs.searchByCompany', $remjob->company_slug )  }}"  
+                href="{{  route( 'remjobs.searchByCompany', $remjob->company->slug )  }}"  
                 >
-                {{ $remjob->company_name }}
+                {{ $remjob->company->name }}
             </a>
             
             <p class="rp-location"> {{ strtoupper( $remjob->locations ) }} </p>
@@ -81,8 +81,8 @@
 
             <p class="mr-2"> {{__('See all jobs at ')}}</p>
             <p>
-                <a class="company-brand" href="{{  route( 'remjobs.searchByCompany', $remjob->company_slug )  }}" >
-                    {{ $remjob->company_name }}
+                <a class="company-brand" href="{{  route( 'remjobs.searchByCompany', $remjob->company->slug )  }}" >
+                    {{ $remjob->company->name }}
                 </a>
             </p>
             
