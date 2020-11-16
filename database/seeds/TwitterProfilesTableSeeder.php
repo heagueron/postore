@@ -29,18 +29,18 @@ class TwitterProfilesTableSeeder extends Seeder
                 'created_at' => '2020-03-04 14:41:49',
                 'updated_at' => '2020-03-04 14:41:49',
             ),
-            // 1 => 
-            // array (
-            //     'id' => 8,
-            //     'handler' => 'JMServca',
-            //     'access_token' => '389702185-Cq4XVXP4rAuO3K3DspCq2t8khpVp8UWHHflMU1Ff',
-            //     'access_token_secret' => 'UG6BuulBrc7rnYnhySzwpRu9H0iSr8kJsIxrzQ1DCwmTm',
-            //     'user_id' => 1,
-            //     'twitter_user_id' => 389702185,
-            //     'avatar' => 'https://pbs.twimg.com/profile_images/1195504818590244864/SfiowUwE_normal.jpg',
-            //     'created_at' => '2020-03-22 20:58:05',
-            //     'updated_at' => '2020-03-22 20:58:05',
-            // ),
+            1 => 
+            array (
+                    'id' => 8,
+                    'handler' => 'JMServca',
+                    'access_token' => '389702185-Cq4XVXP4rAuO3K3DspCq2t8khpVp8UWHHflMU1Ff',
+                    'access_token_secret' => 'UG6BuulBrc7rnYnhySzwpRu9H0iSr8kJsIxrzQ1DCwmTm',
+                    'user_id' => 1,
+                    'twitter_user_id' => 389702185,
+                    'avatar' => 'https://pbs.twimg.com/profile_images/1195504818590244864/SfiowUwE_normal.jpg',
+                    'created_at' => '2020-03-22 20:58:05',
+                    'updated_at' => '2020-03-22 20:58:05',
+                ),
             2 => 
             array (
                 'id' => 11,

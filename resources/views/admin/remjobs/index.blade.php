@@ -6,6 +6,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+
+            <div class="d-flex mb-4">
+                <a  rel="nofollow"
+                    href="{{ route('admin.api-jobs.rok') }}" 
+                    alt="Get api jobs" class="post-button">
+                    {{ __('Jobs from R|OK') }}
+                </a>
+            </div>
+                
             <table class="table">
                 <thead>
                 <tr>
@@ -23,11 +32,15 @@
                         <td>{{ $remjob->position }}</td>
                         <td>{{ $remjob->created_at }}</td>
                         <td class="d-flex justify-content-between">
+                            
+                            {{-- Edit --}}
                             <div>
                                 <a class="ml-2" href="{{ route('admin.remjobs.edit', $remjob->id) }}">
                                     <i class="fa fa-edit" style="font-size:18px;"></i>
                                 </a>
                             </div>
+
+                            {{-- Delete --}}
                             <div>
                                 <form method="POST" action="{{ route('admin.remjobs.destroy', $remjob->id) }}">
                                     @csrf @method('DELETE')
@@ -35,6 +48,13 @@
                                         <i class="fa fa-trash" style="font-size:18px;color:red"></i>
                                     </button>
                                 </form>
+                            </div>
+
+                            {{-- Tweet --}}
+                            <div>
+                                <a class="ml-2" href="{{ route('admin.remjobs.tweet', $remjob->id) }}">
+                                    <i class="fab fa-twitter" style="font-size:18px;color:#0066ff"></i>
+                                </a>
                             </div>
                         </td>
                     </tr> 
@@ -44,6 +64,7 @@
 
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>

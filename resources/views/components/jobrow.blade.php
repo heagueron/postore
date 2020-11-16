@@ -10,11 +10,21 @@
     @endif
 
         <div class="col">
-            @if( $remjob->company->logo != null and $remjob->show_logo )
-                <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="LOGO">
+
+            @if( $remjob->total != null )
+                @if( $remjob->company->logo != null and $remjob->show_logo )
+                    <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="LOGO">
+                @else
+                    <p style="font-size:2.0rem;">{{ Str::of( $remjob->company->name )->substr(0, 1) }}</p>
+                @endif
             @else
-                <p style="font-size:2.0rem;">{{ Str::of( $remjob->company->name )->substr(0, 1) }}</p>
+                @if( $remjob->company->logo != null and $remjob->show_logo )
+                    <img src="{{ $remjob->company->logo }}" alt="LOGO" class="w-100">
+                @else
+                    <p style="font-size:2.0rem;">{{ Str::of( $remjob->company->name )->substr(0, 1) }}</p>
+                @endif
             @endif
+
         </div>
 
         <div class="col-3 mt-3">
@@ -69,8 +79,11 @@
 
     <div class="rp-row__body collapse" id="{{ 'position-' . $remjob->id}}"  data-parent="#rp-accordion">
         
-        <!-- <p>{{ $remjob->description }}</p> -->
-        <div class="p-5">{!! $remjob->description !!}</div>
+        @if( $remjob->total != null )
+            <div class="p-5">{!! $remjob->description !!}</div>
+        @else
+            <p class="pl-5">{{ __('Press Apply to get this remote job details.') }}</p>
+        @endif
 
         @if($remjob->locations)
             <h4 class="pl-5">{{__('Location')}}</h4>

@@ -51,6 +51,8 @@ Route::group(
         Route::get('remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
         Route::get('/remjobs/{remjob}/edit', 'Admin\RemjobController@edit')->name('admin.remjobs.edit');
         Route::delete('/remjobs/{remjob}', 'Admin\RemjobController@destroy')->name('admin.remjobs.destroy');
+        Route::get('/remjobs/{remjob}/tweet', 'Admin\RemjobController@tweet')->name('admin.remjobs.tweet');
+        Route::get('api-jobs.rok', 'Admin\RemjobController@rok')->name('admin.api-jobs.rok');
 });
 
 // COMPANY ROUTES

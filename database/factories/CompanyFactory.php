@@ -13,12 +13,6 @@ $factory->define(Company::class, function (Faker $faker) {
         'name'  => $companyName,
         'slug'  => Str::slug($companyName, '-'),
         'email' => $faker->email,
-        'logo'  => $faker->randomElement([
-                                'logos/logo1.png',
-                                'logos/logo2.png',
-                                'logos/logo3.png',
-                                'logos/logo4.png',
-                                null
-                            ]),
+        'logo'  => $faker->randomElement(['logos/logo1.png', 'logos/logo2.png', 'logos/logo3.png', 'logos/logo4.png', null]),
     ];
 });
