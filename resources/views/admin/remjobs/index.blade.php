@@ -10,8 +10,18 @@
             <div class="d-flex mb-4">
                 <a  rel="nofollow"
                     href="{{ route('admin.api-jobs.rok') }}" 
-                    alt="Get api jobs" class="post-button">
-                    {{ __('Jobs from R|OK') }}
+                    alt="Get api jobs" class="post-button mr-2">
+                    {{ __('Get Jobs from R|OK') }}
+                </a>
+                <a  rel="nofollow"
+                    href="{{ route('admin.api-jobs.remotive') }}" 
+                    alt="Get api jobs" class="post-button mr-2">
+                    {{ __('Get Jobs from remotive') }}
+                </a>
+                <a  rel="nofollow"
+                    href="{{ route('admin.api-jobs.working-nomads') }}" 
+                    alt="Get api jobs" class="post-button mr-2">
+                    {{ __('Get Jobs from working nomads') }}
                 </a>
             </div>
                 
@@ -31,12 +41,12 @@
                         <td>{{ $remjob->company->name }}</td>
                         <td>{{ $remjob->position }}</td>
                         <td>{{ $remjob->created_at }}</td>
-                        <td class="d-flex justify-content-between">
+                        <td class="d-flex justify-content-left">
                             
-                            {{-- Edit --}}
+                            {{-- Tweet --}}
                             <div>
-                                <a class="ml-2" href="{{ route('admin.remjobs.edit', $remjob->id) }}">
-                                    <i class="fa fa-edit" style="font-size:18px;"></i>
+                                <a class="ml-2" href="{{ route('admin.remjobs.tweet', $remjob->id) }}">
+                                    <i class="fab fa-twitter" style="font-size:18px;color:#0066ff"></i>
                                 </a>
                             </div>
 
@@ -50,12 +60,15 @@
                                 </form>
                             </div>
 
-                            {{-- Tweet --}}
+                            @if( $remjob->total )
+                            {{-- Edit --}}
                             <div>
-                                <a class="ml-2" href="{{ route('admin.remjobs.tweet', $remjob->id) }}">
-                                    <i class="fab fa-twitter" style="font-size:18px;color:#0066ff"></i>
+                                <a class="ml-2" href="{{ route('admin.remjobs.edit', $remjob->id) }}">
+                                    <i class="fa fa-edit" style="font-size:18px;"></i>
                                 </a>
                             </div>
+                            @endif
+
                         </td>
                     </tr> 
                 @empty

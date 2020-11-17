@@ -52,7 +52,11 @@ Route::group(
         Route::get('/remjobs/{remjob}/edit', 'Admin\RemjobController@edit')->name('admin.remjobs.edit');
         Route::delete('/remjobs/{remjob}', 'Admin\RemjobController@destroy')->name('admin.remjobs.destroy');
         Route::get('/remjobs/{remjob}/tweet', 'Admin\RemjobController@tweet')->name('admin.remjobs.tweet');
+        
+        // External APIs
         Route::get('api-jobs.rok', 'Admin\RemjobController@rok')->name('admin.api-jobs.rok');
+        Route::get('api-jobs.remotive', 'Admin\RemjobController@remotive')->name('admin.api-jobs.remotive');
+        Route::get('api-jobs.working-nomads', 'Admin\RemjobController@workingNomads')->name('admin.api-jobs.working-nomads');
 });
 
 // COMPANY ROUTES

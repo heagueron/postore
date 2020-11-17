@@ -41,6 +41,8 @@ class CreateRemjobsTable extends Migration
             $table->integer('total')->nullable();
             $table->string('gumroad_link')->nullable();
 
+            $table->string('external_api')->nullable();
+
             $table->timestamps();
         });
     }

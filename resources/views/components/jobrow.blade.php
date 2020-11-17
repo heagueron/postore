@@ -9,6 +9,7 @@
     <div class="row rp-row__header job-box rp-row__standard" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}" style="margin-left:0;margin-right:0;">
     @endif
 
+        {{-- LOGO --}}
         <div class="col">
 
             @if( $remjob->total != null )
@@ -27,6 +28,7 @@
 
         </div>
 
+        {{-- POSITION COMPANY LOCATIONS --}}
         <div class="col-3 mt-3">
             <h5 class="mb-1 rp-job-title"> {{ ucwords( $remjob->position ) }} </h5>
             <a  class="mb-1 company-badge company-brand"
@@ -44,8 +46,9 @@
         <div class="col">
         </div>
 
+        {{-- TAGS --}}
         <div class="col-4 pb-7">
-            @foreach( $remjob->tags as $tag )
+            @foreach( $remjob->tags()->take(5)->get() as $tag )
                 <a href="{{  route( 'remjobs.searchByTags', 'remote-'.$tag->name.'-jobs' )  }}"  class="job-badget">
                     <button 
                         class="rp-tag-item"  
@@ -58,10 +61,12 @@
             @endforeach
         </div>
 
+        {{-- TIME AGO --}}
         <div class="col mt-3">
             <p class="job-date">{{ $remjob->created_at->diffForHumans() }}</p>
         </div>
 
+        {{-- APPLY --}}
         <div class="col-2">
             @if( $remjob->apply_email == null )
                 <a  href="{{ $remjob->apply_link }}"
@@ -77,10 +82,11 @@
 
     </div>
 
+    {{-- DESCRIPTION --}}
     <div class="rp-row__body collapse" id="{{ 'position-' . $remjob->id}}"  data-parent="#rp-accordion">
         
-        @if( $remjob->total != null )
-            <div class="p-5">{!! $remjob->description !!}</div>
+        @if( $remjob->total != null or $remjob->external_api != 'https://remoteok.io')
+            <div class="pl-5">{!! $remjob->description !!}</div>
         @else
             <p class="pl-5">{{ __('Press Apply to get this remote job details.') }}</p>
         @endif

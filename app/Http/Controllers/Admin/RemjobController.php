@@ -40,7 +40,7 @@ class RemjobController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Load jobs from API remoteok.io
      *
      * @return \Illuminate\Http\Response
      */
@@ -48,29 +48,13 @@ class RemjobController extends Controller
     public function rok()
     {
         $response = HTTP::get('https://remoteok.io/api');
-
         $jobsArray = $response->json();
-
         array_shift( $jobsArray );
-
-        // // foreach ( array_slice($jobsArray, 0, 11) as $remApiJob ){
-        // //     if(strpos($remApiJob["company"], 'Ã‚Â ') !== false){
-        // //         $remApiJob["company"] = 'found';
-        // //     }
-        // // }
-        
-
-        // dd( array_slice($jobsArray, 0, 11) );
 
         foreach ( array_slice($jobsArray, 0, 11) as $remApiJob ) {
 
-
-
-
             // Create the remote job post
-
             $remjob = Remjob::create([
-
                 'position'          => STR::before( $remApiJob["position"], '('),
                 'description'       => $remApiJob["description"],
                 'category_id'       => null,
@@ -78,7 +62,6 @@ class RemjobController extends Controller
                 'apply_link'        => $remApiJob["url"],
                 'apply_mode'        => 'link',
                 'show_logo'         => 'on',
-
             ]);
 
             $companyName = STR::before( $remApiJob["company"], 'ÃÂ');
@@ -95,6 +78,11 @@ class RemjobController extends Controller
             } else {
                 $company = Company::where('name', $companyName)->first();
             }
+
+            $remjob->update([ 
+                'company_id'    => $company->id,
+                'external_api'  => 'https://remoteok.io',
+            ]);
 
             // tags for the remjob-tag pivot table
             $tagsIdToLink = [];
@@ -114,14 +102,156 @@ class RemjobController extends Controller
 
             $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
 
-            $remjob->update([ 
-                'company_id'    => $company->id, 
-            ]);
+            
+        }
+        return redirect()->back();
+    }
 
+    /**
+     * Load jobs from API remotive
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function remotive()
+    {
+        $response = HTTP::get('https://remotive.io/api/remote-jobs');
+        $jobsArray = $response->json();
+
+        if( !$jobsArray['job-count'] ) {
+            return back()->with('fail', 'No job found on remotive api');
         }
 
-        return redirect()->back();
+        //dd( array_slice($jobsArray['jobs'], 0, 11) );
 
+        foreach ( array_slice($jobsArray['jobs'], 0, 11) as $remApiJob ) {
+
+            // Create the remote job post
+            $remjob = Remjob::create([
+                'position'          => $remApiJob["title"],
+                'description'       => $remApiJob["description"],
+                'category_id'       => null,
+                'locations'         => $remApiJob["candidate_required_location"],
+                'apply_link'        => $remApiJob["url"],
+                'apply_mode'        => 'link',
+                'show_logo'         => 'on',
+            ]);
+
+            $companyName = $remApiJob["company_name"];
+
+            // Company
+            if( !Company::where('name', $companyName)->exists() ) {
+                // Create company
+                $company = Company::create([
+                    'name'  => $companyName,
+                    'slug'  => Str::slug( $companyName, '-' ),
+                    'email' => 'heagueron@gmail.com',
+                    'logo'  => array_key_exists('company_logo_url', $remApiJob) ? $remApiJob["company_logo_url"] : null,
+                ]);
+            } else {
+                $company = Company::where('name', $companyName)->first();
+            }
+
+            $remjob->update([ 
+                'company_id'    => $company->id,
+                'external_api'  => 'https://remotive.io/',
+            ]);
+
+            // tags for the remjob-tag pivot table
+            $tagsIdToLink = [];
+
+            // Add every tag, if it does not exist, create it in the database.
+            $inputTags = array_values( $remApiJob["tags"] );
+
+            foreach ( $inputTags as $inputTag ) {
+                if( Tag::where('name',trim($inputTag) )-> exists() ) {
+                    $foundTag = Tag::where('name',trim($inputTag) )->first();
+                    array_push( $tagsIdToLink, $foundTag->id );
+                } else {
+                    $newTag = Tag::create([ 'name' => trim($inputTag) ]);
+                    array_push( $tagsIdToLink, $newTag->id );
+                }
+            }
+
+            $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
+
+            
+        }
+        return redirect()->back();
+    }
+
+    /**
+     * Load jobs from API working-nomads
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function workingNomads()
+    {
+        $response = HTTP::get('https://www.workingnomads.co/api/exposed_jobs/');
+        $jobsArray = $response->json();
+
+        if( !count( $jobsArray ) > 0) {
+            return back()->with('fail', 'No job found on working-nomads api');
+        }
+        //dd( explode( "," , $jobsArray[0]["tags"] ) ) ;
+
+        //dd( array_slice($jobsArray, 0, 11) );
+
+        foreach ( array_slice($jobsArray, 0, 11) as $remApiJob ) {
+
+            // Create the remote job post
+            $remjob = Remjob::create([
+                'position'          => $remApiJob["title"],
+                'description'       => $remApiJob["description"],
+                'category_id'       => null,
+                'locations'         => $remApiJob["location"],
+                'apply_link'        => $remApiJob["url"],
+                'apply_mode'        => 'link',
+                'show_logo'         => null,
+            ]);
+
+            $companyName = $remApiJob["company_name"];
+
+            // Company
+            if( !Company::where('name', $companyName)->exists() ) {
+                // Create company
+                $company = Company::create([
+                    'name'  => $companyName,
+                    'slug'  => Str::slug( $companyName, '-' ),
+                    'email' => 'heagueron@gmail.com',
+                    'logo'  => null,
+                ]);
+            } else {
+                $company = Company::where('name', $companyName)->first();
+            }
+
+            $remjob->update([ 
+                'company_id'    => $company->id,
+                'external_api'  => 'https://www.workingnomads.co/',
+            ]);
+
+            // tags for the remjob-tag pivot table
+            $tagsIdToLink = [];
+
+            // Add every tag, if it does not exist, create it in the database.
+            $inputTags = explode("," , $remApiJob["tags"]);
+
+            foreach ( $inputTags as $inputTag ) {
+                if( Tag::where('name',trim($inputTag) )-> exists() ) {
+                    $foundTag = Tag::where('name',trim($inputTag) )->first();
+                    array_push( $tagsIdToLink, $foundTag->id );
+                } else {
+                    $newTag = Tag::create([ 'name' => trim($inputTag) ]);
+                    array_push( $tagsIdToLink, $newTag->id );
+                }
+            }
+
+            $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
+
+            
+        }
+        return redirect()->back();
     }
 
     /**
@@ -216,15 +346,22 @@ class RemjobController extends Controller
         // } else {
         //     return back()->with('fail', 'Remjob could not be shared on Twitter!');
         // }
-        // dd( $remjob );
         $link = $remjob->apply_link != null ? $remjob->apply_link : $remjob->apply_email;
 
-        $text = $remjob->company->name;
-        $text .= ' is looking for a '.$remjob->position;
+        $text = trim( $remjob->company->name );
+        $text .= ' is looking for a '.trim( $remjob->position );
         $text .= '. Find more through '.$link;
-
+        
+        if( $remjob->total == null ) {
+            $text .= '. Source: '.$remjob->external_api;
+        }
+        
+        foreach( $remjob->tags as $tag ){
+           $text .= ' #'.str_replace(' ', '' , $tag->name); 
+        }
+        //dd($text);
+        
         $twitterProfile = \App\TwitterProfile::where('handler','JMServca')->first();
-        //dd( $twitterProfile );
         $twitter = new TwitterGateway( $twitterProfile->id, false );
 
         // Post with TwitterOAuth library
@@ -234,7 +371,6 @@ class RemjobController extends Controller
                 "status"    => $text,
             ]
         );
-        //dd('$response: ',$response);
 
         if ( $twitter->connection->getLastHttpCode() == 200 ) {
             return back()->with('flash', 'Remjob shared on Twitter!');
