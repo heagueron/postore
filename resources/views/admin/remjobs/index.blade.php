@@ -31,6 +31,8 @@
                     <th>{{__('Remote Jobs')}}</th>
                     <th></th>
                     <th></th>
+                    <th></th>
+                    <th></th>
                     <th>{{__('Actions')}}</th>
                 </tr>
                 </thead>
@@ -40,7 +42,22 @@
                     <tr>
                         <td>{{ $remjob->company->name }}</td>
                         <td>{{ $remjob->position }}</td>
-                        <td>{{ $remjob->created_at }}</td>
+                        <td>{{ $remjob->created_at->diffForHumans() }}</td>
+
+                        {{-- SOURCE --}}
+                        @if( $remjob->external_api == 'https://remoteok.io' )
+                            <td> {{__('ROK')}}</td>
+                        @elseif( $remjob->external_api == 'https://remotive.io/' )
+                            <td> {{__('RMV')}}</td>
+                        @elseif( $remjob->external_api == 'https://www.workingnomads.co/' )
+                            <td> {{__('WNM')}}</td>
+                        @else
+                            <td> {{__('RP')}}</td>
+                        @endif
+
+                        {{-- TWITTER SHARE COUNT --}}
+                        <td>{{ $remjob->twitterPosts()->count() }}</td>
+
                         <td class="d-flex justify-content-left">
                             
                             {{-- Tweet --}}

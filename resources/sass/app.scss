@@ -635,9 +635,11 @@ nav {
         justify-content: center;
         align-items: center; 
     }
+
     &__body{
         padding: 1.0rem;
         border-top:1px solid rgba(0, 0, 0, 0.125);
+        background-color: #fff;
     }
     &__highlight{
         background-color: 	#ffffb3;

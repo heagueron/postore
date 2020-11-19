@@ -11497,6 +11497,7 @@ input[type=submit] {
 .rp-row__body {
   padding: 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: #fff;
 }
 
 .rp-row__highlight {

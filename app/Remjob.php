@@ -24,6 +24,11 @@ class Remjob extends Model
             ->withTimestamps();
     }
 
+    public function twitterPosts()
+    {
+        return $this->hasMany('App\TwitterPost');
+    }
+
     // Accesors
 
     /**
