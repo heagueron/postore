@@ -1,18 +1,9 @@
 <header class="hero" style="background-image:url( {{ asset('storage/images/rob.jpg') }} )">
 
-    <div class="nav logo-button-container">
-        <div style="flex: 1" class="nav__logo">
-            <a href="{{ route('landing') }}" aria-current="page" alt="Remote Position">
-                <img src="{{ asset('storage/images/logo.png') }}" alt="Remote Positions">
-            </a>
-        </div>
-        <div class="nav__actions">
-            <a href="{{ route('post-a-job') }}" alt="Post a job" class="post-button">{{ __('Post a Job') }}</a>
-        </div>
-        
-    </div>
+    @include('partials.nav')
+    
 
-    <div class="search-container">
+    <div class="search-container mt-5">
         <!-- <form autocomplete="off" action=""> -->
             <div class="autocomplete" style="width:300px;">
                 <input id="myInput" class="rp-search-input" type="text" name="search-term" placeholder="Start typing to find jobs ...">

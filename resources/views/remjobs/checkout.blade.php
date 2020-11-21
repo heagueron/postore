@@ -4,15 +4,7 @@
 
 @section('content')
 
-    <div class="nav logo-button-container">
-
-        <div style="flex: 1" class="nav__logo">
-            <a href="{{ route('landing') }}" aria-current="page" alt="Remote Position">
-                <img src="{{ asset('storage/images/logo.png') }}" alt="Remote Positions">
-            </a>
-        </div>
-        
-    </div>
+    @include('partials.nav')
 
     <div class="d-flex justify-content-center">
         <h1>Check Your Remote Job Post: {{ $remjob->position }}</h1>

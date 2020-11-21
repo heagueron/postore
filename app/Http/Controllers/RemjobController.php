@@ -74,9 +74,10 @@ class RemjobController extends Controller
         if( is_null( request()->company_id ) ){
             // Create company
             $company = Company::create([
-                'name'  => request()->company_name,
-                'slug'  => Str::slug( request()->company_name, '-' ),
-                'email' => request()->company_email,
+                'name'      => request()->company_name,
+                'slug'      => Str::slug( request()->company_name, '-' ),
+                'email'     => request()->company_email,
+                'user_id'   => \Auth::user()->id,
             ]);
         } else {
             $company = Company::findOrFail( request()->company_id );

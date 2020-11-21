@@ -11451,6 +11451,13 @@ input[type=submit] {
   overflow-y: hidden;
   display: flex;
   margin: 30px auto;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.categories__link {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -11781,5 +11788,24 @@ input[type=email] {
 
 .panel-heading {
   background-color: beige;
+}
+
+#p-sidebar ul li.active > a,
+a[aria-expanded=true] {
+  color: #fff !important;
+  background-color: #4CAF50 !important;
+}
+
+nav {
+  margin-bottom: 0.1rem !important;
+  padding: 0.1rem 0.2rem !important;
+}
+
+.nav-item {
+  background-color: #4CAF50 !important;
+}
+
+.nav-link {
+  color: #fff !important;
 }
 

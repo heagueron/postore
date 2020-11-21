@@ -44,6 +44,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(TwitterProfile::class);
     }
+
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
     
     public function sposts()
     {

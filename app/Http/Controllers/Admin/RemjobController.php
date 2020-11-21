@@ -390,28 +390,25 @@ class RemjobController extends Controller
         $twitterProfile = \App\TwitterProfile::where('handler','JMServca')->first();
         $twitter = new TwitterGateway( $twitterProfile->id, false );
 
-        // Post with TwitterOAuth library
-        $response = $twitter->connection->post(
-            "statuses/update",
-            [
-                "status"    => $text,
-            ]
-        );
-
-        if ( $twitter->connection->getLastHttpCode() == 200 ) {
-            
-            // register the social share
-            $tweetPost = new \App\TwitterPost();
-            $tweetPost->remjob_id = $remjob->id;
-            $tweetPost->save();
-
-            return back()->with('flash', 'Remjob shared on Twitter!');
-
-        } else {
-            return back()->with('fail', 'Remjob could not be shared on Twitter!');
-        }    
         
-        // $spost->update( [ 'posted' => true ] );
+        try {
+            // Post with TwitterOAuth library
+            $response = $twitter->connection->post( "statuses/update", [ "status"    => $text,] );
+
+            if ( $twitter->connection->getLastHttpCode() == 200 ) {          
+                // register the social share
+                $tweetPost = new \App\TwitterPost();
+                $tweetPost->remjob_id = $remjob->id;
+                $tweetPost->save();
+                return back()->with('flash', 'Remjob shared on Twitter!');
+            } else {
+                return back()->with('fail', 'Remjob could not be shared on Twitter!');
+            } 
+
+        } catch (TwitterOAuthException $exception) {
+            return back()->with('fail','Remjob could not be shared on Twitter! ' . $exception->getMessage() );
+        }
+
         
     }
 

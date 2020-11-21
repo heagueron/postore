@@ -4,17 +4,9 @@
 
 @section('content')
 
-    <div class="nav logo-button-container">
+    @include('partials.nav')
 
-        <div style="flex: 1" class="nav__logo">
-            <a href="{{ route('landing') }}" aria-current="page" alt="Remote Position">
-                <img src="{{ asset('storage/images/logo.png') }}" alt="Remote Positions">
-            </a>
-        </div>
-        
-    </div>
-
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mt-3">
         <h1 >Hire remote resources</h1>
     </div>
 
