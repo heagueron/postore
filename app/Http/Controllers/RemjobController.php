@@ -120,7 +120,8 @@ class RemjobController extends Controller
         $remjob->update([ 
             'total'         => $jobPostTotal,
             'gumroad_link'  => $this->determineGumroadLink( $remjob ),
-            'company_id'    => $company->id, 
+            'company_id'    => $company->id,
+            'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
         ]);
 
         // Store the new Remjob id...
@@ -144,7 +145,7 @@ class RemjobController extends Controller
      */
     public function show(Remjob $remjob)
     {
-        //
+        dd( $remjob );
     }
 
     /**

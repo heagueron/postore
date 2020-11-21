@@ -59,6 +59,7 @@ class DatabaseSeeder extends Seeder
             // Company
             $remjob->update([ 
                 'company_id'    => array_rand( $companyIds ),
+                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
             ]);
             
         }

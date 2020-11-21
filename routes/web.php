@@ -38,6 +38,9 @@ Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store')->middle
 Route::get('/remjobs/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
 Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
 
+// REMOTE JOB SHOW ( EXAMPLE, FROM TWITTER )
+Route::get('/remote-jobs/{remjob:slug}', 'RemJobController@show')->name('remjobs.show');
+
 // CHECKOUT
 Route::get('/checkout/{longSlug}', function ( $longSlug ) {
     $remjob = Remjob::find( Str::afterLast( $longSlug, '-') );
@@ -70,13 +73,11 @@ Route::group(
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('home/check_avatars', 'HomeController@checkAvatars');
+//Route::get('home/check_avatars', 'HomeController@checkAvatars');
 
 // Twitter Profiles
 Route::get('/twitter_profiles', 'TwitterProfileController@index')->name('twitter_profiles.index')->middleware('auth');
-
 Route::get('/twitter_profiles/create', 'TwitterProfileController@create')->name('twitter_profiles.create')->middleware('auth');
-
 Route::post('/twitter_profiles', 'TwitterProfileController@store')->name('twitter_profiles.store')->middleware('auth');
 
 // Callback for Twitter API
@@ -90,32 +91,32 @@ Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@d
 
 
 // Scheduled posts (Sposts)
-Route::get('/sposts', 'SpostController@index')->name('sposts.index');
-Route::get('/sposts/create', 'SpostController@create')->name('sposts.create');
-Route::post('/sposts', 'SpostController@store');
+// Route::get('/sposts', 'SpostController@index')->name('sposts.index');
+// Route::get('/sposts/create', 'SpostController@create')->name('sposts.create');
+// Route::post('/sposts', 'SpostController@store');
 
-Route::post('/sposts/{spost}', 'SpostController@sendNow')->name('sposts.send_now')->middleware('auth');
+// Route::post('/sposts/{spost}', 'SpostController@sendNow')->name('sposts.send_now')->middleware('auth');
 
-Route::get('/sposts/{spost}/edit', 'SpostController@edit')->name('sposts.edit')->middleware('auth');
-Route::patch('/sposts/{spost}', 'SpostController@update')->name('sposts.update')->middleware('auth');
+// Route::get('/sposts/{spost}/edit', 'SpostController@edit')->name('sposts.edit')->middleware('auth');
+// Route::patch('/sposts/{spost}', 'SpostController@update')->name('sposts.update')->middleware('auth');
 
-Route::delete('/sposts/{spost}', 'SpostController@destroy')->name('sposts.destroy')->middleware('auth');
-Route::get('/sposts/detail/{spost}', 'SpostController@detail')->name('sposts.detail');
+// Route::delete('/sposts/{spost}', 'SpostController@destroy')->name('sposts.destroy')->middleware('auth');
+// Route::get('/sposts/detail/{spost}', 'SpostController@detail')->name('sposts.detail');
 
-Route::post('/sposts/imageUpload', 'SpostController@imageUpload')->name('sposts.image');
+// Route::post('/sposts/imageUpload', 'SpostController@imageUpload')->name('sposts.image');
 
-Route::get('/sposts/schedule', 'SpostController@schedule')->name('sposts.schedule');
-Route::get('/sposts/archive', 'SpostController@archive')->name('sposts.archive');
+// Route::get('/sposts/schedule', 'SpostController@schedule')->name('sposts.schedule');
+// Route::get('/sposts/archive', 'SpostController@archive')->name('sposts.archive');
 
 
 // Social Profiles
-Route::get('/social_profiles', 'HomeController@socialProfilesIndex')->name('social_profiles.index')->middleware('auth');
+// Route::get('/social_profiles', 'HomeController@socialProfilesIndex')->name('social_profiles.index')->middleware('auth');
 
 // Pages routes
-Route::view('/faq', 'pages.faq')->name('faq');
-Route::view('/file-upload', 'pages.file-upload')->name('file-upload');
-Route::view('/settings', 'pages.settings')->name('settings');
-Route::view('/upgrade', 'pages.upgrade')->name('upgrade');
+// Route::view('/faq', 'pages.faq')->name('faq');
+// Route::view('/file-upload', 'pages.file-upload')->name('file-upload');
+// Route::view('/settings', 'pages.settings')->name('settings');
+// Route::view('/upgrade', 'pages.upgrade')->name('upgrade');
 
 
 

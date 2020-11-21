@@ -28,7 +28,8 @@ class LoginController extends Controller
      */
     //protected $redirectTo = RouteServiceProvider::HOME;
     //protected $redirectTo = RouteServiceProvider::SCHEDULER;
-    protected $redirectTo = RouteServiceProvider::CHECK_AVATARS;
+    //protected $redirectTo = RouteServiceProvider::CHECK_AVATARS;
+    protected $redirectTo = RouteServiceProvider::LANDING;
 
     /**
      * Create a new controller instance.

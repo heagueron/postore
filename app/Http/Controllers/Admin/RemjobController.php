@@ -15,6 +15,7 @@ use App\Traits\PublishRemjob;
 
 use App\ApiConnectors\TwitterGateway;
 
+
 class RemjobController extends Controller
 {
 
@@ -53,9 +54,10 @@ class RemjobController extends Controller
 
         foreach ( array_slice($jobsArray, 0, 11) as $remApiJob ) {
 
-            // if( \App\Remjob::where('external_api','https://remoteok.io')->where('position',STR::before( $remApiJob["position"], '('))->exists() ){
-            //     break;
-            // }
+            if( DB::table('remjobs')->where([
+                ['external_api', '=', 'https://remoteok.io'],
+                ['position', '=', STR::before( $remApiJob["position"], '(')],
+            ])->exists() ){ break; }
 
             // Create the remote job post
             $remjob = Remjob::create([
@@ -86,6 +88,7 @@ class RemjobController extends Controller
             $remjob->update([ 
                 'company_id'    => $company->id,
                 'external_api'  => 'https://remoteok.io',
+                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
             ]);
 
             // tags for the remjob-tag pivot table
@@ -129,9 +132,10 @@ class RemjobController extends Controller
 
         foreach ( array_slice($jobsArray['jobs'], 0, 11) as $remApiJob ) {
 
-            // if( \App\Remjob::where('external_api','https://remotive.io/')->where('position',$remApiJob["title"])->exists() ){
-            //     break;
-            // }
+            if( DB::table('remjobs')->where([
+                ['external_api', '=', 'https://remotive.io/'],
+                ['position', '=', $remApiJob["title"]],
+            ])->exists() ){ break; }
 
             // Create the remote job post
             $remjob = Remjob::create([
@@ -162,6 +166,7 @@ class RemjobController extends Controller
             $remjob->update([ 
                 'company_id'    => $company->id,
                 'external_api'  => 'https://remotive.io/',
+                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
             ]);
 
             // tags for the remjob-tag pivot table
@@ -208,9 +213,10 @@ class RemjobController extends Controller
 
         foreach ( array_slice($jobsArray, 0, 21) as $remApiJob ) {
 
-            // if( \App\Remjob::where('external_api','https://www.workingnomads.co/')->where('position',$remApiJob["title"])->exists() ){
-            //     break;
-            // }
+            if( DB::table('remjobs')->where([
+                ['external_api', '=', 'https://www.workingnomads.co/'],
+                ['position', '=', $remApiJob["title"]],
+            ])->exists() ){ break; }
 
             // Create the remote job post
             $remjob = Remjob::create([
@@ -241,6 +247,7 @@ class RemjobController extends Controller
             $remjob->update([ 
                 'company_id'    => $company->id,
                 'external_api'  => 'https://www.workingnomads.co/',
+                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
             ]);
 
             // tags for the remjob-tag pivot table
@@ -367,21 +374,29 @@ class RemjobController extends Controller
         if( $template == 1 ){
             $text = trim( $remjob->company->name );
             $text .= ' is looking for a '.trim( $remjob->position );
-            $text .= '. Find more through '.$link; 
+            //$text .= '. Find more through '.$link; 
         } elseif( $template == 2 ){
             $text = 'Want to work as '.trim( $remjob->position );
-            $text .= ' at '.trim( $remjob->company->name ).'? ';
-            $text .= 'Apply through '.$link;
+            $text .= ' at '.trim( $remjob->company->name ).'?';
+            //$text .= 'Apply through '.$link;
         } else {
             $text = trim( $remjob->company->name );
             $text .= ' is hiring: '.trim( $remjob->position );
-            $text .= '. Apply here: '.$link; 
+            //$text .= '. Apply here: '.$link; 
+        }
+
+        if( $remjob->locations ){
+           $text .= ' ['.$remjob->locations.']'; 
         }
         
-        if( $remjob->total == null ) {
-            $text .= '. Source: '.$remjob->external_api;
-        }
+
+        $text .= ' '.$link;
+
+        // if( $remjob->total == null ) {
+        //     $text .= '. Source: '.$remjob->external_api;
+        // }
         
+
         foreach( $remjob->tags as $tag ){
            $text .= ' #'.str_replace(' ', '' , $tag->name); 
         }
