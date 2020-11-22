@@ -37,7 +37,7 @@ $factory->define(Remjob::class, function (Faker $faker) {
         'apply_mode'    => $faker->randomElement(['link', 'email']),
         'show_logo'     => $faker->randomElement(['on', null]),
         'total'         => 15,
-        'active'        => 1,
+        'active'        => $faker->randomElement([1,0,1,1]),
     ];
 });
 

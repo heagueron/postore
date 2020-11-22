@@ -42,10 +42,8 @@ Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany
 Route::get('/remote-jobs/{remjob:slug}', 'RemJobController@show')->name('remjobs.show');
 
 // CHECKOUT
-Route::get('/checkout/{longSlug}', function ( $longSlug ) {
-    $remjob = Remjob::find( Str::afterLast( $longSlug, '-') );
-        return view( 'remjobs.checkout', compact('remjob') );
-})->name('checkout');
+Route::get('/checkout/{remjob:slug}', 'RemJobController@checkout')->name('checkout');
+
 
 // ADMIN ROUTES
 Route::group( 

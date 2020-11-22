@@ -83,7 +83,7 @@
     </div>
 
     {{-- DESCRIPTION --}}
-    <div class="rp-row__body collapse" id="{{ 'position-' . $remjob->id}}"  data-parent="#rp-accordion">
+    <div class="rp-row__body collapse" id="{{ 'position-' . $remjob->id}}"  data-parent="#rp-accordion" >
         
         @if( $remjob->total != null or $remjob->external_api != 'https://remoteok.io')
             <div class="pl-5">{!! $remjob->description !!}</div>

@@ -35,7 +35,10 @@ class RemjobController extends Controller
     public function index()
     {
         //dd("admin remjob controller index ");
-        $remjobs = Remjob::orderBy('created_at', 'desc')->get();
+        if( Remjob::where('active',1)->exists() ){
+            $remjobs = Remjob::where('active',1)->orderBy('created_at', 'desc')->get();
+        } else { $remjobs = null; }
+        
         return view( 'admin.remjobs.index',compact('remjobs') );
 
     }
@@ -89,6 +92,7 @@ class RemjobController extends Controller
                 'company_id'    => $company->id,
                 'external_api'  => 'https://remoteok.io',
                 'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
+                'active'        => 1,
             ]);
 
             // tags for the remjob-tag pivot table
@@ -167,6 +171,7 @@ class RemjobController extends Controller
                 'company_id'    => $company->id,
                 'external_api'  => 'https://remotive.io/',
                 'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
+                'active'        => 1,
             ]);
 
             // tags for the remjob-tag pivot table
@@ -248,6 +253,7 @@ class RemjobController extends Controller
                 'company_id'    => $company->id,
                 'external_api'  => 'https://www.workingnomads.co/',
                 'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
+                'active'        => 1,
             ]);
 
             // tags for the remjob-tag pivot table
@@ -390,7 +396,7 @@ class RemjobController extends Controller
         }
         
 
-        $text .= ' '.$link;
+        $text .= ' ☛ '.$link;
 
         // if( $remjob->total == null ) {
         //     $text .= '. Source: '.$remjob->external_api;

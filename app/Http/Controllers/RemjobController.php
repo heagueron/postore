@@ -13,6 +13,7 @@ use App\Http\Requests\StoreRemjob;
 use Intervention\Image\Facades\Image;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class RemjobController extends Controller
 {
@@ -23,7 +24,10 @@ class RemjobController extends Controller
      */
     public function index()
     {
-        $remjobs = Remjob::orderBy('front_page_2w', 'desc')->orderBy('created_at', 'desc')->get();
+
+        if( Remjob::where('active',1)->exists() ){
+            $remjobs = Remjob::where('active',1)->orderBy('front_page_2w', 'desc')->orderBy('created_at', 'desc')->get();
+        } else { $remjobs = null; }
 
         return view( 'landing', compact('remjobs') );
 
@@ -130,7 +134,8 @@ class RemjobController extends Controller
         // Head to preview and checkout page
         //return redirect()->route( 'checkout', [$remjob] );
 
-        return redirect()->route( 'checkout', [ $company->slug.'-'.Str::slug( request()->position, '-' ).'-'.$remjob->id ] );
+        // return redirect()->route( 'checkout', [ $company->slug.'-'.Str::slug( request()->position, '-' ).'-'.$remjob->id ] );
+        return redirect()->route( 'checkout', $remjob->slug );
 
         // Back to remote job list
         //return redirect('/')->with('flash', 'New Remote Job posted!');
@@ -145,7 +150,18 @@ class RemjobController extends Controller
      */
     public function show(Remjob $remjob)
     {
-        dd( $remjob );
+        return view( 'remjobs.show', compact('remjob') );
+    }
+
+    /**
+     * Display the specified resource checkout page.
+     *
+     * @param  \App\Remjob  $remjob
+     * @return \Illuminate\Http\Response
+     */
+    public function checkout(Remjob $remjob)
+    {
+        return view( 'remjobs.checkout', compact('remjob') );
     }
 
     /**
@@ -162,10 +178,20 @@ class RemjobController extends Controller
         if( in_array( $tagsText, ['dev', 'customer-support', 'marketing', 'design', 'non-tech'] ) ){
             // Search for a CATEGORY TAG
             $category = Category::where( 'tag', 'like', $tagsText )->first();
-            //dd($category);
-            if( $category->has('remjobs') ){
-                $remjobs = $category->remjobs()->orderBy('front_category_2w', 'desc')->orderBy('created_at', 'desc')->get();
+
+            if( $category->whereHas('remjobs', function (Builder $query) {
+                $query->where('active', 1);
+            }) ){
+                $remjobs = $category->remjobs()->where('active', 1)
+                    ->orderBy('front_category_2w', 'desc')
+                    ->orderBy('created_at', 'desc')->get();
             } else { $remjobs = null; }
+
+            // if( $category->has('remjobs') ){
+            //     $remjobs = $category->remjobs()
+            //         ->orderBy('front_category_2w', 'desc')
+            //         ->orderBy('created_at', 'desc')->get();
+            // } else { $remjobs = null; }
             
         } else {
             // Search for a normal TAG
@@ -173,9 +199,18 @@ class RemjobController extends Controller
             if ($tag === null) {
                 return view('404');
             }
-            if( $tag->has('remjobs') ){
-                $remjobs = $remjobs = $tag->remjobs()->orderBy('created_at', 'desc')->get();
+
+            if( $tag->whereHas('remjobs', function (Builder $query) {
+                $query->where('active', 1);
+            }) ){
+                $remjobs = $tag->remjobs()->where('active', 1)
+                    ->orderBy('front_category_2w', 'desc')
+                    ->orderBy('created_at', 'desc')->get();
             } else { $remjobs = null; }
+
+            // if( $tag->has('remjobs') ){
+            //     $remjobs = $remjobs = $tag->remjobs()->orderBy('created_at', 'desc')->get();
+            // } else { $remjobs = null; }
 
         }
         
