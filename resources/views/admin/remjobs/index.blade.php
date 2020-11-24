@@ -23,6 +23,11 @@
                     alt="Get api jobs" class="post-button mr-2">
                     {{ __('Get Jobs from working nomads') }}
                 </a>
+                <a  rel="nofollow"
+                    href="{{ route('admin.api-jobs.github') }}" 
+                    alt="Get api jobs" class="post-button mr-2">
+                    {{ __('Get Jobs from github') }}
+                </a>
             </div>
                 
             <table class="table">
@@ -51,8 +56,10 @@
                             <td> {{__('RMV')}}</td>
                         @elseif( $remjob->external_api == 'https://www.workingnomads.co/' )
                             <td> {{__('WNM')}}</td>
+                        @elseif( $remjob->external_api == 'https://jobs.github.com/positions' )
+                        <td> {{__('GH')}}</td>
                         @else
-                            <td> {{__('RP')}}</td>
+                            <td style="color:orange"> {{__('RP')}}</td>
                         @endif
 
                         {{-- TWITTER SHARE COUNT --}}

@@ -318,34 +318,42 @@
                         @else 
                             <input type="checkbox" class="custom-control-input" id="show-logo" name="show_logo">
                         @endif               
-                        <label class="custom-control-label pt-1" for="show-logo">Show company logo ( +$15 )</label>
+                        <label class="custom-control-label pt-1" for="show-logo">
+                            Show company logo ( +${{ \App\Option::find(2)->value }} )
+                        </label>
                     </div>
 
                     <div class="custom-control custom-checkbox mb-3">
-                        @if( !is_null( old('highlight_yellow') ) and old('highlight_yellow') == 'on' )
-                            <input type="checkbox" class="custom-control-input" id="highlight-yellow" name="highlight_yellow" checked>
+                        @if( !is_null( old('yellow_background') ) and old('yellow_background') == 'on' )
+                            <input type="checkbox" class="custom-control-input" id="yellow_background" name="yellow_background" checked>
                         @else
-                            <input type="checkbox" class="custom-control-input" id="highlight-yellow" name="highlight_yellow"> 
+                            <input type="checkbox" class="custom-control-input" id="yellow_background" name="yellow_background"> 
                         @endif
-                        <label class="custom-control-label pt-1" for="highlight-yellow">Highlight the job post with yellow background ( +$15 )</label>
+                        <label class="custom-control-label pt-1" for="yellow_background">
+                            Highlight the job post with yellow background ( +${{ \App\Option::find(3)->value }} )
+                        </label>
                     </div>
 
                     <div class="custom-control custom-checkbox mb-3">
-                        @if( !is_null( old('front_page_2w') ) and old('front_page_2w') == 'on' )
-                            <input type="checkbox" class="custom-control-input" id="front-page-2w" name="front_page_2w" checked>
+                        @if( !is_null( old('main_front_page') ) and old('main_front_page') == 'on' )
+                            <input type="checkbox" class="custom-control-input" id="main_front_page" name="main_front_page" checked>
                         @else
-                            <input type="checkbox" class="custom-control-input" id="front-page-2w" name="front_page_2w">
+                            <input type="checkbox" class="custom-control-input" id="main_front_page" name="main_front_page">
                         @endif
-                        <label class="custom-control-label pt-1" for="front-page-2w">Show on front page for 2 weeks ( +$30 )</label>
+                        <label class="custom-control-label pt-1" for="main_front_page">
+                            Show on front page 4 weeks ( +${{ \App\Option::find(4)->value }} )
+                        </label>
                     </div>
 
                     <div class="custom-control custom-checkbox mb-3">
-                        @if( !is_null( old('front_category_2w') ) and old('front_category_2w') == 'on' )
-                            <input type="checkbox" class="custom-control-input" id="front-category-2w" name="front_category_2w" checked>
+                        @if( !is_null( old('category_front_page') ) and old('category_front_page') == 'on' )
+                            <input type="checkbox" class="custom-control-input" id="category_front_page" name="category_front_page" checked>
                         @else
-                            <input type="checkbox" class="custom-control-input" id="front-category-2w" name="front_category_2w">
+                            <input type="checkbox" class="custom-control-input" id="category_front_page" name="category_front_page">
                         @endif
-                        <label class="custom-control-label pt-1" for="front-category-2w">Show on front page of category for 2 weeks ( +$15 )</label>
+                        <label class="custom-control-label pt-1" for="category_front_page">
+                            Show on front page of category 4 weeks ( +${{ \App\Option::find(5)->value }} )
+                        </label>
                     </div>
 
                 </div>

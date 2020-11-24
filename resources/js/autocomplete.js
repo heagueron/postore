@@ -14,7 +14,6 @@ function autocomplete(inp) {
         if (!val) { return false;}
 
         /* GET THE OPTIONS ARRAY FROM THE SERVER */
-        console.log(`we have a search term, ${val}`);
         const PATH = "http://127.0.0.1:8000";
 
         arr = [];
@@ -59,7 +58,7 @@ function autocomplete(inp) {
 
                   // Set selected tag in the search link 
                   document.getElementById("hero-search-link")
-                  .setAttribute( "href", `${PATH}/remote-${inp.value}-jobs` );
+                  .setAttribute( "href", `${PATH}/remjobs/remote-${inp.value}-jobs` );
 
 
               });
@@ -155,6 +154,7 @@ function autocomplete(inp) {
 
   // }
 
+  //console.log( `CSRF_TOKEN: ${window.CSRF_TOKEN}` )
   // Delay to allow for elements to appear before assigning event listeners.
   setTimeout(() => {
     /*initiate the autocomplete function on the "myInput" element, and pass along the remote job tags array as possible autocomplete values:*/

@@ -17,15 +17,21 @@
         </li>
 
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{ route('logout') }}"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
+            <a class="c-sidebar-nav-link" href="{{ route('admin.remjobs.index') }}">
+                {{ __('Remote Jobs') }}
             </a>              
         </li>
 
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{ route('admin.remjobs.index') }}">
-                {{ __('Remote Jobs') }}
+            <a class="c-sidebar-nav-link" href="{{ route('admin.options') }}">
+                {{ __('Admin Options') }}
+            </a>              
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
             </a>              
         </li>
 

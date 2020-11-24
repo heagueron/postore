@@ -20,7 +20,7 @@
         <div class="rp-row " style="padding:0">
 
 
-            @if( $remjob->highlight_yellow )
+            @if( $remjob->yellow_background )
             <div class="row rp-row__header job-box rp-row__highlight">
             @else
             <div class="row rp-row__header job-box rp-row__standard">
@@ -51,14 +51,12 @@
                 <div class="col">
                 </div>
 
+
+                {{-- TAGS --}}
                 <div class="col-4 pb-7">
                     @foreach( $remjob->tags as $tag )
                         <a href="#" class="job-badget">
-                            <button 
-                                class="rp-tag-item"  
-                                title="{{'browse '.$tag->name.' jobs'}}"
-                                data-toggle="tooltip"
-                                data-placement="top">
+                            <button class="rp-tag-item">
                                 {{ $tag->name }}
                             </button>&nbsp;
                         </a>                 
@@ -125,23 +123,23 @@
 
       <tr>
         <td style="color:#4CAF50;">Basic post</td>
-        <td>15</td>
+        <td>{{ \App\Option::find(1)->value }}</td>
       </tr>
       <tr>
         <td>Show company logo</td>
-        <td>{{ $remjob->show_logo ? 15 : '--' }}</td>
+        <td>{{ $remjob->show_logo ? \App\Option::find(2)->value : '--' }}</td>
       </tr>
       <tr>
         <td>Highlight in yellow</td>
-        <td>{{ $remjob->highlight_yellow ? 15 : '--' }}</td>
+        <td>{{ $remjob->yellow_background ? \App\Option::find(3)->value : '--' }}</td>
       </tr>
       <tr>
         <td>On frontpage 2 weeks</td>
-        <td>{{ $remjob->front_page_2w ? 30 : '--' }}</td>
+        <td>{{ $remjob->main_front_page ? \App\Option::find(4)->value : '--' }}</td>
       </tr>
       <tr>
         <td>On frontpage of category 2 weeks</td>
-        <td>{{ $remjob->front_category_2w ? 15 : '--' }}</td>
+        <td>{{ $remjob->category_front_page ? \App\Option::find(5)->value : '--' }}</td>
       </tr>
 
       <tr>
@@ -152,13 +150,14 @@
     </tbody>
   </table>
 
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center flex-column">
 
         <a  href="#" target="_blank"
             class="rp-jobrow__apply__checkout"> 
             {{ __('Buy this') }}
         </a>
         <p>LINK: {{ $remjob->gumroad_link }}</p>
+        <p>GR ID: {{ $remjob->gumroad_product_id }}</p>
 
   </div>
 

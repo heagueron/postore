@@ -22,7 +22,7 @@ use App\Remjob;
 // })->name('landing');
 
 Route::get('/', 'RemjobController@index')->name('landing');
-
+//Route::get('/checkout/activate', 'RemjobController@index');
 
 // REMOTE JOBS
 Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term')->middleware('cors');
@@ -42,14 +42,18 @@ Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany
 Route::get('/remote-jobs/{remjob:slug}', 'RemJobController@show')->name('remjobs.show');
 
 // CHECKOUT
-Route::get('/checkout/{remjob:slug}', 'RemJobController@checkout')->name('checkout');
+Route::get('checkout/{remjob:slug}', 'PaymentController@checkout')->name('checkout');
+Route::get('activate-remote-job', 'PaymentController@activate')->name('checkout.activate')->middleware('auth');
+Route::post('publish-remote-job/{remjob:slug}', 'PaymentController@publish')->name('checkout.publish')->middleware('auth');
+
 
 
 // ADMIN ROUTES
 Route::group( 
     ['prefix' => 'admin','middleware' => ['auth', 'admin']], 
     function () {
-        Route::get('remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
+        Route::get('/remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
+        Route::get('/options', 'Admin\AdminController@adminOptions')->name('admin.options');
         Route::get('/remjobs/{remjob}/edit', 'Admin\RemjobController@edit')->name('admin.remjobs.edit');
         Route::delete('/remjobs/{remjob}', 'Admin\RemjobController@destroy')->name('admin.remjobs.destroy');
         Route::get('/remjobs/{remjob}/tweet', 'Admin\RemjobController@tweet')->name('admin.remjobs.tweet');
@@ -58,6 +62,7 @@ Route::group(
         Route::get('api-jobs.rok', 'Admin\RemjobController@rok')->name('admin.api-jobs.rok');
         Route::get('api-jobs.remotive', 'Admin\RemjobController@remotive')->name('admin.api-jobs.remotive');
         Route::get('api-jobs.working-nomads', 'Admin\RemjobController@workingNomads')->name('admin.api-jobs.working-nomads');
+        Route::get('api-jobs.github', 'Admin\RemjobController@github')->name('admin.api-jobs.github');
 });
 
 // COMPANY ROUTES

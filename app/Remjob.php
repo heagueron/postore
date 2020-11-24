@@ -48,7 +48,7 @@ class Remjob extends Model
      * @param  string  $value
      * @return string
      */
-    public function getHighlightYellowAttribute($value)
+    public function getYellowBackgroundAttribute($value)
     {
         return $value == 'on' ? 1 : 0;
     }
@@ -59,7 +59,7 @@ class Remjob extends Model
      * @param  string  $value
      * @return string
      */
-    public function getFrontPage2wAttribute($value)
+    public function getMainFrontPageAttribute($value)
     {
         return $value == 'on' ? 1 : 0;
     }
@@ -70,7 +70,7 @@ class Remjob extends Model
      * @param  string  $value
      * @return string
      */
-    public function getFrontCategory2wAttribute($value)
+    public function getCategoryFrontPageAttribute($value)
     {
         return $value == 'on' ? 1 : 0;
     }

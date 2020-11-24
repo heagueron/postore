@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CompanySeeder::class);
         $this->call(TagSeeder::class);
         $this->call(RemjobSeeder::class);  
-        //$this->call(RemjobTagSeeder::class);
+        $this->call(OptionSeeder::class);
 
         // Seed tags from main categories:
         $mainCategories = ['dev', 'customer-support', 'marketing', 'design', 'non-tech'];

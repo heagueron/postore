@@ -30,9 +30,9 @@ class CreateRemjobsTable extends Migration
             $table->unsignedInteger('company_id')->nullable();
 
             $table->enum('show_logo',['on', null ])->default(null)->nullable();
-            $table->enum('highlight_yellow',['on', null ])->default(null)->nullable();
-            $table->enum('front_page_2w',['on', null ])->default(null)->nullable();
-            $table->enum('front_category_2w',['on', null ])->default(null)->nullable();
+            $table->enum('yellow_background',['on', null ])->default(null)->nullable();
+            $table->enum('main_front_page',['on', null ])->default(null)->nullable();
+            $table->enum('category_front_page',['on', null ])->default(null)->nullable();
 
             $table->boolean('active')->default(0);
             $table->boolean('paid')->default(0);

@@ -260,7 +260,7 @@ const formControl = () => {
   
 // Delay to allow for elements to appear before assigning event listeners.
 setTimeout(() => {
-    console.log( window.location.href )
+
     // Check if active url is the post a job page
     if ( window.location.href.indexOf("post-a-job") > -1 ) {
         console.log("active url is: the post a job page");

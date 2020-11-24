@@ -53435,7 +53435,6 @@ function autocomplete(inp) {
     /* GET THE OPTIONS ARRAY FROM THE SERVER */
 
 
-    console.log("we have a search term, ".concat(val));
     var PATH = "http://127.0.0.1:8000";
     arr = [];
     fetch("".concat(PATH, "/job_tags/").concat(val)).then(function (response) {
@@ -53479,7 +53478,7 @@ function autocomplete(inp) {
 
           closeAllLists(); // Set selected tag in the search link 
 
-          document.getElementById("hero-search-link").setAttribute("href", "".concat(PATH, "/remote-").concat(inp.value, "-jobs"));
+          document.getElementById("hero-search-link").setAttribute("href", "".concat(PATH, "/remjobs/remote-").concat(inp.value, "-jobs"));
         });
         /*append the new element as a child of the options list:*/
 
@@ -53566,6 +53565,7 @@ function autocomplete(inp) {
 //     })
 //   });
 // }
+//console.log( `CSRF_TOKEN: ${window.CSRF_TOKEN}` )
 // Delay to allow for elements to appear before assigning event listeners.
 
 
@@ -54040,8 +54040,7 @@ var formControl = function formControl() {
 
 
 setTimeout(function () {
-  console.log(window.location.href); // Check if active url is the post a job page
-
+  // Check if active url is the post a job page
   if (window.location.href.indexOf("post-a-job") > -1) {
     console.log("active url is: the post a job page");
     formControl();

@@ -55,7 +55,7 @@ class RemjobController extends Controller
         $jobsArray = $response->json();
         array_shift( $jobsArray );
 
-        foreach ( array_slice($jobsArray, 0, 11) as $remApiJob ) {
+        foreach ( array_slice($jobsArray, 0, 8) as $remApiJob ) {
 
             if( DB::table('remjobs')->where([
                 ['external_api', '=', 'https://remoteok.io'],
@@ -133,8 +133,8 @@ class RemjobController extends Controller
         if( !$jobsArray['job-count'] ) {
             return back()->with('fail', 'No job found on remotive api');
         }
-
-        foreach ( array_slice($jobsArray['jobs'], 0, 11) as $remApiJob ) {
+        //dd($jobsArray['jobs']);
+        foreach ( array_slice($jobsArray['jobs'], 0, 8) as $remApiJob ) {
 
             if( DB::table('remjobs')->where([
                 ['external_api', '=', 'https://remotive.io/'],
@@ -281,6 +281,89 @@ class RemjobController extends Controller
     }
 
     /**
+     * Load jobs from API remotive
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function github()
+    {
+        $response = HTTP::get('https://jobs.github.com/positions.json');
+        
+        $jobsArray = $response->json();
+        //dd( $jobsArray );
+
+        if( !$jobsArray ) {
+            return back()->with('fail', 'No job found on github jobs');
+        }
+
+        foreach ( array_slice($jobsArray, 0, 21) as $remApiJob ) {
+
+            if( DB::table('remjobs')->where([
+                ['external_api', '=', 'https://jobs.github.com/positions'],
+                ['position', '=', $remApiJob["title"]],
+            ])->exists() ){ 
+                break; 
+            }
+
+            // Create the remote job post
+            $remjob = Remjob::create([
+                'position'          => $remApiJob["title"],
+                'description'       => $remApiJob["description"],
+                'category_id'       => null,
+                'locations'         => $remApiJob["location"],
+                'apply_link'        => $remApiJob["url"],
+                'apply_mode'        => 'link',
+                'show_logo'         => 'on',
+            ]);
+
+            $companyName = $remApiJob["company"];
+
+            // Company
+            if( !Company::where('name', $companyName)->exists() ) {
+                // Create company
+                $company = Company::create([
+                    'name'  => $companyName,
+                    'slug'  => Str::slug( $companyName, '-' ),
+                    'email' => 'heagueron@gmail.com',
+                    'logo'  => array_key_exists('company_logo', $remApiJob) ? $remApiJob["company_logo"] : null,
+                ]);
+            } else {
+                $company = Company::where('name', $companyName)->first();
+            }
+
+            $remjob->update([ 
+                'company_id'    => $company->id,
+                'external_api'  => 'https://jobs.github.com/positions',
+                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
+                'active'        => 1,
+            ]);
+
+            // tags for the remjob-tag pivot table
+            // $tagsIdToLink = [];
+
+            // Add every tag, if it does not exist, create it in the database.
+            // $inputTags = array_values( $remApiJob["tags"] );
+
+            // take 3 tags
+            // foreach ( array_slice($inputTags, 0, 2) as $inputTag ) {
+            //     if( Tag::where('name',trim($inputTag) )-> exists() ) {
+            //         $foundTag = Tag::where('name',trim($inputTag) )->first();
+            //         array_push( $tagsIdToLink, $foundTag->id );
+            //     } else {
+            //         $newTag = Tag::create([ 'name' => trim($inputTag) ]);
+            //         array_push( $tagsIdToLink, $newTag->id );
+            //     }
+            // }
+
+            // $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
+
+            
+        }
+        return redirect()->back();
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -403,14 +486,16 @@ class RemjobController extends Controller
         // }
         
 
-        foreach( $remjob->tags as $tag ){
-           $text .= ' #'.str_replace(' ', '' , $tag->name); 
+        if( $remjob->has('tags') ){
+            foreach( $remjob->tags as $tag ){
+                $text .= ' #'.str_replace(' ', '' , $tag->name); 
+            }
         }
+        
         //dd($text);
         
         $twitterProfile = \App\TwitterProfile::where('handler','JMServca')->first();
         $twitter = new TwitterGateway( $twitterProfile->id, false );
-
         
         try {
             // Post with TwitterOAuth library

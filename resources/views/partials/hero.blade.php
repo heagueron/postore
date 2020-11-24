@@ -16,10 +16,5 @@
         <!-- </form> -->
     </div>
 
-    <!-- <div class="search-container">
-        <input type="text" placeholder="Find a job..." id="search-input">
-        <button type="button" id="search-button"><i class="fa fa-search"></i></button>
-    </div> -->
-
 </header>
 

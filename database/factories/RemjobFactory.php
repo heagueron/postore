@@ -25,19 +25,22 @@ $factory->define(Remjob::class, function (Faker $faker) {
         $positionLocation .= ' '.$locationItem;
     }
 
+    $ybg = $faker->randomElement(['on', null]);
+
     return [
-        'position'      => $faker->randomElement(['administrator', 'operator', 'developer', 'devops', 'designer', 'coach']),
-        'description'   => $faker->text($maxNbChars = 600),
-        'category_id'   => $faker->randomElement(['2', '3', '4', '5', '6']),
-        'min_salary'    => $minSalary,
-        'max_salary'    => $minSalary * 2,
-        'locations'     => $positionLocation,
-        'apply_link'    => $faker->url,
-        'apply_email'   => $faker->email,
-        'apply_mode'    => $faker->randomElement(['link', 'email']),
-        'show_logo'     => $faker->randomElement(['on', null]),
-        'total'         => 15,
-        'active'        => $faker->randomElement([1,0,1,1]),
+        'position'          => $faker->randomElement(['administrator', 'operator', 'developer', 'devops', 'designer', 'coach']),
+        'description'       => $faker->text($maxNbChars = 600),
+        'category_id'       => $faker->randomElement(['2', '3', '4', '5', '6']),
+        'min_salary'        => $minSalary,
+        'max_salary'        => $minSalary * 2,
+        'locations'         => $positionLocation,
+        'apply_link'        => $faker->url,
+        'apply_email'       => $faker->email,
+        'apply_mode'        => $faker->randomElement(['link', 'email']),
+        'show_logo'         => $faker->randomElement(['on', null]),
+        'yellow_background' => $ybg,
+        'total'             => $ybg == 'on' ? ( 39 + 29 ) : 39,
+        'active'            => $faker->randomElement([1,0,1,1]),
     ];
 });
 

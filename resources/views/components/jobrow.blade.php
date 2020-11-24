@@ -2,8 +2,8 @@
 
 <div class="rp-row " style="padding:0">
 
-
-    @if( $remjob->highlight_yellow )
+    
+    @if( $remjob->yellow_background )
     <div class="row rp-row__header job-box rp-row__highlight" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}" style="margin-left:0;margin-right:0;">
     @else
     <div class="row rp-row__header job-box rp-row__standard" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}" style="margin-left:0;margin-right:0;">
