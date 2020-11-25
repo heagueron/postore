@@ -62,7 +62,7 @@ class PaymentController extends Controller
             'license' => [ 'required', 'string', new GumroadLicense ],
         ]);
 
-        // Activate the remote job post:
+        // Activate the remote job post active and paid attribute to publish:
         $remjob->update([
             'active'                => 1,
             'paid'                  => 1,

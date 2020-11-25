@@ -14,13 +14,13 @@
 
             @if( $remjob->total != null )
                 @if( $remjob->company->logo != null and $remjob->show_logo )
-                    <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="LOGO">
+                    <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}">
                 @else
                     <p style="font-size:2.0rem;">{{ Str::of( $remjob->company->name )->substr(0, 1) }}</p>
                 @endif
             @else
                 @if( $remjob->company->logo != null and $remjob->show_logo )
-                    <img src="{{ $remjob->company->logo }}" alt="LOGO" class="w-100">
+                    <img src="{{ $remjob->company->logo }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}" class="w-100">
                 @else
                     <p style="font-size:2.0rem;">{{ Str::of( $remjob->company->name )->substr(0, 1) }}</p>
                 @endif
@@ -38,8 +38,12 @@
                 >
                 {{ $remjob->company->name }}
             </a>
+            @if( in_array( strtoupper( $remjob->locations ), ['WORLDWIDE', 'GLOBAL', 'ANYWHERE'] ) )
+                <p class="rp-location"><i class="fa fa-globe" aria-hidden="true" style="color:#668cff;"></i></i> {{ strtoupper( $remjob->locations ) }} </p>
+            @else 
+                <p class="rp-location"><i class="fa fa-map-marker" style="color:#4CAF50;"></i> {{ strtoupper( $remjob->locations ) }} </p>
+            @endif
             
-            <p class="rp-location"> {{ strtoupper( $remjob->locations ) }} </p>
 
         </div>
 

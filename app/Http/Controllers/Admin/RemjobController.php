@@ -442,6 +442,23 @@ class RemjobController extends Controller
     }
 
     /**
+     * Inactivate the specified remote job
+     *
+     * @param  \App\Remjob  $remjob
+     * @return \Illuminate\Http\Response
+     */
+    public function inactivate(Remjob $remjob)
+    {
+        // Delete the scheduled post
+        $remjob->update([
+            'active'    => 0,
+        ]);
+
+        return back()->with('message', 'Inactivated Remote Job Post from ' . $remjob->company_name );
+        
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Remjob  $remjob

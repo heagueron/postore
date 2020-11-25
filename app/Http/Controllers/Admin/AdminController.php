@@ -13,14 +13,29 @@ class AdminController extends Controller
     }
     
     /**
-     * Display a listing of the resource.
+     * Edit admin options
      *
-     * @return \Illuminate\Http\Response
+     * @param  Spost $spost
+     * @return Response
      */
-
-
-    public function adminOptions()
+    public function editAdminOptions()
     {
-        return view('admin.options');
+        $adminOptions = \App\Option::all();
+        //dd($adminOptions[0]->value);
+        return view( 'admin.edit-options', compact('adminOptions') );
     }
+
+    /**
+     * Update admin options
+     *
+     * @param  Spost $spost
+     * @return Response
+     */
+    public function updateAdminOptions(Request $request)
+    {
+        dd($request);
+    }
+
+
+
 }

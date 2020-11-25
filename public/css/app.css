@@ -11487,8 +11487,9 @@ input[type=submit] {
   /*word-wrap: break-word;*/
   /*background-color: #fff;*/
   /*background-clip: border-box;*/
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  /*border: 1px solid rgba(0, 0, 0, 0.125);*/
   border-radius: 0.25rem;
+  /*border-radius: 25px 25px 0px 0px;*/
   margin: 0px;
   margin-bottom: 0.5rem;
   /*line-height: 1.0em;*/
@@ -11515,9 +11516,14 @@ input[type=submit] {
   background-color: #fff;
 }
 
+.rp-row__standard:hover {
+  background-color: #e6ffe6;
+}
+
 .row {
   margin-right: 0 !important;
   margin-left: 0 !important;
+  border-radius: 0.35rem !important;
 }
 
 /* Job listing */

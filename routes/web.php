@@ -53,9 +53,13 @@ Route::group(
     ['prefix' => 'admin','middleware' => ['auth', 'admin']], 
     function () {
         Route::get('/remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
-        Route::get('/options', 'Admin\AdminController@adminOptions')->name('admin.options');
+
+        Route::get('/edit-options', 'Admin\AdminController@editAdminOptions')->name('admin.edit-options');
+        Route::patch('/update-options', 'Admin\AdminController@updateAdminOptions')->name('admin.update-options');
+
         Route::get('/remjobs/{remjob}/edit', 'Admin\RemjobController@edit')->name('admin.remjobs.edit');
         Route::delete('/remjobs/{remjob}', 'Admin\RemjobController@destroy')->name('admin.remjobs.destroy');
+        Route::patch('/remjobs/{remjob}', 'Admin\RemjobController@inactivate')->name('admin.remjobs.inactivate');
         Route::get('/remjobs/{remjob}/tweet', 'Admin\RemjobController@tweet')->name('admin.remjobs.tweet');
         
         // External APIs

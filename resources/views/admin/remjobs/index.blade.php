@@ -93,6 +93,19 @@
                             </div>
                             @endif
 
+                            {{-- Inactivate --}}
+                            <div>
+                            
+                                <form action="{{ route('admin.remjobs.inactivate', $remjob->id) }}" method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" style="border:none;background-color:transparente">
+                                        <i class="fa fa-ban"  aria-hidden="true" style="font-size:18px;"></i>
+                                    </button>
+                                </form>
+                                    
+                                </a>
+                            </div>
                         </td>
                     </tr> 
                 @empty
