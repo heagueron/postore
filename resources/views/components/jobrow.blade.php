@@ -29,7 +29,7 @@
         </div>
 
         {{-- POSITION COMPANY LOCATIONS --}}
-        <div class="col-3 mt-3">
+        <div class="col-3 mt-4">
             <h5 class="mb-1 rp-job-title"> {{ ucwords( $remjob->position ) }} </h5>
             <a  class="mb-1 company-badge company-brand"
                 title="{{'browse '.$remjob->company->name.' jobs'}}"
@@ -40,15 +40,15 @@
             </a>
             @if( in_array( strtoupper( $remjob->locations ), ['WORLDWIDE', 'GLOBAL', 'ANYWHERE'] ) )
                 <p class="rp-location"><i class="fa fa-globe" aria-hidden="true" style="color:#668cff;"></i></i> {{ strtoupper( $remjob->locations ) }} </p>
-            @else 
+            @elseif( $remjob->locations != null )
                 <p class="rp-location"><i class="fa fa-map-marker" style="color:#4CAF50;"></i> {{ strtoupper( $remjob->locations ) }} </p>
             @endif
             
 
         </div>
 
-        <div class="col">
-        </div>
+        <!-- <div class="col">
+        </div> -->
 
         {{-- TAGS --}}
         <div class="col-4 pb-7">
@@ -95,12 +95,25 @@
             <p class="pl-5">{{ __('Press Apply to get this remote job details.') }}</p>
         @endif
 
+        @if($remjob->min_salary)
+            <p class="pl-5 mt-2">
+                <span style="font-weight:bold;">{{__('Min. Annual Salary: ')}}</span>
+                <span>${{ number_format($remjob->min_salary,0,'.',',') }}</span>
+            </p>
+        @endif
+        @if($remjob->max_salary)
+            <p class="pl-5">
+                <span style="font-weight:bold;">{{__('Max. Annual Salary: ')}}</span>
+                <span>${{ number_format($remjob->max_salary,0,'.',',')  }}</span>
+            </p>
+        @endif
+
         @if($remjob->locations)
-            <h4 class="pl-5">{{__('Location')}}</h4>
+            <h4 class="pl-5 mt-2">{{__('Location')}}</h4>
             <p class="pl-5">{{ $remjob->locations }}</p>
         @endif
 
-        <div class="d-flex pl-5">
+        <div class="d-flex pl-5 mt-2 mb-2">
 
             <p class="mr-2"> {{__('See all jobs at ')}}</p>
             <p>

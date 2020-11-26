@@ -7,7 +7,7 @@
     @include('partials.nav')
 
     <div class="d-flex justify-content-center mt-3">
-        <h1 >Hire remote resources</h1>
+        <h1>{{ strtoupper('Create your remote job post') }}</h1>
     </div>
 
     <hr class="m-5">

@@ -87,6 +87,19 @@
                 <!-- <p>{{ $remjob->description }}</p> -->
                 <div class="p-5">{!! $remjob->description !!}</div>
 
+                @if($remjob->min_salary)
+                    <p class="pl-5">
+                        <span style="font-weight:bold;">{{__('Min. Annual Salary: ')}}</span>
+                        <span>${{ number_format($remjob->min_salary,0,'.',',') }}</span>
+                    </p>
+                @endif
+                @if($remjob->max_salary)
+                    <p class="pl-5">
+                        <span style="font-weight:bold;">{{__('Max. Annual Salary: ')}}</span>
+                        <span>${{ number_format($remjob->max_salary,0,'.',',')  }}</span>
+                    </p>
+                @endif
+
                 @if($remjob->locations)
                     <h4 class="pl-5">{{__('Location')}}</h4>
                     <p class="pl-5">{{ $remjob->locations }}</p>

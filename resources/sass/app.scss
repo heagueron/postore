@@ -773,7 +773,7 @@ nav {
 
 .rp-job-title {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .rp-location {
@@ -943,12 +943,27 @@ nav {
 }
 
 .nav-item {
-    
     background-color: #4CAF50 !important;
+    &__name{
+        background-color: transparent !important;
+    }
 }
 
 .nav-link {
-   color: #fff !important; 
+   color: #fff !important;
+   &__post{
+       background-color: #ed1212 !important;
+       padding-left: 2rem !important;
+       padding-right: 2rem !important;
+       font-weight: bold;
+       transition: all 0.2s;
+
+       &:hover{
+           background-color: #f03e3e !important;
+           transform: scale(1.1);
+        /*opacity: .9;*/
+       }
+   }
 }
 
 

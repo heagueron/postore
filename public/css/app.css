@@ -11627,7 +11627,7 @@ input[type=submit] {
 
 .rp-job-title {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .rp-location {
@@ -11811,7 +11811,25 @@ nav {
   background-color: #4CAF50 !important;
 }
 
+.nav-item__name {
+  background-color: transparent !important;
+}
+
 .nav-link {
   color: #fff !important;
+}
+
+.nav-link__post {
+  background-color: #ed1212 !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.nav-link__post:hover {
+  background-color: #f03e3e !important;
+  transform: scale(1.1);
+  /*opacity: .9;*/
 }
 

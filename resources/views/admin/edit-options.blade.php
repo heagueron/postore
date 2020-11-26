@@ -71,10 +71,10 @@
             <span class="rp-group__head mb-3">{{__('Other parameters')}}</span>
 
             <div class="row mb-2">
-                <div class="col-4 pt-3">{{__('Active Post Duration (days)')}}</div>
+                <div class="col-4 pt-3">{{__('Remote Job Active Duration (days)')}}</div>
                 <div class="col-2">
-                    <input  type="number" name="duration"
-                            value="{{ !is_null( old('duration'))? old('duration') : $adminOptions[5]->value }}"               
+                    <input  type="number" name="remjob_active_duration"
+                            value="{{ !is_null( old('remjob_active_duration'))? old('remjob_active_duration') : $adminOptions[5]->value }}"               
                     >
                 </div>
             </div> 
