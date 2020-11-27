@@ -46,7 +46,10 @@
                 @forelse($remjobs as $remjob)
                     <tr>
                         <td>{{ $remjob->company->name }}</td>
-                        <td>{{ $remjob->position }}</td>
+                        <td>
+                            {{ $remjob->position }}<br/>
+                            <small>{{$remjob->slug}}</small>
+                        </td>
                         <td>{{ $remjob->created_at->diffForHumans() }}</td>
 
                         {{-- SOURCE --}}

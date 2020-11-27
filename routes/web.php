@@ -38,7 +38,7 @@ Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store')->middle
 Route::get('/remjobs/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
 Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
 
-// REMOTE JOB SHOW ( EXAMPLE, FROM TWITTER )
+// REMOTE JOB SHOW 
 Route::get('/remote-jobs/{remjob:slug}', 'RemJobController@show')->name('remjobs.show');
 
 // CHECKOUT

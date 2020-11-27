@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Tag;
 use App\Remjob;
-use App\Category;
 use App\Company;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreRemjob;
-
-use Intervention\Image\Facades\Image;
-
+use App\Category;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests\StoreRemjob;
+use Illuminate\Support\Facades\App;
+use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Builder;
-use DB;
 
 class RemjobController extends Controller
 {
@@ -40,6 +41,7 @@ class RemjobController extends Controller
      */
     public function create()
     {
+        //App::setlocale('es');
         $categories = \App\Category::where('id', '>', '1')->get();
         // dd($categories);
         return view( 'remjobs.create', compact('categories') );

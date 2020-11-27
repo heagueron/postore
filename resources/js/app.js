@@ -64,10 +64,19 @@ const app = new Vue({
 
 /* Activate bootstrap tooltips */
 $(function () {
+
+    function getSummernotePalceholder(lang){
+        const msg = {
+            en: 'Enter your remote job description',
+            es: 'Ingrese la descripcion del trabajo remoto'
+        }
+        return msg[lang];
+    }
+
     $('[data-toggle="tooltip"]').tooltip()
 
     $('#description').summernote({
-        placeholder: 'Remote job description',
+        placeholder: `${getSummernotePalceholder(document.querySelector('#localeElement').value)}`,
         tabsize: 2,
         height: 300,
         toolbar: [

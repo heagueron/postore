@@ -1,3 +1,4 @@
+
 <header class="hero" style="background-image:url( {{ asset('storage/images/rob.jpg') }} )">
 
     @include('partials.nav')

@@ -8,6 +8,7 @@
     @else
     <div class="row rp-row__header job-box rp-row__standard" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}" style="margin-left:0;margin-right:0;">
     @endif
+    
 
         {{-- LOGO --}}
         <div class="col">
@@ -16,20 +17,20 @@
                 @if( $remjob->company->logo != null and $remjob->show_logo )
                     <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}">
                 @else
-                    <p style="font-size:2.0rem;">{{ Str::of( $remjob->company->name )->substr(0, 1) }}</p>
+                    <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-50" >
                 @endif
             @else
                 @if( $remjob->company->logo != null and $remjob->show_logo )
                     <img src="{{ $remjob->company->logo }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}" class="w-100">
                 @else
-                    <p style="font-size:2.0rem;">{{ Str::of( $remjob->company->name )->substr(0, 1) }}</p>
+                    <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-50" >
                 @endif
             @endif
 
         </div>
 
         {{-- POSITION COMPANY LOCATIONS --}}
-        <div class="col-3 mt-4">
+        <div class="col-3 mt-3">
             <h5 class="mb-1 rp-job-title"> {{ ucwords( $remjob->position ) }} </h5>
             <a  class="mb-1 company-badge company-brand"
                 title="{{'browse '.$remjob->company->name.' jobs'}}"
@@ -53,15 +54,15 @@
         {{-- TAGS --}}
         <div class="col-4 pb-7">
             @foreach( $remjob->tags()->take(5)->get() as $tag )
-                <a href="{{  route( 'remjobs.searchByTags', 'remote-'.$tag->name.'-jobs' )  }}"  class="job-badget">
-                    <button 
-                        class="rp-tag-item"  
-                        title="{{'browse '.$tag->name.' jobs'}}"
-                        data-toggle="tooltip"
-                        data-placement="top">
-                        {{ $tag->name }}
-                    </button>&nbsp;
-                </a>                 
+            <a href="{{  route( 'remjobs.searchByTags', 'remote-'.$tag->name.'-jobs' )  }}"  class="job-badget">
+                <button 
+                    class="rp-tag-item"  
+                    title="{{'browse '.$tag->name.' jobs'}}"
+                    data-toggle="tooltip"
+                    data-placement="top">
+                    {{ $tag->name }}
+                </button>&nbsp;
+            </a>                
             @endforeach
         </div>
 

@@ -10920,7 +10920,7 @@ p {
   font-size: 1.1em;
   font-weight: 300;
   line-height: 1.7em;
-  color: #999;
+  color: inherit;
 }
 
 a,
@@ -11460,6 +11460,30 @@ input[type=submit] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  /*border-right: 1px solid blue;*/
+}
+
+.cat {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin: 30px auto;
+}
+
+.cat__list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cat__list__item {
+  display: inline !important;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid transparent;
+}
+
+.cat__list__item:hover {
+  border-bottom: 2px solid #4CAF50;
 }
 
 /* Banners */
@@ -11562,11 +11586,12 @@ input[type=submit] {
   font-weight: bold;
   text-align: center;
   border-radius: 4px;
-  border: 2px solid #000;
+  border: 2px solid black;
 }
 
 .rp-tag-item:hover {
-  background-color: black !important;
+  background-color: #4CAF50 !important;
+  border: 2px solid #4CAF50;
   color: white !important;
 }
 
@@ -11831,5 +11856,29 @@ nav {
   background-color: #f03e3e !important;
   transform: scale(1.1);
   /*opacity: .9;*/
+}
+
+.tooltip-inner {
+  background-color: #4CAF50;
+}
+
+.tooltip.bs-tooltip-right .arrow:before,
+.tooltip.bs-tooltip-auto[x-placement^=right] .arrow:before {
+  border-right-color: #4CAF50 !important;
+}
+
+.tooltip.bs-tooltip-left .arrow:before,
+.tooltip.bs-tooltip-auto[x-placement^=left] .arrow:before {
+  border-left-color: #4CAF50 !important;
+}
+
+.tooltip.bs-tooltip-bottom .arrow:before,
+.tooltip.bs-tooltip-auto[x-placement^=bottom] .arrow:before {
+  border-bottom-color: #4CAF50 !important;
+}
+
+.tooltip.bs-tooltip-top .arrow:before,
+.tooltip.bs-tooltip-auto[x-placement^=top] .arrow:before {
+  border-top-color: #4CAF50 !important;
 }
 

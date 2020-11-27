@@ -6,8 +6,12 @@
 
     @include('partials.nav')
 
-    <div class="d-flex justify-content-center mt-3">
-        <h1>{{ strtoupper('Create your remote job post') }}</h1>
+    {{-- Retrieve localization for javascript --}}
+    <input type="hidden" id="localeElement" value="{{ App::getLocale() }}">
+    
+    <div class="d-flex justify-content-center mt-3 flex-column text-center">
+        <h1>{{ strtoupper( __('text.crFormTitle') ) }}</h1>
+        <h5>{{ __('text.crBasePriceTip', ['basePrice' => \App\Option::find(1)->value]) }}</h5>
     </div>
 
     <hr class="m-5">
@@ -20,11 +24,11 @@
             <!-- T H E   J O B -->
             <div class="rp-group" id="rp-post-fs1">
 
-                <div class="rp-group__title">JOB</div>
+                <div class="rp-group__title">{{ __('text.crGroupTitleJob') }}</div>
                 
                 <!-- company name -->
                 <div>
-                    <span class="rp-group__head">Company name*</span>
+                    <span class="rp-group__head">{{ __('text.crCompanyNameLabel') }}*</span>
                     <input  data-required="required" autocomplete="off" id="companyNameElement"
                             type="text" name="company_name" data-name="your company name"
                             value="{{ !is_null( old('company_name'))? old('company_name') : '' }}"               
@@ -33,7 +37,7 @@
                     <input type="hidden" id="companyIdElement" name="company_id" value="{{ !is_null( old('company_id'))? old('company_id') : '' }}">
                     
                     <span class="rp-group__info">
-                        Your company's brand or trade name. If you have posted here before, enter your company email below and your logo.
+                        {{__('text.crCompanyNameTip')}}
                     </span>
                     @error('company_name') 
                         <p class="rp-group__error">{{ $message }}</p> 
@@ -42,13 +46,13 @@
 
                 <!-- company_email -->
                 <div>
-                    <span class="rp-group__head">Company email*</span>
+                    <span class="rp-group__head">{{ __('text.crCompanyEmailLabel') }}*</span>
                     <input  data-required="required" autocomplete="off" id="companyEmailElement"
                             type="text" name="company_email" data-name="your company email"
                             value="{{ !is_null( old('company_email'))? old('company_email') : '' }}"               
                     >
                     <span class="rp-group__info">
-                        Your company's email.
+                        {{__('text.crCompanyEmailTip')}}
                     </span>
                     @error('company_email') 
                         <p class="rp-group__error">{{ $message }}</p> 
@@ -57,13 +61,13 @@
 
                 <!-- position -->
                 <div>
-                    <span class="rp-group__head">Position*</span>
+                    <span class="rp-group__head">{{ __('text.crPositionLabel') }}*</span>
                     <input  data-required="required" autocomplete="off" 
                             type="text" name="position" data-name="a job position"
                             value="{{ !is_null( old('position'))? old('position') : '' }}"    
                     >
                     <span class="rp-group__info">
-                        Please enter a single job position like "Javascript Developer" or "Virtual Assistant".
+                        {{__('text.crPositionTip')}}
                     </span>
                     @error('position') 
                         <p class="rp-group__error">{{ $message }}</p> 
@@ -72,11 +76,11 @@
 
                 <!-- category -->
                 <div>
-                    <span class="rp-group__head">Category*</span>
+                    <span class="rp-group__head">{{__('text.crCategoryLabel')}}*</span>
 
                     <select data-required="required" name="category_id" id="categoryElement">
                             
-                        <option>Select a job category</option>
+                        <option>{{__('text.crCategoryTitle')}}</option>
 
                         @foreach( $categories as $category)
 
@@ -93,7 +97,7 @@
                     </select>
 
                     <span class="rp-group__info">
-                        Select the category for the position.
+                        {{__('text.crCategoryTip')}}
                     </span>
                     @error('category_id') 
                         <p class="rp-group__error">{{ $message }}</p> 
@@ -103,15 +107,14 @@
 
                 <!-- tags -->
                 <div>
-                    <span class="rp-group__head">Tags*</span>
+                    <span class="rp-group__head">{{__('text.crTagsLabel')}}*</span>
                     <input  data-required="required" autocomplete="off" id="tagsElement"
                             type="text" name="tags" data-name="job tags"
                             value="{{ !is_null( old('tags'))? old('tags') : '' }}"
                             
                         >
                     <span class="rp-group__info">
-                        Enter job related tags (like dev, javascript, php, devops, etc.) and separate multiple tags 
-                        by comma. Jobs will be shown on each tag specific page (like /remote-devops-jobs).
+                        {{__('text.crTagsTip')}}
                     </span>
                     @error('tags') 
                         <p class="rp-group__error">{{ $message }}</p> 
@@ -120,15 +123,14 @@
 
                 <!-- locations -->
                 <div>
-                    <span class="rp-group__head">Location</span>
+                    <span class="rp-group__head">{{__('text.crLocationLabel')}}</span>
                     <input  autocomplete="off"
                             type="text" name="locations" data-name="candidate locations allowed"
-                            value="{{ !is_null( old('locations'))? old('locations') : 'Worldwide' }}"
+                            value="{{ !is_null( old('locations'))? old('locations') : __('text.crLocationDefault') }}"
                             
                         >
                     <span class="rp-group__info">
-                        Location, country or timezone where candidate must be locatedv (e.g. Europe, United States or CET Timezone). 
-                        Can be left as "Worldwide".
+                        {{__('text.crLocationTip')}}
                     </span>
                     @error('locations') 
                         <p class="rp-group__error">{{ $message }}</p> 
@@ -142,30 +144,31 @@
             <!-- J O B   D E T A I L S -->
             <div class="rp-group" id="rp-post-fs1">
 
-                <div class="rp-group__title">JOB DETAILS</div>
+                <div class="rp-group__title">{{__('text.crGroupTitleJobDetails')}}</div>
                 
                 <!-- salary -->
             
                 <div class="d-flex flex-column" id="salary-range">
-                    <span class="rp-group__head salary__items">Annual Salary (US $)</span>
+                    <span class="rp-group__head salary__items">{{__('text.crSalaryLabel')}}</span>
                     <div class="d-flex">
 
+                        <span class="rp-group__head salary__items">{{__('text.crMinSalaryLabel')}} </span>
                         <input  autocomplete="off" data-name="minimun salary"
                             type="text" name="min_salary" placeholder="0" 
                             value="{{ !is_null( old('min_salary'))? old('min_salary') : '0' }}"
-                             data-toggle="tooltip" title="Minimun salary per year"  
+                             data-toggle="tooltip" title="{{__('text.crMinSalaryTooltip')}}"  
                         >
+                        <span class="rp-group__head salary__items">{{__('text.crMaxSalaryLabel')}} </span>
                         <input  autocomplete="off" data-name="maximun salary"
                             type="text" name="max_salary" placeholder="0" 
                             value="{{ !is_null( old('max_salary'))? old('max_salary') : '0' }}"
-                             data-toggle="tooltip" title="Maximun salary per year"   
+                             data-toggle="tooltip" title="{{__('text.crMaxSalaryTooltip')}}"   
                         >
 
                     </div>
                 </div>                
                 <span class="rp-group__info">
-                    Although it is not required, we recommend to enter salary data to help Google index the job.
-                    Remember to enter annual salary data in US $ (like 60000).
+                    {{__('text.crSalaryTip')}}
                 </span>
                 @error('min_salary') 
                     <p class="rp-group__error">{{ $message }}</p> 
@@ -177,12 +180,12 @@
 
                 <!-- description -->
                 <div>
-                    <span class="rp-group__head">description*</span>
+                    <span class="rp-group__head">{{__('text.crDescriptionLabel')}}*</span>
                     <textarea class="form-control" name="description" id="description" style="margin:14px">
                         {{ !is_null( old('description'))? old('description') : '' }}
                     </textarea>
                     <span class="rp-group__info">
-                        The job description.
+                        {{__('text.crDescriptionTip')}}
                     </span>
                     @error('description') 
                         <p class="rp-group__error">{{ $message }}</p> 
@@ -191,17 +194,17 @@
 
                 <!-- apply_link -->
                 <div>
-                    <span class="rp-group__head mb-1">apply mode*</span>
+                    <span class="rp-group__head mb-1">{{__('text.crApplyLabel')}}*</span>
 
                     @if( is_null(old('apply_mode')) or old('apply_mode') == 'link')
                         <div class="custom-control custom-radio custom-control-inline ml-3">
                             <input type="radio" class="custom-control-input" id="apply-link" name="apply_mode" value="link"
                                 checked="checked">
-                            <label class="custom-control-label pt-1" for="apply-link">Link</label>
+                            <label class="custom-control-label pt-1" for="apply-link">{{__('text.crLinkLabel')}}</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="apply-email" name="apply_mode" value="email">
-                            <label class="custom-control-label pt-1" for="apply-email">Email</label>
+                            <label class="custom-control-label pt-1" for="apply-email">{{__('text.crEmailLabel')}}</label>
                         </div>
 
                         <input  data-required="required" autocomplete="off" placeholder="https://..."
@@ -215,18 +218,18 @@
                             value="{{ !is_null( old('apply_email'))? old('apply_email') : null }}"     
                         >
                         <span class="rp-group__info" id="apply-mode-info">
-                            The job apply link.
+                            {{__('text.crLinkTip')}}
                         </span>
 
                     @else
                         <div class="custom-control custom-radio custom-control-inline ml-3">
                             <input type="radio" class="custom-control-input" id="apply-link" name="apply_mode" value="link">
-                            <label class="custom-control-label pt-1" for="apply-link">Link</label>
+                            <label class="custom-control-label pt-1" for="apply-link">{{__('text.crLinkLabel')}}</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="apply-email" name="apply_mode" value="email"
                             checked="checked" >
-                            <label class="custom-control-label pt-1" for="apply-email">Email</label>
+                            <label class="custom-control-label pt-1" for="apply-email">{{__('text.crEmailLabel')}}</label>
                         </div>
 
                         <input  data-required="required" autocomplete="off" placeholder="https://..."
@@ -241,7 +244,7 @@
                         >
 
                         <span class="rp-group__info" id="apply-mode-info">
-                            The job apply email.
+                            {{__('text.crEmailTip')}}
                         </span>
 
                     @endif

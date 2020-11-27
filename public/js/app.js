@@ -53343,9 +53343,17 @@ var app = new Vue({
 /* Activate bootstrap tooltips */
 
 $(function () {
+  function getSummernotePalceholder(lang) {
+    var msg = {
+      en: 'Enter your remote job description',
+      es: 'Ingrese la descripcion del trabajo remoto'
+    };
+    return msg[lang];
+  }
+
   $('[data-toggle="tooltip"]').tooltip();
   $('#description').summernote({
-    placeholder: 'Remote job description',
+    placeholder: "".concat(getSummernotePalceholder(document.querySelector('#localeElement').value)),
     tabsize: 2,
     height: 300,
     toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture']], ['view', ['help']]]

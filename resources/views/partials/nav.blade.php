@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-md navbar-light bg-transparent ">
+<nav class="navbar navbar-expand-md navbar-light bg-transparent">
     <div class="container">
         <a class="navbar-brand" href="{{ route('landing') }}" aria-current="page">
             <img src="{{ asset('storage/images/remjob.png') }}" alt="Remote Positions" class="w-15" >
