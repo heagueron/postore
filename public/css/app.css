@@ -11372,7 +11372,8 @@ nav {
 }
 
 body {
-  background-color: #f9f9f9;
+  /*background-color: #f9f9f9;*/
+  background-color: #fff;
   font: 16px Arial;
 }
 
@@ -11502,25 +11503,17 @@ input[type=submit] {
 /* JOB ROWS */
 
 .rp-row {
-  /*position: relative;*/
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
   padding: 0px;
-  /*padding-bottom: 0;*/
-  /*word-wrap: break-word;*/
-  /*background-color: #fff;*/
-  /*background-clip: border-box;*/
-  /*border: 1px solid rgba(0, 0, 0, 0.125);*/
   border-radius: 0.25rem;
-  /*border-radius: 25px 25px 0px 0px;*/
   margin: 0px;
   margin-bottom: 0.5rem;
-  /*line-height: 1.0em;*/
 }
 
 .rp-row__header {
-  /*margin: 0px;*/
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11537,11 +11530,29 @@ input[type=submit] {
 }
 
 .rp-row__standard {
-  background-color: #fff;
+  background-color: #f9f9f9;
+  /*&:hover{
+      background-color: #e6ffe6;
+  }*/
 }
 
-.rp-row__standard:hover {
-  background-color: #e6ffe6;
+.rp-row .overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.rp-row .inner {
+  position: relative;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rp-row .inner a {
+  pointer-events: all;
+  position: relative;
 }
 
 .row {
@@ -11596,7 +11607,7 @@ input[type=submit] {
 }
 
 .rp-jobrow__apply {
-  display: none;
+  /*display: none;*/
   background-color: #4CAF50 !important;
   color: #fff !important;
   text-decoration: none !important;
@@ -11880,5 +11891,17 @@ nav {
 .tooltip.bs-tooltip-top .arrow:before,
 .tooltip.bs-tooltip-auto[x-placement^=top] .arrow:before {
   border-top-color: #4CAF50 !important;
+}
+
+.company-card {
+  background: #f8f9fa;
+  /*float: right;*/
+  /*padding: 28px 36px 0 36px;*/
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  margin-top: 20px;
+  margin-right: -25px;
+  border-radius: 2px;
+  max-width: 200px;
+  word-break: break-word;
 }
 

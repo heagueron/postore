@@ -63,34 +63,9 @@ const app = new Vue({
 
 
 /* Activate bootstrap tooltips */
-$(function () {
+$('[data-toggle="tooltip"]').tooltip()
 
-    function getSummernotePalceholder(lang){
-        const msg = {
-            en: 'Enter your remote job description',
-            es: 'Ingrese la descripcion del trabajo remoto'
-        }
-        return msg[lang];
-    }
 
-    $('[data-toggle="tooltip"]').tooltip()
-
-    $('#description').summernote({
-        placeholder: `${getSummernotePalceholder(document.querySelector('#localeElement').value)}`,
-        tabsize: 2,
-        height: 300,
-        toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture']],
-            ['view', ['help']]
-          ]
-      });
-
-})
 
 /* Prevent presentation of job description when click on a tag or company name */
 const collapseControl = () => {
@@ -136,6 +111,7 @@ const applyControl = () => {
 
     }
 }
+
 
 
 

@@ -53342,23 +53342,7 @@ var app = new Vue({
 });
 /* Activate bootstrap tooltips */
 
-$(function () {
-  function getSummernotePalceholder(lang) {
-    var msg = {
-      en: 'Enter your remote job description',
-      es: 'Ingrese la descripcion del trabajo remoto'
-    };
-    return msg[lang];
-  }
-
-  $('[data-toggle="tooltip"]').tooltip();
-  $('#description').summernote({
-    placeholder: "".concat(getSummernotePalceholder(document.querySelector('#localeElement').value)),
-    tabsize: 2,
-    height: 300,
-    toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture']], ['view', ['help']]]
-  });
-});
+$('[data-toggle="tooltip"]').tooltip();
 /* Prevent presentation of job description when click on a tag or company name */
 
 var collapseControl = function collapseControl() {
@@ -54042,6 +54026,24 @@ var formControl = function formControl() {
       } else {
         console.log('no hay datos');
       }
+    });
+  });
+  /* SUMMERNOTE */
+
+  $(function () {
+    function getSummernotePalceholder(lang) {
+      var msg = {
+        en: 'Enter your remote job description',
+        es: 'Ingrese la descripcion del trabajo remoto'
+      };
+      return msg[lang];
+    }
+
+    $('#description').summernote({
+      placeholder: "".concat(getSummernotePalceholder(document.querySelector('#localeElement').value)),
+      tabsize: 2,
+      height: 300,
+      toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture']], ['view', ['help']]]
     });
   });
 }; // Delay to allow for elements to appear before assigning event listeners.
