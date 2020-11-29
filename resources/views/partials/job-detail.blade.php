@@ -1,30 +1,4 @@
-
-@extends('layouts.app')
-
-@section('title', 'Remote Resources | Welcome')
-
-@section('content')
-
-    @include('partials.nav')
-   
-    <div class="container">
-
-        <div class="d-flex justify-content-between mt-5">
-
-            <a href="{{ route('landing') }}" style="color:#4CAF50;">
-                <i class="fas fa-arrow-left"></i>{{__('show.back')}}
-            </a>
-
-            @if( $remjob->category )
-            <a href="{{route('remjobs.searchByTags', 'remote-' .$remjob->category->name.'-jobs')}}" style="color:#4CAF50;">
-                {{ __('show.browseCategory', ['category' => $remjob->category->name]) }}<i class="fas fa-arrow-right"></i>
-            </a>
-            @endif
-
-        </div>
-
-
-        <div class="row mt-5">
+<div class="row mt-5">
             <div class="col-9">
 
                 <p>{{ __(
@@ -151,9 +125,3 @@
             </div>
 
         </div>
-
-    </div>
-    
-
-@endsection
-

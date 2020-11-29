@@ -10872,6 +10872,46 @@ a.text-dark:focus {
   }
 }
 
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #fff;
+  font: 16px Arial;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+}
+
+.footer__banner {
+  background-color: #9b9b9b;
+  color: #fff;
+}
+
+.footer__post {
+  margin-top: 25px !important;
+  background-color: #4CAF50 !important;
+  padding: 10px !important;
+  color: #fff !important;
+}
+
+.footer__copyright {
+  background-color: #fff;
+}
+
+.footer .list-group-item {
+  border: none !important;
+}
+
 #p-sidebar {
   min-height: 100vh;
   background: white;
@@ -11371,12 +11411,6 @@ nav {
   box-sizing: border-box;
 }
 
-body {
-  /*background-color: #f9f9f9;*/
-  background-color: #fff;
-  font: 16px Arial;
-}
-
 /*the container must be positioned relative:*/
 
 .autocomplete {
@@ -11668,7 +11702,6 @@ input[type=submit] {
 
 .rp-location {
   color: black !important;
-  cursor: pointer;
   font-size: 0.85rem;
 }
 

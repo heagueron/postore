@@ -12,114 +12,95 @@
 
     <hr class="m-5">
 
-    <div class="row">
+    <div class="row p-5">
 
 
     <div class="col-9">
         <!--Main job preview -->
-        <div class="rp-row " style="padding:0">
+        <h3><i>Here is how your job post will look in main page:</i></h3>
+        <x-jobrow :remjob="$remjob" page='checkout'/>
 
+        <h3 class="mt-5"><i>Here is how your job post detail page will look:</i></h3>
 
-            @if( $remjob->yellow_background )
-            <div class="row rp-row__header job-box rp-row__highlight">
-            @else
-            <div class="row rp-row__header job-box rp-row__standard">
-            @endif
+ 
+            <div class="mt-5">
 
-                <div class="col">
-                    @if( $remjob->company->logo != null and $remjob->show_logo )
-                        <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="LOGO">
-                    @else
-                        <p style="font-size:2.0rem;">{{ Str::of( $remjob->company->name )->substr(0, 1) }}</p>
-                    @endif
-                </div>
+                <p>{{ __(
+                    'show.postDate',
+                    [   'postDate' => \Carbon\Carbon::parse($remjob->created_at)->toFormattedDateString()] 
+                    ) }}
+                </p>
 
-                <div class="col-3 mt-3">
-                    <h5 class="mb-1 rp-job-title"> {{ ucwords( $remjob->position ) }} </h5>
-                    <a  class="mb-1 company-badge company-brand"
-                        title="{{'browse '.$remjob->company->name.' jobs'}}"
-                        data-toggle="tooltip"
-                        href="#"  
-                        >
-                        {{ $remjob->company->name }}
-                    </a>
-                    
-                    <p class="rp-location"> {{ strtoupper( $remjob->locations ) }} </p>
-
-                </div>
-
-                <div class="col">
-                </div>
-
-
-                {{-- TAGS --}}
-                <div class="col-4 pb-7">
-                    @foreach( $remjob->tags as $tag )
-                        <a href="#" class="job-badget">
-                            <button class="rp-tag-item">
+                <h3 style="font-weight:bold;">{{ $remjob->position }}</h3>
+                <div>
+                    @foreach( $remjob->tags()->take(5)->get() as $tag )
+                        <a href="#"  class="job-badget">
+                            <button 
+                                class="rp-tag-item"  
+                                title="{{'browse '.$tag->name.' jobs'}}"
+                                data-toggle="tooltip"
+                                data-placement="top">
                                 {{ $tag->name }}
                             </button>&nbsp;
-                        </a>                 
+                        </a>                
                     @endforeach
                 </div>
 
-                <div class="col mt-3">
-                    <p class="job-date">{{ $remjob->created_at->diffForHumans() }}</p>
-                </div>
-
-                <div class="col-2">
-                    @if( $remjob->apply_email == null )
-                        <a  href="{{ $remjob->apply_link }}" target="_blank"
-                            class="rp-jobrow__apply__checkout"> 
-                    @else
-                        <a  href="mailto:{{ $remjob->apply_email }}" target="_blank"
-                            class="rp-jobrow__apply__checkout"  rel="noindex nofollow">  
-
-                    @endif
-                            {{ __('Apply') }}
-                        </a>
-                </div>
-
-            </div>
-
-            <div class="rp-row__body" id="{{ 'position-' . $remjob->id}}">
-                
-                <!-- <p>{{ $remjob->description }}</p> -->
-                <div class="p-5">{!! $remjob->description !!}</div>
-
-                @if($remjob->min_salary)
-                    <p class="pl-5">
-                        <span style="font-weight:bold;">{{__('Min. Annual Salary: ')}}</span>
-                        <span>${{ number_format($remjob->min_salary,0,'.',',') }}</span>
-                    </p>
-                @endif
-                @if($remjob->max_salary)
-                    <p class="pl-5">
-                        <span style="font-weight:bold;">{{__('Max. Annual Salary: ')}}</span>
-                        <span>${{ number_format($remjob->max_salary,0,'.',',')  }}</span>
-                    </p>
-                @endif
-
-                @if($remjob->locations)
-                    <h4 class="pl-5">{{__('Location')}}</h4>
-                    <p class="pl-5">{{ $remjob->locations }}</p>
-                @endif
-
-                <div class="d-flex pl-5">
-
-                    <p class="mr-2"> {{__('See all jobs at ')}}</p>
-                    <p>
-                        <a class="company-brand" href="#" >
-                            {{ $remjob->company->name }}
-                        </a>
-                    </p>
+                {{-- DESCRIPTION --}}
+                <div class="mt-5">
                     
+                    @if( $remjob->total != null or $remjob->external_api != 'https://remoteok.io')
+                        <div>{!! $remjob->description !!}</div>
+                    @else
+                        <p>{{ __('Press Apply to get this remote job details.') }}</p>
+                    @endif
 
+                    @if($remjob->min_salary)
+                        <p class="mt-2">
+                            <span style="font-weight:bold;">{{__('Min. Annual Salary: ')}}</span>
+                            <span>${{ number_format($remjob->min_salary,0,'.',',') }}</span>
+                        </p>
+                    @endif
+                    @if($remjob->max_salary)
+                        <p>
+                            <span style="font-weight:bold;">{{__('Max. Annual Salary: ')}}</span>
+                            <span>${{ number_format($remjob->max_salary,0,'.',',')  }}</span>
+                        </p>
+                    @endif
 
+                    @if($remjob->locations)
+                        <h4 class="mt-2">{{__('Location')}}</h4>
+                        <p class= >{{ $remjob->locations }}</p>
+                    @endif
+
+                    @if( $remjob->apply_email == null )
+                        <a  href="#"
+                            class="rp-jobrow__apply mt-4 mb-4" target="_blank"> 
+                    @else
+                        <a  href="#"  
+                            class="rp-jobrow__apply mt-4 mb-4" target="_blank" rel="noindex nofollow">  
+                    @endif
+                        {{ __('Apply for this job') }}
+                    </a>
+
+                    <div class="d-flex mt-4 mb-4">
+
+                        <p class="mr-2"> {{__('See all jobs at ')}}</p>
+                        <p>
+                            <a class="company-brand" href="#" >
+                                {{ $remjob->company->name }}
+                            </a>
+                        </p>
+                        
+                    </div>
                 </div>
+
             </div>
 
-        </div>
+
+
+
+
         <!--End of Main job preview -->
     </div>
 
@@ -163,7 +144,7 @@
     </tbody>
   </table>
 
-  <div class="d-flex justify-content-center flex-column">
+  <div class="d-flex justify-content-center flex-column text-center">
 
         <a  href="#" target="_blank"
             class="rp-jobrow__apply__checkout"> 

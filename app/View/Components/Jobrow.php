@@ -16,10 +16,12 @@ class Jobrow extends Component
      */
 
     public $remjob;
+    public $page;
 
-    public function __construct(Remjob $remjob)
+    public function __construct(Remjob $remjob, $page)
     {
         $this->remjob = $remjob;
+        $this->page = $page;
         
     }
 

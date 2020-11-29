@@ -70,4 +70,10 @@ return [
     'crEmailLabel'  => 'Email',
     'crLinkTip'     => 'The job apply link.',
     'crEmailTip'     => 'The job apply email.',
+
+    // Footer
+    'copyright' => ' Copyright © 2020 ',
+    'supportEmail'  => ' Support: heagueron@gmail.com ',
+    'terms'         => ' Terms ',
+    'privacy'       => ' Privacy ',
 ];

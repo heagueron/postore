@@ -291,6 +291,7 @@ setTimeout(() => {
 
     // Check if active url is the post a job page
     if ( window.location.href.indexOf("post-a-job") > -1 ) {
+        document.querySelector('#app-footer').style.display = "none";
         console.log("active url is: the post a job page");
         formControl();
     } 

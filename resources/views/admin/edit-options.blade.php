@@ -77,6 +77,15 @@
                             value="{{ !is_null( old('remjob_active_duration'))? old('remjob_active_duration') : $adminOptions[5]->value }}"               
                     >
                 </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-4 pt-3">{{__('Support email')}}</div>
+                <div class="col-4">
+                    <input  type="text" name="support_email" style="margin:0 !important;"
+                            value="{{ !is_null( old('support_email'))? old('support_email') : $adminTextOptions[0]->value }}"               
+                    >
+                </div>
             </div> 
 
         </div>

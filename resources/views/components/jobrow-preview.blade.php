@@ -1,13 +1,13 @@
 
 <!-- NEW job preview -->
 <h3 class="rp-group__head mb-1">Job Post Preview:</h3>
-<div class="rp-row">
+<div class="rp-row" style="background-color:#f9f9f9;">
 
     <div class="row rp-row__header job-box">
 
         <!-- logo preview -->
-        <div class="col" id="preview_logo_container">
-            <img src="{{ asset('storage/logos/logo1.png') }}" alt="logo" id="preview-logo">
+        <div class="col-1" id="preview_logo_container">
+            <img src="{{ asset('storage/logos/nologo.png') }}" alt="logo" id="preview-logo" class="w-100">
         </div>
 
         <!-- position, company and location preview -->
@@ -39,11 +39,11 @@
         </div> -->
 
         <!-- apply button preview -->
-        <div class="col-2 pr-2 pl-1 d-flex justify-content-center align-content-center">
+        <!-- <div class="col-2 pr-2 pl-1 d-flex justify-content-center align-content-center">
             <p class="rp-jobrow__preview"> 
                 {{ __('Apply') }}
             </p>
-        </div>
+        </div> -->
 
     </div>
 

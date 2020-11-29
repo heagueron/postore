@@ -19,7 +19,7 @@
         <div  id="rp-accordion">
 
             @forelse ( $remjobs as $remjob )
-                <x-jobrow :remjob="$remjob" />
+                <x-jobrow :remjob="$remjob" page='landing'/>
             @empty
                 <p class="d-flex justify-content-center align-content-center">
                     {{ __('There are not remote jobs posted in the selected category.') }}

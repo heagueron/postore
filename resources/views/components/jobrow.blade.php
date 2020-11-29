@@ -1,7 +1,7 @@
 
 <div class="rp-row">
 
-    <a href="{{ route( 'remjobs.show', $remjob->slug ) }}" class="overlay"></a>
+    <a href="{{ $page=='checkout' ? '#' : route( 'remjobs.show', $remjob->slug ) }}" class="overlay"></a>
     
     @if( $remjob->yellow_background )
     <div class="row rp-row__header job-box rp-row__highlight inner" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}" style="margin-left:0;margin-right:0;">
@@ -30,12 +30,12 @@
         </div>
 
         {{-- POSITION COMPANY LOCATIONS --}}
-        <div class="col-3 mt-2">
+        <div class="col-3 mt-2 ml-2">
             <h5 class="mb-1 rp-job-title"> {{ ucwords( $remjob->position ) }} </h5>
             <a  class="mb-1 company-badge company-brand"
                 title="{{'browse '.$remjob->company->name.' jobs'}}"
                 data-toggle="tooltip"
-                href="{{  route( 'remjobs.searchByCompany', $remjob->company->slug )  }}"  
+                href="{{ $page=='checkout' ? '#' : route( 'remjobs.searchByCompany', $remjob->company->slug )  }}"  
                 >
                 {{ $remjob->company->name }}
             </a>
@@ -54,7 +54,7 @@
         {{-- TAGS --}}
         <div class="col-4 pb-7">
             @foreach( $remjob->tags()->take(5)->get() as $tag )
-            <a href="{{  route( 'remjobs.searchByTags', 'remote-'.$tag->name.'-jobs' )  }}"  class="job-badget">
+            <a href="{{ $page=='checkout' ? '#' : route( 'remjobs.searchByTags', 'remote-'.$tag->name.'-jobs' )  }}"  class="job-badget">
                 <button 
                     class="rp-tag-item"  
                     title="{{'browse '.$tag->name.' jobs'}}"
@@ -70,20 +70,6 @@
         <div class="col mt-3">
             <p class="job-date">{{ $remjob->created_at->diffForHumans() }}</p>
         </div>
-
-        {{-- APPLY --}}
-        <!-- <div class="col-2">
-            @if( $remjob->apply_email == null )
-                <a  href="{{ $remjob->apply_link }}"
-                    class="rp-jobrow__apply" target="_blank"> 
-            @else
-                <a  href="mailto:{{ $remjob->apply_email }}"  
-                    class="rp-jobrow__apply" target="_blank" rel="noindex nofollow">  
-
-            @endif
-                    {{ __('Apply') }}
-                </a>
-        </div> -->
 
     </div>
 

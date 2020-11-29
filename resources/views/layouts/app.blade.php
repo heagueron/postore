@@ -37,7 +37,7 @@
 </head>
 <body>
 
-    <div id="app">
+    <div id="app" class="content">
 
 
             @yield('content')
@@ -54,6 +54,10 @@
 
         
     </div>
+
+    <footer class="footer" id="app-footer">
+        @include('partials.footer')
+    </footer>
 
 </body>
 </html>

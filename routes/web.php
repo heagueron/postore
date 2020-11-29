@@ -95,7 +95,9 @@ Route::get('/twitter_profiles/convertToken', 'TwitterProfileController@convertTo
 //Route::patch('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@update')->name('twitter_profiles.update')->middleware('auth');;
 Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@destroy')->name('twitter_profiles.destroy')->middleware('auth');
 
-
+Route::get('privacy', function () {
+    return view('pages.privacy');
+})->name('privacy');
 
 // Scheduled posts (Sposts)
 // Route::get('/sposts', 'SpostController@index')->name('sposts.index');

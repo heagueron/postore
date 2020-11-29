@@ -69,6 +69,7 @@ class OptionSeeder extends Seeder
                 'created_at'    => '2020-11-22 20:23:54',
                 'updated_at'    => '2020-11-22 20:23:54',
             ),
+ 
 
         ));
         
