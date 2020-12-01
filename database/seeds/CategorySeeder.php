@@ -63,6 +63,56 @@ class CategorySeeder extends Seeder
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),
+
+            // SPANISH CATEGORIES:
+            6 => 
+            array (
+                'id' => 7,
+                'name' => 'Trabajos Remotos',
+                'tag'  => '', 
+                'created_at' => '2020-10-26 20:23:54',
+                'updated_at' => '2020-10-26 20:23:54',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'name' => 'Desarrollo de Software',
+                'tag'   => 'desarrollo',
+                'created_at' => '2020-10-26 20:23:54',
+                'updated_at' => '2020-10-26 20:23:54',
+            ),
+            8 => 
+            array (
+                'id' => 9,
+                'name' => 'Servicios al Cliente',
+                'tag' => 'customer-support',
+                'created_at' => '2020-10-26 20:23:54',
+                'updated_at' => '2020-10-26 20:23:54',
+            ),
+            9 => 
+            array (
+                'id' => 10,
+                'name' => 'Mercadotecnia',
+                'tag' => 'mercadotecnia',
+                'created_at' => '2020-10-26 20:23:54',
+                'updated_at' => '2020-10-26 20:23:54',
+            ),
+            10 => 
+            array (
+                'id' => 11,
+                'name' => 'Diseño',
+                'tag' => 'diseño',
+                'created_at' => '2020-10-26 20:23:54',
+                'updated_at' => '2020-10-26 20:23:54',
+            ),
+            11 => 
+            array (
+                'id' => 12,
+                'name' => 'Otros',
+                'tag' => 'otros',
+                'created_at' => '2020-10-26 20:23:54',
+                'updated_at' => '2020-10-26 20:23:54',
+            ),
         ));
         
 

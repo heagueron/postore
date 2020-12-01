@@ -497,11 +497,7 @@ class RemjobController extends Controller
         
 
         $text .= ' ☛ '.$link;
-
-        // if( $remjob->total == null ) {
-        //     $text .= '. Source: '.$remjob->external_api;
-        // }
-        
+        // $text .= ' Source: '.$remjob->external_api;   
 
         if( $remjob->has('tags') ){
             foreach( $remjob->tags as $tag ){

@@ -6565,7 +6565,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px;\n    bottom: 25px;\n}\n", ""]);
+exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px;\n    bottom: 25px;\n    z-index:10;\n}\n", ""]);
 
 // exports
 
@@ -6584,7 +6584,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px;\n    bottom: 25px;\n}\n", ""]);
+exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px;\n    bottom: 25px;\n    z-index:10;\n}\n", ""]);
 
 // exports
 
@@ -53344,56 +53344,47 @@ var app = new Vue({
 
 $('[data-toggle="tooltip"]').tooltip();
 /* Prevent presentation of job description when click on a tag or company name */
+// const collapseControl = () => {
+//     const tagBadges = document.querySelectorAll('.job-badget');
+//     const companyBadges = document.querySelectorAll('.company-badge');
+//     tagBadges.forEach(function(tagbadge) {
+//         tagbadge.addEventListener("click", function(event){
+//         event.stopPropagation()
+//         })
+//     });
+//     companyBadges.forEach(function(companybadge) {
+//         companybadge.addEventListener("click", function(event){
+//         event.stopPropagation()
+//         })
+//     });
+// }
 
-var collapseControl = function collapseControl() {
-  var tagBadges = document.querySelectorAll('.job-badget');
-  var companyBadges = document.querySelectorAll('.company-badge');
-  tagBadges.forEach(function (tagbadge) {
-    tagbadge.addEventListener("click", function (event) {
-      event.stopPropagation();
-    });
-  });
-  companyBadges.forEach(function (companybadge) {
-    companybadge.addEventListener("click", function (event) {
-      event.stopPropagation();
-    });
-  });
-};
 /* Controls presence of Apply Button */
-
-
-var applyControl = function applyControl() {
-  var x = document.getElementsByClassName("job-box");
-  if (x.length == 0) return;
-
-  var _loop = function _loop() {
-    var applyElement = x[i].querySelector('.rp-jobrow__apply'); //console.log(applyElement);
-
-    x[i].addEventListener('mouseenter', function (e) {
-      //console.log("inside job row");  
-      applyElement.style.display = "flex";
-    });
-    x[i].addEventListener('mouseleave', function (e) {
-      //console.log("outside job row");
-      applyElement.style.display = "none";
-    });
-  };
-
-  for (var i = 0; i < x.length; i++) {
-    _loop();
-  }
-}; // Delay to allow for elements to appear before assigning event listeners.
-
-
-setTimeout(function () {
-  collapseControl();
-  var heroSearchInput = document.getElementById("myInput");
-
-  if (heroSearchInput != null) {
-    console.log("active url is the job list page");
-    applyControl();
-  }
-}, 500);
+// const applyControl = () => {
+//     var x = document.getElementsByClassName("job-box");
+//     if( x.length == 0 ) return;
+//     for (var i = 0; i < x.length; i++) {
+//         let applyElement = x[i].querySelector('.rp-jobrow__apply');
+//         //console.log(applyElement);
+//         x[i].addEventListener('mouseenter', e => {
+//             //console.log("inside job row");  
+//             applyElement.style.display = "flex";
+//         });
+//         x[i].addEventListener('mouseleave', e => {
+//             //console.log("outside job row");
+//             applyElement.style.display = "none";
+//         });
+//     }
+// }
+// Delay to allow for elements to appear before assigning event listeners.
+//   setTimeout(() => {
+//     collapseControl();
+//     // let heroSearchInput = document.getElementById("myInput");
+//     // if ( heroSearchInput != null ) {
+//     //     console.log("active url is the job list page");
+//     //     applyControl();
+//     // }
+// }, 500);
 
 /***/ }),
 
@@ -53427,7 +53418,8 @@ function autocomplete(inp) {
     /* GET THE OPTIONS ARRAY FROM THE SERVER */
 
 
-    var PATH = "http://127.0.0.1:8000";
+    var PATH = document.querySelector('#appURL') == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000"; // const PATH = "http://127.0.0.1:8000";
+
     arr = [];
     fetch("".concat(PATH, "/job_tags/").concat(val)).then(function (response) {
       return response.json();
@@ -53802,7 +53794,8 @@ var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.j
     isUndefined = _require.isUndefined;
 
 var formControl = function formControl() {
-  var PATH = "http://127.0.0.1:8000";
+  var PATH = document.querySelector('#appURL') == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000"; // const PATH = "http://127.0.0.1:8000";
+
   /* company_name */
 
   var companyNameElement = document.querySelector('input[name="company_name"]'); // old company_name when returning from validation errors

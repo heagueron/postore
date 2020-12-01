@@ -39,6 +39,7 @@
 
     <div id="app" class="content">
 
+    <input style="display:none;" id="appURL" value="{{ config('app.url') }}">
 
             @yield('content')
 

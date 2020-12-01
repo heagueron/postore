@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             
         }
 
-        $companyIds = array_values( App\Company::pluck('id')->toArray() );
+        $companyIds = array_values( \App\Company::pluck('id')->toArray() );
 
         // Register in pivot tables
         foreach(App\Remjob::all() as $remjob) {
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
 
             // Company
             $remjob->update([ 
-                'company_id'    => array_rand( $companyIds ),
+                'company_id'    => array_rand( array_flip($companyIds) ),
                 'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
             ]);
             

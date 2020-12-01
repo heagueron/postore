@@ -11,11 +11,6 @@
         
         @include('partials.categories')
 
-        <!-- <div class="banner-post-job">
-            <p>{{ __('👉 Looking for remote position resources?') }}</p>
-            <a href="post-a-job.php" alt="Post a job" class="post-button">{{ __('Post a Job') }}</a>
-        </div> -->
-
         <div  id="rp-accordion">
 
             @forelse ( $remjobs as $remjob )

@@ -26,9 +26,13 @@ class RemjobController extends Controller
      */
     public function index()
     {
-        if( Remjob::where('active',1)->exists() ){
-            $remjobs = Remjob::where('active',1)->orderBy('main_front_page', 'desc')->orderBy('created_at', 'desc')->get();
-        } else { $remjobs = null; }
+        // App::setLocale('es');
+        if( Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )->exists() ){
+
+            $remjobs = Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )
+                ->orderBy('main_front_page', 'desc')->orderBy('created_at', 'desc')->get();
+
+        } else { $remjobs = []; } 
 
         return view( 'landing', compact('remjobs') );
 
@@ -42,9 +46,14 @@ class RemjobController extends Controller
     public function create()
     {
         //App::setlocale('es');
-        $categories = \App\Category::where('id', '>', '1')->get();
-        // dd($categories);
+        if (App::isLocale('es')) {
+            $categories = \App\Category::whereIn( 'id', [7, 8, 9, 10, 11, 12] )->get();
+        } else {
+            $categories = \App\Category::whereIn( 'id', [1, 2, 3, 4, 5, 6] )->get();
+        }
+
         return view( 'remjobs.create', compact('categories') );
+
     }
 
     /**
@@ -124,6 +133,7 @@ class RemjobController extends Controller
 
         $remjob->update([ 
             'total'                 => $jobPostTotal,
+            'language'              => App::getLocale(),
             'gumroad_link'          => $this->determineGumroadLink( $remjob )['gumroadLink'],
             'gumroad_product_id'    => $this->determineGumroadLink( $remjob )['gumroadId'],
             'company_id'            => $company->id,
@@ -185,12 +195,6 @@ class RemjobController extends Controller
                     ->orderBy('category_front_page', 'desc')
                     ->orderBy('created_at', 'desc')->get();
             } else { $remjobs = null; }
-
-            // if( $category->has('remjobs') ){
-            //     $remjobs = $category->remjobs()
-            //         ->orderBy('front_category_2w', 'desc')
-            //         ->orderBy('created_at', 'desc')->get();
-            // } else { $remjobs = null; }
             
         } else {
             // Search for a normal TAG
@@ -206,10 +210,6 @@ class RemjobController extends Controller
                     ->orderBy('category_front_page', 'desc')
                     ->orderBy('created_at', 'desc')->get();
             } else { $remjobs = null; }
-
-            // if( $tag->has('remjobs') ){
-            //     $remjobs = $remjobs = $tag->remjobs()->orderBy('created_at', 'desc')->get();
-            // } else { $remjobs = null; }
 
         }
         

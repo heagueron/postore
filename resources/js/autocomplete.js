@@ -14,7 +14,8 @@ function autocomplete(inp) {
         if (!val) { return false;}
 
         /* GET THE OPTIONS ARRAY FROM THE SERVER */
-        const PATH = "http://127.0.0.1:8000";
+        const PATH = document.querySelector('#appURL') == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
+        // const PATH = "http://127.0.0.1:8000";
 
         arr = [];
         fetch(`${PATH}/job_tags/${val}`)

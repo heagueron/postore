@@ -2,7 +2,8 @@ const { isUndefined } = require("lodash");
 
 const formControl = () => {
 
-    var PATH = "http://127.0.0.1:8000";
+    const PATH = document.querySelector('#appURL') == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
+    // const PATH = "http://127.0.0.1:8000";
 
     /* company_name */
     const companyNameElement = document.querySelector('input[name="company_name"]');
