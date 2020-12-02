@@ -53343,48 +53343,6 @@ var app = new Vue({
 /* Activate bootstrap tooltips */
 
 $('[data-toggle="tooltip"]').tooltip();
-/* Prevent presentation of job description when click on a tag or company name */
-// const collapseControl = () => {
-//     const tagBadges = document.querySelectorAll('.job-badget');
-//     const companyBadges = document.querySelectorAll('.company-badge');
-//     tagBadges.forEach(function(tagbadge) {
-//         tagbadge.addEventListener("click", function(event){
-//         event.stopPropagation()
-//         })
-//     });
-//     companyBadges.forEach(function(companybadge) {
-//         companybadge.addEventListener("click", function(event){
-//         event.stopPropagation()
-//         })
-//     });
-// }
-
-/* Controls presence of Apply Button */
-// const applyControl = () => {
-//     var x = document.getElementsByClassName("job-box");
-//     if( x.length == 0 ) return;
-//     for (var i = 0; i < x.length; i++) {
-//         let applyElement = x[i].querySelector('.rp-jobrow__apply');
-//         //console.log(applyElement);
-//         x[i].addEventListener('mouseenter', e => {
-//             //console.log("inside job row");  
-//             applyElement.style.display = "flex";
-//         });
-//         x[i].addEventListener('mouseleave', e => {
-//             //console.log("outside job row");
-//             applyElement.style.display = "none";
-//         });
-//     }
-// }
-// Delay to allow for elements to appear before assigning event listeners.
-//   setTimeout(() => {
-//     collapseControl();
-//     // let heroSearchInput = document.getElementById("myInput");
-//     // if ( heroSearchInput != null ) {
-//     //     console.log("active url is the job list page");
-//     //     applyControl();
-//     // }
-// }, 500);
 
 /***/ }),
 
@@ -53415,10 +53373,20 @@ function autocomplete(inp) {
     if (!val) {
       return false;
     }
+
+    var PATH; // Retrieve server
+
+    var server = document.querySelector('#appURL').value;
+
+    if (server == 'http://127.0.0.1:8000' || server == 'http://localhost') {
+      PATH = "http://127.0.0.1:8000";
+    } else {
+      PATH = "http://142.93.119.207";
+    }
     /* GET THE OPTIONS ARRAY FROM THE SERVER */
+    //const PATH = document.querySelector('#appURL') == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
+    // const PATH = "http://127.0.0.1:8000";
 
-
-    var PATH = document.querySelector('#appURL') == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000"; // const PATH = "http://127.0.0.1:8000";
 
     arr = [];
     fetch("".concat(PATH, "/job_tags/").concat(val)).then(function (response) {
@@ -53794,9 +53762,21 @@ var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.j
     isUndefined = _require.isUndefined;
 
 var formControl = function formControl() {
-  var PATH = document.querySelector('#appURL') == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000"; // const PATH = "http://127.0.0.1:8000";
+  var PATH; // Retrieve server
+
+  var server = document.querySelector('#appURL').value;
+
+  if (server == 'http://127.0.0.1:8000' || server == 'http://localhost') {
+    PATH = "http://127.0.0.1:8000";
+  } else {
+    PATH = "http://142.93.119.207";
+  }
+  /* GET THE OPTIONS ARRAY FROM THE SERVER */
+  //const PATH = document.querySelector('#appURL') == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
+  // const PATH = "http://127.0.0.1:8000";
 
   /* company_name */
+
 
   var companyNameElement = document.querySelector('input[name="company_name"]'); // old company_name when returning from validation errors
 

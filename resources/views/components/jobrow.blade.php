@@ -4,9 +4,9 @@
     <a href="{{ $page=='checkout' ? '#' : route( 'remjobs.show', $remjob->slug ) }}" class="overlay"></a>
     
     @if( $remjob->yellow_background )
-    <div class="row rp-row__header job-box rp-row__highlight inner" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}" style="margin-left:0;margin-right:0;">
+    <div class="row rp-row__header job-box rp-row__highlight inner" style="margin-left:0;margin-right:0;">
     @else
-    <div class="row rp-row__header job-box rp-row__standard inner" data-toggle="collapse" href="{{ '#position-' . $remjob->id}}" style="margin-left:0;margin-right:0;">
+    <div class="row rp-row__header job-box rp-row__standard inner" style="margin-left:0;margin-right:0;">
     @endif
     
 
@@ -71,47 +71,6 @@
             <p class="job-date">{{ $remjob->created_at->diffForHumans() }}</p>
         </div>
 
-    </div>
-
-    {{-- DESCRIPTION --}}
-    <div class="rp-row__body collapse" id="{{ 'positiom-' . $remjob->id}}"  data-parent="#rp-accordion" >
-        
-        @if( $remjob->total != null or $remjob->external_api != 'https://remoteok.io')
-            <div class="pl-5">{!! $remjob->description !!}</div>
-        @else
-            <p class="pl-5">{{ __('Press Apply to get this remote job details.') }}</p>
-        @endif
-
-        @if($remjob->min_salary)
-            <p class="pl-5 mt-2">
-                <span style="font-weight:bold;">{{__('Min. Annual Salary: ')}}</span>
-                <span>${{ number_format($remjob->min_salary,0,'.',',') }}</span>
-            </p>
-        @endif
-        @if($remjob->max_salary)
-            <p class="pl-5">
-                <span style="font-weight:bold;">{{__('Max. Annual Salary: ')}}</span>
-                <span>${{ number_format($remjob->max_salary,0,'.',',')  }}</span>
-            </p>
-        @endif
-
-        @if($remjob->locations)
-            <h4 class="pl-5 mt-2">{{__('Location')}}</h4>
-            <p class="pl-5">{{ $remjob->locations }}</p>
-        @endif
-
-        <div class="d-flex pl-5 mt-2 mb-2">
-
-            <p class="mr-2"> {{__('See all jobs at ')}}</p>
-            <p>
-                <a class="company-brand" href="{{  route( 'remjobs.searchByCompany', $remjob->company->slug )  }}" >
-                    {{ $remjob->company->name }}
-                </a>
-            </p>
-            
-
-
-        </div>
     </div>
 
 </div>

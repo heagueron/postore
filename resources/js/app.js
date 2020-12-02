@@ -67,63 +67,9 @@ $('[data-toggle="tooltip"]').tooltip()
 
 
 
-/* Prevent presentation of job description when click on a tag or company name */
-// const collapseControl = () => {
-
-//     const tagBadges = document.querySelectorAll('.job-badget');
-//     const companyBadges = document.querySelectorAll('.company-badge');
-    
-//     tagBadges.forEach(function(tagbadge) {
-//         tagbadge.addEventListener("click", function(event){
-//         event.stopPropagation()
-//         })
-//     });
-
-//     companyBadges.forEach(function(companybadge) {
-//         companybadge.addEventListener("click", function(event){
-//         event.stopPropagation()
-//         })
-//     });
-
-// }
-
-/* Controls presence of Apply Button */
-// const applyControl = () => {
-
-//     var x = document.getElementsByClassName("job-box");
-
-//     if( x.length == 0 ) return;
-
-//     for (var i = 0; i < x.length; i++) {
-
-//         let applyElement = x[i].querySelector('.rp-jobrow__apply');
-//         //console.log(applyElement);
-
-//         x[i].addEventListener('mouseenter', e => {
-//             //console.log("inside job row");  
-//             applyElement.style.display = "flex";
-//         });
-
-//         x[i].addEventListener('mouseleave', e => {
-//             //console.log("outside job row");
-//             applyElement.style.display = "none";
-//         });
-
-//     }
-// }
 
 
 
 
-// Delay to allow for elements to appear before assigning event listeners.
-//   setTimeout(() => {
-    
-//     collapseControl();
 
-//     // let heroSearchInput = document.getElementById("myInput");
-//     // if ( heroSearchInput != null ) {
-//     //     console.log("active url is the job list page");
-//     //     applyControl();
-//     // }
-    
-// }, 500);
+
