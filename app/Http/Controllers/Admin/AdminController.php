@@ -43,15 +43,18 @@ class AdminController extends Controller
             'remjob_active_duration' => [ 'required', 'string' ],
             'support_email' => [ 'required', 'email' ],
         ]);
-        \App\Option::find(1)->update( ['value'=>$request->base_price]);
-        \App\Option::find(2)->update( ['value'=>$request->show_logo]);
-        \App\Option::find(3)->update( ['value'=>$request->yellow_background]);
-        \App\Option::find(4)->update( ['value'=>$request->main_front_page]);
-        \App\Option::find(5)->update( ['value'=>$request->category_front_page]);
-        \App\Option::find(6)->update( ['value'=>$request->remjob_active_duration]);
-        \App\TextOption::find(1)->update( ['value'=>$request->support_email]);
+        \App\Option::find(1)->update( ['value'=>$request->base_price] );
 
-        return redirect()->back()->with('flash','Admin options values updated');
+        \App\Option::find(2)->update( ['value'=>$request->show_logo] );
+        \App\Option::find(3)->update( ['value'=>$request->yellow_background] );
+        \App\Option::find(4)->update( ['value'=>$request->main_front_page] );
+        \App\Option::find(5)->update( ['value'=>$request->category_front_page] );
+
+        \App\Option::find(6)->update( ['value'=>$request->remjob_active_duration] );
+
+        \App\TextOption::find(1)->update( ['value'=>$request->support_email] );
+
+        return redirect()->back()->with( 'flash','Admin options values updated' );
     }
 
 
