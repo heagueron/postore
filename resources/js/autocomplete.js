@@ -16,11 +16,13 @@ function autocomplete(inp) {
         let PATH;
         // Retrieve server
         const server = document.querySelector('#appURL').value;
+        console.log(`server: ${server}`);
         if( server == 'http://127.0.0.1:8000' || server == 'http://localhost'){
           PATH = "http://127.0.0.1:8000";
         } else {
           PATH = "http://142.93.119.207";
         }
+        console.log(`PATH: ${PATH}`);
 
         /* GET THE OPTIONS ARRAY FROM THE SERVER */
         //const PATH = document.querySelector('#appURL') == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
