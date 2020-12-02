@@ -37,7 +37,7 @@ class RemjobController extends Controller
         //dd("admin remjob controller index ");
         if( Remjob::where('active',1)->exists() ){
             $remjobs = Remjob::where('active',1)->orderBy('created_at', 'desc')->get();
-        } else { $remjobs = null; }
+        } else { $remjobs = []; }
         
         return view( 'admin.remjobs.index',compact('remjobs') );
 
@@ -212,9 +212,7 @@ class RemjobController extends Controller
         if( !count( $jobsArray ) > 0) {
             return back()->with('fail', 'No job found on working-nomads api');
         }
-        //dd( explode( "," , $jobsArray[0]["tags"] ) ) ;
 
-        //dd( array_slice($jobsArray, 0, 11) );
 
         foreach ( array_slice($jobsArray, 0, 21) as $remApiJob ) {
 
@@ -338,25 +336,6 @@ class RemjobController extends Controller
                 'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
                 'active'        => 1,
             ]);
-
-            // tags for the remjob-tag pivot table
-            // $tagsIdToLink = [];
-
-            // Add every tag, if it does not exist, create it in the database.
-            // $inputTags = array_values( $remApiJob["tags"] );
-
-            // take 3 tags
-            // foreach ( array_slice($inputTags, 0, 2) as $inputTag ) {
-            //     if( Tag::where('name',trim($inputTag) )-> exists() ) {
-            //         $foundTag = Tag::where('name',trim($inputTag) )->first();
-            //         array_push( $tagsIdToLink, $foundTag->id );
-            //     } else {
-            //         $newTag = Tag::create([ 'name' => trim($inputTag) ]);
-            //         array_push( $tagsIdToLink, $newTag->id );
-            //     }
-            // }
-
-            // $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
 
             
         }

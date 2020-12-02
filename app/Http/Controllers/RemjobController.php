@@ -163,17 +163,6 @@ class RemjobController extends Controller
     }
 
     /**
-     * Display the specified resource checkout page.
-     *
-     * @param  \App\Remjob  $remjob
-     * @return \Illuminate\Http\Response
-     */
-    // public function checkout(Remjob $remjob)
-    // {
-    //     return view( 'remjobs.checkout', compact('remjob') );
-    // }
-
-    /**
      * Display the specified resource.
      *
      * @param  string $tags
@@ -194,12 +183,12 @@ class RemjobController extends Controller
                 $remjobs = $category->remjobs()->where('active', 1)
                     ->orderBy('category_front_page', 'desc')
                     ->orderBy('created_at', 'desc')->get();
-            } else { $remjobs = null; }
+            } else { $remjobs = []; }
             
         } else {
             // Search for a normal TAG
             $tag = Tag::where( 'name', 'like', $tagsText )->first();
-            if ($tag === null) {
+            if ($tag === []) {
                 return view('404');
             }
 
@@ -209,7 +198,7 @@ class RemjobController extends Controller
                 $remjobs = $tag->remjobs()->where('active', 1)
                     ->orderBy('category_front_page', 'desc')
                     ->orderBy('created_at', 'desc')->get();
-            } else { $remjobs = null; }
+            } else { $remjobs = []; }
 
         }
         
