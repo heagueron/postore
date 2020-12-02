@@ -13,6 +13,7 @@ use App\Remjob;
 |
 */
 
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -25,7 +26,7 @@ Route::get('/', 'RemjobController@index')->name('landing');
 //Route::get('/checkout/activate', 'RemjobController@index');
 
 // REMOTE JOBS
-Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term')->middleware('cors');
+Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term');
 
 Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job')->middleware('auth');
 Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store')->middleware('auth');
