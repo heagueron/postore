@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="remote jobs">
     <meta name="author" content="Hector Aguero - heagueron@gmail.com">
+    <meta name="referrer" content="no-referrer">
     
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
