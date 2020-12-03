@@ -51,7 +51,7 @@
                 {{-- DESCRIPTION --}}
                 <div class="mt-5">
                     
-                    @if( $remjob->total != null or $remjob->external_api != 'https://remoteok.io')
+                    @if( $remjob->external_api != 'https://remoteok.io')
                         <div>{!! $remjob->description !!}</div>
                     @else
                         <p>{{ __('Press Apply to get this remote job details.') }}</p>
@@ -103,14 +103,14 @@
                 <div class="card bg-light pb-2">
                     <div class="card-body text-center">
 
-                        @if( $remjob->total != null )
-                            @if( $remjob->company->logo != null and $remjob->show_logo )
+                        @if( $remjob->external_api == null )
+                            @if( $remjob->company->logo != null and $remjob->plan->show_logo )
                                 <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}">
                             @else
                                 <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-50" >
                             @endif
                         @else
-                            @if( $remjob->company->logo != null and $remjob->show_logo )
+                            @if( $remjob->company->logo != null )
                                 <img src="{{ $remjob->company->logo }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}" width="80" height=auto>
                             @else
                                 <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-50" >

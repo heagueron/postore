@@ -3,7 +3,7 @@
 
     <a href="{{ $page=='checkout' ? '#' : route( 'remjobs.show', $remjob->slug ) }}" class="overlay"></a>
     
-    @if( $remjob->yellow_background )
+    @if( $remjob->plan->yellow_background )
     <div class="row rp-row__header job-box rp-row__highlight inner" style="margin-left:0;margin-right:0;">
     @else
     <div class="row rp-row__header job-box rp-row__standard inner" style="margin-left:0;margin-right:0;">
@@ -12,19 +12,25 @@
 
         {{-- LOGO --}}
         <div class="col-1">
+            
+            @if( $remjob->external_api == null )
 
-            @if( $remjob->total != null )
-                @if( $remjob->company->logo != null and $remjob->show_logo )
+                {{-- remjob posts --}}
+                @if( $remjob->company->logo != null and $remjob->plan->show_logo )
                     <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}">
                 @else
                     <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-100" >
                 @endif
+
             @else
-                @if( $remjob->company->logo != null and $remjob->show_logo )
+
+                {{-- external apis posts --}}
+                @if( $remjob->company->logo != null )
                     <img src="{{ $remjob->company->logo }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}" width="80" height=auto>
                 @else
                     <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-100" >
                 @endif
+
             @endif
 
         </div>

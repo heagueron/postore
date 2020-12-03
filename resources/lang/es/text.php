@@ -28,6 +28,7 @@ return [
     'crPageTitle'   => 'remjob | Crear Publicacion de Trabajo',
     'crFormTitle'   => 'crear su publicacion de trabajo remoto',
     'crBasePriceTip'    => 'Desde $:basePrice (publicacion basica)',
+    'crPost'            => 'publicacion',
 
     'crGroupTitleJob'   => 'Trabajo',
 

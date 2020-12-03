@@ -30,19 +30,14 @@ class CreateRemjobsTable extends Migration
 
             $table->unsignedInteger('company_id')->nullable();
 
-            $table->enum('show_logo',['on', null ])->default(null)->nullable();
-            $table->enum('yellow_background',['on', null ])->default(null)->nullable();
-            $table->enum('main_front_page',['on', null ])->default(null)->nullable();
-            $table->enum('category_front_page',['on', null ])->default(null)->nullable();
+            $table->unsignedInteger('plan_id')->nullable();
 
             $table->boolean('active')->default(0);
             $table->boolean('paid')->default(0);
             $table->string('gumroad_license')->nullable();
-            $table->string('gumroad_product_id')->nullable();
 
             $table->integer('total')->nullable();
-            $table->string('gumroad_link')->nullable();
-
+            
             $table->string('external_api')->nullable();
 
             $table->timestamps();

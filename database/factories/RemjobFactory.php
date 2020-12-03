@@ -25,7 +25,6 @@ $factory->define(Remjob::class, function (Faker $faker) {
         $positionLocation .= ' '.$locationItem;
     }
 
-    $ybg = $faker->randomElement(['on', null]);
 
     return [
         'position'          => $faker->randomElement(['administrator', 'operator', 'developer', 'devops', 'designer', 'coach']),
@@ -37,9 +36,7 @@ $factory->define(Remjob::class, function (Faker $faker) {
         'apply_link'        => $faker->url,
         'apply_email'       => $faker->email,
         'apply_mode'        => $faker->randomElement(['link', 'email']),
-        'show_logo'         => $faker->randomElement(['on', null]),
-        'yellow_background' => $ybg,
-        'total'             => $ybg == 'on' ? ( 39 + 29 ) : 39,
+        'plan_id'           => $faker->randomElement(['1', '2', '3', '2', '3', '2', '3']),
         'active'            => $faker->randomElement([1,0,1,1]),
     ];
 });

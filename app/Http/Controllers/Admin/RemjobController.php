@@ -70,7 +70,6 @@ class RemjobController extends Controller
                 'locations'         => $remApiJob["location"],
                 'apply_link'        => $remApiJob["url"],
                 'apply_mode'        => 'link',
-                'show_logo'         => 'on',
             ]);
 
             $companyName = STR::before( $remApiJob["company"], 'ÃÂ');
@@ -149,7 +148,6 @@ class RemjobController extends Controller
                 'locations'         => $remApiJob["candidate_required_location"],
                 'apply_link'        => $remApiJob["url"],
                 'apply_mode'        => 'link',
-                'show_logo'         => 'on',
             ]);
 
             $companyName = $remApiJob["company_name"];
@@ -229,7 +227,6 @@ class RemjobController extends Controller
                 'locations'         => $remApiJob["location"],
                 'apply_link'        => $remApiJob["url"],
                 'apply_mode'        => 'link',
-                'show_logo'         => null,
             ]);
 
             $companyName = $remApiJob["company_name"];
@@ -312,7 +309,6 @@ class RemjobController extends Controller
                 'locations'         => $remApiJob["location"],
                 'apply_link'        => $remApiJob["url"],
                 'apply_mode'        => 'link',
-                'show_logo'         => 'on',
             ]);
 
             $companyName = $remApiJob["company"];
@@ -504,7 +500,7 @@ class RemjobController extends Controller
             } 
 
         } catch (TwitterOAuthException $exception) {
-            return back()->with('fail','Remjob could not be shared on Twitter! ' . $exception->getMessage() );
+            return back()->with('fail','Remjob could not be shared on Twitter! (exc.) ' . $exception->getMessage() );
         }
 
         

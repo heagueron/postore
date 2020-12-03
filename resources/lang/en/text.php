@@ -28,6 +28,13 @@ return [
     'crPageTitle'   => 'remjob | Create Job Post',
     'crFormTitle'   => 'create your remote job post',
     'crBasePriceTip'    => 'Starts at $:basePrice (base remote job post)',
+    'crPost'            => 'post',
+    'crDuration'    => 'Post for :duration days',
+    'crShareTwitter'    => 'Share on Twitter',
+    'crShowLogo'        => 'Show Company Logo',
+    'crYellowBG'        => 'Yellow Background',
+    'crMFP'             => 'Show on Main Front Page',
+    'crMCP'             => 'Show on Main Category Page',
 
     'crGroupTitleJob'   => 'JOB',
 
@@ -71,9 +78,12 @@ return [
     'crLinkTip'     => 'The job apply link.',
     'crEmailTip'     => 'The job apply email.',
 
+    'crPlanSelectorTitle'   => 'SELECT YOUR PLAN',
+
     // Footer
     'copyright' => ' Copyright © 2020 ',
     'supportEmail'  => ' Support: heagueron@gmail.com ',
     'terms'         => ' Terms ',
     'privacy'       => ' Privacy ',
+
 ];

@@ -77,18 +77,24 @@
                 <div class="card bg-light pb-2">
                     <div class="card-body text-center">
 
-                        @if( $remjob->total != null )
-                            @if( $remjob->company->logo != null and $remjob->show_logo )
+                        @if( $remjob->external_api == null )
+
+                            {{-- remjob posts --}}
+                            @if( $remjob->company->logo != null and $remjob->plan->show_logo )
                                 <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}">
                             @else
-                                <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-50" >
+                                <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-100" >
                             @endif
-                        @else
-                            @if( $remjob->company->logo != null and $remjob->show_logo )
+
+                            @else
+
+                            {{-- external apis posts --}}
+                            @if( $remjob->company->logo != null )
                                 <img src="{{ $remjob->company->logo }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}" width="80" height=auto>
                             @else
-                                <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-50" >
+                                <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-100" >
                             @endif
+
                         @endif
 
                         <h3 class="mt-4 mb-4">{{ $remjob->company->name }}</h3>

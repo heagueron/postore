@@ -23,10 +23,11 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(CompanySeeder::class);
         $this->call(TagSeeder::class);
+        $this->call(PlanSeeder::class);
         $this->call(RemjobSeeder::class);  
         $this->call(OptionSeeder::class);
         $this->call(TextOptionSeeder::class);
-
+        
         // Seed tags from main categories:
         $mainCategories = ['dev', 'customer-support', 'marketing', 'design', 'non-tech'];
         foreach( $mainCategories as $mc ){
@@ -52,7 +53,7 @@ class DatabaseSeeder extends Seeder
 
             // Attach other ramdom tags
             $tagCount = rand(1,4);
-            $randomTags = App\Tag::all()->random( $tagCount );
+            $randomTags = \App\Tag::all()->random( $tagCount );
             foreach( $randomTags as $randomTag){
                 $remjob->tags()->attach($randomTag->id);
             }
@@ -61,6 +62,7 @@ class DatabaseSeeder extends Seeder
             $remjob->update([ 
                 'company_id'    => array_rand( array_flip($companyIds) ),
                 'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
+                'total'         => $remjob->plan->value,
             ]);
             
         }

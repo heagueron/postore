@@ -117,24 +117,49 @@
 
       <tr>
         <td style="color:#4CAF50;">Basic post</td>
-        <td>{{ \App\Option::find(1)->value }}</td>
+        <td>{{ '' }}</td>
       </tr>
       <tr>
-        <td>Show company logo</td>
-        <td>{{ $remjob->show_logo ? \App\Option::find(2)->value : '--' }}</td>
+        <td>{{ $remjob->plan->name }}</td>
+        <td>{{  $remjob->plan->value }}</td>
+      </tr>
+
+      <tr>
+        <td>{{ __('text.crDuration', ['duration' => \App\Option::find(1)->value]) }}</td>
+        <td>{{ '' }}</td>
       </tr>
       <tr>
-        <td>Highlight in yellow</td>
-        <td>{{ $remjob->yellow_background ? \App\Option::find(3)->value : '--' }}</td>
+        <td>{{ __('text.crShareTwitter') }}</td>
+        <td>{{ '' }}</td>
       </tr>
+
+      @if( $remjob->plan->show_logo)
       <tr>
-        <td>On frontpage 2 weeks</td>
-        <td>{{ $remjob->main_front_page ? \App\Option::find(4)->value : '--' }}</td>
+        <td>{{ __('text.crShowLogo') }}</td>
+        <td>{{ '' }}</td>
       </tr>
+      @endif
+
+      @if( $remjob->plan->yellow_background)
       <tr>
-        <td>On frontpage of category 2 weeks</td>
-        <td>{{ $remjob->category_front_page ? \App\Option::find(5)->value : '--' }}</td>
+        <td>{{ __('text.crYellowBG') }}</td>
+        <td>{{ '' }}</td>
       </tr>
+      @endif
+
+      @if( $remjob->plan->main_front_page)
+      <tr>
+        <td>{{ __('text.crMFP') }}</td>
+        <td>{{ '' }}</td>
+      </tr>
+      @endif
+
+      @if( $remjob->plan->category_front_page)
+      <tr>
+        <td>{{ __('text.crMCP') }}</td>
+        <td>{{ '' }}</td>
+      </tr>
+      @endif
 
       <tr>
         <td><strong>{{__('Total')  }}</strong></td>
@@ -150,8 +175,8 @@
             class="rp-jobrow__apply__checkout"> 
             {{ __('Buy this') }}
         </a>
-        <p>LINK: {{ $remjob->gumroad_link }}</p>
-        <p>GR ID: {{ $remjob->gumroad_product_id }}</p>
+        <p>LINK: {{ $remjob->plan->gumroad_link }}</p>
+        <p>GR ID: {{ $remjob->plan->gumroad_product_id }}</p>
 
   </div>
 

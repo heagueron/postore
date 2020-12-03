@@ -33,18 +33,6 @@
             
         </div>
 
-        <!-- time ago preview -->
-        <!-- <div class="col mt-3">
-            <p class="job-date"></p>
-        </div> -->
-
-        <!-- apply button preview -->
-        <!-- <div class="col-2 pr-2 pl-1 d-flex justify-content-center align-content-center">
-            <p class="rp-jobrow__preview"> 
-                {{ __('Apply') }}
-            </p>
-        </div> -->
-
     </div>
 
 </div>

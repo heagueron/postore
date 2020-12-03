@@ -11,7 +11,7 @@
     
     <div class="d-flex justify-content-center mt-3 flex-column text-center">
         <h1>{{ strtoupper( __('text.crFormTitle') ) }}</h1>
-        <h5>{{ __('text.crBasePriceTip', ['basePrice' => \App\Option::find(1)->value]) }}</h5>
+        <!-- <h5>{{ __('text.crBasePriceTip', ['basePrice' => \App\Option::find(1)->value]) }}</h5> -->
     </div>
 
     <hr class="m-5">
@@ -311,55 +311,9 @@
             <!-- S T Y L E  T H E  J O B  P O S T -->
             <div class="rp-group">
 
-                <div class="rp-group__title">STYLE THE JOB POST</div>
+                <div class="rp-group__title">{{__('text.crPlanSelectorTitle')}}</div>
 
-                <div class="m-4">
-
-                    <div class="custom-control custom-checkbox mb-3">
-                        @if( !is_null( old('show_logo') ) and old('show_logo') == 'on' )
-                            <input type="checkbox" class="custom-control-input" id="show-logo" name="show_logo" checked>
-                        @else 
-                            <input type="checkbox" class="custom-control-input" id="show-logo" name="show_logo">
-                        @endif               
-                        <label class="custom-control-label pt-1" for="show-logo">
-                            Show company logo ( +${{ \App\Option::find(2)->value }} )
-                        </label>
-                    </div>
-
-                    <div class="custom-control custom-checkbox mb-3">
-                        @if( !is_null( old('yellow_background') ) and old('yellow_background') == 'on' )
-                            <input type="checkbox" class="custom-control-input" id="yellow_background" name="yellow_background" checked>
-                        @else
-                            <input type="checkbox" class="custom-control-input" id="yellow_background" name="yellow_background"> 
-                        @endif
-                        <label class="custom-control-label pt-1" for="yellow_background">
-                            Highlight the job post with yellow background ( +${{ \App\Option::find(3)->value }} )
-                        </label>
-                    </div>
-
-                    <div class="custom-control custom-checkbox mb-3">
-                        @if( !is_null( old('main_front_page') ) and old('main_front_page') == 'on' )
-                            <input type="checkbox" class="custom-control-input" id="main_front_page" name="main_front_page" checked>
-                        @else
-                            <input type="checkbox" class="custom-control-input" id="main_front_page" name="main_front_page">
-                        @endif
-                        <label class="custom-control-label pt-1" for="main_front_page">
-                            Show on front page 4 weeks ( +${{ \App\Option::find(4)->value }} )
-                        </label>
-                    </div>
-
-                    <div class="custom-control custom-checkbox mb-3">
-                        @if( !is_null( old('category_front_page') ) and old('category_front_page') == 'on' )
-                            <input type="checkbox" class="custom-control-input" id="category_front_page" name="category_front_page" checked>
-                        @else
-                            <input type="checkbox" class="custom-control-input" id="category_front_page" name="category_front_page">
-                        @endif
-                        <label class="custom-control-label pt-1" for="category_front_page">
-                            Show on front page of category 4 weeks ( +${{ \App\Option::find(5)->value }} )
-                        </label>
-                    </div>
-
-                </div>
+                @include('partials.pricing-table')
                 
             
             </div>
@@ -379,7 +333,7 @@
 
         <div class="col-2 job-post-preview__post">
             <button form="post-job-form" class="post-button">
-                Post the job
+                {{ __('Post the job') }}
             </button>
         </div>
 

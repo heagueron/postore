@@ -244,10 +244,28 @@ const formControl = () => {
                 document.getElementById('apply-mode-info').innerHTML = 'The job apply email.'
             }
         });
-    } 
+    }
+
+    // plan change event
+    const planRadios = document.querySelectorAll('input[name="plan_id"]');
+
+    for (let i = 0; i < planRadios.length; i++) 
+    {
+        planRadios[i].addEventListener('change', function() {
+            // console.log(`change!: ${this.value}`);
+            const cards = document.querySelectorAll('.card-price-element');
+            for (let i = 0; i < cards.length; i++){
+                cards[i].style.border = 'none';
+            }
+            if( this.checked ){
+                this.parentElement.style.border = '4px solid yellow';
+            }
+        });
+    }
 
     // Get company data from database
-    companyEmailElement = document.querySelector('#companyEmailElement');
+    /*companyEmailElement = document.querySelector('#companyEmailElement');
+    
     companyEmailElement.addEventListener('change', function() {
         console.log(`change! email entered: ${this.value}`);
         fetch(`${PATH}/companies/search_company_by_email/${this.value}`)
@@ -265,7 +283,7 @@ const formControl = () => {
                 console.log( 'no hay datos' );
             }
         });
-    });
+    });*/
 
     /* SUMMERNOTE */
     $(function () {

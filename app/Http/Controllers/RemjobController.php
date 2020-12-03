@@ -30,7 +30,7 @@ class RemjobController extends Controller
         if( Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )->exists() ){
 
             $remjobs = Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )
-                ->orderBy('main_front_page', 'desc')->orderBy('created_at', 'desc')->get();
+                ->orderBy('plan_id', 'desc')->orderBy('created_at', 'desc')->get();
 
         } else { $remjobs = []; } 
 
@@ -78,10 +78,8 @@ class RemjobController extends Controller
             'apply_link'            => request()->apply_link,
             'apply_email'           => request()->apply_email,
             'apply_mode'            => request()->apply_mode,
-            'show_logo'             => request()->show_logo,
-            'yellow_background'     => request()->yellow_background,
-            'main_front_page'       => request()->main_front_page,
-            'category_front_page'   => request()->category_front_page,       
+            'plan_id'               => request()->plan_id,
+
         ]);
 
         // Company
@@ -125,17 +123,11 @@ class RemjobController extends Controller
         $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
 
         // Calculate job post total
-        $jobPostTotal = \App\Option::find(1)->value
-            + ( $remjob->show_logo * \App\Option::find(2)->value )
-            + ( $remjob->yellow_background * \App\Option::find(3)->value )
-            + ( $remjob->main_front_page * \App\Option::find(4)->value )
-            + ( $remjob->category_front_page * \App\Option::find(5)->value );
+        $jobPostTotal = \App\Plan::find( request()->plan_id )->value;
 
         $remjob->update([ 
             'total'                 => $jobPostTotal,
             'language'              => App::getLocale(),
-            'gumroad_link'          => $this->determineGumroadLink( $remjob )['gumroadLink'],
-            'gumroad_product_id'    => $this->determineGumroadLink( $remjob )['gumroadId'],
             'company_id'            => $company->id,
             'slug'                  => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
         ]);
@@ -296,66 +288,6 @@ class RemjobController extends Controller
         $fixedLogo = Image::make( public_path('storage/' . $company->logo) )->resize(60, 60);
         $fixedLogo->save();    
         return;
-    }
-
-    private function determineGumroadLink( $remjob ) {
-        $l = $remjob->show_logo;
-        $h = $remjob->yellow_background;
-        $fp = $remjob->main_front_page;
-        $fc = $remjob->category_front_page;
-
-        if ( !$l and !$h and !$fp and !$fc ) {
-            $gumroadLink = 'link-0000';
-            $gumroadId = '0000';   
-        } elseif ( !$l and !$h and !$fp and $fc ) {
-            $gumroadLink = 'link-0001';
-            $gumroadId = '0001';   
-        } elseif ( !$l and !$h and $fp and !$fc ) {
-            $gumroadLink = 'link-0010';
-            $gumroadId = '0010';   
-        } elseif ( !$l and !$h and $fp and $fc ) {
-            $gumroadLink = 'link-0011';
-            $gumroadId = '0011';   
-        } elseif ( !$l and $h and !$fp and !$fc ) {
-            $gumroadLink = 'link-0100';
-            $gumroadId = '0100';   
-        } elseif ( !$l and $h and !$fp and $fc ) {
-            $gumroadLink = 'link-0101';
-            $gumroadId = '0101';   
-        } elseif ( !$l and $h and $fp and !$fc ) {
-            $gumroadLink = 'link-0110';
-            $gumroadId = '0110';   
-        } elseif ( !$l and $h and $fp and $fc ) {
-            $gumroadLink = 'link-0111';
-            $gumroadId = '0111';   
-        } elseif ( $l and !$h and !$fp and !$fc ) {
-            $gumroadLink = 'link-1000';
-            $gumroadId = '1000';   
-        } elseif ( $l and !$h and !$fp and $fc ) {
-            $gumroadLink = 'link-1001';
-            $gumroadId = '1001';   
-        } elseif ( $l and !$h and $fp and !$fc ) {
-            $gumroadLink = 'link-1010';
-            $gumroadId = '1010';   
-        } elseif ( $l and !$h and $fp and $fc ) {
-            $gumroadLink = 'link-1011';
-            $gumroadId = '1011';   
-        } elseif ( $l and $h and !$fp and !$fc ) {
-            $gumroadLink = 'link-1100';
-            $gumroadId = '1100';   
-        } elseif ( $l and $h and !$fp and $fc ) {
-            $gumroadLink = 'link-1101';
-            $gumroadId = '1101';   
-        } elseif ( $l and $h and $fp and !$fc ) {
-            $gumroadLink = 'link-1110';
-            $gumroadId = '1110';   
-        } elseif ( $l and $h and $fp and $fc ) {
-            $gumroadLink = 'link-1111';
-            $gumroadId = '1111';   
-        }
-
-        return compact('gumroadLink', 'gumroadId');
-
     }
 
 

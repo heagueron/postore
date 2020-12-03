@@ -53979,31 +53979,49 @@ var formControl = function formControl() {
         document.getElementById('apply-mode-info').innerHTML = 'The job apply email.';
       }
     });
-  } // Get company data from database
+  } // plan change event
 
 
-  companyEmailElement = document.querySelector('#companyEmailElement');
-  companyEmailElement.addEventListener('change', function () {
-    console.log("change! email entered: ".concat(this.value));
-    fetch("".concat(PATH, "/companies/search_company_by_email/").concat(this.value)).then(function (response) {
-      return response.json();
-    }).then(function (result) {
-      console.log(result);
+  var planRadios = document.querySelectorAll('input[name="plan_id"]');
 
-      if (result.company) {
-        console.log('hay datos');
-        document.querySelector('#companyNameElement').value = result.company.name;
-        document.querySelector('#companyIdElement').value = result.company.id;
+  for (var _i = 0; _i < planRadios.length; _i++) {
+    planRadios[_i].addEventListener('change', function () {
+      // console.log(`change!: ${this.value}`);
+      var cards = document.querySelectorAll('.card-price-element');
 
-        if (result.company.twitter) {
-          document.querySelector('#companyTwitterElement').value = result.company.twitter;
-        }
-      } else {
-        console.log('no hay datos');
+      for (var _i2 = 0; _i2 < cards.length; _i2++) {
+        cards[_i2].style.border = 'none';
+      }
+
+      if (this.checked) {
+        this.parentElement.style.border = '4px solid yellow';
       }
     });
-  });
+  } // Get company data from database
+
+  /*companyEmailElement = document.querySelector('#companyEmailElement');
+  
+  companyEmailElement.addEventListener('change', function() {
+      console.log(`change! email entered: ${this.value}`);
+      fetch(`${PATH}/companies/search_company_by_email/${this.value}`)
+      .then( response => response.json() )
+      .then( result => {
+          console.log(result)
+          if( result.company ) {
+              console.log( 'hay datos' );
+              document.querySelector('#companyNameElement').value = result.company.name;
+              document.querySelector('#companyIdElement').value = result.company.id;
+              if( result.company.twitter ){
+                 document.querySelector('#companyTwitterElement').value = result.company.twitter; 
+              }
+          } else {
+              console.log( 'no hay datos' );
+          }
+      });
+  });*/
+
   /* SUMMERNOTE */
+
 
   $(function () {
     function getSummernotePalceholder(lang) {
