@@ -54053,10 +54053,6 @@ setTimeout(function () {
   if (window.location.href.indexOf("checkout") > -1) {
     console.log('On checkout page ... ');
   }
-
-  if (window.location.href.indexOf("remote-jobs") > -1) {
-    document.querySelectorAll('.rp-row__body')[0].classList.remove("collapse");
-  }
 }, 500);
 
 /***/ }),

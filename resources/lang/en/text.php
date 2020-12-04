@@ -39,7 +39,7 @@ return [
     'crGroupTitleJob'   => 'JOB',
 
     'crCompanyNameLabel'     => 'Company name',
-    'crCompanyNameTip'  => 'Your company\'s brand or trade name. If you have posted here before, enter your company email below and your logo.',
+    'crCompanyNameTip'  => 'Your company\'s brand or trade name.',
     
     'crCompanyEmailLabel'     => 'Company email',
     'crCompanyEmailTip'  => 'Your company\'s email',
@@ -85,5 +85,7 @@ return [
     'supportEmail'  => ' Support: heagueron@gmail.com ',
     'terms'         => ' Terms ',
     'privacy'       => ' Privacy ',
+
+
 
 ];

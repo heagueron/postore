@@ -42,11 +42,16 @@ Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany
 // REMOTE JOB SHOW 
 Route::get('/remote-jobs/{remjob:slug}', 'RemJobController@show')->name('remjobs.show');
 
+
 // CHECKOUT
 Route::get('checkout/{remjob:slug}', 'PaymentController@checkout')->name('checkout');
-Route::get('activate-remote-job', 'PaymentController@activate')->name('checkout.activate')->middleware('auth');
-Route::post('publish-remote-job/{remjob:slug}', 'PaymentController@publish')->name('checkout.publish')->middleware('auth');
 
+// Paid plans
+Route::get('activate-remote-job', 'PaymentController@activate')->name('checkout.activate')->middleware('auth');
+Route::patch('publish-remote-job/{remjob}', 'PaymentController@publish')->name('checkout.publish')->middleware('auth');
+
+// Free plan
+Route::patch('free-publish-remote-job/{remjob}', 'PaymentController@freePublish')->name('checkout.free-publish')->middleware('auth');
 
 
 // ADMIN ROUTES

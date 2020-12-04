@@ -17,13 +17,13 @@
 
     <div class="col-9">
         <!--Main job preview -->
-        <h3><i>Here is how your job post will look in main page:</i></h3>
+        <h3 class="mb-3"><i>Here is how your job post will look in main page:</i></h3>
         <x-jobrow :remjob="$remjob" page='checkout'/>
 
         <h3 class="mt-5"><i>Here is how your job post detail page will look:</i></h3>
 
  
-            <div class="mt-5">
+            <div class="mt-3 remjob-description">
 
                 <p>{{ __(
                     'show.postDate',
@@ -169,13 +169,22 @@
     </tbody>
   </table>
 
+   
   <div class="d-flex justify-content-center flex-column text-center">
-
-        <a  href="#" target="_blank"
-            class="rp-jobrow__apply__checkout"> 
-            {{ __('Buy this') }}
+    @if( $remjob->plan->value == 0 )
+        <form action="{{ route( 'checkout.free-publish', $remjob->id ) }}" method="post">
+            @csrf
+            @method('PATCH')
+            <button type="submit" class="btn rp-jobrow__apply__checkout" style="margin-left:28px;">
+                {{ __('checkout.freeBuy') }}
+            </button>
+        </form>
+    @else
+        <a  href="#" target="_blank" class="rp-jobrow__apply__checkout"> 
+            {{ __('checkout.buy') }}
         </a>
-        <p>LINK: {{ $remjob->plan->gumroad_link }}</p>
+    @endif
+        <p>LINK: {{  'gumroad_link'  }}</p>
         <p>GR ID: {{ $remjob->plan->gumroad_product_id }}</p>
 
   </div>

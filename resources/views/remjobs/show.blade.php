@@ -25,7 +25,7 @@
 
 
         <div class="row mt-5">
-            <div class="col-9">
+            <div class="col-9 remjob-description">
 
                 <p>{{ __(
                     'show.postDate',

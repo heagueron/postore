@@ -25,6 +25,7 @@ class PaymentController extends Controller
         return view( 'payments.checkout', compact('remjob') );
     }
 
+
     /**
      * Show the form for activating a remjob after payment
      *
@@ -51,7 +52,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Publish a newly created remote job in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -69,6 +70,21 @@ class PaymentController extends Controller
             'gumroad_license'       => request()->license,
         ]);
         return redirect()->route( 'landing')->with('flash', 'New remote job posted!');
+    }
+
+    /**
+     * Publish a newly created remote job in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function freePublish( Request $request, Remjob $remjob )
+    {
+        // Activate the remote job post active and to publish:
+        $remjob->update([
+            'active'                => 1,
+        ]);
+        return redirect()->route( 'landing' )->with('flash', 'New remote job posted!');
     }
 
 }

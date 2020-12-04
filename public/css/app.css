@@ -12014,3 +12014,14 @@ section.pricing {
   border-radius: 0.5rem;
 }
 
+h3 i {
+  text-decoration: underline;
+}
+
+.remjob-description {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
