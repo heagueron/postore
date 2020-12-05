@@ -12,10 +12,10 @@
 
 return [
 
-    'back' => ' Back to all jobs ',
-    'browseCategory'    => ' Browse all :category jobs ',
-    'postDate'  => 'Posted on :postDate ',
-    'allJobs'   => ' Show all remote jobs '
+    'back' => ' Regresar a todos los trabajos remotos ',
+    'browseCategory'    => ' Chequear todos los trabajos :category ',
+    'postDate'  => 'Publicado en :postDate ',
+    'allJobs'   => ' Mostrar todos los trabajos remotos '
 
 
 ];

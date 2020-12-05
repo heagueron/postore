@@ -12,8 +12,8 @@
 
 return [
 
-    'title' => ' Privacy Policy ',
-    'updated'    => ' Updated Nov 05, 2020 ',
+    'title' => ' Politica de Privacidad ',
+    'updated'    => ' Actualizada Nov 05, 2020 ',
 
     'body'  => 
     
