@@ -80,6 +80,9 @@ return [
 
     'crPlanSelectorTitle'   => 'SELECT YOUR PLAN',
 
+    'crPreviewTitle'    => ' Job Post Preview: ',
+    'crCompany'         => 'Company',
+
     // Footer
     'copyright' => ' Copyright © 2020 ',
     'supportEmail'  => ' Support: heagueron@gmail.com ',

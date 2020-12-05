@@ -1,4 +1,4 @@
-<section class="pricing py-5 m-4">
+<section class="pricing py-5 m-5">
   <div class="container">
     <div class="row">
       <!-- Free Tier -->
@@ -6,7 +6,7 @@
         <div class="card mb-5 mb-lg-0" >
           <div class="card-body card-price-element">
             <h5 class="card-title text-muted text-uppercase text-center">{{ \App\Plan::find(1)->name }}</h5>
-            <h6 class="card-price text-center">{{ \App\Plan::find(1)->value }}<span class="period">/{{ __('text.crPost')}}</span></h6>
+            <h6 class="card-price text-center">${{ \App\Plan::find(1)->value }}<span class="period">/{{ __('text.crPost')}}</span></h6>
             <hr>
             <ul class="fa-ul">
               <li><span class="fa-li"><i class="fas fa-check"></i></span>{{ __('text.crDuration', ['duration' => \App\Option::find(1)->value]) }}</li>
@@ -26,7 +26,7 @@
         <div class="card mb-5 mb-lg-0">
           <div class="card-body card-price-element" style="border: 4px solid yellow;">
             <h5 class="card-title text-muted text-uppercase text-center">{{ \App\Plan::find(2)->name }}</h5>
-            <h6 class="card-price text-center">{{ \App\Plan::find(2)->value }}<span class="period">/{{ __('text.crPost')}}</span></h6>
+            <h6 class="card-price text-center">${{ \App\Plan::find(2)->value }}<span class="period">/{{ __('text.crPost')}}</span></h6>
             <hr>
             <ul class="fa-ul">
               <li><span class="fa-li"><i class="fas fa-check"></i></span>{{ __('text.crDuration', ['duration' => \App\Option::find(1)->value]) }}</li>
@@ -46,7 +46,7 @@
         <div class="card">
           <div class="card-body card-price-element">
             <h5 class="card-title text-muted text-uppercase text-center">{{ \App\Plan::find(3)->name }}</h5>
-            <h6 class="card-price text-center">{{ \App\Plan::find(3)->value }}<span class="period">/{{ __('text.crPost')}}</span></h6>
+            <h6 class="card-price text-center">${{ \App\Plan::find(3)->value }}<span class="period">/{{ __('text.crPost')}}</span></h6>
             <hr>
             <ul class="fa-ul">
               <li><span class="fa-li"><i class="fas fa-check"></i></span>{{ __('text.crDuration', ['duration' => \App\Option::find(1)->value]) }}</li>

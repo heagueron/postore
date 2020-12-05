@@ -308,7 +308,7 @@
             
             </div>
 
-            <!-- S T Y L E  T H E  J O B  P O S T -->
+            <!-- P L A N S -->
             <div class="rp-group">
 
                 <div class="rp-group__title">{{__('text.crPlanSelectorTitle')}}</div>

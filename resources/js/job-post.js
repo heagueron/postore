@@ -1,4 +1,4 @@
-const { isUndefined } = require("lodash");
+// const { isUndefined } = require("lodash");
 
 const formControl = () => {
 
@@ -58,7 +58,7 @@ const formControl = () => {
         if( e.target.value != '') {
             document.querySelector('#preview_position_container').innerHTML = e.target.value;
         } else {
-            document.querySelector('#preview_position_container').innerHTML = 'Worldwide';
+            document.querySelector('#preview_position_container').innerHTML = 'Position';
         }
 
     });
@@ -172,15 +172,19 @@ const formControl = () => {
         const logoInput = document.querySelector('input[name="company_logo"]');
 
         // old logo when returning from validation errors
-        if( document.body.contains(document.querySelectorAll('.rp-group__error')[0]) && sessionStorage.logo ) {
-            // console.log('document has errors and got a logo');
+        if( document.body.contains(document.querySelectorAll('.rp-group__error')[0]) && sessionStorage.logo.length > 100 ) {
+            console.log('document has errors and got a logo');
+            console.log(`sessionStorage.logo: ${sessionStorage.logo.length}`)
             document.querySelector("#company-logo-container").style.backgroundImage = `url(${sessionStorage.logo})`;
             const previewLogo = `<img src="${sessionStorage.logo}" alt="logo" id="preview-logo" class="w-100">`;
             document.querySelector("#preview_logo_container").innerHTML = previewLogo;
         } else {
+            console.log('document doesnt have errors or doesnt get a logo');
             // If there are no errors, we must ensure to enter the form without logo image.
             logoInput.value = null;
             sessionStorage.logo = null;
+            const previewLogo = `<img src="${PATH}/storage/logos/nologo.png" alt="logo" id="preview-logo" class="w-100">`;
+            document.querySelector("#preview_logo_container").innerHTML = previewLogo;
         }
 
         // logo event
@@ -197,12 +201,15 @@ const formControl = () => {
                     // show main logo
                     document.querySelector("#company-logo-container").style.backgroundImage = `url(${e.target.result})`;
 
-                    // show logo on preview row
-                    const previewLogo = `<img src="${e.target.result}" alt="logo" id="preview-logo" class="w-100">`;
-                    document.querySelector("#preview_logo_container").innerHTML = previewLogo;
-
+                    // show logo on preview row, if plan is not free
+                    if( !document.querySelector('#plan-free').checked ){
+                        const previewLogo = `<img src="${e.target.result}" alt="logo" id="preview-logo" class="w-100">`;
+                        document.querySelector("#preview_logo_container").innerHTML = previewLogo;
+                    }
+                    
                     // store logo in session
                     sessionStorage.logo = e.target.result;
+                    console.log(sessionStorage.logo.length)
                 }
                 reader.readAsDataURL(input.files[0]);
             }
@@ -259,6 +266,32 @@ const formControl = () => {
             }
             if( this.checked ){
                 this.parentElement.style.border = '4px solid yellow';
+            }
+
+            const jobPreviewContainer =  document.getElementById('job-preview-container');
+
+            if(this.value == 1){ // Free Plan
+                
+                // Set preview nologo
+                document.querySelector('#preview_logo_container').innerHTML = `<img src="${PATH}/storage/logos/nologo.png" alt="logo" id="preview-logo" class="w-100">`;
+                
+                // Set preview background standard
+                console.log('bg grey')
+                jobPreviewContainer.style.backgroundColor = '#f9f9f9';
+
+            } else { // A Paid Plan
+
+                if( sessionStorage.logo.length > 100 ) {
+
+                    const previewLogo = `<img src="${sessionStorage.logo}" alt="logo" id="preview-logo" class="w-100">`;
+                    document.querySelector("#preview_logo_container").innerHTML = previewLogo;
+                    
+                }
+
+                // Set preview background highlight
+                console.log('bg yellow')
+                jobPreviewContainer.style.backgroundColor = '#ffffb3';
+
             }
         });
     }

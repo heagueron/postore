@@ -36,7 +36,8 @@ Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store')->middle
 
 
 // REMOTE JOBS SEARCH
-Route::get('/remjobs/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
+//Route::get('/remjobs/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
+Route::get('/list/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
 Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
 
 // REMOTE JOB SHOW 
