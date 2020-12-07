@@ -53372,24 +53372,23 @@ function autocomplete(inp) {
 
     if (!val) {
       return false;
-    }
+    } // let PATH;
+    // // Retrieve server
+    // const server = document.querySelector('#appURL').value;
+    // console.log(`server: ${server}`);
+    // if( server == 'http://127.0.0.1:8000' || server == 'http://localhost'){
+    //   PATH = "http://127.0.0.1:8000";
+    // } else {
+    //   PATH = "http://142.93.119.207";
+    // }
+    // console.log(`PATH: ${PATH}`);
 
-    var PATH; // Retrieve server
-
-    var server = document.querySelector('#appURL').value;
-    console.log("server: ".concat(server));
-
-    if (server == 'http://127.0.0.1:8000' || server == 'http://localhost') {
-      PATH = "http://127.0.0.1:8000";
-    } else {
-      PATH = "http://142.93.119.207";
-    }
-
-    console.log("PATH: ".concat(PATH));
     /* GET THE OPTIONS ARRAY FROM THE SERVER */
-    //const PATH = document.querySelector('#appURL') == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
-    // const PATH = "http://127.0.0.1:8000";
 
+
+    var PATH = document.querySelector('#appURL').value == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
+    console.log(document.querySelector('#appURL').value);
+    console.log("path: ".concat(PATH));
     arr = [];
     fetch("".concat(PATH, "/job_tags/").concat(val)).then(function (response) {
       return response.json();
@@ -53432,7 +53431,7 @@ function autocomplete(inp) {
 
           closeAllLists(); // Set selected tag in the search link 
 
-          document.getElementById("hero-search-link").setAttribute("href", "".concat(PATH, "/remjobs/remote-").concat(inp.value, "-jobs"));
+          document.getElementById("hero-search-link").setAttribute("href", "".concat(PATH, "/list/remote-").concat(inp.value, "-jobs"));
         });
         /*append the new element as a child of the options list:*/
 
@@ -53762,21 +53761,20 @@ __webpack_require__.r(__webpack_exports__);
 
 // const { isUndefined } = require("lodash");
 var formControl = function formControl() {
-  var PATH; // Retrieve server
+  // let PATH;
+  // // Retrieve server
+  // const server = document.querySelector('#appURL').value;
+  // if( server == 'http://127.0.0.1:8000' || server == 'http://localhost'){
+  //   PATH = "http://127.0.0.1:8000";
+  // } else {
+  //   PATH = "http://142.93.119.207";
+  // }
 
-  var server = document.querySelector('#appURL').value;
-
-  if (server == 'http://127.0.0.1:8000' || server == 'http://localhost') {
-    PATH = "http://127.0.0.1:8000";
-  } else {
-    PATH = "http://142.93.119.207";
-  }
   /* GET THE OPTIONS ARRAY FROM THE SERVER */
-  //const PATH = document.querySelector('#appURL') == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
-  // const PATH = "http://127.0.0.1:8000";
-
+  var PATH = document.querySelector('#appURL').value == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
+  console.log(document.querySelector('#appURL').value);
+  console.log("path: ".concat(PATH));
   /* company_name */
-
 
   var companyNameElement = document.querySelector('input[name="company_name"]'); // old company_name when returning from validation errors
 
