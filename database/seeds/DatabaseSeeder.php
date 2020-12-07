@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TextOptionSeeder::class);
         
         // Seed tags from main categories:
-        $mainCategories = ['dev', 'customer-support', 'marketing', 'design', 'non-tech'];
+        $mainCategories = ['dev', 'customer_support', 'marketing', 'design', 'non-tech'];
         foreach( $mainCategories as $mc ){
 
             $tag = Tag::where( 'name', '=', $mc )->first();
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
             // Company
             $remjob->update([ 
                 'company_id'    => array_rand( array_flip($companyIds) ),
-                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
+                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
                 'total'         => $remjob->plan->value,
             ]);
             

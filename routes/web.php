@@ -31,9 +31,6 @@ Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term'
 Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job')->middleware('auth');
 Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store')->middleware('auth');
 
-// Route::get('/edit-remote-job/{remjob}', 'RemJobController@edit')->name('edit-remote-job')->middleware('auth');
-// Route::patch('/{remjob}', 'RemJobController@update')->name('update-remote-job')->middleware('auth');
-
 
 // REMOTE JOBS SEARCH
 //Route::get('/remjobs/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');

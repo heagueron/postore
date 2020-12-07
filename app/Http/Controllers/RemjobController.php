@@ -129,7 +129,7 @@ class RemjobController extends Controller
             'total'                 => $jobPostTotal,
             'language'              => App::getLocale(),
             'company_id'            => $company->id,
-            'slug'                  => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
+            'slug'                  => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
         ]);
 
         // Store the new Remjob id...

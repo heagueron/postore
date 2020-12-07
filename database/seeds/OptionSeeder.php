@@ -18,9 +18,9 @@ class OptionSeeder extends Seeder
             0 => 
             array (
                 'id'            => 1,
-                'name'          => 'remjob_active_duration',
+                'name'          => 'Active Duration (days)',
                 'value'         =>  30,
-                'description'   => 'duration of the remote job publication', 
+                'description'   => 'Duration of the remote job publication as active', 
                 'created_at'    => '2020-11-22 20:23:54',
                 'updated_at'    => '2020-11-22 20:23:54',
             ),

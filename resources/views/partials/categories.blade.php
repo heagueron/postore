@@ -13,7 +13,7 @@
         </li>
 
         <li class="cat__list__item">
-            <a href="{{route('remjobs.searchByTags', 'remote-dev-jobs')}}" class="categories__link">
+            <a href="{{route('remjobs.searchByTags', 'remote_dev_jobs')}}" class="categories__link">
                 💻
                 <br><br>
                 {{ __('text.catSoftwareDevelopment') }}
@@ -21,7 +21,7 @@
         </li>
 
         <li class="cat__list__item">
-            <a href="{{route('remjobs.searchByTags', 'remote-customer-support-jobs')}}" class="categories__link">
+            <a href="{{route('remjobs.searchByTags', 'remote_customer_support_jobs')}}" class="categories__link">
                 📞
                 <br><br>
                 {{ __('text.catClientService') }}
@@ -29,7 +29,7 @@
         </li>
 
         <li class="cat__list__item">
-            <a href="{{route('remjobs.searchByTags', 'remote-marketing-jobs')}}" class="categories__link">
+            <a href="{{route('remjobs.searchByTags', 'remote_marketing_jobs')}}" class="categories__link">
                 
                 📈
                 <br><br>
@@ -38,7 +38,7 @@
         </li>
 
         <li class="cat__list__item">
-            <a href="{{route('remjobs.searchByTags', 'remote-design-jobs')}}" class="categories__link">
+            <a href="{{route('remjobs.searchByTags', 'remote_design_jobs')}}" class="categories__link">
                 🖌️
                 <br><br>
                 {{ __('text.catDesign') }}
@@ -46,7 +46,7 @@
         </li>
 
         <li class="cat__list__item">
-            <a href="{{route('remjobs.searchByTags', 'remote-non-tech-jobs')}}" class="categories__link">
+            <a href="{{route('remjobs.searchByTags', 'remote_non_tech_jobs')}}" class="categories__link">
                 💡
                 <br><br>
                 {{ __('text.catNonTech') }}

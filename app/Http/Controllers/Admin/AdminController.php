@@ -43,10 +43,10 @@ class AdminController extends Controller
             'remjob_active_duration' => [ 'required', 'string' ],
             'support_email' => [ 'required', 'email' ],
         ]);
-        \App\Option::find(1)->update( ['value'=>$request->base_price] );
+        \App\Plan::find(1)->update( ['value'=>$request->base_price] );
 
-        \App\Option::find(2)->update( ['value'=>$request->pro_price] );
-        \App\Option::find(3)->update( ['value'=>$request->premium_price] );
+        \App\Plan::find(2)->update( ['value'=>$request->pro_price] );
+        \App\Plan::find(3)->update( ['value'=>$request->premium_price] );
 
         \App\Option::find(1)->update( ['value'=>$request->remjob_active_duration] );
         \App\TextOption::find(1)->update( ['value'=>$request->support_email] );

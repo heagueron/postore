@@ -90,7 +90,7 @@ class RemjobController extends Controller
             $remjob->update([ 
                 'company_id'    => $company->id,
                 'external_api'  => 'https://remoteok.io',
-                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
+                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
                 'active'        => 1,
             ]);
 
@@ -168,7 +168,7 @@ class RemjobController extends Controller
             $remjob->update([ 
                 'company_id'    => $company->id,
                 'external_api'  => 'https://remotive.io/',
-                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
+                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
                 'active'        => 1,
             ]);
 
@@ -247,7 +247,7 @@ class RemjobController extends Controller
             $remjob->update([ 
                 'company_id'    => $company->id,
                 'external_api'  => 'https://www.workingnomads.co/',
-                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
+                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
                 'active'        => 1,
             ]);
 
@@ -329,7 +329,7 @@ class RemjobController extends Controller
             $remjob->update([ 
                 'company_id'    => $company->id,
                 'external_api'  => 'https://jobs.github.com/positions',
-                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '-'),
+                'slug'          => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
                 'active'        => 1,
             ]);
 

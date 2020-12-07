@@ -66,7 +66,7 @@
     {{-- TAGS --}}
     <div class="col-4 pb-7">
         @foreach( $remjob->tags()->take(5)->get() as $tag )
-        <a href="{{ $page=='checkout' ? '#' : route( 'remjobs.searchByTags', 'remote-'.$tag->name.'-jobs' )  }}"  class="job-badget">
+        <a href="{{ $page=='checkout' ? '#' : route( 'remjobs.searchByTags', 'remote_'.$tag->name.'_jobs' )  }}"  class="job-badget">
             <button 
                 class="rp-tag-item"  
                 title="{{'browse '.$tag->name.' jobs'}}"
