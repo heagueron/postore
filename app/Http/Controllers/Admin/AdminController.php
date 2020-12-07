@@ -23,7 +23,7 @@ class AdminController extends Controller
         $adminOptions = \App\Option::all();
         $adminTextOptions = \App\TextOption::all();
         $adminPlans = \App\Plan::all();
-        //dd($adminOptions[0]->value);
+
         return view( 'admin.edit-options', compact( 'adminOptions', 'adminTextOptions', 'adminPlans') );
     }
 
