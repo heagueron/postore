@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\StoreRemjob;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Builder;
 
