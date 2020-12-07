@@ -13,21 +13,10 @@ function autocomplete(inp) {
         closeAllLists();
         if (!val) { return false;}
 
-        // let PATH;
-        // // Retrieve server
-        // const server = document.querySelector('#appURL').value;
-        // console.log(`server: ${server}`);
-        // if( server == 'http://127.0.0.1:8000' || server == 'http://localhost'){
-        //   PATH = "http://127.0.0.1:8000";
-        // } else {
-        //   PATH = "http://142.93.119.207";
-        // }
-        // console.log(`PATH: ${PATH}`);
-
         /* GET THE OPTIONS ARRAY FROM THE SERVER */
         const PATH = document.querySelector('#appURL').value == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
-        console.log(document.querySelector('#appURL').value);
-        console.log(`path: ${PATH}`)
+        console.log(`App URL From DOM: ${document.querySelector('#appURL').value}`);
+        console.log(`PATH: ${PATH}`)
 
         arr = [];
         fetch(`${PATH}/job_tags/${val}`)
