@@ -64,7 +64,7 @@ class RemjobController extends Controller
      */
     public function store(StoreRemjob $request)
     {
-        //dd( request() );
+        Log::info('Will create remote job: '.request()->position);
 
         // Create the remote job post
         $remjob = Remjob::create([
@@ -91,6 +91,7 @@ class RemjobController extends Controller
                 'email'     => request()->company_email,
                 'user_id'   => \Auth::user()->id,
             ]);
+            Log::info('Created company: '.$company->name.' while creating job: '.$remjob->position);
         } else {
             $company = Company::where('email', request()->company_email)->first();
         }
@@ -151,6 +152,7 @@ class RemjobController extends Controller
      */
     public function show(Remjob $remjob)
     {
+        Log::info('Will show details for remote job: '.$remjob->slug);
         return view( 'remjobs.show', compact('remjob') );
     }
 
@@ -164,6 +166,8 @@ class RemjobController extends Controller
     {
         $tagsLength = ( Str::length( $tags ) ) - 12;
         $tagsText = Str::substr($tags, 7, $tagsLength);
+
+        Log::info('Searching jobs for tag: '.$tagsText);
 
         if( in_array( $tagsText, ['dev', 'customer-support', 'marketing', 'design', 'non-tech'] ) ){
             // Search for a CATEGORY TAG
@@ -206,6 +210,8 @@ class RemjobController extends Controller
      */
     public function searchByCompany( $company_slug )
     {
+        Log::info('Searching jobs for company slug: '.$company_slug);
+        
         $company = Company::where( 'slug', 'like', $company_slug )->first();
         $remjobs = Remjob::where( 'company_id', $company->id )
             ->orderBy('plan_id', 'desc')

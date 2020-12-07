@@ -23,8 +23,9 @@ function autocomplete(inp) {
         .then( response => response.json() )
         .then( suggestions => {
 
+          console.log( suggestions )
+          
           suggestions.filtered_job_tags.map( suggestion => arr.push( suggestion.name ) );
-
 
           currentFocus = -1;
 
@@ -70,6 +71,9 @@ function autocomplete(inp) {
             //}
           }
 
+        })
+        .catch(function(error) {
+          console.log(error);
         });
   
     });
