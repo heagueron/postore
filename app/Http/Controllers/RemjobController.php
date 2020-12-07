@@ -83,7 +83,7 @@ class RemjobController extends Controller
         ]);
 
         // Company
-        if( is_null( request()->company_id ) ){
+        if( !Company::where('email', request()->company_email)->exists() ){
             // Create company
             $company = Company::create([
                 'name'      => request()->company_name,
@@ -92,10 +92,10 @@ class RemjobController extends Controller
                 'user_id'   => \Auth::user()->id,
             ]);
         } else {
-            $company = Company::findOrFail( request()->company_id );
+            $company = Company::where('email', request()->company_email)->first();
         }
 
-        // Add media to the company model
+        // Add or update media to the company model
         if( !is_null( request()->company_logo ) ){
             $this->storeMedia( $company );
         }
@@ -173,7 +173,7 @@ class RemjobController extends Controller
                 $query->where('active', 1);
             }) ){
                 $remjobs = $category->remjobs()->where('active', 1)
-                    ->orderBy('category_front_page', 'desc')
+                    ->orderBy('plan_id', 'desc')
                     ->orderBy('created_at', 'desc')->get();
             } else { $remjobs = []; }
             
@@ -188,7 +188,7 @@ class RemjobController extends Controller
                 $query->where('active', 1);
             }) ){
                 $remjobs = $tag->remjobs()->where('active', 1)
-                    ->orderBy('category_front_page', 'desc')
+                    ->orderBy('plan_id', 'desc')
                     ->orderBy('created_at', 'desc')->get();
             } else { $remjobs = []; }
 
@@ -207,7 +207,9 @@ class RemjobController extends Controller
     public function searchByCompany( $company_slug )
     {
         $company = Company::where( 'slug', 'like', $company_slug )->first();
-        $remjobs = Remjob::where( 'company_id', $company->id )->orderBy('created_at', 'desc')->get();
+        $remjobs = Remjob::where( 'company_id', $company->id )
+            ->orderBy('plan_id', 'desc')
+            ->orderBy('created_at', 'desc')->get();
         
         return view( 'landing', compact('remjobs') );
         
@@ -265,7 +267,6 @@ class RemjobController extends Controller
             };
         }
             
-        $job_tags = "Hello there. I will send the Job tags list by term.";
         return response()->json([
             'search_term'       => $search_term,
             'filtered_job_tags' => $filtered_job_tags

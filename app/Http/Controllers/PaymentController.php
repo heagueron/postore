@@ -80,11 +80,18 @@ class PaymentController extends Controller
      */
     public function freePublish( Request $request, Remjob $remjob )
     {
-        // Activate the remote job post active and to publish:
-        $remjob->update([
-            'active'                => 1,
-        ]);
-        return redirect()->route( 'landing' )->with('flash', 'New remote job posted!');
+        // Make sure job post has free plan
+        if( $remjob->plan->id == 1 ){
+
+            // Activate the remote job post active and to publish:
+            $remjob->update([
+                'active'                => 1,
+            ]);
+            return redirect()->route( 'landing' )->with('flash', 'New remote job posted!'); 
+        }
+
+        return redirect()->route( 'landing' )->with('fail', 'Attemp to publish a paid plan as "free" ... '); 
+        
     }
 
 }

@@ -54028,28 +54028,31 @@ var formControl = function formControl() {
         jobPreviewContainer.style.backgroundColor = '#ffffb3';
       }
     });
-  } // Get company data from database
-
-  /*companyEmailElement = document.querySelector('#companyEmailElement');
-  
-  companyEmailElement.addEventListener('change', function() {
-      console.log(`change! email entered: ${this.value}`);
-      fetch(`${PATH}/companies/search_company_by_email/${this.value}`)
+  }
+  /*const getCompanyByEmail = ( ) => {
+      
+      email = companyEmailElement = document.querySelector('#companyEmailElement').value;
+      console.log(`change! email entered: ${email}`);
+        fetch(`${PATH}/companies/search_company_by_email/${email}`)
       .then( response => response.json() )
       .then( result => {
           console.log(result)
           if( result.company ) {
-              console.log( 'hay datos' );
+              console.log( 'company email already registered' );
               document.querySelector('#companyNameElement').value = result.company.name;
               document.querySelector('#companyIdElement').value = result.company.id;
               if( result.company.twitter ){
                  document.querySelector('#companyTwitterElement').value = result.company.twitter; 
               }
           } else {
-              console.log( 'no hay datos' );
+              console.log( 'company email NOT registered yet' );
           }
       });
-  });*/
+  }*/
+  // Get company data from database
+
+  /*companyEmailElement = document.querySelector('#companyEmailElement');
+  companyEmailElement.addEventListener('change', getCompanyByEmail);*/
 
   /* SUMMERNOTE */
 

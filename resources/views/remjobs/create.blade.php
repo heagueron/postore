@@ -324,16 +324,17 @@
 
     <div style="height:150px;"></div>
 
+
+    {{-- PREVIEW AND POST THE JOB BUTTON --}}
     <div class="row job-post-preview">
 
-        
         <div class="col-10 job-post-preview__job">
             <x-jobrow-preview />   
         </div>
 
         <div class="col-2 job-post-preview__post">
-            <button form="post-job-form" class="post-button">
-                {{ __('Post the job') }}
+            <button form="post-job-form" class="post-button" type="submit" id="post-the-job-button">
+                {{ __('text.crPostTheJob') }}
             </button>
         </div>
 

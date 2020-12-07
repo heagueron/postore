@@ -61,10 +61,10 @@ class CompanyController extends Controller
             $company = Company::where( 'email', 'like', $email )->first();
         } else { $company = NULL; }
         
-        //$company = 'slected has that email, ' .$email;
         return response()->json([
             'company'        => $company
         ],200);
+        
     }
 
     /**

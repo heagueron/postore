@@ -83,6 +83,8 @@ return [
     'crPreviewTitle'    => ' Job Post Preview: ',
     'crCompany'         => 'Company',
 
+    'crPostTheJob'      => 'Post the job!',
+
     // Footer
     'copyright' => ' Copyright © 2020 ',
     'supportEmail'  => ' Support: heagueron@gmail.com ',
