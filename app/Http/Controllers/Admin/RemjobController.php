@@ -51,17 +51,20 @@ class RemjobController extends Controller
 
     public function rok()
     {
-        // dd(' Entering rok action in Admin\RemjobController ');
         try {
-            $jobsArray = HTTP::get('https://remoteok.io/api')->throw()->json();
-            dd($jobsArray);
-        } catch ( \Illuminate\Http\Client\RequestException $th) {
-            dd( $th );
+            $guzzleResult = HTTP::get('https://remoteok.io/api');
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            $guzzleResult = $e->getResponse();
         }
-        $response = HTTP::get('https://remoteok.io/api');
-        dd($response);
+        dd($guzzleResult->getStatusCode(), $guzzleResult->getBody());
 
-        
+
+
+
+
+        $response = HTTP::get('https://remoteok.io/api');
+        //dd($response);
+   
         $jobsArray = $response->json();
         array_shift( $jobsArray );
 
