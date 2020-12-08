@@ -275,7 +275,7 @@ class RemjobController extends Controller
      * @param  string $search_term
      * @return \Illuminate\Http\Response
      */
-    public function search_job_tags_by_term($search_term)
+    public function search_job_tags_by_term( $search_term )
     {
         $job_tags = Tag::all();
 

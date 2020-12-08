@@ -22,25 +22,25 @@ use App\Remjob;
 //     return view('landing');
 // })->name('landing');
 
+
+// REMOTE JOBS
 Route::get('/', 'RemjobController@index')->name('landing');
-//Route::get('/checkout/activate', 'RemjobController@index');
-
-
-// REMOTE JOBS (From javascript autocomplete search)
-Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term');
-
 
 Route::get('/post_a_job', 'RemJobController@create')->name('post_a_job')->middleware('auth');
 Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store')->middleware('auth');
 
+// REMOTE JOB SHOW 
+Route::get('/remote_job/{remjob:slug}', 'RemJobController@show')->name('remjobs.show');
 
 // REMOTE JOBS SEARCH
 Route::get('/list/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
 Route::get('/remote-companies/{company:slug}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
 
-// REMOTE JOB SHOW 
-Route::get('/remote_job/{remjob:slug}', 'RemJobController@show')->name('remjobs.show');
+// From javascript autocomplete search)
+Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term');
 
+
+Auth::routes();
 
 // CHECKOUT
 Route::get('/checkout/{remjob:slug}', 'PaymentController@checkout')->name('checkout');
@@ -54,6 +54,8 @@ Route::patch('/free_publish_remote_job/{remjob}', 'PaymentController@freePublish
 
 
 // ADMIN ROUTES
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::group( 
     ['prefix' => 'admin','middleware' => ['auth', 'admin']], 
     function () {
@@ -82,9 +84,7 @@ Route::group(
 });
 
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('home/check_avatars', 'HomeController@checkAvatars');
 
 // Twitter Profiles
