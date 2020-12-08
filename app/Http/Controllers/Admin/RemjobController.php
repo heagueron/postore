@@ -6,7 +6,7 @@ use App\Tag;
 use App\Remjob;
 use App\Company;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\HTTP;
+use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -135,7 +135,7 @@ class RemjobController extends Controller
 
     public function remotive()
     {
-        $response = HTTP::get('https://remotive.io/api/remote-jobs');
+        $response = Http::get('https://remotive.io/api/remote-jobs');
         $jobsArray = $response->json();
 
         if( !$jobsArray['job-count'] ) {
@@ -213,7 +213,7 @@ class RemjobController extends Controller
 
     public function workingNomads()
     {
-        $response = HTTP::get('https://www.workingnomads.co/api/exposed_jobs/');
+        $response = Http::get('https://www.workingnomads.co/api/exposed_jobs/');
         $jobsArray = $response->json();
 
         if( !count( $jobsArray ) > 0) {
@@ -292,7 +292,7 @@ class RemjobController extends Controller
 
     public function github()
     {
-        $response = HTTP::get('https://jobs.github.com/positions.json');
+        $response = Http::get('https://jobs.github.com/positions.json');
         
         $jobsArray = $response->json();
         //dd( $jobsArray );
