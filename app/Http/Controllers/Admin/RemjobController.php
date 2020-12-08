@@ -51,6 +51,7 @@ class RemjobController extends Controller
 
     public function rok()
     {
+        dd(' Entering rok action in Admin\RemjobController ');
         $response = HTTP::get('https://remoteok.io/api');
         $jobsArray = $response->json();
         array_shift( $jobsArray );
