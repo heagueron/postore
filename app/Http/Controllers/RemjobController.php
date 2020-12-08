@@ -209,11 +209,11 @@ class RemjobController extends Controller
      * @param  string $company_name
      * @return \Illuminate\Http\Response
      */
-    public function searchByCompany( $company_slug )
+    public function searchByCompany( Company $company )
     {
-        Log::info('Searching jobs for company slug: '.$company_slug);
+        Log::info('Searching jobs for company slug: '.$company->slug);
         
-        $company = Company::where( 'slug', 'like', $company_slug )->first();
+        // $company = Company::where( 'slug', 'like', $company_slug )->first();
         $remjobs = Remjob::where( 'company_id', $company->id )
             ->orderBy('plan_id', 'desc')
             ->orderBy('created_at', 'desc')->get();
