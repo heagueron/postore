@@ -156,9 +156,7 @@ class RemjobController extends Controller
      */
     public function show(Remjob $remjob)
     {
-        dd($remjob);
         return view( 'remjobs.show', compact('remjob') );
-
     }
 
     /**
