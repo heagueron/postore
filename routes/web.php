@@ -74,6 +74,7 @@ Route::group(
         Route::get('/api_jobs.remotive', 'Admin\RemjobController@remotive')->name('admin.api_jobs.remotive');
         Route::get('/api_jobs.working-nomads', 'Admin\RemjobController@workingNomads')->name('admin.api_jobs.working-nomads');
         Route::get('/api_jobs.github', 'Admin\RemjobController@github')->name('admin.api_jobs.github');
+        
 });
 
 // COMPANY ROUTES
