@@ -156,18 +156,9 @@ class RemjobController extends Controller
      */
     public function show(Remjob $remjob)
     {
-        //Log::info('Will show details for remote job: '.$remjob->slug);
-        //trigger exception in a "try" block
-        try {
-            return view( 'remjobs.show', compact('remjob') );
-        }
-        
-        //catch exception
-        catch(Exception $e) {
-            return redirect()->route( 'landing' )->with('fail', 'Job detail page could no be accesed ... '); 
-        }
-        
-        // return view( 'remjobs.show', compact('remjob') );
+        dd($remjob);
+        return view( 'remjobs.show', compact('remjob') );
+
     }
 
     /**
