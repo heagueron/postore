@@ -6,7 +6,7 @@ use App\Tag;
 use App\Remjob;
 use App\Company;
 use Illuminate\Support\Str;
-Use Illuminate\Support\Facades\HTTP;
+use Illuminate\Support\Facades\HTTP;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -51,17 +51,6 @@ class RemjobController extends Controller
 
     public function rok()
     {
-        try {
-            $guzzleResult = HTTP::get('https://remoteok.io/api');
-        } catch (\GuzzleHttp\Exception\RequestException $e) {
-            $guzzleResult = $e->getResponse();
-        }
-        dd($guzzleResult->getStatusCode(), $guzzleResult->getBody());
-
-
-
-
-
         $response = HTTP::get('https://remoteok.io/api');
         //dd($response);
    
