@@ -51,16 +51,15 @@ class RemjobController extends Controller
 
     public function rok()
     {
-        try {
-            $response = Http::retry(3, 100)->get('https://remoteok.io/api');
-            dd($response->json());
-        } catch (\Throwable $e) {
-            report($e); // this is a Laravel helper, not from Sentry
-            dd('an exception has been thrown and reported!');
-        }
+        // try {
+        //     $response = Http::retry(3, 100)->get('https://remoteok.io/api');
+        //     dd($response->json());
+        // } catch (\Throwable $e) {
+        //     report($e); // this is a Laravel helper, not from Sentry
+        //     dd('an exception has been thrown and reported!',$e);
+        // }
 
         $response = Http::retry(3, 100)->get('https://remoteok.io/api');
-        //dd($response);
    
         $jobsArray = $response->json();
         array_shift( $jobsArray );
