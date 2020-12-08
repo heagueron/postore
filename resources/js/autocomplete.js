@@ -20,7 +20,9 @@ function autocomplete(inp) {
 
         arr = [];
         fetch(`${PATH}/job_tags/${val}`)
-        .then( response => response.json() )
+        //.then( response => response.json() )
+        .then( response => response.text() )
+        .then( text => console.log(text) )
         .then( suggestions => {
 
           console.log( suggestions )
