@@ -20,7 +20,7 @@
             <ul class="navbar-nav ml-auto">
                 @if( Request::path() == '/')
                     <li class="nav-item mr-5">
-                        <a class="nav-link nav-link__post" href="{{ route('post-a-job') }}">{{ __('text.postAJob') }}</a>
+                        <a class="nav-link nav-link__post" href="{{ route('post_a_job') }}">{{ __('text.postAJob') }}</a>
                     </li>
                 @endif
                 <!-- Authentication Links -->

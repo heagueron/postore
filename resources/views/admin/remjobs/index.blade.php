@@ -9,22 +9,22 @@
 
             <div class="d-flex mb-4">
                 <a  rel="nofollow"
-                    href="{{ route('admin.api-jobs.rok') }}" 
+                    href="{{ route('admin.api_jobs.rok') }}" 
                     alt="Get api jobs" class="post-button mr-2">
                     {{ __('Get Jobs from R|OK') }}
                 </a>
                 <a  rel="nofollow"
-                    href="{{ route('admin.api-jobs.remotive') }}" 
+                    href="{{ route('admin.api_jobs.remotive') }}" 
                     alt="Get api jobs" class="post-button mr-2">
                     {{ __('Get Jobs from remotive') }}
                 </a>
                 <a  rel="nofollow"
-                    href="{{ route('admin.api-jobs.working-nomads') }}" 
+                    href="{{ route('admin.api_jobs.working-nomads') }}" 
                     alt="Get api jobs" class="post-button mr-2">
                     {{ __('Get Jobs from working nomads') }}
                 </a>
                 <a  rel="nofollow"
-                    href="{{ route('admin.api-jobs.github') }}" 
+                    href="{{ route('admin.api_jobs.github') }}" 
                     alt="Get api jobs" class="post-button mr-2">
                     {{ __('Get Jobs from github') }}
                 </a>

@@ -4,7 +4,7 @@
             <h1 style="font-weight:bold;">REMJOB</h1>
         </div>
         <div class="col-2 mt-2">
-            <a class="footer__post" href="{{ route('post-a-job') }}">{{ __('text.postAJob') }}</a>
+            <a class="footer__post" href="{{ route('post_a_job') }}">{{ __('text.postAJob') }}</a>
         </div>
     </div>
 </div>

@@ -16,7 +16,9 @@
               <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>{{ __('text.crMFP') }}</li>
               <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>{{ __('text.crMCP') }}</li>
             </ul>
-            <input type="radio" style="display:none" id="plan-free" name="plan_id" value="1">
+
+              <input type="radio" style="display:none" id="plan-free" name="plan_id" value="1">
+
             <label for="plan-free">{{__('SELECT')}}</label>
           </div>
         </div>
@@ -36,7 +38,9 @@
               <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>{{ __('text.crMFP') }}</li>
               <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>{{ __('text.crMCP') }}</li>
             </ul>
-            <input type="radio" style="display:none" id="plan-pro" name="plan_id" value="2" checked="checked">
+
+              <input type="radio" style="display:none" id="plan-pro" name="plan_id" value="2" checked>
+
             <label for="plan-pro">{{__('SELECT')}}</label>
           </div>
         </div>
@@ -56,7 +60,9 @@
               <li><span class="fa-li"><i class="fas fa-check"></i></span>{{ __('text.crMFP') }}</li>
               <li><span class="fa-li"><i class="fas fa-check"></i></span>{{ __('text.crMCP') }}</li>
             </ul>
-            <input type="radio" style="display:none" id="plan-premium" name="plan_id" value="3">
+
+              <input type="radio" style="display:none" id="plan-premium" name="plan_id" value="3">
+
             <label for="plan-premium">{{__('SELECT')}}</label>
           </div>
         </div>

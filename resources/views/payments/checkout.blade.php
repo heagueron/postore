@@ -172,7 +172,7 @@
    
   <div class="d-flex justify-content-center flex-column text-center">
     @if( $remjob->plan->value == 0 )
-        <form action="{{ route( 'checkout.free-publish', $remjob->id ) }}" method="post">
+        <form action="{{ route( 'checkout.free_publish', $remjob->id ) }}" method="post">
             @csrf
             @method('PATCH')
             <button type="submit" class="btn rp-jobrow__apply__checkout" style="margin-left:28px;">

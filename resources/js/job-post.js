@@ -247,11 +247,12 @@ const formControl = () => {
 
     // plan change event
     const planRadios = document.querySelectorAll('input[name="plan_id"]');
+    //console.log(planRadios[0]);
 
     for (let i = 0; i < planRadios.length; i++) 
     {
         planRadios[i].addEventListener('change', function() {
-            // console.log(`change!: ${this.value}`);
+            //console.log(`change!: ${this.value}`);
             const cards = document.querySelectorAll('.card-price-element');
             for (let i = 0; i < cards.length; i++){
                 cards[i].style.border = 'none';
@@ -349,7 +350,7 @@ const formControl = () => {
 setTimeout(() => {
 
     // Check if active url is the post a job page
-    if ( window.location.href.indexOf("post-a-job") > -1 ) {
+    if ( window.location.href.indexOf("post_a_job") > -1 ) {
         document.querySelector('#app-footer').style.display = "none";
         console.log("active url is: the post a job page");
         formControl();

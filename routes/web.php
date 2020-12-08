@@ -30,29 +30,27 @@ Route::get('/', 'RemjobController@index')->name('landing');
 Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term');
 
 
-Route::get('/post-a-job', 'RemJobController@create')->name('post-a-job')->middleware('auth');
+Route::get('/post_a_job', 'RemJobController@create')->name('post_a_job')->middleware('auth');
 Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store')->middleware('auth');
 
 
 // REMOTE JOBS SEARCH
-//Route::get('/remjobs/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
 Route::get('/list/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
-// Route::get('/remote-companies/{company_name}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
 Route::get('/remote-companies/{company:slug}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
 
 // REMOTE JOB SHOW 
-Route::get('/remote-jobs/{remjob:slug}', 'RemJobController@show')->name('remjobs.show');
+Route::get('/remote_job/{remjob:slug}', 'RemJobController@show')->name('remjobs.show');
 
 
 // CHECKOUT
 Route::get('/checkout/{remjob:slug}', 'PaymentController@checkout')->name('checkout');
 
 // Paid plans
-Route::get('/activate-remote-job', 'PaymentController@activate')->name('checkout.activate')->middleware('auth');
-Route::patch('/publish-remote-job/{remjob}', 'PaymentController@publish')->name('checkout.publish')->middleware('auth');
+Route::get('/activate_remote_job', 'PaymentController@activate')->name('checkout.activate')->middleware('auth');
+Route::patch('/publish_remote_job/{remjob}', 'PaymentController@publish')->name('checkout.publish')->middleware('auth');
 
 // Free plan
-Route::patch('/free-publish-remote-job/{remjob}', 'PaymentController@freePublish')->name('checkout.free-publish')->middleware('auth');
+Route::patch('/free_publish_remote_job/{remjob}', 'PaymentController@freePublish')->name('checkout.free_publish')->middleware('auth');
 
 
 // ADMIN ROUTES
@@ -70,10 +68,10 @@ Route::group(
         Route::get('/remjobs/{remjob}/tweet', 'Admin\RemjobController@tweet')->name('admin.remjobs.tweet');
         
         // External APIs
-        Route::get('/api-jobs.rok', 'Admin\RemjobController@rok')->name('admin.api-jobs.rok');
-        Route::get('/api-jobs.remotive', 'Admin\RemjobController@remotive')->name('admin.api-jobs.remotive');
-        Route::get('/api-jobs.working-nomads', 'Admin\RemjobController@workingNomads')->name('admin.api-jobs.working-nomads');
-        Route::get('/api-jobs.github', 'Admin\RemjobController@github')->name('admin.api-jobs.github');
+        Route::get('/api_jobs.rok', 'Admin\RemjobController@rok')->name('admin.api_jobs.rok');
+        Route::get('/api_jobs.remotive', 'Admin\RemjobController@remotive')->name('admin.api_jobs.remotive');
+        Route::get('/api_jobs.working-nomads', 'Admin\RemjobController@workingNomads')->name('admin.api_jobs.working-nomads');
+        Route::get('/api_jobs.github', 'Admin\RemjobController@github')->name('admin.api_jobs.github');
 });
 
 // COMPANY ROUTES
