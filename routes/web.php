@@ -26,18 +26,18 @@ use App\Remjob;
 // REMOTE JOBS
 Route::get('/', 'RemjobController@index')->name('landing');
 
-Route::get('/post_a_job', 'RemJobController@create')->name('post_a_job')->middleware('auth');
-Route::post('/remjobs', 'RemJobController@store')->name('remjobs.store')->middleware('auth');
+Route::get('/post_a_job', 'RemjobController@create')->name('post_a_job')->middleware('auth');
+Route::post('/remjobs', 'RemjobController@store')->name('remjobs.store')->middleware('auth');
 
 // REMOTE JOB SHOW 
-Route::get('/remote_job/{remjob:slug}', 'RemJobController@show')->name('remjobs.show');
+Route::get('/remote_job/{remjob:slug}', 'RemjobController@show')->name('remjobs.show');
 
 // REMOTE JOBS SEARCH
-Route::get('/list/{tags}', 'RemJobController@searchByTags')->name('remjobs.searchByTags');
-Route::get('/remote-companies/{company:slug}', 'RemJobController@searchByCompany')->name('remjobs.searchByCompany');
+Route::get('/list/{tags}', 'RemjobController@searchByTags')->name('remjobs.searchByTags');
+Route::get('/remote-companies/{company:slug}', 'RemjobController@searchByCompany')->name('remjobs.searchByCompany');
 
 // From javascript autocomplete search)
-Route::get('/job_tags/{search_term}', 'RemJobController@search_job_tags_by_term');
+Route::get('/job_tags/{search_term}', 'RemjobController@search_job_tags_by_term');
 
 
 Auth::routes();
