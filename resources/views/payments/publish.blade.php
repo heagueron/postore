@@ -18,11 +18,12 @@
                             </div>
 
                             <span class="clearfix"></span>
-                            <form method="POST" action="{{ route('checkout.publish', $remjob->slug) }}">
+                            <form method="POST" action="{{ route( 'checkout.publish', $remjob->id ) }}">
                                 @csrf
+                                @method('PATCH')
 
                                 <div class="form-group">
-                                    <label  for="email" class="form-control-label">{{ __('Payment code (License)') }}</label>
+                                    <label  for="license" class="form-control-label">{{ __('Payment code (License)') }}</label>
                                     <div class="input-group">
                                         <input id="license" type="text" class="form-control @error('license') is-invalid @enderror" name="license" value="{{ $gumroadLicense }}" required autofocus>
                                         <span class="rp-group__info">

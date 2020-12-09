@@ -23,7 +23,7 @@ class CreatePlansTable extends Migration
             $table->enum('yellow_background',['on', null ])->default(null)->nullable();
             $table->enum('main_front_page',['on', null ])->default(null)->nullable();
             $table->enum('category_front_page',['on', null ])->default(null)->nullable();
-            $table->string('gumroad_link')->nullable();
+            $table->string('gumroad_permalink')->nullable();
             $table->string('gumroad_product_id')->nullable();
             $table->timestamps();
         });

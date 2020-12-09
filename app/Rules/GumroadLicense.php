@@ -27,18 +27,24 @@ class GumroadLicense implements Rule
      */
     public function passes($attribute, $value)
     {
+        if( ( null !== session('newRemjobId') ) and Remjob::where('id', session('newRemjobId') )->exists() ) {
+            
+            // Grab remote job and its permalink
+            $remjob = Remjob::find( session('newRemjobId') );
 
-        // Grab remote job and its permalink
-        $remjob = Remjob::find( session('newRemjobId') );
+            $license = Gumroad::verifyLicense( $value, $remjob->gumroad_permalink );
 
-        $license = Gumroad::verifyLicense( $value, $remjob->gumroad_link );
+            return
+                    $license['success'] &&
+                    $license['uses'] == 1 &&
+                    !$license['purchase']['refunded'] &&
+                    !$license['purchase']['disputed'] &&
+                    !$license['purchase']['chargebacked'];
 
-        return
-                $license['success'] &&
-                $license['uses'] == 1 &&
-                !$license['purchase']['refunded'] &&
-                !$license['purchase']['disputed'] &&
-                !$license['purchase']['chargebacked'];
+        }
+
+        return false;
+        
     }
 
     /**
@@ -48,7 +54,7 @@ class GumroadLicense implements Rule
      */
     public function message()
     {
-        return 'The provided license is invalid or has expired.';
+        return 'There was a problem validating the provided license. Contact support.';
     }
     
 }

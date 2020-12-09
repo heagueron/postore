@@ -25,6 +25,7 @@ class PaymentController extends Controller
         return view( 'payments.checkout', compact('remjob') );
     }
 
+    
 
     /**
      * Show the form for activating a remjob after payment

@@ -14,13 +14,6 @@ use App\Remjob;
 */
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/', function () {
-//     return view('landing');
-// })->name('landing');
 
 
 // REMOTE JOBS
@@ -44,6 +37,7 @@ Auth::routes();
 
 // CHECKOUT
 Route::get('/checkout/{remjob:slug}', 'PaymentController@checkout')->name('checkout');
+
 
 // Paid plans
 Route::get('/activate_remote_job', 'PaymentController@activate')->name('checkout.activate')->middleware('auth');
@@ -104,6 +98,16 @@ Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@d
 Route::get('/privacy', function () {
     return view('pages.privacy');
 })->name('privacy');
+
+
+// Fake route to test final publish step
+Route::get('/testp', function () {
+
+    $remjob = Remjob::first();
+    $gumroadLicense = 'fake-license-007';
+
+    return view( 'payments.publish', compact( 'remjob', 'gumroadLicense' ) );
+});
 
 // Scheduled posts (Sposts)
 // Route::get('/sposts', 'SpostController@index')->name('sposts.index');
