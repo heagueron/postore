@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
     public const SCHEDULER = '/sposts/schedule';
     public const CHECK_AVATARS = 'home/check_avatars';
-    public const POST_A_JOB = '/post-a-job';
+    public const POST_A_JOB = '/post_a_job';
     public const LANDING = '/';
 
     /**

@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-
-use Illuminate\Http\Request;
+use App\Mail\WelcomeEmail;
 use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\Mail;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 
 class RegisterController extends Controller
@@ -92,6 +94,9 @@ class RegisterController extends Controller
         $user->created_at = $user->created_at->timezone( $timezone )->toDateTimeString();
         $user->updated_at = $user->created_at->timezone( $timezone )->toDateTimeString();
         $user->save();
+
+        // Send email to new user
+        Mail::to($user->email)->send( new WelcomeEmail( $user ) );
 
     }
 

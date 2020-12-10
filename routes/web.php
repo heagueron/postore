@@ -13,9 +13,6 @@ use App\Remjob;
 |
 */
 
-
-
-
 // REMOTE JOBS
 Route::get('/', 'RemjobController@index')->name('landing');
 
