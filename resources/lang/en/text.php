@@ -15,6 +15,7 @@ return [
     'siteName' => 'Remote Jobs',
     'postAJob' => 'Post a Job',
     'searchJob' => 'Find',
+    'heroTitleTip' => 'Post or find awesome remote jobs from around the world',
 
     //Categories
     'catRemoteJobs' => 'Remote Jobs',

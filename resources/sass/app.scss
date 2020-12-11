@@ -523,9 +523,17 @@ nav {
     height: 250px;
     background-size: cover;
     background-position: 50% 47%;
-    padding: 0 20px 50px;
+    /*padding: 0 20px 50px;*/
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
+    background-color: $hero-bg;
+    &__jobtitle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .logo-button-container .post-button {
@@ -612,7 +620,7 @@ nav {
 
 /* SEARCH CONTAINER */
   .search-container {
-    height: 100%;
+    /*height: 100%;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1004,8 +1012,14 @@ textarea, select, input[type="text"]:not(.rp-search-input), input[type="email"] 
 }
 
 nav {
-    margin-bottom: 0.1rem !important;
+    margin-bottom: 0 !important;
     padding: 0.1rem 0.2rem !important;
+    position: -webkit-sticky !important;
+    position: fixed !important;
+    top: 0 !important;
+    z-index: 200 !important;
+    background-color: #d9d9d9 !important;
+    width:100% !important;
 }
 
 .nav-item {
@@ -1018,19 +1032,21 @@ nav {
 .nav-link {
    color: #fff !important;
    &__post{
-       background-color: #ed1212 !important;
+       background-color: $post-bg !important;
+       border:1px solid $post-bg !important;
        padding-left: 2rem !important;
        padding-right: 2rem !important;
+       font-size: 12pt;
        font-weight: bold;
        transition: all 0.2s;
 
        &:hover{
-           background-color: #f03e3e !important;
-           transform: scale(1.1);
-        /*opacity: .9;*/
+           background-color: $hero-bg !important;
+           color: $post-bg !important;
        }
    }
 }
+
 
 
 .tooltip-inner {

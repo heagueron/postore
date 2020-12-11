@@ -1,21 +1,25 @@
 
-<header class="hero" style="background-image:url( {{ asset('storage/images/rob.jpg') }} )">
+<!-- <header class="hero" style="background-image:url( {{ asset('storage/images/robi.png') }} )"> -->
+<header class="hero">
 
-    @include('partials.nav')
+    <div class="hero__title mt-5 text-center">
+        <h1>REMJOB</h1>
+        <h4>{{__('text.heroTitleTip')}}</h4>
+    </div>
+
     
-
-    <div class="search-container mt-5">
+    <div class="search-container mt-3">
 
             <div class="autocomplete" style="width:300px;">
                 <input id="myInput" class="rp-search-input" type="text" name="search-term" placeholder="Start typing to find jobs ...">
             </div>
 
-            <a  alt="Search jobs by tag" id="hero-search-link"
-                href="{{  route( 'remjobs.searchByTags', 'remote-dev-jobs' )  }}"  
-                class="post-button">{{ __('text.searchJob') }}
+            <a  href="{{  route( 'remjobs.searchByTags', 'remote-dev-jobs' )  }}"  
+                class="post-button" id="hero-search-link">
+                {{ __('text.searchJob') }}
             </a>
 
     </div>
 
 </header>
-
+@include('partials.nav')

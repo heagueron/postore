@@ -66,7 +66,15 @@ const app = new Vue({
 $('[data-toggle="tooltip"]').tooltip()
 
 
+window.onscroll = function() {navBackgroundControl()};
 
+function navBackgroundControl() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    document.getElementById("app-nav").classList.remove('bg-transparent');
+  } else {
+    document.getElementById("app-nav").classList.add('bg-transparent');
+  }
+}
 
 
 
