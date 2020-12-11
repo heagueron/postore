@@ -6,13 +6,15 @@
 
     @include('partials.nav')
 
-    {{-- Retrieve localization for javascript --}}
-    <input type="hidden" id="localeElement" value="{{ App::getLocale() }}">
-    
-    <div class="d-flex justify-content-center mt-3 flex-column text-center">
-        <h1>{{ strtoupper( __('text.crFormTitle') ) }}</h1>
-        <!-- <h5>{{ __('text.crBasePriceTip', ['basePrice' => \App\Option::find(1)->value]) }}</h5> -->
+    <div class="container" style="margin-top:7rem;">
+
+        <div class="d-flex justify-content-center mt-3 flex-column text-center">
+            <h1>{{ strtoupper( __('text.crFormTitle') ) }}</h1>
+            <!-- <h5>{{ __('text.crBasePriceTip', ['basePrice' => \App\Option::find(1)->value]) }}</h5> -->
+        </div>
+
     </div>
+
 
     <hr class="m-5">
 
@@ -20,6 +22,9 @@
 
         <form action="{{ route('remjobs.store') }}" method="post" enctype="multipart/form-data" id="post-job-form">
             @csrf
+
+            {{-- Retrieve localization for javascript --}}
+            <input type="hidden" id="localeElement" value="{{ App::getLocale() }}">
 
             <!-- T H E   J O B -->
             <div class="rp-group" id="rp-post-fs1">

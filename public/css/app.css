@@ -12041,3 +12041,9 @@ h3 i {
   margin-bottom: 15px;
 }
 
+.checkout-subtitle {
+  background-color: #d9d9d9;
+  border: none;
+  padding: 0.6rem;
+}
+

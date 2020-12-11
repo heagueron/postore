@@ -6,9 +6,15 @@
 
     @include('partials.nav')
 
-    <div class="d-flex justify-content-center">
-        <h1>Check Your Remote Job Post: {{ $remjob->position }}</h1>
+
+    <div class="container" style="margin-top:7rem;">
+
+        <div class="d-flex justify-content-center">
+            <h1>Check Your Remote Job Post: {{ $remjob->position }}</h1>
+        </div>
+
     </div>
+
 
     <hr class="m-5">
 
@@ -17,12 +23,11 @@
 
     <div class="col-9">
         <!--Main job preview -->
-        <h3 class="mb-3"><i>Here is how your job post will look in main page:</i></h3>
+        <h3 class="mb-3 checkout-subtitle">Here is how your job post will look on main page:</h3>
         <x-jobrow :remjob="$remjob" page='checkout'/>
 
-        <h3 class="mt-5"><i>Here is how your job post detail page will look:</i></h3>
+        <h3 class="mt-5 checkout-subtitle">Here is how your job post detail page will look:</h3>
 
- 
             <div class="mt-3 remjob-description">
 
                 <p>{{ __(

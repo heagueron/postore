@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('title', 'Remote Resources | Welcome')
@@ -6,8 +5,8 @@
 @section('content')
 
     @include('partials.nav')
-   
-    <div class="container">
+    
+    <div class="container" style="margin-top:7rem;">
 
         <div class="d-flex justify-content-between mt-5">
 

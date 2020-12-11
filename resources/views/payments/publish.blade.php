@@ -6,7 +6,7 @@
 
     @include('partials.nav')
 
-    <div class="container d-flex flex-column">
+    <div class="container d-flex flex-column" style="margin-top:7rem;">
             <div class="row align-items-center justify-content-center">
                 <div class="col-md-6 col-lg-5 col-xl-5 py-6 py-md-0">
                     <div class="card shadow zindex-100 mb-0">

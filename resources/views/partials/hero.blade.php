@@ -1,4 +1,6 @@
 
+@include('partials.nav')
+
 <!-- <header class="hero" style="background-image:url( {{ asset('storage/images/robi.png') }} )"> -->
 <header class="hero">
 
@@ -22,4 +24,4 @@
     </div>
 
 </header>
-@include('partials.nav')
+
