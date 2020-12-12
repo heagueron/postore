@@ -11889,6 +11889,7 @@ nav {
   z-index: 200 !important;
   background-color: #d9d9d9 !important;
   width: 100% !important;
+  opacity: 0.9 !important;
 }
 
 .nav-item {

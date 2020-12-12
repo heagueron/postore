@@ -53343,6 +53343,9 @@ var app = new Vue({
 /* Activate bootstrap tooltips */
 
 $('[data-toggle="tooltip"]').tooltip();
+/* Make sure nav background transparency is properly set */
+
+navBackgroundControl();
 
 window.onscroll = function () {
   navBackgroundControl();
