@@ -6,6 +6,7 @@ use App\Remjob;
 use Illuminate\Http\Request;
 use App\Rules\GumroadLicense;
 use App\ApiConnectors\Gumroad;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -22,7 +23,19 @@ class PaymentController extends Controller
      */
     public function checkout(Remjob $remjob)
     {
+        //dd( Auth::user()->id, $remjob->company->user->id )
+        if( $remjob->external_api ){
+            return redirect()->route('landing');
+        } else if ( Auth::user()->id != $remjob->company->user->id ) {
+                return redirect()->route('landing');
+        } 
+
+        if( $remjob->paid == 1) {
+            return redirect()->route('landing');
+        }
+
         return view( 'payments.checkout', compact('remjob') );
+
     }
 
     

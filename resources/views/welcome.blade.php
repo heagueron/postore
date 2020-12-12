@@ -112,7 +112,8 @@
                     @if (Route::has('login'))
                         @auth
                             <li class="nav-item ">
-                                <a class="nav-link" href="{{ url('/home') }}">Home</a>
+                                <!-- <a class="nav-link" href="{{ url('/home') }}">Home</a> -->
+                                <a class="nav-link" href="{{ url('/') }}">Remote Jobs</a>
                             </li>    
                         @else
                             <li class="nav-item ">

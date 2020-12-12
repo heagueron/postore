@@ -67,7 +67,7 @@
             <h3 class="pr-404__description">We searched all over the universe.</h3>
             <h3 class="pr-404__description">That page or job type does not exist.</h3>
             <div class="nav__actions">
-                <a href="{{ route('landing') }}" alt="Home" class="post-button">{{ __('Home') }}</a>
+                <a href="{{ route('landing') }}" class="post-button">{{ __('Remote Jobs') }}</a>
             </div>
         
     </div>

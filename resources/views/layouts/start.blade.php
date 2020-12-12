@@ -101,7 +101,8 @@
 
                         @auth
                             <li class="nav-item links nav__option">
-                                <a href="{{ url('/home') }}" class="nav__option__link">Home</a>
+                                <!-- <a href="{{ url('/home') }}" class="nav__option__link">Home</a> -->
+                                <a href="{{ url('/') }}" class="nav__option__link">Remote Jobs</a>
                             </li>    
                         @else
                             <li class="nav-item links nav__option">

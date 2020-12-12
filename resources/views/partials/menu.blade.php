@@ -16,17 +16,21 @@
             </a>
         </li>
 
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{ route('admin.remjobs.index') }}">
-                {{ __('Remote Jobs') }}
-            </a>              
-        </li>
+        @if( Auth::user()->is_admin == 1 )
 
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{ route('admin.edit-options') }}">
-                {{ __('Admin Options') }}
-            </a>              
-        </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('admin.remjobs.index') }}">
+                    {{ __('Remote Jobs') }}
+                </a>              
+            </li>
+
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('admin.edit-options') }}">
+                    {{ __('Admin Options') }}
+                </a>              
+            </li>
+
+        @endif
 
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{ route('logout') }}"

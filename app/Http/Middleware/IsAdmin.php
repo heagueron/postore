@@ -22,5 +22,5 @@ class IsAdmin
 
        return redirect('/')->with('fail', 'Route not allowed');
     }
-
+    
 }
