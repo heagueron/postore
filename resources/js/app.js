@@ -73,8 +73,10 @@ window.onscroll = function() {navBackgroundControl()};
 function navBackgroundControl() {
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     document.getElementById("app-nav").classList.remove('bg-transparent');
+    document.getElementById("app-nav").classList.add('one-edge-shadow');
   } else {
     document.getElementById("app-nav").classList.add('bg-transparent');
+    document.getElementById("app-nav").classList.remove('one-edge-shadow');
   }
 }
 

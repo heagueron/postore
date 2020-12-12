@@ -14,7 +14,7 @@
     <!-- <title>{{ __('Remote Resources | Welcome') }}</title> -->
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('storage/images/logo.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('storage/images/remjob.png') }}" type="image/png">
 
 
     <!-- Scripts -->

@@ -23,10 +23,10 @@
 
     <div class="col-9">
         <!--Main job preview -->
-        <h3 class="mb-3 checkout-subtitle">Here is how your job post will look on main page:</h3>
+        <h3 class="mb-3 checkout-subtitle">{{__('checkout.rowTitle')}}</h3>
         <x-jobrow :remjob="$remjob" page='checkout'/>
 
-        <h3 class="mt-5 checkout-subtitle">Here is how your job post detail page will look:</h3>
+        <h3 class="mt-5 checkout-subtitle">{{__('checkout.detailTitle')}}</h3>
 
             <div class="mt-3 remjob-description">
 

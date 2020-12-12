@@ -33,9 +33,9 @@ return [
     'crDuration'    => 'Post for :duration days',
     'crShareTwitter'    => 'Share on Twitter',
     'crShowLogo'        => 'Show Company Logo',
-    'crYellowBG'        => 'Yellow Background',
-    'crMFP'             => 'Show on Main Front Page',
-    'crMCP'             => 'Show on Main Category Page',
+    'crYellowBG'        => 'Highlight the row',
+    'crMFP'             => 'Priority on Main Front Page',
+    'crMCP'             => 'Priority on Main Category Page',
 
     'crGroupTitleJob'   => 'JOB',
 

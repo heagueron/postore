@@ -1018,9 +1018,10 @@ nav {
     position: fixed !important;
     top: 0 !important;
     z-index: 200 !important;
-    background-color: #d9d9d9 !important;
+    /*background-color: #d9d9d9 !important;*/
+    background-color: #fff !important;
     width:100% !important;
-    opacity: 0.9 !important;
+    /*opacity: 0.95 !important;*/
 }
 
 .nav-item {
@@ -1167,8 +1168,22 @@ h3 i {
 }
 
 .checkout-subtitle{
-    background-color: $hero-bg;
-    border: none;
+    /*background-color: $hero-bg;
+    border: none;*/
     padding: 0.6rem;
+}
+
+.one-edge-shadow {
+    box-shadow: 0 4px 3px -3px black;
+}
+
+.card-price-free {
+    color: $post-bg;
+    font-weight: bold;
+}
+
+.card-price-paid {
+    color: $remjob-green;
+    font-weight: bold;
 }
 
