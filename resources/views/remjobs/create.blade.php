@@ -182,7 +182,6 @@
                     <p class="rp-group__error">{{ $message }}</p> 
                 @enderror
                 
-
                 <!-- description -->
                 <div>
                     <span class="rp-group__head">{{__('text.crDescriptionLabel')}}*</span>
@@ -263,11 +262,7 @@
                         <p class="rp-group__error">{{ $message }}</p> 
                     @enderror
 
-                </div>
-
-                
-
-                
+                </div>  
 
             </div>
 
@@ -318,8 +313,7 @@
 
                 <div class="rp-group__title">{{__('text.crPlanSelectorTitle')}}</div>
 
-                @include('partials.pricing-table')
-                
+                @include('partials.pricing-table')   
             
             </div>
 
@@ -327,7 +321,7 @@
 
     </div>
 
-    <div style="height:150px;"></div>
+    <!-- <div style="height:150px;"></div> -->
 
 
     {{-- PREVIEW AND POST THE JOB BUTTON --}}
@@ -338,9 +332,11 @@
         </div>
 
         <div class="col-2 job-post-preview__post">
+
             <button form="post-job-form" class="post-button" type="submit" id="post-the-job-button">
-                {{ __('text.crPostTheJob') }}
+                Post the job!
             </button>
+
         </div>
 
     </div>

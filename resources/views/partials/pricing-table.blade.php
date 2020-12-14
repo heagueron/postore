@@ -1,6 +1,7 @@
 <section class="pricing py-5 m-5">
   <div class="container">
     <div class="row">
+      
       <!-- Free Tier -->
       <div class="col-lg-4">
         <div class="card mb-5 mb-lg-0" >
@@ -28,6 +29,7 @@
           </div>
         </div>
       </div>
+
       <!-- PRO Tier -->
       <div class="col-lg-4">
         <div class="card mb-5 mb-lg-0">
@@ -54,6 +56,7 @@
           </div>
         </div>
       </div>
+
       <!-- PREMIUM Tier -->
       <div class="col-lg-4">
         <div class="card">
@@ -80,6 +83,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
