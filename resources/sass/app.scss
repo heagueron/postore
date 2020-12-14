@@ -510,11 +510,10 @@ nav {
     
 }
 
+
+
+
 /* REMOTE POSITIONS */
-
-
-
-
 
 
 .hero {
@@ -1187,3 +1186,15 @@ h3 i {
     font-weight: bold;
 }
 
+
+.btn-auth{
+    background-color:#4CAF50 !important;
+    color:#fff !important;
+    &:hover{
+        background-color: #367c39 !important;
+    }
+}
+
+.btn-link {
+    color: #4CAF50 !important;
+}

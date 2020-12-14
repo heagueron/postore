@@ -19,4 +19,18 @@ return [
     'register'  => 'Register',
     'logout'    => 'Logout',
 
+    'emailLabel'    => 'E-Mail Address',
+    'emailPlaceholder'  => 'name@example.com',
+    'passwordLabel'    => 'Password',
+    'passwordPlaceholder'   => 'password',
+    'confirmPasswordLabel'  => 'Confirm Password',
+    'confirmPasswordPlaceholder'    => 'enter same password',
+    'forgotPassword'    => 'Forgot Your Password?',
+    'notRegistered'     => 'Not registered?',
+    'alreadyRegistered' => 'Already registered?',
+    'createAccount'     => 'Create account',
+    'nameLabel' => 'Name',
+    'namePlaceholder'   => 'your name',
+
+
 ];
