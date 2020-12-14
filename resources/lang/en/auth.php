@@ -32,5 +32,9 @@ return [
     'nameLabel' => 'Name',
     'namePlaceholder'   => 'your name',
 
+    'sendResetLink' => 'Send Password Reset Link',
+
+    'resetPasswordTitle' => 'Reset Password',
+
 
 ];
