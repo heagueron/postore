@@ -50,18 +50,19 @@ class PaymentController extends Controller
         
         if( ( null !== session('newRemjobId') ) and Remjob::where('id', session('newRemjobId') )->exists() ) {
 
-
             $remjob = Remjob::find( session('newRemjobId') );
 
             // Retrieve the license from gumroad:
             if ( request()->query('sale_id') ) {
+
                 $sale = Gumroad::getSale( $request->query('sale_id') )['sale'];
                 $gumroadLicense = $sale['license_key'];
+
+                return view( 'payments.publish', compact( 'remjob', 'gumroadLicense' ) );
+
             } else { 
                 $message = 'Sorry. We could not find your payment license for this job post. Contact support: heagueron@gmail.com';
             }
-
-            return view( 'payments.publish', compact( 'remjob', 'gumroadLicense' ) );
 
         } else {
             $message = 'Sorry. We could not find your remote job. Contact support: heagueron@gmail.com';
