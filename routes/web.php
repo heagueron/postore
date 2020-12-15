@@ -1,5 +1,9 @@
 <?php
 
+use App\Rules\GumroadLicense;
+use App\ApiConnectors\Gumroad;
+use Illuminate\Support\Facades\Http;
+
 use App\Remjob;
 
 /*
@@ -97,6 +101,54 @@ Route::get('/privacy', function () {
 })->name('privacy');
 
 
+// Fake route to test activate
+Route::get('/testa', function () {
+
+    // Store the new Remjob id...
+    session([ 'newRemjobId' => 33 ]);
+
+    $saleId = 'kADrfEgPlKkWvJwdrJ3MnA==';
+
+    if( ( null !== session('newRemjobId') ) and Remjob::where('id', session('newRemjobId') )->exists() ) {
+
+        $remjob = Remjob::find( session('newRemjobId') );
+
+        // Retrieve the license from gumroad:
+        if ( $saleId ) {
+
+            $grConnection = new Gumroad();
+            $sale = $grConnection->getSale('kADrfEgPlKkWvJwdrJ3MnA==')['sale'];
+            $gumroadLicense = $sale['license_key'];
+            // dd($gumroadLicense);
+
+            // $saleDirect = Http::withToken(config('services.gumroad.token'))->get('https://api.gumroad.com/v2/sales/kADrfEgPlKkWvJwdrJ3MnA==');
+            
+            // $gumroadLicense = $saleDirect->json()['sale']['license_key'];
+
+            return view( 'payments.publish', compact( 'remjob', 'gumroadLicense' ) );
+
+        } else { 
+            $message = 'Sorry. We could not find your payment license for this job post. Contact support: heagueron@gmail.com';
+        }
+
+    } else {
+        $message = 'Sorry. We could not find your remote job. Contact support: heagueron@gmail.com';
+    }
+     
+    return view( 'information', compact( 'message' ) );
+
+    // $saleDirect = Http::withToken(config('services.gumroad.token'))->get('https://api.gumroad.com/v2/sales/kADrfEgPlKkWvJwdrJ3MnA==');
+    // dd($sale->body(), $sale->json(), $sale->headers());
+
+    // $sales = Http::withToken(config('services.gumroad.token'))->get('https://api.gumroad.com/v2/sales');
+    // dd($sales->body(), $sales->json(), $sales->headers());
+
+    // $response = Http::withToken(config('services.gumroad.token'))->get('https://api.gumroad.com/v2/user');
+    // dd($response->body(), $response->json(), $response->headers());
+
+});
+
+
 // Fake route to test final publish step
 Route::get('/testp', function () {
 
@@ -165,6 +217,7 @@ Route::get('/view-clear', function() {
 // J7mbo twitter-api-php
 
 use Illuminate\Support\Str;
+
 use App\ApiConnectors\TwitterGateway;
 use App\ApiConnectors\TwitterAPIExchange;
 

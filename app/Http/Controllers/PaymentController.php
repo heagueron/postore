@@ -55,7 +55,10 @@ class PaymentController extends Controller
             // Retrieve the license from gumroad:
             if ( request()->query('sale_id') ) {
 
-                $sale = Gumroad::getSale( $request->query('sale_id') )['sale'];
+                $grConnection = new Gumroad();
+
+                $sale = $grConnection->getSale( request()->query('sale_id') )['sale'];
+                
                 $gumroadLicense = $sale['license_key'];
 
                 return view( 'payments.publish', compact( 'remjob', 'gumroadLicense' ) );
@@ -90,7 +93,7 @@ class PaymentController extends Controller
             'paid'                  => 1,
             'gumroad_license'       => request()->license,
         ]);
-        return redirect()->route( 'landing')->with('flash', 'New remote job posted!');
+        return redirect()->route('landing')->with('flash', 'New remote job posted!');
     }
 
     /**

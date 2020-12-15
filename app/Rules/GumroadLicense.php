@@ -32,7 +32,11 @@ class GumroadLicense implements Rule
             // Grab remote job and its permalink
             $remjob = Remjob::find( session('newRemjobId') );
 
-            $license = Gumroad::verifyLicense( $value, $remjob->gumroad_permalink );
+            $grConnection = new Gumroad();
+
+            $license = $grConnection->verifyLicense( $value, $remjob->plan->gumroad_permalink );
+
+            //$license = Gumroad::verifyLicense( $value, $remjob->gumroad_permalink );
 
             return
                     $license['success'] &&

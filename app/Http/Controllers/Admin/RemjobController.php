@@ -295,7 +295,6 @@ class RemjobController extends Controller
         $response = Http::get('https://jobs.github.com/positions.json');
         
         $jobsArray = $response->json();
-        //dd( $jobsArray );
 
         if( !$jobsArray ) {
             return back()->with('fail', 'No job found on github jobs');
