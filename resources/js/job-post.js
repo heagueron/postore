@@ -161,23 +161,12 @@ const formControl = () => {
 
         /* logo */
     
+        sessionStorage.logo = null;
+        const previewLogo = `<img src="${PATH}/storage/logos/nologo.png" alt="logo" id="preview-logo" class="w-100">`;
+        document.querySelector("#preview_logo_container").innerHTML = previewLogo;
+
         const logoInput = document.querySelector('input[name="company_logo"]');
 
-        // old logo when returning from validation errors
-        if( document.body.contains(document.querySelectorAll('.rp-group__error')[0]) && sessionStorage.logo.length > 100 ) {
-            console.log('document has errors and got a logo');
-            console.log(`sessionStorage.logo: ${sessionStorage.logo.length}`)
-            document.querySelector("#company-logo-container").style.backgroundImage = `url(${sessionStorage.logo})`;
-            const previewLogo = `<img src="${sessionStorage.logo}" alt="logo" id="preview-logo" class="w-100">`;
-            document.querySelector("#preview_logo_container").innerHTML = previewLogo;
-        } else {
-            console.log('document doesnt have errors or doesnt get a logo');
-            // If there are no errors, we must ensure to enter the form without logo image.
-            logoInput.value = null;
-            sessionStorage.logo = null;
-            const previewLogo = `<img src="${PATH}/storage/logos/nologo.png" alt="logo" id="preview-logo" class="w-100">`;
-            document.querySelector("#preview_logo_container").innerHTML = previewLogo;
-        }
 
         // logo event
         logoInput.addEventListener('change', function() {
@@ -319,7 +308,7 @@ const formControl = () => {
     /* SUMMERNOTE */
     $(function () {
 
-        function getSummernotePalceholder(lang){
+        function getSummernotePlaceholder(lang){
             const msg = {
                 en: 'Enter your remote job description',
                 es: 'Ingrese la descripcion del trabajo remoto'
@@ -328,7 +317,7 @@ const formControl = () => {
         }
     
         $('#description').summernote({
-            placeholder: `${getSummernotePalceholder(document.querySelector('#localeElement').value)}`,
+            placeholder: `${getSummernotePlaceholder(document.querySelector('#localeElement').value)}`,
             tabsize: 2,
             height: 300,
             toolbar: [

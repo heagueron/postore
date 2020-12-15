@@ -278,7 +278,9 @@
 
                     <div class="logo-box" id="company-logo-container">
                         <p>💾 Upload</p>
-                        <input type="file" name="company_logo" class="input_company_logo" accept=".jpg,.png" id="company-logo-input">
+                        <input type="file" name="company_logo" class="input_company_logo" 
+                                accept=".jpg,.png" id="company-logo-input"
+                        >
                     </div>
 
                     <span class="rp-group__info">
