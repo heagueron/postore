@@ -146,7 +146,6 @@ class RemjobController extends Controller
         // return redirect()->route( 'checkout', [ $company->slug.'-'.Str::slug( request()->position, '-' ).'-'.$remjob->id ] );
         return redirect()->route( 'checkout', $remjob->slug );
 
-
     }
 
     /**
@@ -291,38 +290,39 @@ class RemjobController extends Controller
      * @return void
      */
     private function storeMedia( $company )
-    {
-        //Get file from the browser
+    {/*
+        // Get file from the browser
         $path= request()->company_logo;
         //$path= $request->file('webinarphoto');
 
         // Resize and encode to required type
-        $img = Image::make($path)->resize(60,60)->encode();
+        $img = Image::make($path)->resize(60, null, function ($constraint) 
+                {
+                    $constraint->aspectRatio();
+                })->encode();
 
-        //Provide the file name with extension 
+        // Build a file name with extension 
         $filename = time(). '.' .$path->getClientOriginalExtension();
 
-        //Put file with own name
+        // Put uploaded image content on file with own name
         Storage::put($filename, $img);
 
-        //Move file to your location 
+        // Move file to final location in storage 
         Storage::move($filename, 'public/logos/' . $filename);
 
-        //now insert into database 
+        // Update company model in database 
         $company->update([
             'logo' => 'logos/' . $filename
+        ]);*/
+
+        $company->update([
+            'logo' => request()->company_logo->store('logos', 'public')
         ]);
-
-
-        // $company->update([
-        //     'logo' => request()->company_logo->store('logos', 'public')
-        // ]);
 
         // $fixedLogo = Image::make( public_path('storage/' . $company->logo) )->resize(60, 60);
         // $fixedLogo->save();    
         // return;
 
     }
-
 
 }

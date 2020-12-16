@@ -104,7 +104,7 @@
 
                         @if( $remjob->external_api == null )
                             @if( $remjob->company->logo != null and $remjob->plan->show_logo )
-                                <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}">
+                                <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}" width="60" height=auto>
                             @else
                                 <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-50" >
                             @endif

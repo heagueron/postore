@@ -72,7 +72,7 @@
                             
                             {{-- Tweet --}}
                             <div>
-                                <a class="ml-2" href="{{ route('admin.remjobs.tweet', $remjob->id) }}">
+                                <a class="ml-2" href="{{ route('admin.remjobs.tweet', $remjob->id) }}" title="Share on Twitter">
                                     <i class="fab fa-twitter" style="font-size:18px;color:#0066ff"></i>
                                 </a>
                             </div>
@@ -81,7 +81,7 @@
                             <div>
                                 <form method="POST" action="{{ route('admin.remjobs.destroy', $remjob->id) }}">
                                     @csrf @method('DELETE')
-                                    <button type="submit" style="border:none; background-color:transparent;">
+                                    <button type="submit" style="border:none; background-color:transparent;" title="Destroy">
                                         <i class="fa fa-trash" style="font-size:18px;color:red"></i>
                                     </button>
                                 </form>
@@ -90,7 +90,7 @@
                             @if( $remjob->total )
                             {{-- Edit --}}
                             <div>
-                                <a class="ml-2" href="{{ route('admin.remjobs.edit', $remjob->id) }}">
+                                <a class="ml-2" href="{{ route('admin.remjobs.edit', $remjob->id) }}" title="Edit">
                                     <i class="fa fa-edit" style="font-size:18px;"></i>
                                 </a>
                             </div>
@@ -99,7 +99,7 @@
                             {{-- Inactivate --}}
                             <div>
                             
-                                <form action="{{ route('admin.remjobs.inactivate', $remjob->id) }}" method="post">
+                                <form action="{{ route('admin.remjobs.inactivate', $remjob->id) }}" method="post" title="Inactivate">
                                     @csrf
                                     @method('PATCH')
                                     <button type="submit" style="border:none;background-color:transparente">
