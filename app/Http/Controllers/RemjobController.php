@@ -290,8 +290,8 @@ class RemjobController extends Controller
      * @return void
      */
     private function storeMedia( $company )
-    {/*
-        // Get file from the browser
+    {
+        // Get file from form
         $path= request()->company_logo;
         //$path= $request->file('webinarphoto');
 
@@ -305,7 +305,7 @@ class RemjobController extends Controller
         $filename = time(). '.' .$path->getClientOriginalExtension();
 
         // Put uploaded image content on file with own name
-        Storage::put($filename, $img);
+        Storage::put($filename, $img, 'public');
 
         // Move file to final location in storage 
         Storage::move($filename, 'public/logos/' . $filename);
@@ -313,11 +313,18 @@ class RemjobController extends Controller
         // Update company model in database 
         $company->update([
             'logo' => 'logos/' . $filename
-        ]);*/
-
-        $company->update([
-            'logo' => request()->company_logo->store('logos', 'public')
         ]);
+
+
+
+
+
+
+        // $company->update([
+        //     'logo' => request()->company_logo->store('logos', 'public')
+        // ]);
+
+        //Storage::setVisibility( asset('storage/' . $company->logo ), 'public' );
 
         // $fixedLogo = Image::make( public_path('storage/' . $company->logo) )->resize(60, 60);
         // $fixedLogo->save();    
