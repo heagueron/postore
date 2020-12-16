@@ -292,14 +292,36 @@ class RemjobController extends Controller
      */
     private function storeMedia( $company )
     {
+        //Get file from the browser
+        $path= request()->company_logo;
+        //$path= $request->file('webinarphoto');
+
+        // Resize and encode to required type
+        $img = Image::make($path)->resize(60,60)->encode();
+
+        //Provide the file name with extension 
+        $filename = time(). '.' .$path->getClientOriginalExtension();
+
+        //Put file with own name
+        Storage::put($filename, $img);
+
+        //Move file to your location 
+        Storage::move($filename, 'public/logos/' . $filename);
+
+        //now insert into database 
         $company->update([
-            'logo' => request()->company_logo->store('logos', 'public')
+            'logo' => 'logos/' . $filename
         ]);
 
-        $fixedLogo = Image::make( public_path('storage/' . $company->logo) )->resize(60, 60);
-        $fixedLogo->save();    
-        return;
-        
+
+        // $company->update([
+        //     'logo' => request()->company_logo->store('logos', 'public')
+        // ]);
+
+        // $fixedLogo = Image::make( public_path('storage/' . $company->logo) )->resize(60, 60);
+        // $fixedLogo->save();    
+        // return;
+
     }
 
 
