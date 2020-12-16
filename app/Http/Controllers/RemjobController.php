@@ -16,6 +16,7 @@ use App\Http\Requests\StoreRemjob;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
 
 class RemjobController extends Controller
@@ -298,6 +299,7 @@ class RemjobController extends Controller
         $fixedLogo = Image::make( public_path('storage/' . $company->logo) )->resize(60, 60);
         $fixedLogo->save();    
         return;
+        
     }
 
 

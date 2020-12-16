@@ -20,7 +20,7 @@ class everyDay extends Command
      *
      * @var string
      */
-    protected $description = 'Checks remote jobs date. Sets field active to 0 after 30 days.';
+    protected $description = 'Checks remote jobs date. Sets field active to 0 after the stablished duration period.';
 
     /**
      * Create a new command instance.
@@ -44,20 +44,26 @@ class everyDay extends Command
             // Get active remote jobs
             $remjobs = \App\Remjob::where('active', 1)->get();
 
+            $inactivatedRemjobs = 0;
+            $datetime2 = date_create();
+
             foreach ( $remjobs as $remjob ) {
 
                 $dt1 = Carbon::parse( $remjob->created_at );
                 $datetime1 = date_create($remjob->created_at);
-                $datetime2 = date_create();
 
                 $interval = date_diff($datetime1, $datetime2)->format('%a');
 
-                if( $interval > 30 ){
+                if( $interval > \App\Option::find(1)->value ){
                     $this->info( $remjob->position.', posted on: '.$dt1.' will be set inactive' );
                     $remjob->update([ 'active'  => 0 ]);
+
+                    $inactivatedRemjobs += 1;
                 }
 
             }
+
+            $this->info( ' Total remote jobs inactivated: '.$inactivatedRemjobs );
 
         } else {
             $this->info( ' No remote jobs on active state ' );

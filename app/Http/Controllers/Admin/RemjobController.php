@@ -34,10 +34,13 @@ class RemjobController extends Controller
 
     public function index()
     {
-        //dd("admin remjob controller index ");
-        if( Remjob::where('active',1)->exists() ){
-            $remjobs = Remjob::where('active',1)->orderBy('created_at', 'desc')->get();
+        if( Remjob::all()->count() > 0 ){
+            $remjobs = Remjob::latest()->get();
         } else { $remjobs = []; }
+
+        // if( Remjob::where('active',1)->exists() ){
+        //     $remjobs = Remjob::where('active',1)->orderBy('created_at', 'desc')->get();
+        // } else { $remjobs = []; }
         
         return view( 'admin.remjobs.index',compact('remjobs') );
 
@@ -410,8 +413,8 @@ class RemjobController extends Controller
     public function destroy(Remjob $remjob)
     {
         // Delete media files
-        if(\Storage::exists( 'public/' . $remjob->company_logo )){
-            \Storage::delete( 'public/' . $remjob->company_logo );           
+        if(\Storage::exists( 'public/' . $remjob->company->logo )){
+            \Storage::delete( 'public/' . $remjob->company->logo );           
         }
 
         // Delete from pivot table Sposts-Twitter profiles
