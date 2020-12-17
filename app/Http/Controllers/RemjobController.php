@@ -322,12 +322,14 @@ class RemjobController extends Controller
 
         //Storage::setVisibility( asset('storage/' . $company->logo ), 'public' );
 
-        $fixedLogo = Image::make( public_path('storage/' . $company->logo) )->resize(60, null, function ($constraint) 
-        {
-            $constraint->aspectRatio();
-        });
+        // $fixedLogo = Image::make( public_path('storage/' . $company->logo) )->resize(60, null, function ($constraint) 
+        // {
+        //     $constraint->aspectRatio();
+        // });
 
-        $fixedLogo->save();    
+        $fixedLogo = Image::make( public_path('storage/' . $company->logo) )->resize(60, 60);
+        $fixedLogo->save(); 
+           
         return;
 
     }
