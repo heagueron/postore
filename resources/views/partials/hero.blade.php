@@ -1,7 +1,7 @@
 
 @include('partials.nav')
 
-<header class="hero" style="background-image:url( {{ asset('storage/images/green-bg.png') }} )">
+<header class="hero" style="background-image:url( {{ asset('images/green-bg.png') }} )">
 <!-- <header class="hero"> -->
 
     <div class="hero__title mt-5 text-center">
