@@ -14,6 +14,6 @@ $factory->define(Company::class, function (Faker $faker) {
         'slug'      => Str::slug($companyName, '-'),
         'email'     => $faker->email,
         'user_id'   => 1,
-        'logo'      => $faker->randomElement(['logos/logo1.png', 'logos/logo2.png', 'logos/logo3.png', 'logos/logo4.png', null]),
+        'logo'      => null
     ];
 });
