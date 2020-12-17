@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-transparent" id="app-nav">
     <div class="container">
         <a class="navbar-brand" href="{{ route('landing') }}" aria-current="page">
-            <img src="{{ asset('storage/images/remjob.png') }}" alt="Remote Positions" class="w-15" >
+            <img src="{{ asset('images/remjob.png') }}" alt="Remote Positions" class="w-15" >
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>

@@ -59,9 +59,10 @@
     </style>
 </head>
 
+
 <body>
 
-    <div class="pr-404" style="background-image:url( {{ asset('storage/images/universe.jpg') }} )" id="app">
+    <div class="pr-404" style="background-image:url( {{ asset('images/universe.jpg') }} )" id="app">
 
             <h1 class="pr-404__title">404</h1>
             <h3 class="pr-404__description">We searched all over the universe.</h3>

@@ -158,6 +158,11 @@ Route::get('/testp', function () {
     return view( 'payments.publish', compact( 'remjob', 'gumroadLicense' ) );
 });
 
+// Fake route to 404
+Route::get('/test404', function () {
+    return view( '404' );
+});
+
 // Scheduled posts (Sposts)
 // Route::get('/sposts', 'SpostController@index')->name('sposts.index');
 // Route::get('/sposts/create', 'SpostController@create')->name('sposts.create');
