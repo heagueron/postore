@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreRemjob;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
@@ -50,14 +51,16 @@ class RemjobController extends Controller
      */
     public function create()
     {
-        //App::setlocale('es');
+        // Retrieve the currently authenticated user...
+        $user = Auth::user();
+        
         if (App::isLocale('es')) {
             $categories = \App\Category::whereIn( 'id', [7, 8, 9, 10, 11, 12] )->get();
         } else {
             $categories = \App\Category::whereIn( 'id', [1, 2, 3, 4, 5, 6] )->get();
         }
 
-        return view( 'remjobs.create', compact('categories') );
+        return view( 'remjobs.create', compact('categories', 'user') );
 
     }
 
@@ -88,7 +91,7 @@ class RemjobController extends Controller
         ]);
 
         // Company
-        if( !Company::where('email', request()->company_email)->exists() ){
+        if( !Company::where('id', request()->company_id)->exists() ){
             // Create company
             $company = Company::create([
                 'name'      => request()->company_name,
@@ -98,7 +101,7 @@ class RemjobController extends Controller
             ]);
             //Log::info('Created company: '.$company->name.' while creating job: '.$remjob->position);
         } else {
-            $company = Company::where('email', request()->company_email)->first();
+            $company = Company::where('id', request()->company_id)->first();
         }
 
         // Add or update media to the company model

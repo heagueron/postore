@@ -25,44 +25,28 @@
 
             {{-- Retrieve localization for javascript --}}
             <input type="hidden" id="localeElement" value="{{ App::getLocale() }}">
+            
 
             <!-- T H E   J O B -->
             <div class="rp-group" id="rp-post-fs1">
 
                 <div class="rp-group__title">{{ __('text.crGroupTitleJob') }}</div>
-                
-                <!-- company name -->
-                <div>
-                    <span class="rp-group__head">{{ __('text.crCompanyNameLabel') }}*</span>
-                    <input  data-required="required" autocomplete="off" id="companyNameElement"
-                            type="text" name="company_name" data-name="your company name"
-                            value="{{ !is_null( old('company_name'))? old('company_name') : '' }}"               
-                    >
-                    {{-- Hidden input to hold company id --}}
-                    <input type="hidden" id="companyIdElement" name="company_id" value="{{ !is_null( old('company_id'))? old('company_id') : '' }}">
-                    
-                    <span class="rp-group__info">
-                        {{__('text.crCompanyNameTip')}}
-                    </span>
-                    @error('company_name') 
-                        <p class="rp-group__error">{{ $message }}</p> 
-                    @enderror
-                </div>
 
-                <!-- company_email -->
-                <div>
-                    <span class="rp-group__head">{{ __('text.crCompanyEmailLabel') }}*</span>
-                    <input  data-required="required" autocomplete="off" id="companyEmailElement"
-                            type="text" name="company_email" data-name="your company email"
-                            value="{{ !is_null( old('company_email'))? old('company_email') : '' }}"               
-                    >
-                    <span class="rp-group__info">
-                        {{__('text.crCompanyEmailTip')}}
-                    </span>
-                    @error('company_email') 
-                        <p class="rp-group__error">{{ $message }}</p> 
-                    @enderror
-                </div>
+                @if( \App\Company::where('user_id', $user->id)->exists() )
+
+                    {{-- Retrieve first company id --}}
+                    <input type="hidden" id="firstCompanyId" name="company_id" value="{{ $user->companies->first()->id }}">
+
+                    @if( $user->companies->count() == 1 )
+                        @include('partials.has-one-company')
+                    @else
+                    {{-- HAS MORE THAN ONE COMPANY ! --}}
+                    HAS MORE THAN 
+                        @include('partials.has-one-company')
+                    @endif
+                @else
+                    @include('partials.first-company')
+                @endif
 
                 <!-- position -->
                 <div>
@@ -272,41 +256,21 @@
 
                 <div class="rp-group__title">More Company Details</div>
 
-                <!-- company_logo -->
-                <div>
-                    <span class="rp-group__head">company_logo*</span>
+                @if( \App\Company::where('user_id', $user->id)->exists() )
+                    <input type="hidden" id="storedLogo" value="{{ $user->companies->first()->logo }}">
+                    @if( $user->companies->count() == 1 )
+                        @include('partials.more-details-one-company')
+                    @else
+                    {{-- HAS MORE THAN ONE COMPANY ! --}}
+                    HAS MORE THAN 
+                        @include('partials.more-details-one-company')
+                    @endif
+                @else
+                    <input type="hidden" id="storedLogo" value="logos/nologo.png">
+                    @include('partials.more-details-first-company')
+                @endif
 
-                    <div class="logo-box" id="company-logo-container">
-                        <p>💾 Upload</p>
-                        <input type="file" name="company_logo" class="input_company_logo" 
-                                accept=".jpg,.png" id="company-logo-input"
-                        >
-                    </div>
-
-                    <span class="rp-group__info">
-                        Your company logo.
-                    </span>
-                    @error('company_logo') 
-                        <p class="rp-group__error">{{ $message }}</p> 
-                    @enderror
-                    
-                </div>
                 
-
-                 <!-- company_twitter -->
-                 <div>
-                    <span class="rp-group__head">Company twitter profile</span>
-                    <input  autocomplete="off" id="companyTwitterElement"
-                            type="text" name="company_twitter" data-name="your company twitter"
-                            value="{{ !is_null( old('company_twitter'))? old('company_twitter') : '' }}"               
-                    >
-                    <span class="rp-group__info">
-                        Your company's twitter profile (no '@' please). We will tag (mention) this profile when we share the job in twitter. 
-                    </span>
-                    @error('company_twitter') 
-                        <p class="rp-group__error">{{ $message }}</p> 
-                    @enderror
-                </div>
             
             </div>
 
@@ -330,7 +294,7 @@
     <div class="row job-post-preview">
 
         <div class="col-10 job-post-preview__job">
-            <x-jobrow-preview />   
+            @include('partials.jobrow-preview')
         </div>
 
         <div class="col-2 job-post-preview__post">

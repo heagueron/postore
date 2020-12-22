@@ -26,10 +26,13 @@ const formControl = () => {
             } 
             document.querySelector('#preview_company_container').innerHTML = e.target.value;
 
+            // clear main logo ( user can be adding a new company )
+            document.querySelector("#company-logo-container").style.backgroundImage = '';
+
         } else {
             // Company name empty
             if( !document.querySelector('#company-logo-input').value ){
-                document.querySelector('#preview_logo_container').innerHTML = `<img src="${PATH}/storage/logos/logo1.png" alt="logo">`;
+                document.querySelector('#preview_logo_container').innerHTML = `<img src="${PATH}/storage/logos/nologo.png" alt="logo">`;
             }
             document.querySelector('#preview_company_container').innerHTML = 'Company';
         }
@@ -162,9 +165,13 @@ const formControl = () => {
         /* logo */
     
         sessionStorage.logo = null;
-        const previewLogo = `<img src="${PATH}/storage/logos/nologo.png" alt="logo" id="preview-logo" class="w-100">`;
-        document.querySelector("#preview_logo_container").innerHTML = previewLogo;
 
+        // Clear logo container if there is no company
+        if( !document.querySelector('#firstCompanyId') ){
+            const previewLogo = `<img src="${PATH}/storage/logos/nologo.png" alt="logo" id="preview-logo" class="w-100">`;
+            document.querySelector("#preview_logo_container").innerHTML = previewLogo;
+        }
+        
         const logoInput = document.querySelector('input[name="company_logo"]');
 
 
@@ -262,12 +269,15 @@ const formControl = () => {
                 jobPreviewContainer.style.backgroundColor = '#f9f9f9';
 
             } else { // A Paid Plan
+                
+                const storedLogo = document.querySelector('#storedLogo').value;
 
                 if( sessionStorage.logo.length > 100 ) {
-
                     const previewLogo = `<img src="${sessionStorage.logo}" alt="logo" id="preview-logo" class="w-100">`;
                     document.querySelector("#preview_logo_container").innerHTML = previewLogo;
-                    
+                } else {
+                    const previewLogo = `<img src="${PATH}/storage/${storedLogo}" alt="logo" id="preview-logo" class="w-100">`;
+                    document.querySelector("#preview_logo_container").innerHTML = previewLogo;
                 }
 
                 // Set preview background highlight
