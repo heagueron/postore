@@ -24,7 +24,7 @@
 
 
         <div class="row mt-5">
-            <div class="col-9 remjob-description">
+            <div class="col-lg-9 col-sm-12 remjob-description">
 
                 <p>{{ __(
                     'show.postDate',
@@ -98,7 +98,7 @@
 
             </div>
 
-            <div class="col-3">
+            <div class="col-lg-3 col-sm-12">
                 <div class="card bg-light pb-2">
                     <div class="card-body text-center">
 
@@ -133,7 +133,7 @@
                             <a  href="mailto:{{ $remjob->apply_email }}"  
                                 class="rp-jobrow__apply mt-4 mb-4" target="_blank" rel="noindex nofollow">  
                         @endif
-                            {{ __('Apply for this job') }}
+                            {{ __('Apply') }}
                         </a>
 
                         <hr class="m-4">

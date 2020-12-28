@@ -243,12 +243,13 @@ const formControl = () => {
 
     // plan change event
     const planRadios = document.querySelectorAll('input[name="plan_id"]');
-    //console.log(planRadios[0]);
+    
+    console.log(`Initial logo: ${document.querySelector('#storedLogo').value}`);
 
     for (let i = 0; i < planRadios.length; i++) 
     {
         planRadios[i].addEventListener('change', function() {
-            //console.log(`change!: ${this.value}`);
+            console.log(`plan change to: ${this.value}`);
             const cards = document.querySelectorAll('.card-price-element');
             for (let i = 0; i < cards.length; i++){
                 cards[i].style.border = 'none';
@@ -272,11 +273,13 @@ const formControl = () => {
                 
                 const storedLogo = document.querySelector('#storedLogo').value;
 
+                console.log(`changed to paid plan. Logo: ${storedLogo}`);
+
                 if( sessionStorage.logo.length > 100 ) {
-                    const previewLogo = `<img src="${sessionStorage.logo}" alt="logo" id="preview-logo" class="w-100">`;
+                    const previewLogo = `<img src="${sessionStorage.logo}" alt="logo" id="preview-logo" class="jobrow-company-logo">`;
                     document.querySelector("#preview_logo_container").innerHTML = previewLogo;
                 } else {
-                    const previewLogo = `<img src="${PATH}/storage/${storedLogo}" alt="logo" id="preview-logo" class="w-100">`;
+                    const previewLogo = `<img src="${PATH}/storage/${storedLogo}" alt="St_lg" id="preview-logo" class="jobrow-company-logo">`;
                     document.querySelector("#preview_logo_container").innerHTML = previewLogo;
                 }
 

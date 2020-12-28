@@ -1,9 +1,9 @@
 <div class="footer__banner p-4">
     <div class="row">
-        <div class="col-10">
+        <div class="col-sm-9 col-lg-10">
             <h1 style="font-weight:bold;">REMJOB</h1>
         </div>
-        <div class="col-2 mt-2">
+        <div class="col-sm-3 col-lg-2 mt-3">
             <a class="footer__post" href="{{ route('post_a_job') }}">{{ __('text.postAJob') }}</a>
         </div>
     </div>

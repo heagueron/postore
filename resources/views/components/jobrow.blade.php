@@ -17,7 +17,7 @@
     
 
     {{-- LOGO --}}
-    <div class="col-1">
+    <div class="col-1 mr-1">
         
         @if( $remjob->external_api == null )
 
@@ -25,7 +25,7 @@
             @if( $remjob->company->logo != null and $remjob->plan->show_logo )
                 <img src="{{ asset('storage/' . $remjob->company->logo ) }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}" width="60" height=auto>
             @else
-                <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-100" >
+                <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="jobrow-company-logo">
             @endif
 
         @else
@@ -34,49 +34,52 @@
             @if( $remjob->company->logo != null )
                 <img src="{{ $remjob->company->logo }}" alt="{{ Str::of( $remjob->company->name )->substr(0, 1) }}" width="60" height=auto>
             @else
-                <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="w-100" >
+                <img src="{{ asset('storage/logos/nologo.png') }}" alt="Remote Positions" class="jobrow-company-logo">
             @endif
 
         @endif
 
     </div>
 
-    {{-- POSITION COMPANY LOCATIONS --}}
-    <div class="col-3 mt-2 ml-2">
-        <h5 class="mb-1 rp-job-title"> {{ ucwords( $remjob->position ) }} </h5>
-        <a  class="mb-1 company-badge company-brand"
-            title="{{'browse '.$remjob->company->name.' jobs'}}"
-            data-toggle="tooltip"
-            href="{{ $page=='checkout' ? '#' : route( 'remjobs.searchByCompany', $remjob->company->slug )  }}"  
-            >
-            {{ $remjob->company->name }}
-        </a>
-        @if( in_array( strtoupper( $remjob->locations ), ['WORLDWIDE', 'GLOBAL', 'ANYWHERE'] ) )
-            <p class="rp-location"><i class="fa fa-globe" aria-hidden="true" style="color:#668cff;"></i></i> {{ strtoupper( $remjob->locations ) }} </p>
-        @elseif( $remjob->locations != null )
-            <p class="rp-location"><i class="fa fa-map-marker" style="color:#4CAF50;"></i> {{ strtoupper( $remjob->locations ) }} </p>
-        @endif
-        
-
-    </div>
-
-        <!-- <div class="col">
-        </div> -->
-
-    {{-- TAGS --}}
-    <div class="col-4 pb-7">
-        @foreach( $remjob->tags()->take(5)->get() as $tag )
-        <a href="{{ $page=='checkout' ? '#' : route( 'remjobs.searchByTags', 'remote_'.$tag->name.'_jobs' )  }}"  class="job-badget">
-            <button 
-                class="rp-tag-item"  
-                title="{{'browse '.$tag->name.' jobs'}}"
+    <div class="col-7 row">
+    
+        {{-- POSITION COMPANY LOCATIONS --}}
+        <div class="col-sm-10 col-lg-4 mt-lg-3 mt-sm-2 ml-2">
+            <h5 class="mb-1 rp-job-title"> {{ ucwords( $remjob->position ) }} </h5>
+            <a  class="mb-1 company-badge company-brand"
+                title="{{'browse '.$remjob->company->name.' jobs'}}"
                 data-toggle="tooltip"
-                data-placement="top">
-                {{ $tag->name }}
-            </button>&nbsp;
-        </a>                
-        @endforeach
+                href="{{ $page=='checkout' ? '#' : route( 'remjobs.searchByCompany', $remjob->company->slug )  }}"  
+                >
+                {{ $remjob->company->name }}
+            </a>
+            @if( in_array( strtoupper( $remjob->locations ), ['WORLDWIDE', 'GLOBAL', 'ANYWHERE'] ) )
+                <p class="rp-location"><i class="fa fa-globe" aria-hidden="true" style="color:#668cff;"></i></i> {{ strtoupper( $remjob->locations ) }} </p>
+            @elseif( $remjob->locations != null )
+                <p class="rp-location"><i class="fa fa-map-marker" style="color:#4CAF50;"></i> {{ strtoupper( $remjob->locations ) }} </p>
+            @endif
+            
+
+        </div>
+
+        {{-- TAGS --}}
+        <div class="col-sm-10 col-lg-6 mt-lg-4 pb-7">
+            @foreach( $remjob->tags()->take(5)->get() as $tag )
+            <a href="{{ $page=='checkout' ? '#' : route( 'remjobs.searchByTags', 'remote_'.$tag->name.'_jobs' )  }}"  class="job-badget">
+                <button 
+                    class="rp-tag-item"  
+                    title="{{'browse '.$tag->name.' jobs'}}"
+                    data-toggle="tooltip"
+                    data-placement="top">
+                    {{ $tag->name }}
+                </button>&nbsp;
+            </a>                
+            @endforeach
+        </div>
+
     </div>
+
+    
 
     {{-- TIME AGO --}}
     <div class="col mt-3">

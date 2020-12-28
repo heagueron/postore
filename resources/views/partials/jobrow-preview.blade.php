@@ -10,9 +10,9 @@
             @if( $user->companies->count() == 1 )
                 <div class="col-1" id="preview_logo_container">
                     @if($user->companies->first()->logo)
-                        <img src="{{ asset('storage/'.$user->companies->first()->logo) }}" alt="logo" id="preview-logo" class="w-100">
+                        <img src="{{ asset('storage/'.$user->companies->first()->logo) }}" alt="logo" id="preview-logo" class="jobrow-company-logo">
                     @else
-                        <img src="{{ asset('storage/logos/nologo.png') }}" alt="logo" id="preview-logo" class="w-100">
+                        <img src="{{ asset('storage/logos/nologo.png') }}" alt="logo" id="preview-logo" class="jobrow-company-logo">
                     @endif
                 </div>
             @else
@@ -21,19 +21,19 @@
                     @if($user->companies->first()->logo)
                         <img src="{{ asset('storage/'.$user->companies->first()->logo) }}" alt="logo" id="preview-logo" class="w-100">
                     @else
-                        <img src="{{ asset('storage/logos/nologo.png') }}" alt="logo" id="preview-logo" class="w-100">
+                        <img src="{{ asset('storage/logos/nologo.png') }}" alt="logo" id="preview-logo" class="jobrow-company-logo">
                     @endif
                 </div>
             @endif
         @else
             <div class="col-1" id="preview_logo_container">
-                <img src="{{ asset('storage/logos/nologo.png') }}" alt="logo" id="preview-logo" class="w-100">
+                <img src="{{ asset('storage/logos/nologo.png') }}" alt="logo" id="preview-logo" class="jobrow-company-logo">
             </div>
         @endif
 
 
         <!-- position, company and location preview -->
-        <div class="col-3 mt-3">
+        <div class="col-3 mt-3 ml-3">
             <h5 class="mb-1 rp-job-title" id="preview_position_container"> {{ ucwords(__('text.crPositionLabel')) }} </h5>
             <p class="mb-1 company-badge company-brand" id="preview_company_container">
                 {{ __('text.crCompany') }}

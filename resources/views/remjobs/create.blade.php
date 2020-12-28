@@ -40,8 +40,7 @@
                     @if( $user->companies->count() == 1 )
                         @include('partials.has-one-company')
                     @else
-                    {{-- HAS MORE THAN ONE COMPANY ! --}}
-                    HAS MORE THAN 
+                    {{-- HAS MORE THAN ONE COMPANY ! --}} 
                         @include('partials.has-one-company')
                     @endif
                 @else
@@ -257,12 +256,11 @@
                 <div class="rp-group__title">More Company Details</div>
 
                 @if( \App\Company::where('user_id', $user->id)->exists() )
-                    <input type="hidden" id="storedLogo" value="{{ $user->companies->first()->logo }}">
+                    <input type="hidden" id="storedLogo" value="{{ $user->companies->first()->logo ?: 'logos/nologo.png' }}">
                     @if( $user->companies->count() == 1 )
                         @include('partials.more-details-one-company')
                     @else
                     {{-- HAS MORE THAN ONE COMPANY ! --}}
-                    HAS MORE THAN 
                         @include('partials.more-details-one-company')
                     @endif
                 @else
@@ -291,13 +289,13 @@
 
 
     {{-- PREVIEW AND POST THE JOB BUTTON --}}
-    <div class="row job-post-preview">
+    <div class="row job-post-preview mr-1">
 
-        <div class="col-10 job-post-preview__job">
+        <div class="col-lg-10 col-sm-12 job-post-preview__job">
             @include('partials.jobrow-preview')
         </div>
 
-        <div class="col-2 job-post-preview__post">
+        <div class="col-lg-2 col-sm-12 job-post-preview__post">
 
             <button form="post-job-form" class="post-button" type="submit" id="post-the-job-button">
                 Post the job!

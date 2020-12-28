@@ -21,7 +21,7 @@
     <div class="row p-5">
 
 
-    <div class="col-9">
+    <div class="col-lg-9 col-sm-12">
         <!--Main job preview -->
         <h3 class="mb-3 checkout-subtitle">{{__('checkout.rowTitle')}}</h3>
         <x-jobrow :remjob="$remjob" page='checkout'/>
@@ -109,70 +109,72 @@
         <!--End of Main job preview -->
     </div>
 
-    <div class="col-3">
+    <div class="col-lg-3 col-sm-12">
             
     <table class="table">
-    <thead>
-      <tr>
-        <th>{{__('Your Job Post has')}}</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
+        <thead>
+        <tr>
+            <th>{{__('Your Job Post has')}}</th>
+            <th></th>
+        </tr>
+        </thead>
 
-      <tr>
-        <td style="color:#4CAF50;">Basic post</td>
-        <td>{{ '' }}</td>
-      </tr>
-      <tr>
-        <td>{{ $remjob->plan->name }}</td>
-        <td>{{  $remjob->plan->value }}</td>
-      </tr>
+        <tbody>
 
-      <tr>
-        <td>{{ __('text.crDuration', ['duration' => \App\Option::find(1)->value]) }}</td>
-        <td>{{ '' }}</td>
-      </tr>
-      <tr>
-        <td>{{ __('text.crShareTwitter') }}</td>
-        <td>{{ '' }}</td>
-      </tr>
+            <tr>
+                <td style="color:#4CAF50;">Basic post</td>
+                <td>{{ '' }}</td>
+            </tr>
+            <tr>
+                <td>{{ $remjob->plan->name }}</td>
+                <td>{{  $remjob->plan->value }}</td>
+            </tr>
 
-      @if( $remjob->plan->show_logo)
-      <tr>
-        <td>{{ __('text.crShowLogo') }}</td>
-        <td>{{ '' }}</td>
-      </tr>
-      @endif
+            <tr>
+                <td>{{ __('text.crDuration', ['duration' => \App\Option::find(1)->value]) }}</td>
+                <td>{{ '' }}</td>
+            </tr>
+            <tr>
+                <td>{{ __('text.crShareTwitter') }}</td>
+                <td>{{ '' }}</td>
+            </tr>
 
-      @if( $remjob->plan->yellow_background)
-      <tr>
-        <td>{{ __('text.crYellowBG') }}</td>
-        <td>{{ '' }}</td>
-      </tr>
-      @endif
+            @if( $remjob->plan->show_logo)
+            <tr>
+                <td>{{ __('text.crShowLogo') }}</td>
+                <td>{{ '' }}</td>
+            </tr>
+            @endif
 
-      @if( $remjob->plan->main_front_page)
-      <tr>
-        <td>{{ __('text.crMFP') }}</td>
-        <td>{{ '' }}</td>
-      </tr>
-      @endif
+            @if( $remjob->plan->yellow_background)
+            <tr>
+                <td>{{ __('text.crYellowBG') }}</td>
+                <td>{{ '' }}</td>
+            </tr>
+            @endif
 
-      @if( $remjob->plan->category_front_page)
-      <tr>
-        <td>{{ __('text.crMCP') }}</td>
-        <td>{{ '' }}</td>
-      </tr>
-      @endif
+            @if( $remjob->plan->main_front_page)
+            <tr>
+                <td>{{ __('text.crMFP') }}</td>
+                <td>{{ '' }}</td>
+            </tr>
+            @endif
 
-      <tr>
-        <td><strong>{{__('Total')  }}</strong></td>
-        <td><strong>${{ $remjob->total }}</strong></td>
-      </tr>
+            @if( $remjob->plan->category_front_page)
+            <tr>
+                <td>{{ __('text.crMCP') }}</td>
+                <td>{{ '' }}</td>
+            </tr>
+            @endif
 
-    </tbody>
-  </table>
+            <tr>
+                <td><strong>{{__('Total')  }}</strong></td>
+                <td><strong>${{ $remjob->total }}</strong></td>
+            </tr>
+
+        </tbody>
+
+    </table>
 
    
   <div class="d-flex justify-content-center flex-column text-center">
