@@ -16,7 +16,7 @@
  <title>{{ __('Remote Jobs') }}</title>
 
  <!-- Favicon -->
- <link rel="icon" href="{{ asset('storage/images/remjob.png') }}" type="image/png">
+ <link rel="icon" href="{{ asset('images/remjob.png') }}" type="image/png">
 
  </head>
 

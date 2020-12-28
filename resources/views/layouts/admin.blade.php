@@ -13,6 +13,9 @@
 
  <title>{{ __('Remote Jobs') }}</title>
 
+ <!-- Favicon -->
+ <link rel="icon" href="{{ asset('images/remjob.png') }}" type="image/png">
+
  <!-- Scripts -->
  <script src="{{ asset('js/app.js') }}" defer></script>
 

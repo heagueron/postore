@@ -100,6 +100,15 @@ Route::get('/privacy', function () {
     return view('pages.privacy');
 })->name('privacy');
 
+// Support Routes
+Route::group( 
+    ['prefix' => 'support','middleware' => ['auth']], 
+    function () {
+
+        Route::get('/contact', 'SupportFormController@create')->name('support.create');
+        Route::post('/contact', 'SupportFormController@store')->name('support.store');
+        
+});
 
 // Fake route to test activate
 Route::get('/testa', function () {

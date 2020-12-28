@@ -20,7 +20,9 @@
                 <a href="{{ route('privacy') }}">{{ __('text.privacy') }}</a>
             </li> -->
         </ul>
-        <p style="font:16px arial;">{{ __('text.supportEmail') }}</p>
 
+        <a href="{{ route('support.create') }}" class="mr-2">
+            {{ __('Contact support') }}
+        </a>
 
 </div>
