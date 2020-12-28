@@ -63,7 +63,7 @@
         </div>
 
         {{-- TAGS --}}
-        <div class="col-sm-10 col-lg-6 mt-lg-4 pb-7">
+        <div class="col-sm-10 col-lg-6 mt-lg-4 pb-7 ml-sm-2">
             @foreach( $remjob->tags()->take(5)->get() as $tag )
             <a href="{{ $page=='checkout' ? '#' : route( 'remjobs.searchByTags', 'remote_'.$tag->name.'_jobs' )  }}"  class="job-badget">
                 <button 

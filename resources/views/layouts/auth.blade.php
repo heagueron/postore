@@ -25,7 +25,7 @@
     <div class="c-wrapper">
 
         <div class="c-body">
-            <main class="c-main">
+            <main class="c-main" style="padding-top: 0.2rem;">
                 <div class="container-fluid">
                     @yield('content')
                 </div>
