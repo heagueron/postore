@@ -66,9 +66,13 @@ return [
     'crDescriptionLabel'     => 'DESCRIPCION',
     'crDescriptionTip'  => 'Description del trabajo.',
 
-    'crApplyLabel'     => 'Como postularse',
+    'crApplyLabel'  => 'Como postularse',
     'crLinkLabel'   => 'Enlace',
     'crEmailLabel'  => 'Email',
     'crLinkTip'     => 'Enlace para postularse',
-    'crEmailTip'     => 'Email para postularse',
+    'crEmailTip'    => 'Email para postularse',
+
+    'supTitle'      => 'Formulario de Contacto Remjob',
+    'supMessage'    => 'Mensaje',
+    'supSend'       => 'Enviar',
 ];

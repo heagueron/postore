@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mail\SupportFormMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class SupportFormController extends Controller
 {
     public function create() 
     {
-        return view('support.create');
+        $user = Auth::user();
+
+        return view( 'support.create', compact('user') );
+
     }
 
     public function store() 

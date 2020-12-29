@@ -92,6 +92,10 @@ return [
     'terms'         => ' Terms ',
     'privacy'       => ' Privacy ',
 
+    'supTitle'      => 'Remjob Contact Form',
+    'supMessage'    => 'Message',
+    'supSend'       => 'Send',
+
 
 
 ];

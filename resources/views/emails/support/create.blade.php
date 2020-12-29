@@ -1,5 +1,5 @@
 @component('mail::message')
-# Suppor request
+# Support request
 
 
 <p><strong>Sender name:</strong> {{$data['name']}}</p>
