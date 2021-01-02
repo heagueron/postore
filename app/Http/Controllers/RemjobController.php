@@ -189,10 +189,10 @@ class RemjobController extends Controller
             
         } else {
             // Search for a normal TAG
-            $tag = Tag::where( 'name', 'like', $tagsText )->first();
-            if ($tag === []) {
+            if( !Tag::where( 'name', 'like', $tagsText )->exists() ) {
                 return view('404');
             }
+            $tag = Tag::where( 'name', 'like', $tagsText )->first();
 
             if( $tag->whereHas('remjobs', function (Builder $query) {
                 $query->where('active', 1);

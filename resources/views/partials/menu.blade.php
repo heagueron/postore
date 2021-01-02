@@ -25,6 +25,12 @@
             </li>
 
             <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('admin.companies.index') }}">
+                    {{ __('Companies') }}
+                </a>              
+            </li>
+
+            <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.edit-options') }}">
                     {{ __('Admin Options') }}
                 </a>              

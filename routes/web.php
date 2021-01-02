@@ -55,6 +55,7 @@ Route::group(
     ['prefix' => 'admin','middleware' => ['auth', 'admin']], 
     function () {
         Route::get('/remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
+        Route::get('/companies', 'Admin\CompanyController@index')->name('admin.companies.index');
 
         Route::get('/editOptions', 'Admin\AdminController@editAdminOptions')->name('admin.edit-options');
         Route::patch('/update-options', 'Admin\AdminController@updateAdminOptions')->name('admin.update-options');
