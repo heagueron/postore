@@ -22,7 +22,7 @@
         </ul>
 
         <a href="{{ route('support.create') }}" class="mr-2">
-            {{ __('Contact support') }}
+            {{ __('text.contactSupport') }}
         </a>
 
 </div>

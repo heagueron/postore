@@ -30,7 +30,7 @@ return [
     'crFormTitle'   => 'create your remote job post',
     'crBasePriceTip'    => 'Starts at $:basePrice (base remote job post)',
     'crPost'            => 'post',
-    'crDuration'    => 'Post for :duration days',
+    'crDuration'        => 'Post for :duration days',
     'crShareTwitter'    => 'Share on Twitter',
     'crShowLogo'        => 'Show Company Logo',
     'crYellowBG'        => 'Highlight the row',
@@ -88,13 +88,19 @@ return [
 
     // Footer
     'copyright' => ' Copyright © 2020 ',
-    'supportEmail'  => ' Support: heagueron@gmail.com ',
+    'contactSupport'  => ' Contact support ',
     'terms'         => ' Terms ',
     'privacy'       => ' Privacy ',
 
+    // Contact Form
     'supTitle'      => 'Remjob Contact Form',
     'supMessage'    => 'Message',
     'supSend'       => 'Send',
+
+    // Other
+    'noRemjobs'     => 'There are not remote jobs posted in that category and language.',
+    'startTyping'   => 'Start typing to find jobs ...',
+
 
 
 

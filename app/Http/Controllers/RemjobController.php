@@ -170,19 +170,28 @@ class RemjobController extends Controller
      */
     public function searchByTags( $tags )
     {
+        // App::setLocale('es');
+
         $tagsLength = ( Str::length( $tags ) ) - 12;
         $tagsText = Str::substr($tags, 7, $tagsLength);
 
         //Log::info('Searching jobs for tag: '.$tagsText);
 
-        if( in_array( $tagsText, ['dev', 'customer-support', 'marketing', 'design', 'non-tech'] ) ){
+        $catTags = [
+            'dev', 'customer-support', 'marketing', 'design', 'non-tech',
+            'desarrollo', 'servicios-al-cliente', 'mercadotecnia', 'diseño', 'otros'
+        ];
+
+        if( in_array( $tagsText, $catTags ) ){
             // Search for a CATEGORY TAG
             $category = Category::where( 'tag', 'like', $tagsText )->first();
 
             if( $category->whereHas('remjobs', function (Builder $query) {
-                $query->where('active', 1);
+                //$query->where('active', 1);
+                $query->where( [['language', '=', App::getLocale()],['active', '=', '1']] );
             }) ){
-                $remjobs = $category->remjobs()->where('active', 1)
+                //$remjobs = $category->remjobs()->where('active', 1)
+                $remjobs = $category->remjobs()->where( [['language', '=', App::getLocale()],['active', '=', '1']] )
                     ->orderBy('plan_id', 'desc')
                     ->orderBy('created_at', 'desc')->get();
             } else { $remjobs = []; }
@@ -195,9 +204,11 @@ class RemjobController extends Controller
             $tag = Tag::where( 'name', 'like', $tagsText )->first();
 
             if( $tag->whereHas('remjobs', function (Builder $query) {
-                $query->where('active', 1);
+                // $query->where('active', 1);
+                $query->where( [['language', '=', App::getLocale()],['active', '=', '1']] );
             }) ){
-                $remjobs = $tag->remjobs()->where('active', 1)
+                //$remjobs = $tag->remjobs()->where('active', 1)
+                $remjobs = $tag->remjobs()->where( [['language', '=', App::getLocale()],['active', '=', '1']] )
                     ->orderBy('plan_id', 'desc')
                     ->orderBy('created_at', 'desc')->get();
             } else { $remjobs = []; }

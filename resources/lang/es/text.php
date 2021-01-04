@@ -15,8 +15,9 @@ return [
     'siteName' => 'Tele Trabajos',
     'postAJob' => 'Publicar un Trabajo',
     'searchJob' => 'Buscar',
+    'heroTitleTip' => 'Publique o encuentre excelentes trabajos remotos en todo el mundo',
 
-    // Categorias
+    // Categories
     'catRemoteJobs' => 'Trabajos Remotos',
     'catSoftwareDevelopment' => 'Desarrollo de Software',
     'catClientService' => 'Servicios al Cliente',
@@ -29,6 +30,12 @@ return [
     'crFormTitle'   => 'crear su publicacion de trabajo remoto',
     'crBasePriceTip'    => 'Desde $:basePrice (publicacion basica)',
     'crPost'            => 'publicacion',
+    'crDuration'        => 'Publicar por :duration dias',
+    'crShareTwitter'    => 'Compartir en Twitter',
+    'crShowLogo'        => 'Mostrar Logo',
+    'crYellowBG'        => 'Destacar',
+    'crMFP'             => 'Prioridad en pagina principal',
+    'crMCP'             => 'Prioridad en pagina de categoria',
 
     'crGroupTitleJob'   => 'Trabajo',
 
@@ -72,7 +79,25 @@ return [
     'crLinkTip'     => 'Enlace para postularse',
     'crEmailTip'    => 'Email para postularse',
 
-    'supTitle'      => 'Formulario de Contacto Remjob',
+    'crPlanSelectorTitle'   => 'SELECCIONE SU PLAN',
+
+    'crPreviewTitle'    => ' Vista Preliminar: ',
+    'crCompany'         => 'Empresa',
+
+    'crPostTheJob'      => 'Publicar!',
+
+    // Footer
+    'copyright' => ' Copyright © 2020 ',
+    'contactSupport'  => ' Contactar soporte ',
+    'terms'         => ' Terminos ',
+    'privacy'       => ' Privacidad ',
+
+    // Contact Form
+    'supTitle'      => 'Contactar Soporte Remjob',
     'supMessage'    => 'Mensaje',
     'supSend'       => 'Enviar',
+
+    // Other
+    'noRemjobs'     => 'No encontramos trabajos remotos en esa categoria e idioma.',
+    'startTyping'   => 'Escriba para ver trabajos ...',
 ];

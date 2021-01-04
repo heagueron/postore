@@ -85,7 +85,7 @@ class CategorySeeder extends Seeder
             array (
                 'id' => 9,
                 'name' => 'Servicios al Cliente',
-                'tag' => 'customer_support',
+                'tag' => 'servicios-al-cliente',
                 'created_at' => '2020-10-26 20:23:54',
                 'updated_at' => '2020-10-26 20:23:54',
             ),

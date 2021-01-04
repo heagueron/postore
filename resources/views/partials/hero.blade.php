@@ -13,7 +13,8 @@
     <div class="search-container mt-3">
 
             <div class="autocomplete" style="width:300px;">
-                <input id="myInput" class="rp-search-input" type="text" name="search-term" placeholder="Start typing to find jobs ...">
+                <input id="myInput" class="rp-search-input" type="text" name="search-term" 
+                    placeholder="{{ __('text.startTyping') }}">
             </div>
 
             <a  href="{{  route( 'remjobs.searchByTags', 'remote-dev-jobs' )  }}"  

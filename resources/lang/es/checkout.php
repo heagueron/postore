@@ -13,4 +13,8 @@ return [
     'buy'     => 'Buy this',
     'freeBuy' => 'Publish',
 
+    'rowTitle' => 'Su publicacion en la pagina principal: ',
+    'detailTitle' => 'Su publicacion en la pagina detalle: ',
+
+
 ];

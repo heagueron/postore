@@ -19,4 +19,22 @@ return [
     'register'  => 'Registrarse',
     'logout'    => 'Salir',
 
+    'emailLabel'    => 'Direccion E-Mail',
+    'emailPlaceholder'  => 'name@example.com',
+    'passwordLabel'    => 'Password',
+    'passwordPlaceholder'   => 'password',
+    'confirmPasswordLabel'  => 'Confirmar Password',
+    'confirmPasswordPlaceholder'    => 'repita password',
+    'forgotPassword'    => 'Olvido su Password?',
+    'notRegistered'     => 'No esta registrado?',
+    'alreadyRegistered' => 'Ya esta registrado?',
+    'createAccount'     => 'Crear una cuenta',
+    'nameLabel' => 'Nombre',
+    'namePlaceholder'   => 'su nombre',
+
+    'sendResetLink' => 'Enviar Enlace para Resetear Password',
+
+    'resetPasswordTitle' => 'Resetear Password',
+
+
 ];
