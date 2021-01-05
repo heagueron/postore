@@ -40,10 +40,10 @@ return [
     'crGroupTitleJob'   => 'JOB',
 
     'crCompanyNameLabel'     => 'Company name',
-    'crCompanyNameTip'  => 'Your company\'s brand or trade name.',
+    'crCompanyNameTip'  => 'Company brand or trade name.',
     
     'crCompanyEmailLabel'     => 'Company email',
-    'crCompanyEmailTip'  => 'Your company\'s email',
+    'crCompanyEmailTip'  => 'Company email',
 
     'crPositionLabel'     => 'Position',
     'crPositionTip'  => 'Please enter a single job position title like "Javascript Developer" or "Virtual Assistant".',

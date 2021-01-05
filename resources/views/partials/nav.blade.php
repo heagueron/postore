@@ -1,5 +1,6 @@
 
 <nav class="navbar navbar-expand-md navbar-light bg-transparent" id="app-nav">
+<!-- <nav class="navbar navbar-expand-md navbar-light" style="background-image:url( {{ asset('images/green-bg.png') }} )" id="app-nav"> -->
     <div class="container">
         <a class="navbar-brand" href="{{ route('landing') }}" aria-current="page">
             <img src="{{ asset('images/remjob.png') }}" alt="Remote Positions" class="w-15" >

@@ -29,7 +29,12 @@ class SupportFormController extends Controller
 
         Mail::to('heagueron@gmail.com')->send( new SupportFormMail($data) );
 
-        return redirect()->route( 'landing' );
+        // return redirect()->route( 'landing' );
+
+        $title = 'Thank You!';
+        $message = 'Thanks for your contact. We will respond as soon as we can.';
+         
+        return view( 'information', compact( 'title', 'message' ) );
 
     }
 

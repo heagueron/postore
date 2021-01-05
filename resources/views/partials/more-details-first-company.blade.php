@@ -10,7 +10,7 @@
     </div>
 
     <span class="rp-group__info">
-        Your company logo.
+        Company logo.
     </span>
     @error('company_logo') 
         <p class="rp-group__error">{{ $message }}</p> 
@@ -27,7 +27,7 @@
             value="{{ !is_null( old('company_twitter'))? old('company_twitter') : '' }}"               
     >
     <span class="rp-group__info">
-        Your company's twitter profile (no '@' please). We will tag (mention) this profile when we share the job in twitter. 
+        Company twitter profile (no '@' please). We will tag (mention) this profile when we share the job in twitter. 
     </span>
     @error('company_twitter') 
         <p class="rp-group__error">{{ $message }}</p> 

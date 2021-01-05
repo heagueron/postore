@@ -420,7 +420,7 @@ class RemjobController extends Controller
         // Delete from pivot table Sposts-Twitter profiles
         DB::table('remjob_tag')->where('remjob_id',$remjob->id)->delete();
 
-        // Delete the scheduled post
+        // Delete the remote job
         $remjob->delete();
 
         return back()->with('message', 'Removed Remote Job Post from ' . $remjob->company_name );

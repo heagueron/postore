@@ -64,6 +64,14 @@ Route::group(
         Route::delete('/remjobs/{remjob}', 'Admin\RemjobController@destroy')->name('admin.remjobs.destroy');
         Route::patch('/remjobs/{remjob}', 'Admin\RemjobController@inactivate')->name('admin.remjobs.inactivate');
         Route::get('/remjobs/{remjob}/tweet', 'Admin\RemjobController@tweet')->name('admin.remjobs.tweet');
+
+        Route::get('/companies/create', 'Admin\CompanyController@create')->name('admin.companies.create');
+        Route::post('/companies', 'Admin\CompanyController@store')->name('admin.companies.store');
+        Route::get('/companies/{company}/edit', 'Admin\CompanyController@edit')->name('admin.companies.edit');
+        Route::patch('/companies/{company}', 'Admin\CompanyController@update')->name('admin.companies.update');
+
+        Route::delete('/companies/{company}', 'Admin\CompanyController@destroy')->name('admin.companies.destroy');
+
         
         // External APIs
         Route::get('/api_jobs.rok', 'Admin\RemjobController@rok')->name('admin.api_jobs.rok');

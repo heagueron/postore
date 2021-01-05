@@ -53273,6 +53273,65 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/admin.js":
+/*!*******************************!*\
+  !*** ./resources/js/admin.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// const { isUndefined } = require("lodash");
+var companyControl = function companyControl() {
+  /* GET THE OPTIONS ARRAY FROM THE SERVER */
+  // const PATH = document.querySelector('#appURL').value == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
+  // console.log(`App URL From DOM: ${document.querySelector('#appURL').value}`);
+  // console.log(`PATH: ${PATH}`)
+
+  /* company_name */
+  var companyNameElement = document.querySelector('input[name="company_name"]');
+  /* logo */
+
+  if (typeof Storage !== "undefined") {
+    sessionStorage.logo = null;
+    var logoInput = document.querySelector('input[name="company_logo"]'); // logo event
+
+    logoInput.addEventListener('change', function () {
+      readURL(this);
+    });
+
+    var readURL = function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          // console.log('logo file already read.');
+          // console.log(`url(${e.target.result})`);
+          // show main logo
+          document.querySelector("#company-logo-container").style.backgroundImage = "url(".concat(e.target.result, ")"); // store logo in session
+
+          sessionStorage.logo = e.target.result;
+          console.log(sessionStorage.logo.length);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    };
+  } else {
+    alert("Sorry! No Web Storage support. Please use one of the following browsers and versions or a newer one:\n                Chrome 4.0 | Explorer 8.0 | FireFox 3.5 | Safari 4.0 | Opera 11.5");
+  }
+}; // Delay to allow for elements to appear before assigning event listeners.
+
+
+setTimeout(function () {
+  // Check if active url is the post a job page
+  if (window.location.href.indexOf("admin") > -1) {
+    console.log("active url is: admin dashboard page");
+    companyControl();
+  }
+}, 500);
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -53300,6 +53359,8 @@ var PATH = "http://127.0.0.1:8000"; //require('./spost');
 __webpack_require__(/*! ./autocomplete */ "./resources/js/autocomplete.js");
 
 __webpack_require__(/*! ./job-post */ "./resources/js/job-post.js");
+
+__webpack_require__(/*! ./admin */ "./resources/js/admin.js");
 
 __webpack_require__(/*! ./summernote */ "./resources/js/summernote.js");
 

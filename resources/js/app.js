@@ -14,6 +14,7 @@ var PATH = "http://127.0.0.1:8000";
 //require('./spost');
 require('./autocomplete');
 require('./job-post');
+require('./admin');
 require('./summernote');
 
 window.Vue = require('vue');

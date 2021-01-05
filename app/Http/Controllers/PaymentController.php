@@ -64,14 +64,16 @@ class PaymentController extends Controller
                 return view( 'payments.publish', compact( 'remjob', 'gumroadLicense' ) );
 
             } else { 
-                $message = 'Sorry. We could not find your payment license for this job post. Contact support: heagueron@gmail.com';
+                $title = 'Information';
+                $message = 'Ooops!. We could not find your payment license for this job post.';
             }
 
         } else {
-            $message = 'Sorry. We could not find your remote job. Contact support: heagueron@gmail.com';
+            $title = 'Information';
+            $message = 'Ooops!. We could not find your remote job.';
         }
          
-        return view( 'information', compact( 'message' ) );
+        return view( 'information', compact( 'title', 'message' ) );
 
     }
 

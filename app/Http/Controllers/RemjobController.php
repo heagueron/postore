@@ -300,7 +300,7 @@ class RemjobController extends Controller
     /**
      * Store the incoming $remjob company_logo.
      *
-     * @param Remjob $remjob
+     * @param Company $company
      * @return void
      */
     private function storeMedia( $company )
