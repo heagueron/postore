@@ -53324,7 +53324,7 @@ var companyControl = function companyControl() {
 
 setTimeout(function () {
   // Check if active url is the post a job page
-  if (window.location.href.indexOf("admin") > -1) {
+  if (window.location.href.indexOf("admin/companies") > -1) {
     console.log("active url is: admin dashboard page");
     companyControl();
   }
@@ -53404,13 +53404,7 @@ var app = new Vue({
 /* Activate bootstrap tooltips */
 
 $('[data-toggle="tooltip"]').tooltip();
-/* Make sure nav background transparency is properly set */
-
-navBackgroundControl();
-
-window.onscroll = function () {
-  navBackgroundControl();
-};
+/* nav background transparency */
 
 function navBackgroundControl() {
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
@@ -53420,6 +53414,15 @@ function navBackgroundControl() {
     document.getElementById("app-nav").classList.add('bg-transparent');
     document.getElementById("app-nav").classList.remove('one-edge-shadow');
   }
+}
+
+if (window.location.href.indexOf("admin") <= -1) {
+  /* Not in admin routes */
+  navBackgroundControl();
+
+  window.onscroll = function () {
+    navBackgroundControl();
+  };
 }
 
 /***/ }),

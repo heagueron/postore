@@ -56,7 +56,7 @@ const companyControl = () => {
 setTimeout(() => {
 
     // Check if active url is the post a job page
-    if ( window.location.href.indexOf("admin") > -1) {
+    if ( window.location.href.indexOf("admin/companies") > -1) {
         console.log("active url is: admin dashboard page");
         companyControl();
     } 

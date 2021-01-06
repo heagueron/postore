@@ -66,11 +66,7 @@ const app = new Vue({
 /* Activate bootstrap tooltips */
 $('[data-toggle="tooltip"]').tooltip()
 
-/* Make sure nav background transparency is properly set */
-navBackgroundControl();
-
-window.onscroll = function() {navBackgroundControl()};
-
+/* nav background transparency */
 function navBackgroundControl() {
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     document.getElementById("app-nav").classList.remove('bg-transparent');
@@ -80,6 +76,16 @@ function navBackgroundControl() {
     document.getElementById("app-nav").classList.remove('one-edge-shadow');
   }
 }
+
+if ( window.location.href.indexOf("admin") <= -1) {
+  /* Not in admin routes */
+
+  navBackgroundControl();
+  window.onscroll = function() {navBackgroundControl()};
+
+}
+
+
 
 
 
