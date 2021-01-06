@@ -36,10 +36,29 @@
                 </thead>
                 <tbody>
                     @forelse($companies as $company)
-                        <tr></tr>
+
                         <tr>
+                            <td class="d-flex justify-content-left">
+                                @if( $company->logo != null )
+                                    <img src="{{ asset('storage/' . $company->logo ) }}" alt="Logo" width="60" height=auto>
+                                @else
+                                    <img src="{{ asset('storage/logos/nologo.png') }}" alt="NL" class="jobrow-company-logo">
+                                @endif
+                            </td>
+
                             <td>{{ $company->name }}</td>
+
+                            <td>
+                                {{ $company->user->name }}<br/>
+                                <small>( {{ $company->user->id }} )</small>
+                            </td>
+
+                            <td>{{ $company->remjobs()->count() }}</td>
+
+                            <td>{{ $company->remjobs()->where('active', 1)->count() }}</td>
+                            
                         </tr>
+
                     @empty
                         {{__('NO COMPANIES FOUND')}}
                     @endforelse
