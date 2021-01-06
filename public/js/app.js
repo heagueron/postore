@@ -53319,6 +53319,26 @@ var companyControl = function companyControl() {
   } else {
     alert("Sorry! No Web Storage support. Please use one of the following browsers and versions or a newer one:\n                Chrome 4.0 | Explorer 8.0 | FireFox 3.5 | Safari 4.0 | Opera 11.5");
   }
+  /* FOR COMPANY EDITION */
+  // $('#editCompanyModal').on('show.bs.modal', function (event) {
+  //     // Compose the update route
+  //     const companyId = $(event.relatedTarget).data('company-id');
+  //     console.log(companyId);
+  //     $("#update-job-form").attr("action", `{{route('admin.companies.update',${companyId})}}`);
+  //     // Company Name
+  //     const companyName = $(event.relatedTarget).data('company-name');
+  //     console.log(companyName);
+  //     $(this).find("#companyNameElement").val(companyName);
+  //     // Company Email
+  //     const companyEmail = $(event.relatedTarget).data('company-email');
+  //     console.log(companyEmail);
+  //     $(this).find("#companyEmailElement").val(companyEmail);
+  //     // Company Twitter
+  //     const companyTwitter = $(event.relatedTarget).data('company-twitter');
+  //     console.log(companTwitterl);
+  //     $(this).find("#companyTwitterElement").val(companyTwitter);
+  // });
+
 }; // Delay to allow for elements to appear before assigning event listeners.
 
 

@@ -13,12 +13,9 @@ const companyControl = () => {
     /* logo */
     if (typeof(Storage) !== "undefined") {
 
-        
-    
         sessionStorage.logo = null;
         
         const logoInput = document.querySelector('input[name="company_logo"]');
-
 
         // logo event
         logoInput.addEventListener('change', function() {
@@ -50,7 +47,35 @@ const companyControl = () => {
     }
 
 
+    /* FOR COMPANY EDITION */
+    // $('#editCompanyModal').on('show.bs.modal', function (event) {
+    //     // Compose the update route
+    //     const companyId = $(event.relatedTarget).data('company-id');
+    //     console.log(companyId);
+    //     $("#update-job-form").attr("action", `{{route('admin.companies.update',${companyId})}}`);
+        
+    //     // Company Name
+    //     const companyName = $(event.relatedTarget).data('company-name');
+    //     console.log(companyName);
+    //     $(this).find("#companyNameElement").val(companyName);
+
+    //     // Company Email
+    //     const companyEmail = $(event.relatedTarget).data('company-email');
+    //     console.log(companyEmail);
+    //     $(this).find("#companyEmailElement").val(companyEmail);
+
+    //     // Company Twitter
+    //     const companyTwitter = $(event.relatedTarget).data('company-twitter');
+    //     console.log(companTwitterl);
+    //     $(this).find("#companyTwitterElement").val(companyTwitter);
+
+    // });
+
+
 }
+
+
+
   
 // Delay to allow for elements to appear before assigning event listeners.
 setTimeout(() => {
@@ -60,6 +85,5 @@ setTimeout(() => {
         console.log("active url is: admin dashboard page");
         companyControl();
     } 
-
 
 }, 500);

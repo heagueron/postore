@@ -87,7 +87,9 @@ class CompanyController extends Controller
      */
     public function edit( Company $company )
     {
-        dd('will edit company: ', $company->name);
+        //dd('will edit company: ', $company->name);
+        return view('admin.companies.edit', compact('company') );
+
     }
 
     /**
@@ -99,7 +101,26 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+        $this->validateCompany();
+
+        $company = Company::findOrFail( $id ); 
+
+        $company->update([
+            'name'      => request()->company_name,
+            'slug'      => Str::slug( request()->company_name, '-' ),
+            'email'     => request()->company_email,
+            //'user_id'   => request()->user_id,
+        ]);
+        
+        if ( request()->has('company_logo') ){
+            $this->storeMedia($company);
+        }
+
+        //dd( $company );
+
+        return redirect()->route('admin.companies.index');
+
     }
 
     /**
@@ -139,15 +160,9 @@ class CompanyController extends Controller
 
     private function validateCompany() 
     {
-        // return request()->validate([
-        //     'company_name'          => 'required|min:3',
-        //     'company_email'         => 'required|email',
-        //     'company_logo'  => '',
-        //     'company_twitter'   => '',
-        // ]);
 
         $validatedData = request()->validate([
-            'user_id'               => 'required',
+            //'user_id'               => 'required',
             'company_name'          => 'required|min:3',
             'company_email'         => 'required|email',
             'company_logo'  => '',
