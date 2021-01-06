@@ -30,33 +30,74 @@
                         <th>User</th>
                         <th>RJs</th>
                         <th>A RJs</th>
-                        <th>E</th>
-                        <th>D</th>
+                        <th colspan="2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($companies as $company)
 
                         <tr>
-                            <td class="d-flex justify-content-left">
-                                @if( $company->logo != null )
-                                    <img src="{{ asset('storage/' . $company->logo ) }}" alt="Logo" width="60" height=auto>
+                            <td>
+                                @if( $company->user != null )
+
+                                    {{-- remjob.io client company --}}
+                                    @if( $company->logo != null )
+                                        <img src="{{ asset('storage/' . $company->logo ) }}" alt="Logo" width="60" height=auto>
+                                    @else
+                                        <img src="{{ asset('storage/logos/nologo.png') }}" alt="NL" class="jobrow-company-logo">
+                                    @endif
                                 @else
-                                    <img src="{{ asset('storage/logos/nologo.png') }}" alt="NL" class="jobrow-company-logo">
+
+                                    {{-- external apis posts --}}
+                                    @if( $company->logo != null )
+                                        <img src="{{ $company->logo }}" alt="Logo" width="60" height=auto>
+                                    @else
+                                        <img src="{{ asset('storage/logos/nologo.png') }}" alt="NL" class="jobrow-company-logo">
+                                     @endif
+
                                 @endif
+
                             </td>
 
                             <td>{{ $company->name }}</td>
 
-                            <td>
-                                {{ $company->user->name }}<br/>
-                                <small>( {{ $company->user->id }} )</small>
-                            </td>
+                            @if( $company->user != null )
+                                <td>
+                                    {{ $company->user->name }}<br/>
+                                    <small>( {{ $company->user->id }} )</small>
+                                </td>
+                            @else 
+                                <td>
+                                    From APIs
+                                </td>
+                            @endif
 
                             <td>{{ $company->remjobs()->count() }}</td>
 
                             <td>{{ $company->remjobs()->where('active', 1)->count() }}</td>
-                            
+
+
+                            {{-- ACTIONS --}}
+                        
+                            {{-- Edit --}}
+                            <td>
+                                <form method="GET" action="{{ route('admin.companies.edit', $company->id) }}">
+                                    <button type="submit" style="border:none; background-color:transparent;" title="Edit">
+                                        <i class="fa fa-edit" style="font-size:0.75rem;"></i>
+                                    </button>
+                                </form>
+                            </td>
+
+                            {{-- Delete --}}
+                            <td>
+                                <form method="POST" action="{{ route('admin.companies.destroy', $company->id) }}">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" style="border:none; background-color:transparent;" title="Destroy">
+                                        <i class="fa fa-trash" style="font-size:0.75rem;color:red"></i>
+                                    </button>
+                                </form>
+                            </td>
+
                         </tr>
 
                     @empty
