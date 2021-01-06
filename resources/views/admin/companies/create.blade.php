@@ -16,7 +16,7 @@
 
             <!-- user id -->
             <div>
-                <span class="rp-group__head">{{ __('USER ID') }}*</span>
+                <span class="rp-group__head">USER ID*</span>
                 <input  type="text" name="user_id" title="user id of company owner"
                         value="{{ !is_null( old('user_id'))? old('user_id') : '' }}"               
                 >
@@ -30,7 +30,7 @@
             @include('partials.more-details-first-company')
 
             <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-warning">{{ __('Save') }}</button>
+                <button type="submit" class="btn btn-warning">Save</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </form>

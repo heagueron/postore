@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
-@section('title', 'Remote Jobs')
+@section('title', 'Admin|Companies')
 
 @section('content')
-<!-- <div class="container"> -->
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
 
@@ -22,8 +22,8 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>{{__('Logo')}}</th>
-                    <th>{{__('Company')}}</th>
+                    <th>Logo</th>
+                    <th>Company</th>
                     <th>User</th>
                     <th>RJs</th>
                     <th>A-RJs</th>
@@ -85,7 +85,7 @@
         </div>
     </div>
 
-<!-- </div> -->
+</div>
 
 
 @endsection
