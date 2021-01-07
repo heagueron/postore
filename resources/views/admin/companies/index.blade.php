@@ -11,7 +11,7 @@
         {{-- MODALS --}}
             @include('admin.companies.create')
 
-            <div class="d-flex justify-content-between mb-2">
+            <div class="d-flex justify-content-between mb-2 p-2"  style="background-color:#ffffff;">
 
                 <h3>COMPANIES</h3>
 
@@ -22,7 +22,7 @@
 
             </div>
 
-            <table class="table">
+            <table class="table" style="background-color:#ffffff;">
                 <thead>
                     <tr>
                         <th>Logo</th>

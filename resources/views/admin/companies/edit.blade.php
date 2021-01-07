@@ -9,11 +9,14 @@
             @method('PATCH')
 
             <!-- user id -->
-            <input type="text" name="user_id" value="{{ !is_null( $company->user) ? $company->user->id : '' }}">
-            @error('user_id') 
-                <p class="rp-group__error">{{ $message }}</p> 
-            @enderror
-
+            <div>
+                <span class="rp-group__head">{{ __('User id') }}*</span>
+                <input type="text" name="user_id" value="{{ !is_null( $company->user) ? $company->user->id : '' }}">
+                @error('user_id') 
+                    <p class="rp-group__error">{{ $message }}</p> 
+                @enderror
+            </div>
+            
             <!-- company name -->
             <div>
                 <span class="rp-group__head">{{ __('text.crCompanyNameLabel') }}*</span>
@@ -21,15 +24,16 @@
                         type="text" name="company_name" data-name="your company name"
                         value="{{ !is_null( old('company_name'))? old('company_name') : $company->name }}"               
                 >
-                {{-- Input to hold company id --}}
-                <input type="text" id="companyIdElement" name="company_id" value="{{ $company->id }}">
-
                 <span class="rp-group__info">
                     {{__('text.crCompanyNameTip')}}
                 </span>
                 @error('company_name') 
                     <p class="rp-group__error">{{ $message }}</p> 
                 @enderror
+
+                {{-- Input to hold company id --}}
+                <input type="text" id="companyIdElement" name="company_id" value="{{ $company->id }}">
+
             </div>
 
             <!-- company_email -->

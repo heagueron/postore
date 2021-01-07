@@ -70,8 +70,9 @@ Route::group(
         Route::post('/companies', 'Admin\CompanyController@store')->name('admin.companies.store');
         Route::get('/companies/{company}/edit', 'Admin\CompanyController@edit')->name('admin.companies.edit');
         Route::patch('/companies/{company}', 'Admin\CompanyController@update')->name('admin.companies.update');
-
         Route::delete('/companies/{company}', 'Admin\CompanyController@destroy')->name('admin.companies.destroy');
+
+        Route::get('/users', 'Admin\UserController@index')->name('admin.users.index');
 
         
         // External APIs

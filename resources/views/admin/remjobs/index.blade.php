@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
 
-            <div class="d-flex mb-4">
+            <div class="d-flex mb-4 text-center p-2" style="background-color:#ffffff;">
                 <a  rel="nofollow"
                     href="{{ route('admin.api_jobs.rok') }}" 
                     alt="Get api jobs" class="post-button mr-2">
@@ -30,7 +30,7 @@
                 </a>
             </div>
                 
-            <table class="table">
+            <table class="table" style="background-color:#ffffff;">
                 <thead>
                 <tr>
                     <th>{{__('Remote Jobs')}}</th>
