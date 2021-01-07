@@ -11,34 +11,34 @@
                 <a  rel="nofollow"
                     href="{{ route('admin.api_jobs.rok') }}" 
                     alt="Get api jobs" class="post-button mr-2">
-                    {{ __('Get Jobs from R|OK') }}
+                    Get Jobs from R|OK
                 </a>
                 <a  rel="nofollow"
                     href="{{ route('admin.api_jobs.remotive') }}" 
                     alt="Get api jobs" class="post-button mr-2">
-                    {{ __('Get Jobs from remotive') }}
+                    Get Jobs from remotive
                 </a>
                 <a  rel="nofollow"
                     href="{{ route('admin.api_jobs.working-nomads') }}" 
                     alt="Get api jobs" class="post-button mr-2">
-                    {{ __('Get Jobs from working nomads') }}
+                    Get Jobs from working nomads
                 </a>
                 <a  rel="nofollow"
                     href="{{ route('admin.api_jobs.github') }}" 
                     alt="Get api jobs" class="post-button mr-2">
-                    {{ __('Get Jobs from github') }}
+                    Get Jobs from github
                 </a>
             </div>
                 
             <table class="table" style="background-color:#ffffff;">
                 <thead>
                 <tr>
-                    <th>{{__('Remote Jobs')}}</th>
+                    <th>Remote Jobs</th>
                     <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th>{{__('Actions')}}</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -112,7 +112,7 @@
                         </td>
                     </tr> 
                 @empty
-                    {{__('NO REMOTE JOBS FOUND')}}
+                    NO REMOTE JOBS FOUND
                 @endforelse
 
                 </tbody>

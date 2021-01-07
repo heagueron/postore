@@ -81,23 +81,12 @@
                         
                             {{-- Edit --}}
                             <td>
+                            
                                 <form method="GET" action="{{ route('admin.companies.edit', $company->id) }}">
                                     <button type="submit" style="border:none; background-color:transparent;" title="Edit">
                                         <i class="fa fa-edit" style="font-size:0.75rem;"></i>
                                     </button>
                                 </form>
-
-                                <!-- {{-- Open Edit Company Modal --}}
-                                <button type="button" style="border:none; background-color:transparent;" title="Edit" 
-                                    data-toggle="modal" data-target="#editCompanyModal"
-                                    data-company-id ="{{ $company->id }}"
-                                    data-user-id="{{ $company->user != null? $company->user->id : null }}"
-                                    data-company-name="{{ $company->name }}"
-                                    data-company-email="{{ $company->email }}"
-                                    data-company-logo="{{ $company->logo }}"
-                                    data-company-twitter="{{ $company->twitter }}">
-                                    <i class="fa fa-edit" style="font-size:0.75rem;"></i>
-                                </button> -->
 
                             </td>
 

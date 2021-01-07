@@ -45,7 +45,7 @@
                             @if( $user->companies()->count() > 0 )
                                 <td> {{$user->companies()->first()->name }} </td>
                             @else 
-                                <td> {{ None }}</td>
+                                <td> None </td>
                             @endif
 
                             {{-- ACTIONS --}}
@@ -72,7 +72,7 @@
                         </tr>
 
                     @empty
-                        {{__('NO USERS FOUND')}}
+                        NO USERS FOUND
                     @endforelse
                 </tbody>
             </table>

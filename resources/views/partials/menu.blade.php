@@ -2,7 +2,7 @@
 
     <div class="c-sidebar-brand d-md-down-none">
         <a href="{{ route('landing') }}">
-            {{ __('Remote Jobs') }}
+            Remote Jobs
         </a>
     </div>
 
@@ -20,25 +20,25 @@
 
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.remjobs.index') }}">
-                    {{ __('Remote Jobs') }}
+                    Remote Jobs
                 </a>              
             </li>
 
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.companies.index') }}">
-                    {{ __('Companies') }}
+                    Companies
                 </a>              
             </li>
 
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.users.index') }}">
-                    {{ __('Users') }}
+                    Users
                 </a>              
             </li>
 
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.edit-options') }}">
-                    {{ __('Admin Options') }}
+                    Admin Options
                 </a>              
             </li>
 
@@ -47,7 +47,7 @@
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
+                Logout
             </a>              
         </li>
 
