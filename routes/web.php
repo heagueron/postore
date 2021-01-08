@@ -54,17 +54,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group( 
     ['prefix' => 'admin','middleware' => ['auth', 'admin']], 
     function () {
-        Route::get('/remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
         
-
+        // App Options
         Route::get('/editOptions', 'Admin\AdminController@editAdminOptions')->name('admin.edit-options');
         Route::patch('/update-options', 'Admin\AdminController@updateAdminOptions')->name('admin.update-options');
 
+        // Remjobs
+        Route::get('/remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
         Route::get('/remjobs/{remjob}/edit', 'Admin\RemjobController@edit')->name('admin.remjobs.edit');
+        Route::patch('/remjob/{remjob}', 'Admin\RemjobController@update')->name('admin.remjobs.update');
+
         Route::delete('/remjobs/{remjob}', 'Admin\RemjobController@destroy')->name('admin.remjobs.destroy');
         Route::patch('/remjobs/{remjob}', 'Admin\RemjobController@inactivate')->name('admin.remjobs.inactivate');
         Route::get('/remjobs/{remjob}/tweet', 'Admin\RemjobController@tweet')->name('admin.remjobs.tweet');
 
+        // Companies
         Route::get('/companies', 'Admin\CompanyController@index')->name('admin.companies.index');
         Route::get('/companies/create', 'Admin\CompanyController@create')->name('admin.companies.create');
         Route::post('/companies', 'Admin\CompanyController@store')->name('admin.companies.store');
@@ -72,9 +76,9 @@ Route::group(
         Route::patch('/companies/{company}', 'Admin\CompanyController@update')->name('admin.companies.update');
         Route::delete('/companies/{company}', 'Admin\CompanyController@destroy')->name('admin.companies.destroy');
 
+        // Users
         Route::get('/users', 'Admin\UserController@index')->name('admin.users.index');
 
-        
         // External APIs
         Route::get('/api_jobs.rok', 'Admin\RemjobController@rok')->name('admin.api_jobs.rok');
         Route::get('/api_jobs.remotive', 'Admin\RemjobController@remotive')->name('admin.api_jobs.remotive');

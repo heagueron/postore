@@ -74,6 +74,48 @@ const companyControl = () => {
 
 }
 
+const remjobControl = () => {
+    /* SUMMERNOTE */
+    $(function () {
+
+        $('#description').summernote({
+            placeholder: ``,
+            tabsize: 2,
+            height: 300,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']],
+                ['view', ['help']]
+              ]
+          });
+    
+    })
+
+    // apply_mode change event
+    const applyRadios = document.querySelectorAll('input[name="apply_mode"]');
+
+    for (let i = 0; i < applyRadios.length; i++) 
+    {
+        applyRadios[i].addEventListener('change', function() {
+            console.log(`change!: ${this.value}`);
+            if ( this.value == 'link') {
+                document.getElementById('apply-email-input').style.display="none";
+                document.getElementById('apply-link-input').style.display="block";
+                document.getElementById('apply-mode-info').innerHTML = 'The job apply link.'
+            } else {
+                document.getElementById('apply-link-input').style.display="none";
+                document.getElementById('apply-email-input').style.display="block";
+                document.getElementById('apply-mode-info').innerHTML = 'The job apply email.'
+            }
+        });
+    }
+
+}
+
 
 
   
@@ -82,8 +124,16 @@ setTimeout(() => {
 
     // Check if active url is the post a job page
     if ( window.location.href.indexOf("admin/companies") > -1) {
-        console.log("active url is: admin dashboard page");
+        console.log("active url is: admin companies page");
         companyControl();
-    } 
+    }
+    
+    if ( window.location.href.indexOf("admin/remjobs") > -1) {
+        console.log("active url is: admin remjobs page");
+        if( document.getElementById("admin-update-remjob-form") ){
+           document.querySelector('#app-footer').style.display = "none"; 
+        }
+        remjobControl();
+    }
 
 }, 500);

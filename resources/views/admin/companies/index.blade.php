@@ -25,6 +25,7 @@
             <table class="table" style="background-color:#ffffff;">
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Logo</th>
                         <th>Company</th>
                         <th>User</th>
@@ -37,6 +38,7 @@
                     @forelse($companies as $company)
 
                         <tr>
+                            <td>{{$company->id}}</td>
                             <td>
                                 @if( $company->user != null )
 

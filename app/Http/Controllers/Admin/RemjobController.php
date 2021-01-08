@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Tag;
 use App\Remjob;
 use App\Company;
+use App\Category;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
+use App\Traits\PublishRemjob;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Traits\PublishRemjob;
 
+use Illuminate\Support\Facades\Http;
 use App\ApiConnectors\TwitterGateway;
 
 
@@ -389,19 +391,82 @@ class RemjobController extends Controller
      */
     public function edit(Remjob $remjob)
     {
-        dd('edit remjob position: ', $remjob->position);
+        // dd('edit remjob position: ', $remjob->position);
+        if ( $remjob->language == 'es' ) {
+            $categories = \App\Category::whereIn( 'id', [7, 8, 9, 10, 11, 12] )->get();
+        } else {
+            $categories = \App\Category::whereIn( 'id', [1, 2, 3, 4, 5, 6] )->get();
+        }
+
+        $tagsText = '';
+        foreach( $remjob->tags()->take(5)->get() as $tag ){
+            $tagsText .= $tag->name.', ';
+        }
+        $tagsText = rtrim($tagsText, ", ");
+
+        // Retrieve the currently authenticated user...
+        $user = \App\User::find(1);
+        return view( 'admin.remjobs.edit', compact('remjob', 'categories', 'user', 'tagsText') );
+
+        // return view('admin.remjobs.edit', compact('remjob', 'categories', 'tagsText') );
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Remjob  $remjob
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Remjob $remjob)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validateRemjob();
+
+        $remjob = Remjob::findOrFail( $id );
+
+        // Delete previous links from pivot table remjob_tag
+        DB::table('remjob_tag')->where('remjob_id',$remjob->id)->delete();
+
+        $remjob->update([
+
+            'position'      => request()->position,
+            //'tags'          => ['required', 'max:100'], 
+            'description'           => request()->description,
+            'category_id'           => request()->category_id,
+            'min_salary'            => request()->min_salary,
+            'max_salary'            => request()->max_salary,
+            'locations'             => request()->locations,
+            'apply_link'            => request()->apply_link,
+            'apply_email'           => request()->apply_email,
+            'apply_mode'            => request()->apply_mode,
+            
+        ]);
+
+        // tags for the remjob-tag pivot table
+        $tagsIdToLink = []; // 
+
+        $inputTags = explode(',', request()->tags );
+
+        // Insert the Category tag in the first position of the array
+        $category = Category::find( request()->category_id );
+        array_unshift( $inputTags, $category->tag);
+
+        // Add every tag, if it does not exist, create it in the database.
+        foreach ( $inputTags as $inputTag ) {
+            if( Tag::where('name',trim($inputTag) )-> exists() ) {
+                $foundTag = Tag::where('name',trim($inputTag) )->first();
+                array_push( $tagsIdToLink, $foundTag->id );
+            } else {
+                $newTag = Tag::create([ 'name' => trim($inputTag) ]);
+                array_push( $tagsIdToLink, $newTag->id );
+            }
+        }
+
+        $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
+
+        return redirect()->route('admin.remjobs.index');
+        
     }
 
     /**
@@ -417,7 +482,7 @@ class RemjobController extends Controller
             \Storage::delete( 'public/' . $remjob->company->logo );           
         }
 
-        // Delete from pivot table Sposts-Twitter profiles
+        // Delete from pivot table remjob_tag
         DB::table('remjob_tag')->where('remjob_id',$remjob->id)->delete();
 
         // Delete the remote job
@@ -515,6 +580,25 @@ class RemjobController extends Controller
         }
 
         
+    }
+
+    private function validateRemjob() 
+    {
+
+        $validatedData = request()->validate([
+            'position'      => ['required', 'max:100'],
+            'tags'          => ['required', 'max:100'],      
+            'description'   => ['required'],
+            'category_id'   => [ Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12']) ],
+            'apply_link'    => ['exclude_if:apply_mode,==,email', 'url'],
+            'apply_email'   => ['exclude_if:apply_mode,==,link', 'email'],
+            'min_salary'    => ['nullable', 'max:7', 'lte:max_salary'], 
+            'max_salary'    => ['nullable', 'max:7', 'gte:min_salary'],
+            'locations'     => ['max:100'],
+        ]);
+
+        return $validatedData;
+
     }
 
 
