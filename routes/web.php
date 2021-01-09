@@ -111,9 +111,13 @@ Route::get('/twitter_profiles/convertToken', 'TwitterProfileController@convertTo
 //Route::patch('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@update')->name('twitter_profiles.update')->middleware('auth');;
 Route::delete('/twitter_profiles/{twitter_profile}', 'TwitterProfileController@destroy')->name('twitter_profiles.destroy')->middleware('auth');
 
+// PAGES
 Route::get('/privacy', function () {
     return view('pages.privacy');
-})->name('privacy');
+})->name('pages.privacy');
+Route::get('/faq', function () {
+    return view('pages.faq');
+})->name('pages.faq');
 
 // Support Routes
 Route::group( 

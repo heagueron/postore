@@ -88,9 +88,10 @@ return [
 
     // Footer
     'copyright' => ' Copyright © 2020 ',
-    'contactSupport'  => ' Contactar soporte ',
+    'contactSupport'  => ' Contactanos ',
     'terms'         => ' Terminos ',
     'privacy'       => ' Privacidad ',
+    'faq'           => ' PREGUNTAS FRECUENTES ',
 
     // Contact Form
     'supTitle'      => 'Contactar Soporte Remjob',

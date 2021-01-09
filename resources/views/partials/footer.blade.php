@@ -13,16 +13,14 @@
 
         <ul class="list-group list-group-horizontal">
             <li class="list-group-item">{{ __('text.copyright') }}</li>
-            <!-- <li class="list-group-item">
-                <a href="{{ route('landing') }}">{{ __('text.terms') }}</a>
-            </li>
-            <li class="list-group-item">
-                <a href="{{ route('privacy') }}">{{ __('text.privacy') }}</a>
-            </li> -->
         </ul>
-
-        <a href="{{ route('support.create') }}" class="mr-2">
-            {{ __('text.contactSupport') }}
-        </a>
+        <div class="d-flex">
+            <a href="{{ route('pages.faq') }}" class="mr-2">
+                {{ __('text.faq') }}
+            </a>
+            <a href="{{ route('support.create') }}" class="mr-2">
+                {{ __('text.contactSupport') }}
+            </a>
+        </div>
 
 </div>
