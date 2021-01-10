@@ -8,6 +8,7 @@ use App\ApiConnectors\TwitterGateway;
 //use Illuminate\Support\Facades\Storage;
 
 
+
 trait PublishRemjob
 {
 
@@ -22,33 +23,58 @@ trait PublishRemjob
     {   
         $link = $remjob->apply_link != null ? $remjob->apply_link : $remjob->apply_email;
 
-        $text = $remjob->company->name;
-        $text .= ', is looking for a '.$remjob->position;
-        $text .= '. Find more through '.$remjob->link;
+        // Select ramdom template:
+        $template = mt_rand(1,3);
 
-        $twitterProfile = \App\TwitterProfile::where('handler','JMServca');
-        dd( $twitterProfile );
+        if( $template == 1 ){
+            $text = trim( $remjob->company->name );
+            $text .= ' is looking for a '.trim( $remjob->position );
+            //$text .= '. Find more through '.$link; 
+        } elseif( $template == 2 ){
+            $text = 'Want to work as '.trim( $remjob->position );
+            $text .= ' at '.trim( $remjob->company->name ).'?';
+            //$text .= 'Apply through '.$link;
+        } else {
+            $text = trim( $remjob->company->name );
+            $text .= ' is hiring: '.trim( $remjob->position );
+            //$text .= '. Apply here: '.$link; 
+        }
+
+        // Add locations
+        if( $remjob->locations ){
+            $text .= ' ['.$remjob->locations.']'; 
+        }
+
+        // Add tags
+        if( $remjob->has('tags') ){
+            foreach( $remjob->tags as $tag ){
+                $text .= ' #'.str_replace(' ', '' , $tag->name); 
+            }
+        }
+
+        // Add apply link
+        $text .= ' ☛ '.$link;
+
+        // Share on Twitter with TwitterOAuth library
+        $twitterProfile = \App\TwitterProfile::where('handler','JMServca')->first();
         $twitter = new TwitterGateway( $twitterProfile->id, false );
 
-        // Post with TwitterOAuth library
-        $response = $twitter->connection->post(
-            "statuses/update",
-            [
-                "status"    => $text,
-            ]
-        );
-        //dd('$response: ',$response);
+        try {
+            $response = $twitter->connection->post( "statuses/update", [ "status"    => $text,] );
 
-        if ( $twitter->connection->getLastHttpCode() == 200 ) {
-            // Success. Store the twitter status id received in pivot 'spost_twitter_profile'
-            return true; 
+            if ( $twitter->connection->getLastHttpCode() == 200 ) {          
+                // register the social share
+                $tweetPost = new \App\TwitterPost();
+                $tweetPost->remjob_id = $remjob->id;
+                $tweetPost->save();
+                return true;
+            } else {
+                return false;
+            } 
 
-        } else {
-            // Failure
+        } catch (TwitterOAuthException $exception) {
             return false;
-        }    
-        
-        // $spost->update( [ 'posted' => true ] );
+        }
 
     }
    

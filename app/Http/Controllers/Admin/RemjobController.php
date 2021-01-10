@@ -20,7 +20,7 @@ use App\ApiConnectors\TwitterGateway;
 
 class RemjobController extends Controller
 {
-
+    use PublishRemjob;
         
     public function __construct()
     {
@@ -517,67 +517,70 @@ class RemjobController extends Controller
      */
     public function tweet(Remjob $remjob)
     {
-        // $publish = $this->shareRemjobOnTwitter( $remjob );
-        // if( $publish ){
-        //     return back()->with('flash', 'Remjob shared on Twitter!');
-        // } else {
-        //     return back()->with('fail', 'Remjob could not be shared on Twitter!');
-        // }
-        $link = $remjob->apply_link != null ? $remjob->apply_link : $remjob->apply_email;
+        $publish = $this->shareRemjobOnTwitter( $remjob );
 
-        // Select ramdom template:
-        $template = mt_rand(1,3);
-
-        if( $template == 1 ){
-            $text = trim( $remjob->company->name );
-            $text .= ' is looking for a '.trim( $remjob->position );
-            //$text .= '. Find more through '.$link; 
-        } elseif( $template == 2 ){
-            $text = 'Want to work as '.trim( $remjob->position );
-            $text .= ' at '.trim( $remjob->company->name ).'?';
-            //$text .= 'Apply through '.$link;
+        if( $publish ){
+            return back()->with('flash', 'Remjob shared on Twitter!');
         } else {
-            $text = trim( $remjob->company->name );
-            $text .= ' is hiring: '.trim( $remjob->position );
-            //$text .= '. Apply here: '.$link; 
+            return back()->with('fail', 'Remjob could not be shared on Twitter!');
         }
 
-        if( $remjob->locations ){
-           $text .= ' ['.$remjob->locations.']'; 
-        }
+
+        // $link = $remjob->apply_link != null ? $remjob->apply_link : $remjob->apply_email;
+
+        // // Select ramdom template:
+        // $template = mt_rand(1,3);
+
+        // if( $template == 1 ){
+        //     $text = trim( $remjob->company->name );
+        //     $text .= ' is looking for a '.trim( $remjob->position );
+        //     //$text .= '. Find more through '.$link; 
+        // } elseif( $template == 2 ){
+        //     $text = 'Want to work as '.trim( $remjob->position );
+        //     $text .= ' at '.trim( $remjob->company->name ).'?';
+        //     //$text .= 'Apply through '.$link;
+        // } else {
+        //     $text = trim( $remjob->company->name );
+        //     $text .= ' is hiring: '.trim( $remjob->position );
+        //     //$text .= '. Apply here: '.$link; 
+        // }
+
+        // if( $remjob->locations ){
+        //    $text .= ' ['.$remjob->locations.']'; 
+        // }
         
 
-        $text .= ' ☛ '.$link;
+        // $text .= ' ☛ '.$link;
         // $text .= ' Source: '.$remjob->external_api;   
 
-        if( $remjob->has('tags') ){
-            foreach( $remjob->tags as $tag ){
-                $text .= ' #'.str_replace(' ', '' , $tag->name); 
-            }
-        }
+        // if( $remjob->has('tags') ){
+        //     foreach( $remjob->tags as $tag ){
+        //         $text .= ' #'.str_replace(' ', '' , $tag->name); 
+        //     }
+        // }
         
-        //dd($text);
+        // //dd($text);
         
-        $twitterProfile = \App\TwitterProfile::where('handler','JMServca')->first();
-        $twitter = new TwitterGateway( $twitterProfile->id, false );
+        // $twitterProfile = \App\TwitterProfile::where('handler','JMServca')->first();
+        // $twitter = new TwitterGateway( $twitterProfile->id, false );
         
-        try {
-            // Post with TwitterOAuth library
-            $response = $twitter->connection->post( "statuses/update", [ "status"    => $text,] );
+        // try {
+        //     // Post with TwitterOAuth library
+        //     $response = $twitter->connection->post( "statuses/update", [ "status"    => $text,] );
 
-            if ( $twitter->connection->getLastHttpCode() == 200 ) {          
-                // register the social share
-                $tweetPost = new \App\TwitterPost();
-                $tweetPost->remjob_id = $remjob->id;
-                $tweetPost->save();
-                return back()->with('flash', 'Remjob shared on Twitter!');
-            } else {
-                return back()->with('fail', 'Remjob could not be shared on Twitter!');
-            } 
+        //     if ( $twitter->connection->getLastHttpCode() == 200 ) {          
+        //         // register the social share
+        //         $tweetPost = new \App\TwitterPost();
+        //         $tweetPost->remjob_id = $remjob->id;
+        //         $tweetPost->save();
+        //         return back()->with('flash', 'Remjob shared on Twitter!');
+        //     } else {
+        //         return back()->with('fail', 'Remjob could not be shared on Twitter!');
+        //     } 
 
-        } catch (TwitterOAuthException $exception) {
-            return back()->with('fail','Remjob could not be shared on Twitter! (exc.) ' . $exception->getMessage() );
-        }
+        // } catch (TwitterOAuthException $exception) {
+        //     return back()->with('fail','Remjob could not be shared on Twitter! (exc.) ' . $exception->getMessage() );
+        // }
 
         
     }

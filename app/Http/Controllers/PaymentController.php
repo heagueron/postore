@@ -8,8 +8,13 @@ use App\Rules\GumroadLicense;
 use App\ApiConnectors\Gumroad;
 use Illuminate\Support\Facades\Auth;
 
+use App\Traits\PublishRemjob;
+use Illuminate\Support\Facades\Log;
+
 class PaymentController extends Controller
 {
+    use PublishRemjob;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -95,7 +100,20 @@ class PaymentController extends Controller
             'paid'                  => 1,
             'gumroad_license'       => request()->license,
         ]);
-        return redirect()->route('landing')->with('flash', 'New remote job posted!');
+
+        Log::info( 'Remote Job id: ' .$remjob->id.' activated.' );
+
+        $publish = $this->shareRemjobOnTwitter( $remjob );
+
+        // Share new posted remote job on Twitter
+        if( $publish ){
+            Log::info( 'New Remote Job id: ' .$remjob->id.' shared on Twitter.' );
+            return redirect()->route( 'landing' )->with('flash', 'New Remote Job activated | Shared on Twitter!');
+        } else {
+            Log::info( 'New Remote Job id: ' .$remjob->id.' failed to share on Twitter.' );
+            return redirect()->route( 'landing' )->with('flash', 'New Remote Job activated | Failed to share on Twitter!');
+        } 
+        //return redirect()->route('landing')->with('flash', 'New remote job posted!');
     }
 
     /**
@@ -113,7 +131,20 @@ class PaymentController extends Controller
             $remjob->update([
                 'active'                => 1,
             ]);
-            return redirect()->route( 'landing' )->with('flash', 'New remote job posted!'); 
+
+            Log::info( 'Remote Job id: ' .$remjob->id.' activated.' );
+
+            $publish = $this->shareRemjobOnTwitter( $remjob );
+
+            // Share new posted remote job on Twitter
+            if( $publish ){
+                Log::info( 'New Remote Job id: ' .$remjob->id.' shared on Twitter.' );
+                return redirect()->route( 'landing' )->with('flash', 'New Remote Job activated | Shared on Twitter!');
+            } else {
+                Log::info( 'New Remote Job id: ' .$remjob->id.' failed to share on Twitter.' );
+                return redirect()->route( 'landing' )->with('flash', 'New Remote Job activated | Failed to share on Twitter!');
+            } 
+ 
         }
 
         return redirect()->route( 'landing' )->with('fail', 'Attemp to publish a paid plan as "free" ... '); 
