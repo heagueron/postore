@@ -60,14 +60,21 @@
 
                             </td>
 
-                            {{-- Delete --}}
-                            <td>
+                            @if( $user->companies()->count() == 0 )
+                                {{-- Delete --}}
+                                <td>
 
-                                    <button type="submit" style="border:none; background-color:transparent;" title="Destroy">
-                                        <i class="fa fa-trash" style="font-size:0.75rem;color:red"></i>
-                                    </button>
+                                    <div>
+                                        <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" style="border:none; background-color:transparent;" title="Destroy">
+                                                <i class="fa fa-trash" style="font-size:18px;color:red"></i>
+                                            </button>
+                                        </form>
+                                    </div>
 
-                            </td>
+                                </td>
+                            @endif
 
                         </tr>
 

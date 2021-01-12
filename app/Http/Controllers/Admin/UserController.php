@@ -81,8 +81,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        //dd('delete user: ', $id);
+        // Delete the remote job
+        $user->delete();
+
+        return back()->with('message', 'Removed User ' . $user->name );
+        
     }
 }

@@ -78,6 +78,7 @@ Route::group(
 
         // Users
         Route::get('/users', 'Admin\UserController@index')->name('admin.users.index');
+        Route::delete('/users/{user}', 'Admin\UserController@destroy')->name('admin.users.destroy');
 
         // External APIs
         Route::get('/api_jobs.rok', 'Admin\RemjobController@rok')->name('admin.api_jobs.rok');

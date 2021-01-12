@@ -71,6 +71,7 @@ const companyControl = () => {
 
     // });
 
+    
 
 }
 
@@ -116,6 +117,21 @@ const remjobControl = () => {
 
 }
 
+// const userControl = () => {
+//     /* FOR USER DESTROY */
+//     $('#destroyUserModal').on('show.bs.modal', function (event) {
+//         // Compose the update route
+//         const userId = $(event.relatedTarget).data('user-id');
+//         console.log(userId);
+
+//         // User Id
+//         $("#user_id_to_destroy").val(userId);
+
+//         $("#destroy-user-form").attr("action", `admin/users/${userId}`);
+//         console.log($("#destroy-user-form"));
+//     });
+// }
+
 
 
   
@@ -135,5 +151,11 @@ setTimeout(() => {
         }
         remjobControl();
     }
+
+    // Check if active url is the admin users page
+    // if ( window.location.href.indexOf("admin/users") > -1) {
+    //     console.log("active url is: admin users page");
+    //     userControl();
+    // }
 
 }, 500);
