@@ -103,9 +103,9 @@ class PaymentController extends Controller
 
         Log::info( 'Remote Job id: ' .$remjob->id.' activated.' );
 
+        // Share new posted remote job on Twitter
         $publish = $this->shareRemjobOnTwitter( $remjob );
 
-        // Share new posted remote job on Twitter
         if( $publish ){
             Log::info( 'New Remote Job id: ' .$remjob->id.' shared on Twitter.' );
             return redirect()->route( 'landing' )->with('flash', 'New Remote Job activated | Shared on Twitter!');
@@ -133,10 +133,10 @@ class PaymentController extends Controller
             ]);
 
             Log::info( 'Remote Job id: ' .$remjob->id.' activated.' );
-
-            $publish = $this->shareRemjobOnTwitter( $remjob );
-
+            
             // Share new posted remote job on Twitter
+            $publish = $this->shareRemjobOnTwitter( $remjob );
+            
             if( $publish ){
                 Log::info( 'New Remote Job id: ' .$remjob->id.' shared on Twitter.' );
                 return redirect()->route( 'landing' )->with('flash', 'New Remote Job activated | Shared on Twitter!');

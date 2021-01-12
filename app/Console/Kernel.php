@@ -6,6 +6,7 @@ use DB;
 use App\Console\Commands\PostTweets;
 use App\Console\Commands\CleanRemjobs;
 use App\Console\Commands\HourlyTwitter;
+use App\Console\Commands\DailyTwitter;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -21,7 +22,7 @@ class Kernel extends ConsoleKernel
         PostTweets::class,
         CleanRemjobs::class,
         HourlyTwitter::class,
-
+        DailyTwitter::class,
     ];
 
     /**
@@ -35,6 +36,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('postore:post')->everyMinute();
         $schedule->command('postore:clean-sposts')->daily();
         $schedule->command('postore:hourlyTwitter')->hourly();
+        $schedule->command('postore:dailyTwitter')->dailyAt('11:00');
         
     }
 

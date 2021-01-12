@@ -41,7 +41,7 @@
 
     </div>
 
-    <div class="col-7 row">
+    <div class="col-10 row">
     
         {{-- POSITION COMPANY LOCATIONS --}}
         <div class="col-sm-10 col-lg-4 mt-lg-3 mt-sm-2 ml-2">
