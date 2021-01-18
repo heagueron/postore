@@ -22,6 +22,7 @@ trait PublishRemjob
     public function shareRemjobOnTwitter(Remjob $remjob)
     {   
         $link = $remjob->apply_link != null ? $remjob->apply_link : $remjob->apply_email;
+        $remjobLink = 'https://remjob.io';
 
         // Select ramdom template:
         $template = mt_rand(1,3);
@@ -54,6 +55,9 @@ trait PublishRemjob
 
         // Add apply link
         $text .= ' ☛ '.$link;
+
+        // Add remjob.io link
+        $text .= ' More jobs on: '.$remjobLink;
 
         // Share on Twitter with TwitterOAuth library
         $twitterProfile = \App\TwitterProfile::where('handler','JMServca')->first();
