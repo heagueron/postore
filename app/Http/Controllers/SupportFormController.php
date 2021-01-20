@@ -27,14 +27,26 @@ class SupportFormController extends Controller
             'support-request' => 'required'
         ]);
 
-        Mail::to('heagueron@gmail.com')->send( new SupportFormMail($data) );
+        try{
 
-        // return redirect()->route( 'landing' );
+            Mail::to('heagueron@gmail.com')->send( new SupportFormMail($data) );
+            // return redirect()->route( 'landing' );
 
-        $title = 'Thank You!';
-        $message = 'Thanks for your contact. We will respond as soon as we can.';
-         
-        return view( 'information', compact( 'title', 'message' ) );
+            $title = 'Thank You!';
+            $message = 'Thanks for your contact. We will respond as soon as we can.';
+            
+            return view( 'information', compact( 'title', 'message' ) );
+
+        } catch (\Exception $exception){
+
+            $title = 'Oops!';
+            $message = 'We were unable to send your contact. Please try again later.';
+
+        }
+
+        
+
+        
 
     }
 

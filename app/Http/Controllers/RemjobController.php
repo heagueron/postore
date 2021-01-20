@@ -12,10 +12,12 @@ use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 
+use App\Mail\RemjobCreatedMail;
 use App\Http\Requests\StoreRemjob;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
@@ -145,6 +147,13 @@ class RemjobController extends Controller
         session([ 'newRemjobId' => $remjob->id ]);
 
         // Head to preview and checkout page
+
+        // Mail Administrator
+        try{ 
+            Mail::to('heagueron@gmail.com')->send( new RemjobCreatedMail( $remjob ) );
+        } catch (\Exception $exception){ 
+            Log::info( 'Failed to send email to notify admin creation of remjob: ' . $remjob->id );
+        }
 
         // return redirect()->route( 'checkout', [ $company->slug.'-'.Str::slug( request()->position, '-' ).'-'.$remjob->id ] );
         return redirect()->route( 'checkout', $remjob->slug );
