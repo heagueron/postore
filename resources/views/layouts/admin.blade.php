@@ -28,8 +28,9 @@
 
     <div class="c-wrapper" id="app">
 
-        <header class="c-header c-header-light c-header-fixed">
-        </header>
+        <!-- <header class="c-header c-header-light c-header-fixed">
+        </header> -->
+        
         <div class="c-body">
             <main class="c-main">
                 <div class="container-fluid">

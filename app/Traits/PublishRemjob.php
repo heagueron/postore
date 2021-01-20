@@ -53,11 +53,14 @@ trait PublishRemjob
             }
         }
 
-        // Add apply link
-        $text .= ' ☛ '.$link;
+        // Add reference link
+        $refLink = $remjob->plan ?  'https://remjob.io/remote_job/' .$remjob->slug : $link;
+        $text .= ' ☛ '.$refLink;
 
         // Add remjob.io link
-        $text .= ' More jobs on: '.$remjobLink;
+        $text .= ' +Jobs: '.$remjobLink;
+
+        // dd($text);
 
         // Share on Twitter with TwitterOAuth library
         $twitterProfile = \App\TwitterProfile::where('handler','JMServca')->first();
