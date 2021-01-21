@@ -33,11 +33,12 @@
             <table class="table" style="background-color:#ffffff;">
                 <thead>
                 <tr>
-                    <th>Remote Jobs</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th>Company</th>
+                    <th>Position</th>
+                    <th>Act</th>
+                    <th>Date</th>
+                    <th>Src</th>
+                    <th>Tw#</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -49,6 +50,11 @@
                         <td>
                             {{ $remjob->position }}<br/>
                             <small>{{$remjob->slug}}</small>
+                        </td>
+                        <td>
+                            @if( $remjob->active )
+                                <i class="fa fa-check" style="font-size:18px;color:#0066ff"></i>
+                            @endif
                         </td>
                         <td>{{ $remjob->created_at->diffForHumans() }}</td>
 
@@ -96,18 +102,21 @@
                             </div>
                             @endif
 
-                            {{-- Inactivate --}}
+                            {{-- Inactivate/Activate --}}
                             <div>
                             
-                                <form action="{{ route('admin.remjobs.inactivate', $remjob->id) }}" method="post" title="Inactivate">
+                                <form action="{{ route('admin.remjobs.toggleActive', $remjob->id) }}" method="post">
                                     @csrf
                                     @method('PATCH')
                                     <button type="submit" style="border:none;background-color:transparente">
-                                        <i class="fa fa-ban"  aria-hidden="true" style="font-size:18px;"></i>
+                                        @if( $remjob->active )
+                                            <i class="fa fa-ban"  aria-hidden="true" style="font-size:18px;" title="Inactivate"></i>
+                                        @else
+                                            <i class="fas fa-arrow-up" aria-hidden="true" style="font-size:18px;" title="Activate"></i>
+                                        @endif
                                     </button>
                                 </form>
-                                    
-                                </a>
+                               
                             </div>
                         </td>
                     </tr> 

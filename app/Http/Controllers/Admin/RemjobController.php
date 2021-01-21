@@ -498,12 +498,15 @@ class RemjobController extends Controller
      * @param  \App\Remjob  $remjob
      * @return \Illuminate\Http\Response
      */
-    public function inactivate(Remjob $remjob)
+    public function toggleActive(Remjob $remjob)
     {
-        // Delete the scheduled post
-        $remjob->update([
-            'active'    => 0,
-        ]);
+        if($remjob->active){
+            // Inactivate the scheduled post
+            $remjob->update( ['active'    => 0, ]);
+        } else {
+            // Activate the scheduled post
+            $remjob->update( ['active'    => 1, ]);
+        }
 
         return back()->with('message', 'Inactivated Remote Job Post from ' . $remjob->company_name );
         

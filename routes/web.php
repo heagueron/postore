@@ -65,7 +65,7 @@ Route::group(
         Route::patch('/remjob/{remjob}', 'Admin\RemjobController@update')->name('admin.remjobs.update');
 
         Route::delete('/remjobs/{remjob}', 'Admin\RemjobController@destroy')->name('admin.remjobs.destroy');
-        Route::patch('/remjobs/{remjob}', 'Admin\RemjobController@inactivate')->name('admin.remjobs.inactivate');
+        Route::patch('/remjobs/{remjob}', 'Admin\RemjobController@toggleActive')->name('admin.remjobs.toggleActive');
         Route::get('/remjobs/{remjob}/tweet', 'Admin\RemjobController@tweet')->name('admin.remjobs.tweet');
 
         // Companies
