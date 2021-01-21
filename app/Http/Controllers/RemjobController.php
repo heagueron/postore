@@ -100,6 +100,7 @@ class RemjobController extends Controller
                 'slug'      => Str::slug( request()->company_name, '-' ),
                 'email'     => request()->company_email,
                 'user_id'   => \Auth::user()->id,
+                'twitter'   => request()->company_twitter
             ]);
             //Log::info('Created company: '.$company->name.' while creating job: '.$remjob->position);
         } else {
@@ -148,9 +149,11 @@ class RemjobController extends Controller
 
         // Head to preview and checkout page
 
-        // Mail Administrator
+        // Send Mail to Client and cc Administrator
         try{ 
-            Mail::to('heagueron@gmail.com')->send( new RemjobCreatedMail( $remjob ) );
+            Mail::to( $remjob->company->user->email )
+                ->cc('heagueron@gmail.com')
+                ->send( new RemjobCreatedMail( $remjob ) );
         } catch (\Exception $exception){ 
             Log::info( 'Failed to send email to notify admin creation of remjob: ' . $remjob->id );
         }

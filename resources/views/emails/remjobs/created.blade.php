@@ -4,7 +4,7 @@
 
         <div class="d-flex justify-content-between mt-5">
 
-            <p>A new remote job was created at remjob.io with these details:</p>
+            <p>{{__('mails.crClientSalute')}}</p>
 
         </div>
 
@@ -19,22 +19,22 @@
                 </p>
 
                 <p>
-                    <span style="font-weight:bold;">{{__('Company: ')}}</span>
+                    <span style="font-weight:bold;">{{__('mails.companyLabel')}}</span>
                     <span>{{ $remjob->company->name }}</span>
                 </p>
 
                 <p>
-                    <span style="font-weight:bold;">{{__('Position: ')}}</span>
+                    <span style="font-weight:bold;">{{__('mails.positionLabel')}}</span>
                     <span>{{ $remjob->position }}</span>
                 </p>
 
                 <p>
-                    <span style="font-weight:bold;">{{__('Category: ')}}</span>
+                    <span style="font-weight:bold;">{{__('mails.categoryLabel')}}</span>
                     <span>{{ $remjob->category->name }}</span>
                 </p>
 
                 <p>
-                    <span style="font-weight:bold;">{{__('Tags: ')}}</span>
+                    <span style="font-weight:bold;">{{__('mails.tagsLabel')}}</span>
                     <span>
                         @foreach( $remjob->tags()->take(5)->get() as $tag )
                             <button class="rp-tag-item"> {{ $tag->name }}</button>&nbsp;                
@@ -45,31 +45,31 @@
 
                 {{-- DESCRIPTION --}}
                 <div class="mt-5">
-                    <p>{{__('Description: ')}}</p>
+                    <p>{{__('mails.description: ')}}</p>
                     <div>{!! $remjob->description !!}</div>
 
                     @if($remjob->min_salary)
                         <p class="mt-2">
-                            <span style="font-weight:bold;">{{__('Min. Annual Salary: ')}}</span>
+                            <span style="font-weight:bold;">{{__('mails.minSalaryLabel')}}</span>
                             <span>${{ number_format($remjob->min_salary,0,'.',',') }}</span>
                         </p>
                     @endif
                     @if($remjob->max_salary)
                         <p>
-                            <span style="font-weight:bold;">{{__('Max. Annual Salary: ')}}</span>
+                            <span style="font-weight:bold;">{{__('mails.maxSalaryLabel')}}</span>
                             <span>${{ number_format($remjob->max_salary,0,'.',',')  }}</span>
                         </p>
                     @endif
 
                     @if($remjob->locations)
                         <p>
-                            <span style="font-weight:bold;">{{__('Location: ')}}</span>
+                            <span style="font-weight:bold;">{{__('mails.locationLabel: ')}}</span>
                             <span>{{ $remjob->locations }}</span>
                         </p>
                     @endif
 
                     <p>
-                        <span style="font-weight:bold;">{{__('Apply mode: ')}}</span>
+                        <span style="font-weight:bold;">{{__('mails.applyModeLabel')}}</span>
                         <span>
                             @if( $remjob->apply_email == null )
                                 {{ $remjob->apply_link }}
@@ -95,6 +95,18 @@
 
                     </div>
                 </div>
+
+                <p>
+                    <span style="font-weight:bold;">{{__('mails.planLabel')}}</span>
+                    <span>{{ $remjob->plan->name }}</span>
+                </p>
+
+            </div>
+
+            <div class="d-flex justify-content-between mt-5">
+
+                <p>{{__('mails.finalMsg')}}</p>
+
             </div>
 
         </div>

@@ -57,6 +57,11 @@ trait PublishRemjob
         $refLink = $remjob->plan ?  'https://remjob.io/remote_job/' .$remjob->slug : $link;
         $text .= ' ☛ '.$refLink;
 
+        // Add client twitter handle to mention
+        // if( $remjob->company->twitter ){
+        //     $text .= ' @'.$remjob->company->twitter; 
+        // }
+
         // Add remjob.io link
         $text .= ' +Jobs: '.$remjobLink;
 

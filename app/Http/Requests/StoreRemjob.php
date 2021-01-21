@@ -37,6 +37,7 @@ class StoreRemjob extends FormRequest
             'locations'     => ['max:100'],
             'company_logo'  => ['nullable','file','image','max:5000'],
             'company_email' => ['required', 'email:rfc,dns'],
+            'company_twitter' => ['nullable', 'max:15'],
         ];
             
     }
@@ -52,7 +53,7 @@ class StoreRemjob extends FormRequest
             'position.required'     => 'Please enter a name for the position.',
             'position.max'          => 'Please enter a position name with less than 100 characters.',
 
-            'tags.required'         => 'Please enter some tags separated by comma (example: dev, java, php)',
+            'tags.required'         => 'Please enter some tags separated by comma (example: dev, java, php).',
             'tags.max'              => 'The tags list must have less than 100 characters.',
 
             'description.required'  => 'Please enter a description for the position.',
@@ -64,16 +65,18 @@ class StoreRemjob extends FormRequest
             'apply_email.email'     => 'Please enter a valid email so candidates can apply for the position.',
 
             'min_salary.max'        => 'Enter a minimun salary less than 999,999.',
-            'min_salary.lte'        => 'Minimun salary must be less than or equal to Maximun Salary',
+            'min_salary.lte'        => 'Minimun salary must be less than or equal to Maximun Salary.',
 
             'max_salary.max'        => 'Enter a maximun salary less than 999,999.',
-            'max_salary.gte'        => 'Maximun salary must be more than or equal to Minimun Salary',
+            'max_salary.gte'        => 'Maximun salary must be more than or equal to Minimun Salary.',
 
             'locations.max'         => 'Allowed locations must have less than 100 characters.',
 
-            'company_logo.file'     => 'Please select a image file for your company logo. Max 5000 bytes',
-            'company_logo.image'    => 'Please select a image file for your company logo. Max 5000 bytes',
-            'company_logo.max'      => 'Please select a image file for your company logo. Max 5000 bytes',
+            'company_logo.file'     => 'Please select a image file for your company logo. Max 5000 bytes.',
+            'company_logo.image'    => 'Please select a image file for your company logo. Max 5000 bytes.',
+            'company_logo.max'      => 'Please select a image file for your company logo. Max 5000 bytes.',
+            
+            'company_twitter.max'   => 'The Twitter handle has a maximum length of 15 characters.',
         ];
     }
 
