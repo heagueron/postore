@@ -155,7 +155,7 @@ class RemjobController extends Controller
                 ->cc('heagueron@gmail.com')
                 ->send( new RemjobCreatedMail( $remjob ) );
         } catch (\Exception $exception){ 
-            Log::info( 'Failed to send email to notify admin creation of remjob: ' . $remjob->id );
+            Log::info( 'Failed to send email to notify client or admin creation of remjob: ' . $remjob->id );
         }
 
         // return redirect()->route( 'checkout', [ $company->slug.'-'.Str::slug( request()->position, '-' ).'-'.$remjob->id ] );

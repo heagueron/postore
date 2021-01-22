@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Remjob;
+use App\Mail\RemjobPaidMail;
 use Illuminate\Http\Request;
 use App\Rules\GumroadLicense;
-use App\ApiConnectors\Gumroad;
-use Illuminate\Support\Facades\Auth;
-
 use App\Traits\PublishRemjob;
+
+use App\ApiConnectors\Gumroad;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -102,6 +104,15 @@ class PaymentController extends Controller
         ]);
 
         Log::info( 'Remote Job id: ' .$remjob->id.' activated.' );
+
+        // Send Mail to Client and cc Administrator
+        try{ 
+            Mail::to( $remjob->company->user->email )
+                ->cc('heagueron@gmail.com')
+                ->send( new RemjobPaidMail( $remjob ) );
+        } catch (\Exception $exception){ 
+            Log::info( 'Failed to send email to notify client or admin payment of remjob: ' . $remjob->id );
+        }
 
         // Share new posted remote job on Twitter
         $publish = $this->shareRemjobOnTwitter( $remjob );

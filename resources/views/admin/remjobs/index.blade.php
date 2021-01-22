@@ -76,12 +76,14 @@
 
                         <td class="d-flex justify-content-left">
                             
-                            {{-- Tweet --}}
-                            <div>
-                                <a class="ml-2" href="{{ route('admin.remjobs.tweet', $remjob->id) }}" title="Share on Twitter">
-                                    <i class="fab fa-twitter" style="font-size:18px;color:#0066ff"></i>
-                                </a>
-                            </div>
+                            @if( $remjob->active )
+                                {{-- Tweet --}}
+                                <div>
+                                    <a class="ml-2" href="{{ route('admin.remjobs.tweet', $remjob->id) }}" title="Share on Twitter">
+                                        <i class="fab fa-twitter" style="font-size:18px;color:#0066ff"></i>
+                                    </a>
+                                </div>
+                            @endif
 
                             {{-- Delete --}}
                             <div>

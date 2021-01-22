@@ -1,10 +1,10 @@
 <?php
 
-use App\Rules\GumroadLicense;
-use App\ApiConnectors\Gumroad;
-use Illuminate\Support\Facades\Http;
-
 use App\Remjob;
+use Illuminate\Support\Str;
+use App\Mail\RemjobPaidMail;
+
+use App\Rules\GumroadLicense;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,6 +130,31 @@ Route::group(
         
 });
 
+/**
+ * 
+ *  SUPPORT ROUTES
+ * 
+ */
+
+// Fake route to send paid remjob mail
+Route::get('/remjob_paid', function () {
+    $remjob = Remjob::where('company_id',6)->first();
+    // Send Mail to Client and cc Administrator
+    $title='Sending paid remjob mail ...';
+    //dd($remjob->company->user->email);
+    try{ 
+        Mail::to( $remjob->company->user->email )
+            ->cc('heagueron@gmail.com')
+            ->send( new RemjobPaidMail( $remjob ) );     
+            $message = 'SUCCESS!!';
+    } catch (\Exception $exception){ 
+        Log::info( 'Failed to send email to notify client or admin payment of remjob: ' . $remjob->id );
+            $message = 'FAIL!!';
+            dd($exception);
+    }
+    return view( 'information', compact( 'message', 'title' ) );
+});
+
 // Fake route to test activate
 Route::get('/testa', function () {
 
@@ -250,8 +275,10 @@ Route::get('/view-clear', function() {
 
 // J7mbo twitter-api-php
 
-use Illuminate\Support\Str;
+use App\ApiConnectors\Gumroad;
 
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use App\ApiConnectors\TwitterGateway;
 use App\ApiConnectors\TwitterAPIExchange;
 

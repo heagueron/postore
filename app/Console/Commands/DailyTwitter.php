@@ -46,7 +46,7 @@ class DailyTwitter extends Command
         if( \App\Remjob::where('active', 1)->exists() ){
 
             // Get active remote jobs
-            $remjobs = \App\Remjob::where('active', 1)->get();
+            $remjobs = \App\Remjob::where('active', 1)->where('plan_id', '>' , 1)->get();
 
             $sharedRemjobs = 0;
 
