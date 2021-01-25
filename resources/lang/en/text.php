@@ -25,6 +25,8 @@ return [
     'catDesign' => 'Design',
     'catNonTech' => 'Non Tech',
 
+    'searchCatLabel' => 'Search by Category ',
+
     // Create remote job form
     'crPageTitle'   => 'remjob | Create Job Post',
     'crFormTitle'   => 'create your remote job post',

@@ -647,23 +647,23 @@ nav {
 }
 
 .cat {
-    overflow-x:hidden;
-    overflow-y:hidden;
-    margin: 30px auto;
+    // overflow-x:hidden;
+    // overflow-y:hidden;
+    //margin: 30px auto;
     &__list{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
+        //display: flex;
+        //justify-content: space-around;
+        //align-items: center;
     }
 
 }
 .cat__list__item {
-    display:inline !important;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid transparent;
-    &:hover {
-        border-bottom: 2px solid #4CAF50;
-    }
+    //display:inline !important;
+    // padding-bottom: 0.5rem;
+    // border-bottom: 2px solid transparent;
+    // &:hover {
+    //     border-bottom: 2px solid #4CAF50;
+    // }
 }
 
 /* Banners */

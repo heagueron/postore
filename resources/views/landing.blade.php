@@ -8,20 +8,30 @@
 
    
     <div class="container">
-        
-        @include('partials.categories')
 
-        <div  id="rp-accordion">
+        <div class="row mt-5">
 
-            @forelse ( $remjobs as $remjob )
-                <x-jobrow :remjob="$remjob" page='landing'/>
-            @empty
-                <p class="d-flex justify-content-center align-content-center">
-                    {{ __('text.noRemjobs') }}
-                </p>
-            @endforelse
+            <div class="col-sm-12 col-lg-2">@include('partials.categories')</div>
+
+            <div class="col-sm-12 col-lg-10">
+                <div  id="rp-accordion">
+
+                    @forelse ( $remjobs as $remjob )
+                        <x-jobrow :remjob="$remjob" page='landing'/>
+                    @empty
+                        <p class="d-flex justify-content-center align-content-center">
+                            {{ __('text.noRemjobs') }}
+                        </p>
+                    @endforelse
+
+                </div>
+            </div>
 
         </div>
+        
+        
+
+        
 
     </div>
     

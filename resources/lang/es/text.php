@@ -25,12 +25,14 @@ return [
     'catDesign' => 'Diseño',
     'catNonTech' => 'Otros',
 
+    'searchCatLabel' => 'Buscar por Categoría ',
+
     // Create remote job form
     'crPageTitle'   => 'remjob | Crear Publicacion de Trabajo',
     'crFormTitle'   => 'crear su publicacion de trabajo remoto',
     'crBasePriceTip'    => 'Desde $:basePrice (publicacion basica)',
     'crPost'            => 'publicacion',
-    'crDuration'        => 'Publicar por :duration dias',
+    'crDuration'        => 'Publicar por :duration días',
     'crShareTwitter'    => 'Compartir en Twitter',
     'crShowLogo'        => 'Mostrar Logo',
     'crYellowBG'        => 'Destacar',

@@ -25,7 +25,7 @@ trait PublishRemjob
         $remjobLink = 'https://remjob.io';
 
         // Select ramdom template:
-        $template = mt_rand(1,3);
+        $template = mt_rand(1,4);
 
         if( $template == 1 ){
             $text = trim( $remjob->company->name );
@@ -35,10 +35,13 @@ trait PublishRemjob
             $text = 'Want to work as '.trim( $remjob->position );
             $text .= ' at '.trim( $remjob->company->name ).'?';
             //$text .= 'Apply through '.$link;
-        } else {
+        } elseif( $template == 3 ) {
             $text = trim( $remjob->company->name );
             $text .= ' is hiring: '.trim( $remjob->position );
             //$text .= '. Apply here: '.$link; 
+        } else {
+            $text = 'Apply for '.trim( $remjob->position );
+            $text .= ' at '.trim( $remjob->company->name );
         }
 
         // Add locations
