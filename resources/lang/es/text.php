@@ -89,7 +89,7 @@ return [
     'crPostTheJob'      => 'Publicar!',
 
     // Footer
-    'copyright' => ' Copyright © 2020 ',
+    'copyright' => ' Copyright © 2021 ',
     'contactSupport'  => ' Contactanos ',
     'terms'         => ' Terminos ',
     'privacy'       => ' Privacidad ',

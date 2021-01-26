@@ -465,6 +465,16 @@ class RemjobController extends Controller
 
         $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
 
+        // Send Mail to Client and cc Administrator
+        try{ 
+            Mail::to( $remjob->company->user->email )
+                ->cc('info@remjob.io')
+                ->bcc('heagueron@gmail.com')
+                ->send( new RemjobUpdatedMail( $remjob ) );
+        } catch (\Exception $exception){ 
+            Log::info( 'Failed to send email to notify client or admin update of remjob: ' . $remjob->id );
+        }
+
         return redirect()->route('admin.remjobs.index');
         
     }

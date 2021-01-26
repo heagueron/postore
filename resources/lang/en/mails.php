@@ -3,6 +3,7 @@
 return [
 
     'crClientSalute'      => 'Congratulations for creating at remjob.io. Here are the details: ',
+    'updateSalute'      => 'The remote job has been updated. Here are the details: ',
     
     'companyLabel'      => 'Company: ',
     'positionLabel'     => 'Position: ',

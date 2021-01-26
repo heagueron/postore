@@ -58,7 +58,7 @@ trait PublishRemjob
 
         // Add reference link
         $refLink = $remjob->plan ?  'https://remjob.io/remote_job/' .$remjob->slug : $link;
-        $text .= ' ☛ '.$refLink;
+        $text .= ' '.$refLink;
 
         // Add client twitter handle to mention
         // if( $remjob->company->twitter ){
@@ -66,7 +66,7 @@ trait PublishRemjob
         // }
 
         // Add remjob.io link
-        $text .= ' +Jobs: '.$remjobLink;
+        $text .= ' More jobs ☛  '.$remjobLink;
 
         // dd($text);
 

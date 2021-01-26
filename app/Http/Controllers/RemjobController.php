@@ -152,7 +152,8 @@ class RemjobController extends Controller
         // Send Mail to Client and cc Administrator
         try{ 
             Mail::to( $remjob->company->user->email )
-                ->cc('heagueron@gmail.com')
+                ->cc('info@remjob.io')
+                ->bcc('heagueron@gmail.com')
                 ->send( new RemjobCreatedMail( $remjob ) );
         } catch (\Exception $exception){ 
             Log::info( 'Failed to send email to notify client or admin creation of remjob: ' . $remjob->id );
