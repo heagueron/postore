@@ -10,11 +10,13 @@ use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 use App\Traits\PublishRemjob;
+use App\Mail\RemjobUpdatedMail;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use App\ApiConnectors\TwitterGateway;
 
 
