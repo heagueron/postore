@@ -95,14 +95,14 @@
                                 </form>
                             </div>
 
-                            @if( $remjob->total )
+                            
                             {{-- Edit --}}
                             <div>
                                 <a class="ml-2" href="{{ route('admin.remjobs.edit', $remjob->id) }}" title="Edit">
                                     <i class="fa fa-edit" style="font-size:18px;"></i>
                                 </a>
                             </div>
-                            @endif
+                            
 
                             {{-- Inactivate/Activate --}}
                             <div>

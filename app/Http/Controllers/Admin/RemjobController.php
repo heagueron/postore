@@ -268,9 +268,14 @@ class RemjobController extends Controller
                 'slug'  => Str::slug( $companyName, '-' ),
                 'email' => 'heagueron@gmail.com',
                 'logo'  => $jobData["logo"],
+                'user_id'   => 1,
             ]);
         } else {
             $company = Company::where('name', $companyName)->first();
+            if( !$company->user_id == 1 ){
+                // this company belongs to a registered client
+                return;
+            }
         }
 
         // Create the remote job post
