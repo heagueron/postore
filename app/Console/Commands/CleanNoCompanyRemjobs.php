@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class CleanNoCompanyRemjobs extends Command
 {
@@ -37,10 +38,10 @@ class CleanNoCompanyRemjobs extends Command
      */
     public function handle()
     {
-        if( \App\Remjob::whereIn('company_id', [null, ''])->exists() ){
+        if( \App\Remjob::where('company_id', null)->exists() ){
 
             // Get no-company remote jobs
-            $remjobs = \App\Remjob::whereIn('company_id', [null, ''])->get();
+            $remjobs = \App\Remjob::where('company_id', null)->get();
 
             $deletedRemjobsCount = 0;
 
