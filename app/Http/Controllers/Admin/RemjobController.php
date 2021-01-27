@@ -60,8 +60,8 @@ class RemjobController extends Controller
     public function rok()
     {
         $response = Http::retry(3, 100)->get('https://remoteok.io/api');
-   
         $jobsArray = $response->json();
+
         array_shift( $jobsArray );
 
         foreach ( array_slice($jobsArray, 0, 8) as $remApiJob ) {
@@ -69,10 +69,14 @@ class RemjobController extends Controller
             if( DB::table('remjobs')->where([
                 ['external_api', '=', 'https://remoteok.io'],
                 ['position', '=', STR::before( $remApiJob["position"], '(')],
-            ])->exists() ){ break; }
+            ])->exists() ){
+                Log::info( 'ROK api job: ' .STR::before( $remApiJob["position"], '('). 'already exists' );
+                continue; 
+            }
 
-            if( strlen( $remApiJob["company_logo"] ) > 190 or strlen( $remApiJob["description"] > 75 ) ) {
-                break;
+            if( strlen( $remApiJob["company_logo"] ) > 190 or strlen( $remApiJob["position"] > 75 ) ) {
+                Log::info( 'ROK api job: ' .STR::before( $remApiJob["position"], '('). 'position or company_logo link too long' );
+                continue;
             }
 
             $jobData = [
@@ -92,6 +96,7 @@ class RemjobController extends Controller
                 $this->createApiJob( $jobData );
             } catch (\Exception $exception){ 
                 Log::info( 'Failed to create ROK api job: ' . $jobData['position'] );
+                //dd('catched exception creating remjob');
             }
 
         }
@@ -113,17 +118,16 @@ class RemjobController extends Controller
         if( !$jobsArray['job-count'] ) {
             return back()->with('fail', 'No job found on remotive api');
         }
-        //dd($jobsArray['jobs']);
+
         foreach ( array_slice($jobsArray['jobs'], 0, 8) as $remApiJob ) {
 
             if( DB::table('remjobs')->where([
                 ['external_api', '=', 'https://remotive.io/'],
                 ['position', '=', $remApiJob["title"]],
-            ])->exists() ){ break; }
+            ])->exists() ){ continue; }
 
-            
-            if( strlen( $remApiJob["description"] > 75 ) ) {
-                break;
+            if( strlen( $remApiJob["title"] > 75 ) ) {
+                continue;
             }
 
             $jobData = [
@@ -142,7 +146,7 @@ class RemjobController extends Controller
             try{ 
                 $this->createApiJob( $jobData );
             } catch (\Exception $exception){ 
-                Log::info( 'Failed to create ROK api job: ' . $jobData['position'] );
+                Log::info( 'Failed to create REMOTIVE api job: ' . $jobData['position'] );
             }
 
         }
@@ -165,16 +169,15 @@ class RemjobController extends Controller
         }
 
 
-        foreach ( array_slice($jobsArray, 0, 21) as $remApiJob ) {
-
+        foreach ( array_slice($jobsArray, 0, 11) as $remApiJob ) {
+//dd($remApiJob);
             if( DB::table('remjobs')->where([
                 ['external_api', '=', 'https://www.workingnomads.co/'],
                 ['position', '=', $remApiJob["title"]],
-            ])->exists() ){ break; }
-
+            ])->exists() ){ continue; }
             
-            if( strlen( $remApiJob["description"] > 75 ) ) {
-                break;
+            if( strlen( $remApiJob["title"] > 75 ) ) {
+                continue;
             }
 
             $jobData = [
@@ -184,16 +187,16 @@ class RemjobController extends Controller
                 'locations'         => $remApiJob["location"],
                 'apply_link'        => $remApiJob["url"],
                 'apply_mode'        => 'link',
-                'company_name'      => STR::before( $remApiJob["company"], 'ÃÂ'),
-                'tags'              => array_pop( $remApiJob["tags"] ),
-                'logo'              => array_key_exists('company_logo', $remApiJob) ? $remApiJob["company_logo"] : null,
-                'external_api'      => 'https://remoteok.io',
+                'company_name'      => $remApiJob["company_name"],
+                'tags'              => $remApiJob["tags"],
+                'logo'              => null,
+                'external_api'      => 'https://www.workingnomads.co/',
             ];
 
             try{ 
                 $this->createApiJob( $jobData );
             } catch (\Exception $exception){ 
-                Log::info( 'Failed to create ROK api job: ' . $jobData['position'] );
+                Log::info( 'Failed to create WORKING NOMADS api job: ' . $jobData['position'] );
             }
             
         }
@@ -216,17 +219,17 @@ class RemjobController extends Controller
             return back()->with('fail', 'No job found on github jobs');
         }
 
-        foreach ( array_slice($jobsArray, 0, 21) as $remApiJob ) {
+        foreach ( array_slice($jobsArray, 0, 11) as $remApiJob ) {
 
             if( DB::table('remjobs')->where([
                 ['external_api', '=', 'https://jobs.github.com/positions'],
                 ['position', '=', $remApiJob["title"]],
             ])->exists() ){ 
-                break; 
+                continue; 
             }
 
             if( strlen( $remApiJob["company_logo"] ) > 190 or strlen( $remApiJob["title"] > 75 ) ) {
-                break;
+                continue;
             }
 
             $jobData = [
@@ -245,7 +248,7 @@ class RemjobController extends Controller
             try{ 
                 $this->createApiJob( $jobData );
             } catch (\Exception $exception){ 
-                Log::info( 'Failed to create ROK api job: ' . $jobData['position'] );
+                Log::info( 'Failed to create GITHUB api job: ' . $jobData['position'] );
             }
 
         }
@@ -254,6 +257,7 @@ class RemjobController extends Controller
 
     private function createApiJob( $jobData ){
 
+        // dd('received data at createApiJob', $jobData);
         $companyName = $jobData['company_name'];
 
         // Company
@@ -279,8 +283,12 @@ class RemjobController extends Controller
             'apply_mode'        => 'link',
             'company_id'        => $company->id,
             'external_api'      => $jobData['external_api'],
-            'slug'              => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
+            //'slug'              => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
             'active'            => 1,
+        ]);
+
+        $remjob->update([
+            'slug'              => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
         ]);
 
         if( $jobData['tags'] ){
@@ -302,6 +310,8 @@ class RemjobController extends Controller
 
             $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
         }
+
+        return;
 
     }
 
