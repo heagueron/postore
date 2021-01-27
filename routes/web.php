@@ -330,3 +330,13 @@ Route::get('/tap3', function() {
     dd($response3);
     
 });
+
+Route::get('/phoneburner', function() {
+    $send_resume_to="_php_job@phoneburner.com";
+    for ($x=1; $x<5; $x++){
+        $send_resume_to = $x . $send_resume_to;
+    }
+    $send_resume_to = substr($send_resume_to,1);
+    dd( $send_resume_to );
+    
+});
