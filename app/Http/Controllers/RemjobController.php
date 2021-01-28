@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Tag;
+use App\Visit;
 use App\Remjob;
 use App\Company;
 use App\Category;
 use Carbon\Carbon;
+
 use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
-
 use App\Mail\RemjobCreatedMail;
 use App\Http\Requests\StoreRemjob;
 use Illuminate\Support\Facades\App;
@@ -33,6 +34,17 @@ class RemjobController extends Controller
     {
         // App::setLocale('es');
 
+        // Register a visit
+        $ip = \request()->ip();
+        if( !Visit::where('visitor_ip', $ip)->exists() ){
+            $this->registerVisit( $ip, 'landing' );
+        } else {
+            $latestVisit = Visit::where('visitor_ip', $ip)->orderBy('created_at', 'desc')->first();
+            if ( !$latestVisit->created_at->isToday() ){
+                $this->registerVisit( $ip, 'landing' );
+            } 
+        }
+        
         Log::info( 'Will show all active remote jobs' );
 
         if( Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )->exists() ){
@@ -44,6 +56,19 @@ class RemjobController extends Controller
 
         return view( 'landing', compact('remjobs') );
 
+    }
+
+    private function registerVisit( $ip, $route ){
+
+        Log::info( 'Will register a visitor' );
+
+        Visit::create([
+            'visitor_ip'    => $ip,
+            'entry_route'   => $route,
+            'user_id'       => Auth::check() ? Auth::user()->id : null,
+        ]);
+        return;
+        
     }
 
     /**

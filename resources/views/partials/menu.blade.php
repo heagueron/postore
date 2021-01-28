@@ -42,6 +42,10 @@
                 </a>              
             </li>
 
+            <li class="c-sidebar-nav-item">
+                <span class="c-sidebar-nav-link">Visits: {{ \App\Visit::all()->count() }}</span>             
+            </li>
+
         @endif
 
         <li class="c-sidebar-nav-item">
@@ -50,6 +54,10 @@
                 Logout
             </a>              
         </li>
+
+    </ul>
+
+
 
 </div>
 
