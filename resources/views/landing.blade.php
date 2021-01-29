@@ -9,7 +9,11 @@
    
     <div class="container d-flex flex-column">
 
-
+        @if( !$request->is('worldwide_remote_jobs') )
+            <div class="worlwide-filter mt-2 ml-auto"><a href="{{ route('remjobs.worlwide') }}">⬜️	Show only worldwide jobs </a></div>
+        @else 
+            <div class="worlwide-filter mt-2 ml-auto"><a href="{{ route('landing') }}">✅ Show only worldwide jobs </a></div>
+        @endif
 
         <div class="row mt-3">
 

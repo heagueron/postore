@@ -101,6 +101,6 @@ return [
     'supSend'       => 'Enviar',
 
     // Other
-    'noRemjobs'     => 'No encontramos trabajos remotos en esa categoria e idioma.',
+    'noRemjobs'     => 'No encontramos trabajos remotos en esa categoria o etiqueta.',
     'startTyping'   => 'Escriba para ver trabajos ...',
 ];

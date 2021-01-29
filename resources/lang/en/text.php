@@ -101,7 +101,7 @@ return [
     'supSend'       => 'Send',
 
     // Other
-    'noRemjobs'     => 'There are not remote jobs posted in that category and language.',
+    'noRemjobs'     => 'There are not remote jobs posted in that category or tag.',
     'startTyping'   => 'Start typing to find jobs ...',
 
 

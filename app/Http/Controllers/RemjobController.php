@@ -282,7 +282,7 @@ class RemjobController extends Controller
 
         }
         
-        return view( 'landing', compact('remjobs') );
+        return view( 'landing', compact('remjobs', 'request') );
         
     }
 
@@ -301,7 +301,7 @@ class RemjobController extends Controller
             ->orderBy('plan_id', 'desc')
             ->orderBy('created_at', 'desc')->get();
         
-        return view( 'landing', compact('remjobs') );
+        return view( 'landing', compact('remjobs', 'request') );
         
     }
 
