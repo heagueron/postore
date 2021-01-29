@@ -235,7 +235,7 @@ class RemjobController extends Controller
      * @param  string $tags
      * @return \Illuminate\Http\Response
      */
-    public function searchByTags( $tags )
+    public function searchByTags( $tags, Request $request )
     {
         // App::setLocale('es');
 
@@ -292,7 +292,7 @@ class RemjobController extends Controller
      * @param  string $company_name
      * @return \Illuminate\Http\Response
      */
-    public function searchByCompany( Company $company )
+    public function searchByCompany( Company $company, Request $request )
     {
         //Log::info('Searching jobs for company slug: '.$company->slug);
         
