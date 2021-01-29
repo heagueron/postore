@@ -19,6 +19,7 @@ use App\Rules\GumroadLicense;
 
 // REMOTE JOBS
 Route::get('/', 'RemjobController@index')->name('landing');
+Route::get('/worldwide_remote_jobs', 'RemjobController@worldwide')->name('remjobs.worlwide');
 
 Route::get('/post_a_job', 'RemjobController@create')->name('post_a_job')->middleware('auth');
 Route::post('/remjobs', 'RemjobController@store')->name('remjobs.store')->middleware('auth');

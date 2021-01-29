@@ -30,7 +30,7 @@ class RemjobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request )
     {
         // App::setLocale('es');
 
@@ -54,7 +54,27 @@ class RemjobController extends Controller
 
         } else { $remjobs = []; } 
 
-        return view( 'landing', compact('remjobs') );
+        return view( 'landing', compact('remjobs', 'request') );
+
+    }
+
+    /**
+     * Display a listing of the worlwide jobs
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function worldwide( Request $request )
+    {
+        if( Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )
+            ->whereIn(strtoupper('locations'), ['WORLDWIDE', 'GLOBAL', 'ANYWHERE', 'REMOTE'])
+            ->exists() ){
+
+            $remjobs = Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )
+            ->whereIn(strtoupper('locations'), ['WORLDWIDE', 'GLOBAL', 'ANYWHERE', 'REMOTE'])
+            ->orderBy('plan_id', 'desc')->orderBy('created_at', 'desc')->get();
+        } else { $remjobs = []; } 
+
+        return view( 'landing', compact('remjobs', 'request') );
 
     }
 

@@ -7,9 +7,15 @@
     @include('partials.hero')
 
    
-    <div class="container">
+    <div class="container d-flex flex-column">
 
-        <div class="row mt-5">
+        @if( !$request->is('worldwide_remote_jobs') )
+            <div class="worlwide-filter mt-2 ml-auto"><a href="{{ route('remjobs.worlwide') }}">⬜️	Show only worldwide jobs </a></div>
+        @else 
+            <div class="worlwide-filter mt-2 ml-auto"><a href="{{ route('landing') }}">✅ Show only worldwide jobs </a></div>
+        @endif
+
+        <div class="row mt-3">
 
             <div class="col-sm-12 col-lg-2">@include('partials.categories')</div>
 
