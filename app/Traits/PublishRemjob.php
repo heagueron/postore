@@ -32,8 +32,10 @@ trait PublishRemjob
             $text .= ' is looking for a '.trim( $remjob->position );
             //$text .= '. Find more through '.$link; 
         } elseif( $template == 2 ){
-            $text = 'Want to work as '.trim( $remjob->position );
-            $text .= ' at '.trim( $remjob->company->name ).'?';
+            $text = trim( $remjob->position );
+            $text .= ' at '.trim( $remjob->company->name );
+            // $text = 'Want to work as '.trim( $remjob->position );
+            // $text .= ' at '.trim( $remjob->company->name ).'?';
             //$text .= 'Apply through '.$link;
         } elseif( $template == 3 ) {
             $text = trim( $remjob->company->name );
