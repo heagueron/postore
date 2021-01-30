@@ -59,6 +59,12 @@
                 </tbody>
             </table>
 
+            <div class="d-flex">
+                {{-- CLEAN DETAILED REGISTERS ACTION --}}
+                <a href="{{ route('admin.visits.cleanAll') }}" type="button" class="btn btn-danger ml-auto">
+                    Clean visit registers
+                </a>
+            </div>
 
         </div>
     </div>

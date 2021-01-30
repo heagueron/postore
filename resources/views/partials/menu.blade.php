@@ -49,9 +49,9 @@
             </li>
 
             <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">Visits: {{ \App\Visit::all()->count() }}</span>             
+                <span class="c-sidebar-nav-link">Today Visits: {{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
             </li>
-
+            
         @endif
 
         <li class="c-sidebar-nav-item">
