@@ -77,6 +77,10 @@ Route::group(
         Route::patch('/companies/{company}', 'Admin\CompanyController@update')->name('admin.companies.update');
         Route::delete('/companies/{company}', 'Admin\CompanyController@destroy')->name('admin.companies.destroy');
 
+        // Dailies
+        Route::get('/dailies', 'Admin\DailyController@index')->name('admin.dailies.index');
+        Route::get('/dailies/updateAll', 'Admin\DailyController@updateAll')->name('admin.dailies.updateAll');
+
         // Users
         Route::get('/users', 'Admin\UserController@index')->name('admin.users.index');
         Route::delete('/users/{user}', 'Admin\UserController@destroy')->name('admin.users.destroy');

@@ -43,6 +43,12 @@
             </li>
 
             <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route('admin.dailies.index') }}">
+                    Dailies
+                </a>              
+            </li>
+
+            <li class="c-sidebar-nav-item">
                 <span class="c-sidebar-nav-link">Visits: {{ \App\Visit::all()->count() }}</span>             
             </li>
 

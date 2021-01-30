@@ -96,7 +96,6 @@ class RemjobController extends Controller
                 $this->createApiJob( $jobData );
             } catch (\Exception $exception){ 
                 Log::info( 'Failed to create ROK api job: ' . $jobData['position'] );
-                //dd('catched exception creating remjob');
             }
 
         }
@@ -168,9 +167,8 @@ class RemjobController extends Controller
             return back()->with('fail', 'No job found on working-nomads api');
         }
 
-
         foreach ( array_slice($jobsArray, 0, 11) as $remApiJob ) {
-//dd($remApiJob);
+
             if( DB::table('remjobs')->where([
                 ['external_api', '=', 'https://www.workingnomads.co/'],
                 ['position', '=', $remApiJob["title"]],
@@ -257,7 +255,6 @@ class RemjobController extends Controller
 
     private function createApiJob( $jobData ){
 
-        // dd('received data at createApiJob', $jobData);
         $companyName = $jobData['company_name'];
 
         // Company
@@ -362,7 +359,6 @@ class RemjobController extends Controller
      */
     public function edit(Remjob $remjob)
     {
-        // dd('edit remjob position: ', $remjob->position);
         if ( $remjob->language == 'es' ) {
             $categories = \App\Category::whereIn( 'id', [7, 8, 9, 10, 11, 12] )->get();
         } else {
