@@ -18,6 +18,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- GUMROAD -->
+    <script src="https://gumroad.com/js/gumroad.js"></script>
    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

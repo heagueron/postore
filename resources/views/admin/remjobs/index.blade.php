@@ -46,7 +46,11 @@
                 
                 @forelse($remjobs as $remjob)
                     <tr>
-                        <td>{{ $remjob->company->name }}</td>
+                        @if( $remjob->company )
+                            <td>{{ $remjob->company->name }}</td>
+                        @else 
+                            <td >{{ __('*** NO COMPANY! *** ') }}</td>
+                        @endif
                         <td>
                             {{ $remjob->position }}<br/>
                             <small>{{$remjob->slug}}</small>

@@ -187,8 +187,8 @@
             </button>
         </form>
     @else
-        <a  href="{{'https://gum.co/' .$remjob->plan->gumroad_permalink}}" target="_blank" class="rp-jobrow__apply__checkout"> 
-            {{ __('checkout.buy') }}
+        <a class="gumroad-button" href="{{ 'https://gum.co/' .$remjob->plan->gumroad_permalink. '?wanted=true' }}" target="_blank" data-gumroad-single-product="true">
+            By this!
         </a>
     @endif
         <!-- <p>LINK: {{  'https://gum.co/' .$remjob->plan->gumroad_permalink  }}</p>
