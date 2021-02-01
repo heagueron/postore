@@ -149,16 +149,18 @@ class RemjobController extends Controller
             ]);
             //Log::info('Created company: '.$company->name.' while creating job: '.$remjob->position);
         } else {
-            $company = Company::where('id', request()->company_id)->first();
+
+            $company = Company::find(request()->company_id);
+
             if( $company->user_id == 1 ){
-                // this company has api captured jobs. Now switches to real client.
+                // this company has api captured jobs. Now could be switching to real client.
                 $company->update([
                     'email'     => request()->company_email,
                     'user_id'   => \Auth::user()->id,
                     'twitter'   => request()->company_twitter
                 ]);
-                return;
             }
+
         }
 
         // Add or update media to the company model
