@@ -17,7 +17,9 @@
 
         <div class="row mt-3">
 
-            <div class="col-sm-12 col-lg-2">@include('partials.categories')</div>
+            <div class="col-sm-12 col-lg-2">
+                @include('partials.categories')
+            </div>
 
             <div class="col-sm-12 col-lg-10">
                 <div  id="rp-accordion">

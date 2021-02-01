@@ -54,7 +54,13 @@ trait PublishRemjob
         // Add tags
         if( $remjob->has('tags') ){
             foreach( $remjob->tags as $tag ){
-                $text .= ' #'.str_replace(' ', '' , $tag->name); 
+                if( $tag->name == 'non-tech'){
+                    $text .= ' #nontech';
+                } else if( $tag->name == ''){
+                    continue;
+                } else {
+                    $text .= ' #'.str_replace(' ', '' , $tag->name); 
+                }   
             }
         }
 

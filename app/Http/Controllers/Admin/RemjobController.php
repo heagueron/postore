@@ -430,7 +430,7 @@ class RemjobController extends Controller
             }
         }
 
-        $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
+        $remjob->tags()->sync( array_unique( $tagsIdToLink ) );
 
         // Send Mail to Client and cc Administrator
         try{ 

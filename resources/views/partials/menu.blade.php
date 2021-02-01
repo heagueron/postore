@@ -51,6 +51,10 @@
             <li class="c-sidebar-nav-item">
                 <span class="c-sidebar-nav-link">Today Visits: {{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
             </li>
+
+            <li class="c-sidebar-nav-item">
+                <span class="c-sidebar-nav-link">Active Jobs: {{ \App\Remjob::where('active', 1)->count() }}</span>             
+            </li>
             
         @endif
 
