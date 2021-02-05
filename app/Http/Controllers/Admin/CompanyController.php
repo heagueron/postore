@@ -40,7 +40,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        dd('I will create a company via admin dashboard');
+        // dd('I will create a company via admin dashboard');
     }
 
     /**

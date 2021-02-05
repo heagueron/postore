@@ -77,6 +77,14 @@ Route::group(
         Route::patch('/companies/{company}', 'Admin\CompanyController@update')->name('admin.companies.update');
         Route::delete('/companies/{company}', 'Admin\CompanyController@destroy')->name('admin.companies.destroy');
 
+        // Categories
+        Route::get('/categories', 'Admin\CategoryController@index')->name('admin.categories.index');
+        Route::get('/categories/create', 'Admin\CategoryController@create')->name('admin.categories.create');
+        Route::post('/categories', 'Admin\CategoryController@store')->name('admin.categories.store');
+        Route::get('/categories/{category}/edit', 'Admin\CategoryController@edit')->name('admin.categories.edit');
+        Route::patch('/categories/{category}', 'Admin\CategoryController@update')->name('admin.categories.update');
+        Route::delete('/categories/{category}', 'Admin\CategoryController@destroy')->name('admin.categories.destroy');
+
         // Dailies
         Route::get('/dailies', 'Admin\DailyController@index')->name('admin.dailies.index');
         Route::get('/dailies/updateAll', 'Admin\DailyController@updateAll')->name('admin.dailies.updateAll');
