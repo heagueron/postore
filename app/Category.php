@@ -13,5 +13,10 @@ class Category extends Model
     {
         return $this->hasMany(\App\Remjob::class);
     }
+
+    public function language()
+    {
+        return $this->belongsTo(\App\Language::class);
+    }
     
 }
