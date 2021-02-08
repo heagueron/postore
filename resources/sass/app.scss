@@ -1250,5 +1250,22 @@ h3 i {
     //right: 0;
 }
 
+.remjob-button{
+    background-color: $remjob-green;
+    color:white;
+    border: 2px solid $remjob-green !important;
+    width: 80% !important;
+    padding: 8px;
+    &:hover{
+        background-color: white;
+        color: $remjob-green;
+        border: 2px solid $remjob-green !important;
+    }
+}
+
+.modal-content-subscribe{
+    background-color: #71c174 !important;
+}
+
 
 

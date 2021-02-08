@@ -111,6 +111,8 @@ Route::group(
         Route::get('search_company_by_email/{email}', 'CompanyController@search_company_by_email');
 });
 
+// SUBSCRIBER ROUTES
+Route::post('/subscribers', 'SubscriberController@store')->name('subscribers.store');
 
 
 //Route::get('home/check_avatars', 'HomeController@checkAvatars');
@@ -151,6 +153,12 @@ Route::group(
  *  SUPPORT ROUTES
  * 
  */
+
+// Fake route to ping mailchimp
+Route::get('/pingChimp', 'SubscriberController@pingChimp');
+// Route::get('/pingChimp', function () {
+    
+// });
 
 // Fake route to send paid remjob mail
 Route::get('/remjob_paid', function () {

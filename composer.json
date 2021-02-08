@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "orangehill/iseed": "^2.6",
+        "spatie/laravel-newsletter": "^4.9",
         "spatie/laravel-permission": "^3.17"
     },
     "require-dev": {

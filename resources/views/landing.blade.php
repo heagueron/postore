@@ -5,23 +5,31 @@
 @section('content')
 
     @include('partials.hero')
-
+    @include('subscribers.create')
    
-    <div class="container d-flex flex-column">
+    <div class="d-flex flex-column">
 
         @if( !$request->is('worldwide_remote_jobs') )
-            <div class="worlwide-filter mt-2 ml-auto"><a href="{{ route('remjobs.worlwide') }}">⬜️	Show only worldwide jobs </a></div>
+            <div class="worlwide-filter mt-2 mr-4 ml-auto"><a href="{{ route('remjobs.worlwide') }}">⬜️	Show only worldwide jobs </a></div>
         @else 
-            <div class="worlwide-filter mt-2 ml-auto"><a href="{{ route('landing') }}">✅ Show only worldwide jobs </a></div>
+            <div class="worlwide-filter mt-2 mr-4 ml-auto"><a href="{{ route('landing') }}">✅ Show only worldwide jobs </a></div>
         @endif
 
         <div class="row mt-3">
 
-            <div class="col-sm-12 col-lg-2">
+            <div class="col-sm-12 col-lg-3">
                 @include('partials.categories')
+
+                <!-- <div class="text-center mt-2">
+                    {{-- Open Subscribe Modal --}}
+                    <button type="button" class="btn remjob-button" data-toggle="modal" data-target="#createSubscriberModal">
+                        {{__('Keep me posted')}}
+                    </button>
+                </div> -->
+                
             </div>
 
-            <div class="col-sm-12 col-lg-10">
+            <div class="col-sm-12 col-lg-9">
                 <div  id="rp-accordion">
 
                     @forelse ( $remjobs as $remjob )

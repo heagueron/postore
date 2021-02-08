@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SpostTwitterProfileTableSeeder::class);
 
         // Remote Jobs
+        $this->call(LanguageSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(CompanySeeder::class);
         $this->call(TagSeeder::class);
