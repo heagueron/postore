@@ -16,15 +16,39 @@ class SubscriberController extends Controller
      */
     public function store(Request $request)
     {
-        dd('subscribe this friend: ', $request);
+        // dd('subscribe this friend: ', $request);
 
-        $data = request()->validate([
-            'name'          => 'nullable|min:3',
-            'email'         => 'required|email',
-            'category_id'   => [ 'nullable', Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12']) ],
-            //'frecuency'     => [ 'nullable', Rule::in(['daily','weekly','monthly']) ],
-        ]);
+        // validate in a Request separate file
 
+        // $data = request()->validate([
+        //     'name'          => 'nullable|min:3',
+        //     'email'         => 'required|email',
+        //     'category_id'   => [ 'nullable', Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12']) ],
+        //     //'frecuency'     => [ 'nullable', Rule::in(['daily','weekly','monthly']) ],
+        // ]);
+        //dd($request->category_id);
+        $interestId = $request->category_id ? 
+                    \App\Category::where('id',$request->category_id)->first()->mailchimp_interest_id
+                    : null;
+        //dd($interestId) ;  
+        if ( ! Newsletter::isSubscribed($request->email) ) 
+        {
+            Newsletter::subscribePending(
+                $request->email, 
+                ['FNAME'=>$request->name],
+                'subscribers', 
+                ['interests'=>[$interestId=>true] ] );
+
+            $title = 'Information';
+            $message = 'Thanks for you subscription. Please check your email inbox and confirm.';
+            //return redirect('newsletter')->with('success', 'Thanks For Subscribe');
+        } else{
+            $title = 'Information';
+            $message = 'Oops! You have already subscribed.';
+        }
+        
+        return view( 'information', compact( 'title', 'message' ) );
+        //return redirect('newsletter')->with('failure', 'Sorry! You have already subscribed ');
 
         return back()->with('flash', 'Added subscriber: ' . $request->email );
     }

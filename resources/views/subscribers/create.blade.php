@@ -76,7 +76,7 @@
 
             <div class="text-center mt-5" style="margin-left:12px; margin-right:12px;">
                 <button type="submit" class="btn btn-warning btn-block mb-3">{{__('Subscribe me')}}</button>
-                <small class="mt-4">{{__('We will not send spam. You will be able to unsubscribe at any time.')}}</small>
+                <small class="mt-4">{{__('We do not send spam. You will be able to unsubscribe at any time.')}}</small>
             </div>
             
 

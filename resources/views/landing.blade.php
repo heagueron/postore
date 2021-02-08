@@ -20,12 +20,12 @@
             <div class="col-sm-12 col-lg-3">
                 @include('partials.categories')
 
-                <!-- <div class="text-center mt-2">
+                <div class="text-center mt-4">
                     {{-- Open Subscribe Modal --}}
                     <button type="button" class="btn remjob-button" data-toggle="modal" data-target="#createSubscriberModal">
-                        {{__('Keep me posted')}}
+                        {{__('I want to subscribe')}}
                     </button>
-                </div> -->
+                </div>
                 
             </div>
 
