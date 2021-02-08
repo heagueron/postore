@@ -48,9 +48,47 @@
                 @enderror
             </div>
 
+
+            <!-- Mailchimp Audience ID -->
+            <div>
+                <span class="rp-group__head">Mailchimp Audience ID</span>
+                <input  type="text" name="mailchimp_audience_id"
+                        value="{{ !is_null( old('mailchimp_audience_id'))? old('mailchimp_audience_id') : $category->mailchimp_audience_id }}"               
+                >
+                @error('mailchimp_audience_id') 
+                    <p class="rp-group__error">{{ $message }}</p> 
+                @enderror
+            </div>
+
+            <!-- Mailchimp Category ID -->
+            <div>
+                <span class="rp-group__head">Mailchimp Category ID</span>
+                <input  type="text" name="mailchimp_category_id"
+                        value="{{ !is_null( old('mailchimp_category_id'))? old('mailchimp_category_id') : $category->mailchimp_category_id }}"               
+                >
+                @error('mailchimp_category_id') 
+                    <p class="rp-group__error">{{ $message }}</p> 
+                @enderror
+            </div>
+
+            <!-- Mailchimp Interest ID -->
+            <div>
+                <span class="rp-group__head">Mailchimp Interest ID</span>
+                <input  type="text" name="mailchimp_interest_id"
+                        value="{{ !is_null( old('mailchimp_interes_id'))? old('mailchimp_interest_id') : $category->mailchimp_interest_id }}"               
+                >
+                @error('mailchimp_interest_id') 
+                    <p class="rp-group__error">{{ $message }}</p> 
+                @enderror
+            </div>
+
+
+            
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-warning">Update</button>
             </div>
+
+
         </form>
 
 @endsection
