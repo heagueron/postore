@@ -20,7 +20,7 @@
             <div class="col-sm-12 col-lg-3">
                 @include('partials.categories')
 
-                <div class="text-center my-4">
+                <div class="text-center my-2">
                     {{-- Open Subscribe Modal --}}
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#createSubscriberModal">
                         {{__('I want to subscribe')}}

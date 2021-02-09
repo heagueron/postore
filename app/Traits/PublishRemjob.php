@@ -25,19 +25,19 @@ trait PublishRemjob
         $remjobLink = 'https://remjob.io';
 
         // Select ramdom template:
-        $template = mt_rand(1,4);
+        $template = mt_rand(1,12);
 
-        if( $template == 1 ){
+        if( in_array($template, [1,2]) ){
             $text = trim( $remjob->company->name );
             $text .= ' is looking for a '.trim( $remjob->position );
             //$text .= '. Find more through '.$link; 
-        } elseif( $template == 2 ){
+        } elseif( in_array($template, [3,4,5,6,7,8])  ){
             $text = trim( $remjob->position );
             $text .= ' at '.trim( $remjob->company->name );
             // $text = 'Want to work as '.trim( $remjob->position );
             // $text .= ' at '.trim( $remjob->company->name ).'?';
             //$text .= 'Apply through '.$link;
-        } elseif( $template == 3 ) {
+        } elseif( in_array($template, [9,10])  ) {
             $text = trim( $remjob->company->name );
             $text .= ' is hiring: '.trim( $remjob->position );
             //$text .= '. Apply here: '.$link; 

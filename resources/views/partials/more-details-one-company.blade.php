@@ -29,7 +29,7 @@
             value="{{ !is_null( old('company_twitter'))? old('company_twitter') : $user->companies()->first()->twitter }}"               
     >
     <span class="rp-group__info">
-        Your company's twitter profile (no '@' please). We will tag (mention) this profile when we share the job in twitter. 
+        Your company's twitter profile (no '@' please).
     </span>
     @error('company_twitter') 
         <p class="rp-group__error">{{ $message }}</p> 

@@ -16,13 +16,13 @@
       <!-- Modal body -->
       <div class="modal-body" style="background-color:ligthblue !important;">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h2 class="text-center mt-1 mb-3">Remote jobs rigth in your inbox</h2>
+        <h2 class="text-center mt-1 mb-3">Get daily remote jobs</h2>
         <form action="{{ route('subscribers.store') }}" method="post">
             @csrf
 
             <!-- name -->
             <div>
-                <input  type="text" name="name" placeholder="your name ... "
+                <input  type="text" name="name" placeholder="your first name ... "
                         value="{{ !is_null( old('name'))? old('name') : '' }}"               
                 >
                 @error('name') 
