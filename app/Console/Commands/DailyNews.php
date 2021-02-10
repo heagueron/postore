@@ -44,44 +44,63 @@ class DailyNews extends Command
     {
         $api = Newsletter::getApi();
 
-        // // Get campaigns
-        // $nontechCampaign = $api->get('campaigns/bb3d041905');
+        // TESTING: MARKETING Remote Jobs
+        $category = \App\Category::where('tag', 'marketing')->first();
 
-        // MARKETING Remote Jobs
-        $campaigneName = "Marketing";
-        $baseCampaignId = '75a16833a6';
+        if ( \App\Remjob::whereDate( 'created_at', '=', Carbon::yesterday()->toDateString() )
+                            ->where('category_id', $category->id)
+                            ->exists() ){
+            $this->info( 'got ' .$category->tag. ' jobs.' );
+            
+            // Replicate the campaigne
+            $clonCampaign = $api->post('campaigns/' .$category->mailchimp_base_campaign_id. '/actions/replicate');
 
-        // Replicate the campaigne
-        $clonCampaign = $api->post('campaigns/' .$baseCampaignId. '/actions/replicate');
+            if( $clonCampaign ) {
 
-        if( $clonCampaign ) { 
-            $this->info('Replication Success');
-            $campaignId = $clonCampaign["id"];
+                $this->info('Campaign replication succeded. Category: '.$category->tag);
 
-            //Update the clon campaigne
-            $html = '<br/><br/><h1> Marketing Remote Jobs Report ... (modified cloned campaign!) </h1>';
-            $options = [];
+                $campaignId = $clonCampaign["id"];
 
-            $updateResponse = Newsletter::updateContent( $campaignId, $html, $options);
-            if ( !$updateResponse  ) {
+                $remjobs = \App\Remjob::whereDate( 'created_at', '=', Carbon::yesterday()->toDateString() )
+                            ->where('category_id', $category->id)->get();
                 
-                $this->info('Campaign update failed for: '.$campaignId);
+                // Create the content
+                $html = '<br/>';
+                foreach ( $remjobs as $remjob ) {
+
+                    $html .= '<a href="https://remjob.io/remote_job/' .$remjob->slug. '">';
+                    $html .= '<p style="color:#38c172;">' .$remjob->position. '</p><br/>';
+                    $html .= '<p>' .$remjob->company->name. '</p><br/>';
+                    $html .= '<p>' .$remjob->locations. '</p><br/></a>';
+
+                }
+
+                //Update the clon campaigne
+                $options = [];
+                $updateResponse = Newsletter::updateContent( $campaignId, $html, $options);
+                if ( !$updateResponse  ) {
+
+                    $this->info('Campaign update failed for: '.$category->tag);
+
+                } else {
+
+                    // Send the campaign
+                    $response = $api->post('campaigns/' .$campaignId. '/actions/send');
+                    if( $response ) {
+                        $this->info('Campaign send initiated  for: '.$category->tag);
+                    } else {
+                        $this->info('Campaign send failed for: '.$category->tag);
+                    }
+
+                }
 
             } else {
-                
-                // Send the campaign
-                $response = $api->post('campaigns/' .$campaignId. '/actions/send');
-                if( $response ) {
-                    $this->info('Campaign send initiated  for: '.$campaignId);
-                } else {
-                    $this->info('Campaign send failed for: '.$campaignId);
-                }
-                
+                $this->info('Campaign replication failed. Category: '.$category->tag);
             }
-
         } else {
-            $this->info('Replication Fail');
+            $this->info( 'There are no ' .$category->tag. ' jobs.' );
         }
+      
 
     }
 
