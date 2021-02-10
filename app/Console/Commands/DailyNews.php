@@ -69,7 +69,7 @@ class DailyNews extends Command
                 $html .= '<div style="background-color:#ffffff; padding:10px;">';
 
                 $html .= '<p>Hello</p>'; 
-                $html .= '<p>Here are your selected remote jobs for ' .Carbon::yesterday()->toDateString(). '</p><br/>';
+                $html .= '<p>Here are your selected remote jobs for ' .Carbon::yesterday()->toFormattedDateString(). '. Click on any job title to get details.</p><br/>';
 
                 $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
 
