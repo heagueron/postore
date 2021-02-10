@@ -101,6 +101,7 @@ class CategoryController extends Controller
             'mailchimp_audience_id' => 'nullable',
             'mailchimp_category_id' => 'nullable',
             'mailchimp_interest_id' => 'nullable',
+            'mailchimp_base_campaign_id' => 'nullable',
         ]);
 
         $category->update($data);

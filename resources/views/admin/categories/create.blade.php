@@ -36,7 +36,7 @@
                 @enderror
             </div>
 
-            <!-- user_id -->
+            <!-- language_id -->
             <div>
                 <span class="rp-group__head">language*</span>
                 <select name="language_id">
