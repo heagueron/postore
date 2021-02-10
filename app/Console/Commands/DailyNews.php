@@ -65,15 +65,17 @@ class DailyNews extends Command
                             ->where('category_id', $category->id)->get();
                 
                 // Create the content
-                $html = '<br/>';
+                $html = '<br/><p>Hello. Here are your remote jobs for ' .Carbon::yesterday()->toDateString(). '</p>';
                 foreach ( $remjobs as $remjob ) {
 
-                    $html .= '<a href="https://remjob.io/remote_job/' .$remjob->slug. '">';
-                    $html .= '<p style="color:#38c172;">' .$remjob->position. '</p><br/>';
-                    $html .= '<p>' .$remjob->company->name. '</p><br/>';
-                    $html .= '<p>' .$remjob->locations. '</p><br/></a>';
+                    $html .= '<a style="text-decoration: none;" href="https://remjob.io/remote_job/' .$remjob->slug. '">';
+                    $html .= '<p style="color:#38c172;">' .$remjob->position. '</p></a>';
+                    $html .= '<p>' .$remjob->company->name. '</p>';
+                    $html .= '<p>' .$remjob->locations. '</p><br/>';
 
                 }
+
+                $html .= 'Find more jobs at: <a style="text-decoration: none;" href="https://remjob.io">https://remjob.io</a>';
 
                 //Update the clon campaigne
                 $options = [];
