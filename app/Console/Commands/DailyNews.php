@@ -65,13 +65,17 @@ class DailyNews extends Command
                             ->where('category_id', $category->id)->get();
                 
                 // Create the content
-                $html = '<br/><p>Hello. Here are your remote jobs for ' .Carbon::yesterday()->toDateString(). '</p>';
-                foreach ( $remjobs as $remjob ) {
+                $html = '<p>Hello</p>'; 
+                $html .= '<p>Here are your remote jobs for ' .Carbon::yesterday()->toDateString(). '</p><br/>';
+                $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;">';
 
+                foreach ( $remjobs as $remjob ) {
+                    $html .= '<div style="line-height: 1.6;">';
                     $html .= '<a style="text-decoration: none;" href="https://remjob.io/remote_job/' .$remjob->slug. '">';
                     $html .= '<p style="color:#38c172;">' .$remjob->position. '</p></a>';
-                    $html .= '<p>' .$remjob->company->name. '</p>';
-                    $html .= '<p>' .$remjob->locations. '</p><br/>';
+                    $html .= '<p>At ' .$remjob->company->name. '</p>';
+                    $html .= '<p>[ ' .$remjob->locations. ' ]</p><br/>';
+                    $html .= '</div';
 
                 }
 
