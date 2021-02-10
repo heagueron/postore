@@ -65,8 +65,8 @@ class DailyNews extends Command
                             ->where('category_id', $category->id)->get();
                 
                 // Create the content
-                $html  = '<div style"background-color:#c9c9c9; padding:20px:">';
-                $html .= '<div style"background-color:#ffffff; padding:10px:">';
+                $html  = '<div style="background-color:#f2f5f3; padding:10px;">';
+                $html .= '<div style="background-color:#ffffff; padding:10px;">';
 
                 $html .= '<p>Hello</p>'; 
                 $html .= '<p>Here are your selected remote jobs for ' .Carbon::yesterday()->toDateString(). '</p><br/>';
@@ -74,7 +74,7 @@ class DailyNews extends Command
                 $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
 
                 foreach ( $remjobs as $remjob ) {
-                    $html .= '<div style="line-height: 1.4;">';
+                    $html .= '<div style="line-height: 1.3;">';
                     $html .= '<a style="text-decoration: none;" href="https://remjob.io/remote_job/' .$remjob->slug. '">';
                     $html .= '<p style="color:#38c172;">' .$remjob->position. '</p></a>';
                     $html .= '<p>At ' .$remjob->company->name. '</p>';
@@ -82,7 +82,11 @@ class DailyNews extends Command
                     $html .= '</div>';
                 }
 
+                $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
+
                 $html .= 'Find more jobs at: <a style="text-decoration: none;" href="https://remjob.io">https://remjob.io</a><br/>';
+
+                $html .= '<p>Have a nice day!</p><br/>';
                 $html .= '</div></div>';
 
                 //Update the clon campaigne
