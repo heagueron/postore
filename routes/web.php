@@ -115,6 +115,7 @@ Route::group(
 Route::post('/subscribers', 'SubscriberController@store')->name('subscribers.store');
 
 
+
 //Route::get('home/check_avatars', 'HomeController@checkAvatars');
 
 // Twitter Profiles
@@ -155,10 +156,13 @@ Route::group(
  */
 
 // Fake route to ping mailchimp
-Route::get('/pingChimp', 'SubscriberController@pingChimp');
-// Route::get('/pingChimp', function () {
-    
-// });
+Route::get('/mc/ping', 'SubscriberController@pingChimp');
+Route::get('/mc/segments', 'SubscriberController@mcSegments'); // get MailChimp segments
+Route::get('/mc/campaigns', 'SubscriberController@mcGetCampaigns'); // get MailChimp campaigns
+Route::get('/mc/createCampaigne', 'SubscriberController@mcCreateCampaign'); // Create MailChimp Campaign
+
+Route::get('/mc/campaigns/{campaignId}', 'SubscriberController@showCampaign');
+
 
 // Fake route to send paid remjob mail
 Route::get('/remjob_paid', function () {

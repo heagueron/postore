@@ -93,16 +93,74 @@ class SubscriberController extends Controller
         }
         dd( $structure );
 
-        // $api = Newsletter::getApi();
-        // $allAudiences = $api->get('lists');
-        // //$response = $api->get( 'lists/f52a8f2e25/interest-categories/');
-        // $audienceId = $allAudiences['lists'][0]['id'];
-        // $categories = $api->get( 'lists/f52a8f2e25/interest-categories/');
-        
-        // foreach( $categories['categories'] as $category){
-        //     dd($category['id']);
-        // }
-        
-        // dd($categories['categories']);
     }
+
+    public function mcSegments(){
+        $api = Newsletter::getApi();
+
+        // Get segments
+        $segments = $api->get('lists/f52a8f2e25/segments');
+        dd( $segments );
+
+    }
+
+    public function mcGetCampaigns(){
+        $api = Newsletter::getApi();
+
+        // Get campaigns
+        $campaigns = $api->get('campaigns');
+        dd( $campaigns );
+
+    }
+
+    public function showCampaign( $campaignId ){
+        $api = Newsletter::getApi();
+
+        // Get campaign
+        $campaign = $api->get('campaigns/' . $campaignId);
+        dd( $campaign );
+
+    }
+
+    public function mcCreateCampaign(){
+
+        dd('Create a mc campaign ');
+
+        $subject = 'Your daily remote jobs';
+        $fromName = 'Remote Jobs';
+        $replyTo = 'info@remjob.io';
+        $listName = 'subscribers';
+
+        $options = [
+            'recipients' => [
+                'segment_opts' => [
+                    'saved_segment_id' => '3533471'
+                ]
+            ],
+        ];
+
+        $defaultOptions = [
+            'type' => 'regular',
+            'recipients' => [
+                'list_id' => 'f52a8f2e25',
+            ],
+            'settings' => [
+                'subject_line' => $subject,
+                'from_name' => $fromName,
+                'reply_to' => $replyTo,
+            ],
+        ];
+
+        $options = array_merge($defaultOptions, $options);
+
+        dd( $options );
+
+        $api = Newsletter::getApi();
+
+        // Get segments
+        $segments = $api->get('lists/f52a8f2e25/segments');
+        dd( $segments );
+
+    }
+
 }
