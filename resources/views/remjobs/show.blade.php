@@ -156,7 +156,10 @@
                 <h5 style="font-weight:bold" class="mb-3">{{__('show.similarJobs')}}</h5>
                     
                 @foreach( \App\Remjob::where('category_id', $remjob->category_id )
-                                        ->where("id", "!=", $remjob->id)->get() as $remjob )    
+                                        ->where("id", "!=", $remjob->id)
+                                        ->take(5)
+                                        ->orderBy('created_at', 'desc')
+                                        ->get() as $remjob )    
                     <x-jobrow :remjob="$remjob" page='landing'/>
                 @endforeach
 
