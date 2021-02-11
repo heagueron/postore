@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreSubscriber;
+
 use Newsletter;
 
 
@@ -14,23 +16,12 @@ class SubscriberController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSubscriber $request)
     {
-        // dd('subscribe this friend: ', $request);
+        $interestId = $request->category_id
+                    ? \App\Category::where('id',$request->category_id)->first()->mailchimp_interest_id
+                    : "84a0520c2e"; 
 
-        // validate in a Request separate file
-
-        // $data = request()->validate([
-        //     'name'          => 'nullable|min:3',
-        //     'email'         => 'required|email',
-        //     'category_id'   => [ 'nullable', Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12']) ],
-        //     //'frecuency'     => [ 'nullable', Rule::in(['daily','weekly','monthly']) ],
-        // ]);
-        //dd($request->category_id);
-        $interestId = $request->category_id ? 
-                    \App\Category::where('id',$request->category_id)->first()->mailchimp_interest_id
-                    : null;
-        //dd($interestId) ;  
         if ( ! Newsletter::isSubscribed($request->email) ) 
         {
             Newsletter::subscribePending(

@@ -47,7 +47,10 @@
                     <option value=""><p style="color:#d9d9d9 !important;">select a category ...</p> </option>
                    
                     @foreach( \App\Category::where('language_id', $localeId)->get() as $category )
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        {{-- Exclude categories without tag --}}
+                        @if( $category->tag != '')
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endif
                     @endforeach
 
                   
