@@ -82,8 +82,10 @@ class DailyNews extends Command
                         $html .= '<a style="text-decoration: none;" href="https://remjob.io/remote_job/' .$remjob->slug. '">';
                         $html .= '<p style="color:#38c172;">' .$remjob->position. '</p></a>';
                         $html .= '<p>At ' .$remjob->company->name. '</p>';
-                        $html .= '<p>[ ' .$remjob->locations. ' ]</p><br/>';
-                        $html .= '</div>';
+                        if( $remjob->locations ){
+                            $html .= '<p>[ ' .$remjob->locations. ' ]</p>';
+                        }
+                        $html .= '</div><br/>';
                     }
 
                     $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
