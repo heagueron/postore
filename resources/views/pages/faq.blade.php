@@ -39,7 +39,7 @@
                 <p>{{__('faq.whyRemjob-A')}}</p>
 
                 <h5><strong>{{__('faq.howMuch-Q')}}</strong></h5>
-                <p>{{ __('faq.howMuch-A', ['plan2' => \App\Plan::find(2)->value, 'duration' => \App\Option::find(1)->value]) }}</p>
+                <p>{{ __('faq.howMuch-A', ['plan1' => \App\Plan::find(1)->value, 'duration' => \App\Option::find(1)->value]) }}</p>
 
                 <h5><strong>{{__('faq.whatInfo-Q')}}</strong></h5>
                 <p>{{__('faq.whatInfo-A')}}</p>

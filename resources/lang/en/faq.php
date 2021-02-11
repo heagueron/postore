@@ -32,7 +32,7 @@ return [
                         Save a lot by reducing significant costs in office infraestructure.',
 
     'howMuch-Q'   => 'How much does it cost to post on remjob.io?',
-    'howMuch-A'   => 'Paid options start at just $:plan2 per post with a duration of :duration days.',
+    'howMuch-A'   => 'Paid options start at just $:plan1 per post with a duration of :duration days.',
 
     'whatInfo-Q'   => 'What kind of information is needed to enter to post on remjob.io?',
     'whatInfo-A'   => 'First you register as a user. Then you will enter your company identification data and the job

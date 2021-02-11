@@ -32,7 +32,7 @@ return [
                         Ahorre mediante la reducción de costos en infraestructura.',
 
     'howMuch-Q'   => 'Cuánto cuesta publicar en remjob.io?',
-    'howMuch-A'   => 'Las opciones pagas empiezan en sólo $:plan2 por publicación con una duración de  post with a duration de :duration días.',
+    'howMuch-A'   => 'Las opciones pagas empiezan en sólo $:plan1 por publicación con una duración de  post with a duration de :duration días.',
 
     'whatInfo-Q'   => 'Qué tipo de información es requerida para publicar en remjob.io?',
     'whatInfo-A'   => 'Primero se registra como usuario. Luego ingresa datos de identificación de la empresa y los datos del trabajo remoto
