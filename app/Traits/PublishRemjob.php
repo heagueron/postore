@@ -79,8 +79,6 @@ trait PublishRemjob
         // Add remjob.io link
         // $text .= ' More jobs ☛  '.$remjobLink;
 
-        dd($text);
-
         // Share on Twitter with TwitterOAuth library
         $twitterProfile = \App\TwitterProfile::where('handler','JMServca')->first();
         $twitter = new TwitterGateway( $twitterProfile->id, false );
