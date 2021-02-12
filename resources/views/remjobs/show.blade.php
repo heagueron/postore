@@ -153,7 +153,7 @@
         @if( \App\Remjob::where('category_id', $remjob->category_id )->count() > 1 )                
             <div class="d-flex flex-column align-content-center justify-content-center my-5">
                 
-                <h5 style="font-weight:bold" class="mb-4">{{ strtoupper( __('show.similarJobs', ['category' => $remjob->category->name]) ) }}</h5>
+                <h5 style="font-weight:bold" class="mb-4">{{ __('show.similarJobs', ['category' => $remjob->category->name]) }}</h5>
                     
                 @foreach( \App\Remjob::where('category_id', $remjob->category_id )
                                         ->where("id", "!=", $remjob->id)

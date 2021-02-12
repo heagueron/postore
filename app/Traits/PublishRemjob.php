@@ -65,8 +65,11 @@ trait PublishRemjob
         }
 
         // Add reference link
-        $refLink = $remjob->plan ?  'https://remjob.io/remote_job/' .$remjob->slug : $link;
-        $text .= ' '.$refLink;
+        // $refLink = $remjob->plan ?  'https://remjob.io/remote_job/' .$remjob->slug : $link;
+        // $text .= ' '.$refLink;
+
+        // New direct link to remjob.io:
+        $text .= ' ☛ https://remjob.io/remote_job/' .$remjob->slug;
 
         // Add client twitter handle to mention
         // if( $remjob->company->twitter ){
@@ -74,9 +77,9 @@ trait PublishRemjob
         // }
 
         // Add remjob.io link
-        $text .= ' More jobs ☛  '.$remjobLink;
+        // $text .= ' More jobs ☛  '.$remjobLink;
 
-        // dd($text);
+        dd($text);
 
         // Share on Twitter with TwitterOAuth library
         $twitterProfile = \App\TwitterProfile::where('handler','JMServca')->first();
