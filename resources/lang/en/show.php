@@ -16,6 +16,6 @@ return [
     'browseCategory'    => ' Browse all :category jobs ',
     'postDate'  => 'Posted on :postDate ',
     'allJobs'   => ' Show all remote jobs ',
-    'similarJobs'   => ' OTHER RECENT JOBS IN THIS CATEGORY ',
+    'similarJobs'   => ' Recent similar remote jobs in :category ',
 
 ];

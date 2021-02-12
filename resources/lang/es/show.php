@@ -16,6 +16,6 @@ return [
     'browseCategory'    => ' Chequear todos los trabajos :category ',
     'postDate'  => 'Publicado en :postDate ',
     'allJobs'   => ' Mostrar todos los trabajos remotos ',
-    'similarJobs'   => ' OTROS TRABAJOS RECIENTES EN ESTA CATEGORIA ',
+    'similarJobs'   => ' Trabajos remotos recientes en :category ',
 
 ];

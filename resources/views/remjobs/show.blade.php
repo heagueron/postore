@@ -15,7 +15,7 @@
             </a>
 
             @if( $remjob->category )
-            <a href="{{route('remjobs.searchByTags', 'remote-' .$remjob->category->name.'-jobs')}}" style="color:#4CAF50;">
+            <a href="{{route('remjobs.searchByTags', 'remote-' .$remjob->category->tag.'-jobs')}}" style="color:#4CAF50;">
                 {{ __('show.browseCategory', ['category' => $remjob->category->name]) }}<i class="fas fa-arrow-right"></i>
             </a>
             @endif
@@ -153,7 +153,7 @@
         @if( \App\Remjob::where('category_id', $remjob->category_id )->count() > 1 )                
             <div class="d-flex flex-column align-content-center justify-content-center my-5">
                 
-                <h5 style="font-weight:bold" class="mb-3">{{__('show.similarJobs')}}</h5>
+                <h5 style="font-weight:bold" class="mb-4">{{ strtoupper( __('show.similarJobs', ['category' => $remjob->category->name]) ) }}</h5>
                     
                 @foreach( \App\Remjob::where('category_id', $remjob->category_id )
                                         ->where("id", "!=", $remjob->id)
