@@ -60,6 +60,13 @@ Route::group(
         Route::get('/editOptions', 'Admin\AdminController@editAdminOptions')->name('admin.edit-options');
         Route::patch('/update-options', 'Admin\AdminController@updateAdminOptions')->name('admin.update-options');
 
+        Route::get('/textOptions/{textOption}/edit', 'Admin\AdminController@editTextOption')->name('admin.textOptions.edit');
+        Route::patch('/textOptions/{textOption}', 'Admin\AdminController@updateTextOption')->name('admin.textOptions.update');
+        Route::post('/textOptions', 'Admin\AdminController@storeTextOption')->name('admin.textOptions.store');
+
+        Route::get('/options/{option}/edit', 'Admin\AdminController@editOption')->name('admin.options.edit');
+        Route::patch('/options/{option}', 'Admin\AdminController@updateOption')->name('admin.options.update');
+
         // Remjobs
         Route::get('/remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
         Route::get('/remjobs/{remjob}/edit', 'Admin\RemjobController@edit')->name('admin.remjobs.edit');

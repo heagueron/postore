@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\TextOption;
+use App\Option;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -20,11 +22,95 @@ class AdminController extends Controller
      */
     public function editAdminOptions()
     {
-        $adminOptions = \App\Option::all();
-        $adminTextOptions = \App\TextOption::all();
-        $adminPlans = \App\Plan::all();
+        $options = \App\Option::all();
+        $textOptions = TextOption::all();
+        // $adminPlans = \App\Plan::all();
 
-        return view( 'admin.edit-options', compact( 'adminOptions', 'adminTextOptions', 'adminPlans') );
+        //return view( 'admin.edit-options', compact( 'adminOptions', 'adminTextOptions', 'adminPlans') );
+        return view( 'admin.options.index', compact( 'options', 'textOptions') );
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeTextOption(Request $request)
+    {
+        //dd($request);
+        $data = request()->validate([
+            'name'          => 'required',
+            'value'         => 'required',
+        ]);
+
+        TextOption::create($data);
+
+        return redirect()->route('admin.edit-options');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\TextOption  $textOption
+     * @return \Illuminate\Http\Response
+     */
+    public function editTextOption(TextOption $textOption)
+    {
+        // dd('will edit text option: ', $textOption->name);
+        return view('admin.options.editTextOption', compact('textOption') );
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\TextOption  $textOption
+     * @return \Illuminate\Http\Response
+     */
+    public function updateTextOption(Request $request, TextOption $textOption)
+    {
+        //dd('upddate ', $textOption->name, $request);
+        $data = request()->validate([
+            'name'          => 'required',
+            'value'         => 'required',
+        ]);
+
+        $textOption->update($data);
+
+        return redirect()->route('admin.edit-options');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Option  $option
+     * @return \Illuminate\Http\Response
+     */
+    public function editOption(Option $option)
+    {
+        //dd('will edit option: ', $option->name);
+        return view('admin.options.editOption', compact('option') );
+    }
+
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Option  $option
+     * @return \Illuminate\Http\Response
+     */
+    public function updateOption(Request $request, Option $option)
+    {
+        //dd('upddate ', $option->name, $request);
+        $data = request()->validate([
+            'name'          => 'required',
+            'value'         => 'required',
+        ]);
+
+        $option->update($data);
+
+        return redirect()->route('admin.edit-options');
     }
 
     /**
