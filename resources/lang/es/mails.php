@@ -2,6 +2,8 @@
 
 return [
 
+    'dearCustomer'      => 'Estimado cliente,',
+
     'crClientSalute'      => 'Felicitaciones por crear en remjob.io. Detalles: ',
 
     'companyLabel'      => 'Empresa: ',

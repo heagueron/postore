@@ -104,6 +104,9 @@ return [
     'noRemjobs'     => 'There are not remote jobs posted in that category or tag.',
     'startTyping'   => 'Start typing to find jobs ...',
 
+    // Edit remjob
+    'edFormTitle'   => 'edit your remote job post',
+
 
 
 

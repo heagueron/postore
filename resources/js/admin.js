@@ -144,7 +144,7 @@ setTimeout(() => {
         companyControl();
     }
     
-    if ( window.location.href.indexOf("admin/remjobs") > -1) {
+    if ( window.location.href.indexOf("admin/remjobs") > -1 || window.location.href.indexOf("remjobs/edit") > -1) {
         console.log("active url is: admin remjobs page");
         if( document.getElementById("admin-update-remjob-form") ){
            document.querySelector('#app-footer').style.display = "none"; 

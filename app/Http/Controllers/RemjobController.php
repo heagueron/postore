@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Mail\RemjobCreatedMail;
 use App\Http\Requests\StoreRemjob;
+use App\Http\Requests\UpdateRemjob;
+use App\Mail\RemjobUpdatedMail;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -314,8 +316,31 @@ class RemjobController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Remjob $remjob)
-    {
-        //
+    { 
+
+        if( Auth::user()->id != $remjob->company->user_id ) {
+            $title = 'Information';
+            $message = 'Ooops!. It seems the link is not working. Please check or contact support (in your message, 
+                        include the link you are trying to access. Thanks!';
+            return view( 'information', compact( 'title', 'message' ) );
+        }
+
+        $tagsText = '';
+        foreach( $remjob->tags()->take(5)->get() as $tag ){
+            $tagsText .= $tag->name.', ';
+        }
+        $tagsText = rtrim($tagsText, ", ");
+
+        if ( $remjob->language == 'es' ) {
+            $categories = \App\Category::whereIn( 'id', [7, 8, 9, 10, 11, 12] )->get();
+        } else {
+            $categories = \App\Category::whereIn( 'id', [1, 2, 3, 4, 5, 6] )->get();
+        }
+
+        $user = Auth::user();
+        
+        return view( 'remjobs.edit', compact('remjob', 'tagsText', 'categories', 'user') );
+
     }
 
     /**
@@ -325,9 +350,56 @@ class RemjobController extends Controller
      * @param  \App\Remjob  $remjob
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Remjob $remjob)
+    public function update(UpdateRemjob $request, Remjob $remjob)
     {
-        //
+        //dd('update: ', $remjob->position, $request );
+        $remjob->update([
+
+            'position'              => request()->position,
+            'description'           => request()->description,
+            'category_id'           => request()->category_id,
+            'min_salary'            => request()->min_salary,
+            'max_salary'            => request()->max_salary,
+            'locations'             => request()->locations,
+            'apply_link'            => request()->apply_link,
+            'apply_email'           => request()->apply_email,
+            'apply_mode'            => request()->apply_mode,
+            
+        ]);
+
+        // tags for the remjob-tag pivot table
+        $tagsIdToLink = [];  
+
+        $inputTags = explode(',', request()->tags );
+
+        // Insert the Category tag in the first position of the array
+        $category = Category::find( request()->category_id );
+        array_unshift( $inputTags, $category->tag);
+
+        // Add every tag, if it does not exist, create it in the database.
+        foreach ( $inputTags as $inputTag ) {
+            if( Tag::where('name',trim($inputTag) )-> exists() ) {
+                $foundTag = Tag::where('name',trim($inputTag) )->first();
+                array_push( $tagsIdToLink, $foundTag->id );
+            } else {
+                $newTag = Tag::create([ 'name' => trim($inputTag) ]);
+                array_push( $tagsIdToLink, $newTag->id );
+            }
+        }
+
+        $remjob->tags()->sync( array_unique( $tagsIdToLink ) );
+
+        // Send Mail to Client and cc Administrator
+        try{ 
+            Mail::to( $remjob->company->user->email )
+                ->cc('info@remjob.io')
+                ->bcc('heagueron@gmail.com')
+                ->send( new RemjobUpdatedMail( $remjob ) );
+        } catch (\Exception $exception){ 
+            Log::info( 'Failed to send email to notify client or admin update of remjob: ' . $remjob->id );
+        }
+
+        return redirect()->route('landing');
     }
 
     /**

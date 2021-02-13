@@ -2,8 +2,10 @@
 
 return [
 
-    'crClientSalute'      => 'Congratulations for creating at remjob.io. Here are the details: ',
-    'updateSalute'      => 'The remote job has been updated. Here are the details: ',
+    'dearCustomer'      => 'Dear customer,',
+
+    'crClientSalute'    => 'Congratulations for creating at remjob.io. Here are the details: ',
+    'updateSalute'      => 'Your remote job has been updated. Here are the details: ',
     
     'companyLabel'      => 'Company: ',
     'positionLabel'     => 'Position: ',
@@ -16,6 +18,8 @@ return [
     'applyModeLabel'    => 'Apply mode: ',
     'planLabel'         => 'Selected plan: ',
     
-    'finalMsg'          => 'Have a good day! ',
+    'ifEditLabel'       => ' If you ever need to edit your remote job post, here is the required link: ',
+    'editButton'        => ' Edit the remote job post ',
+    'finalMsg'          => ' Have a good day! ',
 
 ];

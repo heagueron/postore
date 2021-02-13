@@ -24,6 +24,10 @@ Route::get('/worldwide_remote_jobs', 'RemjobController@worldwide')->name('remjob
 Route::get('/post_a_job', 'RemjobController@create')->name('post_a_job')->middleware('auth');
 Route::post('/remjobs', 'RemjobController@store')->name('remjobs.store')->middleware('auth');
 
+// REMJOB EDITED BY CUSTOMER
+Route::get('/remjobs/edit/{remjob}', 'RemjobController@edit')->name('remjobs.edit')->middleware('auth');
+Route::patch('/remjobs/{remjob}', 'RemjobController@update')->name('remjobs.update')->middleware('auth');
+
 // REMOTE JOB SHOW 
 Route::get('/remote_job/{remjob:slug}', 'RemjobController@show')->name('remjobs.show');
 

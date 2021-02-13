@@ -397,8 +397,7 @@ class RemjobController extends Controller
 
         $remjob->update([
 
-            'position'      => request()->position,
-            //'tags'          => ['required', 'max:100'], 
+            'position'              => request()->position,
             'description'           => request()->description,
             'category_id'           => request()->category_id,
             'min_salary'            => request()->min_salary,
@@ -411,7 +410,7 @@ class RemjobController extends Controller
         ]);
 
         // tags for the remjob-tag pivot table
-        $tagsIdToLink = []; // 
+        $tagsIdToLink = [];  
 
         $inputTags = explode(',', request()->tags );
 
