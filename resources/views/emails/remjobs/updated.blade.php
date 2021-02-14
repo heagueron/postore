@@ -1,15 +1,19 @@
-
-    
 <div style="margin-top:1rem;padding:25px;background-color:#f2f5f3;">
 
-    <a href="{{ url('/') }}" style="display:flex;justify-content:center;align-items: center;">
-        <img src="{{ asset('images/remjob.png') }}" alt="RemJob" width="80px;" >
-    </a>
+    <p style="text-align:center;margin:10px 0;padding:0;">
+        <a href="{{ url('/') }}" target="_blank">
+            <img align="center" height="85" src="{{ asset('images/remjob.png') }}" alt="" 
+                style="float:center;border:0;height:auto!important;outline:none;text-decoration:none" 
+                width="100" class="CToWUd">
+        </a>
+    </p>
 
     <div style="padding:20px;background-color:#ffffff;margin-top:15px;">
         
         <p style="margin-bottom:10px;margin-left:10px;">{{__('mails.dearCustomer')}}</p>
         <p style="margin-bottom:10px;margin-left:10px;">{{__('mails.updateSalute')}}</p>
+
+        <p style="margin-bottom:15px;margin-left:10px;">{{__('mails.contentLabel')}}</p>
 
         <div style="margin-bottom:10px;margin-left:10px;">
             <div>
@@ -46,9 +50,14 @@
                 </p>
 
                 {{-- DESCRIPTION --}}
+                
                 <div>
+                    <hr style="margin:10px;">
+
                     <p style="font-weight:bold;">{{__('mails.descriptionLabel')}}</p>
                     <div>{!! $remjob->description !!}</div>
+
+                    <hr style="margin:10px;">
 
                     @if($remjob->min_salary)
                         <p>
@@ -105,22 +114,24 @@
 
             </div>
 
-            <div style="margin-top:2rem;">
+            <hr style="margin:10px;">
+            
+            <div style="margin-top:3rem;margin-bottom:3rem;">
 
                 <p>{{__('mails.ifEditLabel')}}</p>
-                
+
                 <a href="{{ url('/remjobs/edit/' . $remjob->id ) }}" 
                     style="padding:10px;background-color:#4CAF50;border:none;color:white;font-weight:bold;text-decoration:none;">
                     {{__('mails.editButton')}}
                 </a> 
-                
+
                 <p style="margin-top:20px;">{{__('mails.finalMsg')}}</p>
 
             </div>
 
         </div>
- 
-    </div> 
+
+    </div>
 
 </div>
 

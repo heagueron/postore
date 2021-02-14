@@ -389,6 +389,9 @@ class RemjobController extends Controller
 
         $remjob->tags()->sync( array_unique( $tagsIdToLink ) );
 
+        // Store the new Remjob id...
+        session([ 'newRemjobId' => $remjob->id ]);
+
         // Send Mail to Client and cc Administrator
         try{ 
             Mail::to( $remjob->company->user->email )
