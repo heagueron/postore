@@ -72,7 +72,7 @@
 
                     <p>
                         <span style="font-weight:bold;">{{__('mails.applyModeLabel')}}</span>
-                        <span>
+                        <span style="text-decoration:none;">
                             @if( $remjob->apply_email == null )
                                 {{ $remjob->apply_link }}
                             @else
@@ -105,15 +105,16 @@
 
             </div>
 
-            <div class="mt-5">
+            <div style="margin-top:2rem;">
 
                 <p>{{__('mails.ifEditLabel')}}</p>
                 
-                <a href="{{ url('/remjobs/edit/' . $remjob->id ) }}">
-                    <button type="button" style="paddig:15px !important;background-color:#4CAF50;border:none;color:white;font-weight:bold;">{{__('mails.editButton')}}</button>
+                <a href="{{ url('/remjobs/edit/' . $remjob->id ) }}" 
+                    style="padding:10px;background-color:#4CAF50;border:none;color:white;font-weight:bold;text-decoration:none;">
+                    {{__('mails.editButton')}}
                 </a> 
                 
-                <p>{{__('mails.finalMsg')}}</p>
+                <p style="margin-top:20px;">{{__('mails.finalMsg')}}</p>
 
             </div>
 
