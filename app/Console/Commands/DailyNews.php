@@ -68,11 +68,13 @@ class DailyNews extends Command
                     $remjobs = \App\Remjob::whereDate( 'created_at', '=', Carbon::yesterday()->toDateString() )
                                 ->where('category_id', $category->id)->get();
                     
-                    // Create the content
-                    $html  = '<div style="background-color:#f2f5f3; padding:10px;">';
+                    // Container
+                    $html  = '<div style="margin-top:1rem;padding:25px;background-color:#f2f5f3;">';
+
+                    // Content
                     $html .= '<div style="background-color:#ffffff; padding:10px;">';
 
-                    $html .= '<p>Hello</p>'; 
+                    $html .= '<p>Hello *|FNAME|*,</p>';  
                     $html .= '<p>Here are your selected remote jobs. Click on any job title to get more details.</p><br/>';
 
                     $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
