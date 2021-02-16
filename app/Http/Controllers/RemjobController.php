@@ -495,4 +495,28 @@ class RemjobController extends Controller
 
     }
 
+    /***********************
+     * 
+     * Test Admin Only Route
+     */
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index_hean( Request $request )
+    {
+        $remjobs = Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )
+            ->orderBy('plan_id', 'desc')->orderBy('created_at', 'desc')->get();
+
+        $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
+
+        $categories = Category::where('language_id', '=',  $lenguageId )->get();
+        $selectedCategory = $categories[0];
+
+        return view( 'admin.landing_hean', compact('remjobs', 'request', 'categories', 'selectedCategory') );
+
+    }
+
+
 }
