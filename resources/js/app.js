@@ -16,7 +16,7 @@ require('./autocomplete');
 require('./job-post');
 require('./admin');
 require('./summernote');
-require('./jquery.nice-select');
+require('./jquery-nice-select');
 
 window.Vue = require('vue');
 
