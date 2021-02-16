@@ -17,15 +17,36 @@
 
         <div class="row mt-3">
 
-            <div class="col-sm-12 col-lg-3">
-                @include('partials.categories')
+            
 
-                <div class="text-center my-2">
+
+            <div class="col-sm-12 col-lg-3">
+
+                <div class="d-flex flex-column">
+
+                    <select class="wide" id="selectCategory" style="marging-top:8px !important;">
+                        @foreach( $categories as $category )
+                            @if( $selectedCategory->id == $category->id )
+                                <option selected value="{{ $category->tag }}">{{ $category->name }}</option>
+                            @else 
+                                <option value="{{ $category->tag }}">{{ $category->name }}</option>
+                            @endif
+                        @endforeach
+                    </select>
+
+                    <div class="text-center my-4">
                     {{-- Open Subscribe Modal --}}
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#createSubscriberModal">
+                    <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#createSubscriberModal">
                         {{__('I want to subscribe')}}
                     </button>
                 </div>
+            
+                </div>
+                
+
+                
+
+                
                 
             </div>
 

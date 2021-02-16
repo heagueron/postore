@@ -395,6 +395,7 @@ class RemjobController extends Controller
         // Delete previous links from pivot table remjob_tag
         DB::table('remjob_tag')->where('remjob_id',$remjob->id)->delete();
 
+
         $remjob->update([
 
             'position'              => request()->position,
@@ -406,6 +407,7 @@ class RemjobController extends Controller
             'apply_link'            => request()->apply_link,
             'apply_email'           => request()->apply_email,
             'apply_mode'            => request()->apply_mode,
+            'slug'                  => Str::slug( (request()->position.' '.$remjob->id), '_'),
             
         ]);
 

@@ -56,7 +56,12 @@ class RemjobController extends Controller
 
         } else { $remjobs = []; } 
 
-        return view( 'landing', compact('remjobs', 'request') );
+        $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
+
+        $categories = Category::where('language_id', '=',  $lenguageId )->get();
+        $selectedCategory = $categories[0];
+        //dd($selectedCategory);
+        return view( 'landing', compact('remjobs', 'request', 'categories', 'selectedCategory') );
 
     }
 
@@ -76,8 +81,12 @@ class RemjobController extends Controller
             ->orderBy('plan_id', 'desc')->orderBy('created_at', 'desc')->get();
         } else { $remjobs = []; } 
 
-        return view( 'landing', compact('remjobs', 'request') );
+        $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
 
+        $categories = Category::where('language_id', '=',  $lenguageId )->get();
+        $selectedCategory = $categories[0];
+        //dd($selectedCategory);
+        return view( 'landing', compact('remjobs', 'request', 'categories', 'selectedCategory') );
     }
 
     private function registerVisit( $ip, $route ){
@@ -243,14 +252,18 @@ class RemjobController extends Controller
     {
         // App::setLocale('es');
 
+        $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
+        $categories = Category::where('language_id', '=',  $lenguageId )->get();
+
+
         $tagsLength = ( Str::length( $tags ) ) - 12;
         $tagsText = Str::substr($tags, 7, $tagsLength);
 
         //Log::info('Searching jobs for tag: '.$tagsText);
 
         $catTags = [
-            'dev', 'customer-support', 'marketing', 'design', 'non-tech',
-            'desarrollo', 'servicios-al-cliente', 'mercadotecnia', 'diseño', 'otros'
+            'dev', 'customer_support', 'marketing', 'design', 'non_tech',
+            'desarrollo', 'servicios_al_cliente', 'mercadotecnia', 'diseño', 'otros'
         ];
 
         if( in_array( $tagsText, $catTags ) ){
@@ -266,6 +279,8 @@ class RemjobController extends Controller
                     ->orderBy('plan_id', 'desc')
                     ->orderBy('created_at', 'desc')->get();
             } else { $remjobs = []; }
+
+            $selectedCategory = $category;
             
         } else {
             // Search for a normal TAG
@@ -284,9 +299,11 @@ class RemjobController extends Controller
                     ->orderBy('created_at', 'desc')->get();
             } else { $remjobs = []; }
 
+            $selectedCategory = $categories[0];
+
         }
-        
-        return view( 'landing', compact('remjobs', 'request') );
+
+        return view( 'landing', compact('remjobs', 'request', 'categories', 'selectedCategory') );
         
     }
 
@@ -364,6 +381,7 @@ class RemjobController extends Controller
             'apply_link'            => request()->apply_link,
             'apply_email'           => request()->apply_email,
             'apply_mode'            => request()->apply_mode,
+            
             
         ]);
 

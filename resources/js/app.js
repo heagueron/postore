@@ -16,6 +16,7 @@ require('./autocomplete');
 require('./job-post');
 require('./admin');
 require('./summernote');
+require('./jquery.nice-select');
 
 window.Vue = require('vue');
 
@@ -77,13 +78,43 @@ function navBackgroundControl() {
   }
 }
 
+
+/* Categories in Jquery Nice Selector */
+function categoryControl() {
+  $(document).ready(function() {
+    $('#selectCategory').niceSelect();
+  });
+
+  $('#selectCategory').change(function () {
+
+    const PATH = document.querySelector('#appURL').value == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
+    console.log(`App URL From DOM: ${document.querySelector('#appURL').value}`);
+    console.log(`PATH: ${PATH}`)
+
+    console.log('SELECTION: '+this.value);
+    if( this.value != ''){
+      window.location.href = `${PATH}/list/remote_${this.value}_jobs`
+    } else {
+      window.location.href = `${PATH}`
+    }
+  })
+}
+
+
+
+
+
 if ( window.location.href.indexOf("admin") <= -1) {
   /* Not in admin routes */
 
   navBackgroundControl();
   window.onscroll = function() {navBackgroundControl()};
 
+  categoryControl();
+
 }
+
+
 
 
 
