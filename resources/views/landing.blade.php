@@ -24,15 +24,9 @@
 
                 <div class="d-flex flex-column">
 
-                    <select class="wide" id="selectCategory" style="marging-top:8px !important;">
-                        @foreach( $categories as $category )
-                            @if( $selectedCategory->id == $category->id )
-                                <option selected value="{{ $category->tag }}">{{ $category->name }}</option>
-                            @else 
-                                <option value="{{ $category->tag }}">{{ $category->name }}</option>
-                            @endif
-                        @endforeach
-                    </select>
+                    @include('partials.categories')
+
+                    
 
                     <div class="text-center my-4">
                     {{-- Open Subscribe Modal --}}
