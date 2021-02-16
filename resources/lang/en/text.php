@@ -20,7 +20,7 @@ return [
     //Categories
     'catRemoteJobs' => 'Remote Jobs',
     'catSoftwareDevelopment' => 'Software Development',
-    'catClientService' => 'Client Service',
+    'catClientService' => 'Customer Support',
     'catMarketing' => 'Marketing',
     'catDesign' => 'Design',
     'catNonTech' => 'Non Tech',
