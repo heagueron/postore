@@ -5,6 +5,8 @@
 @section('content')
 
     @include('partials.nav')
+
+    @include('subscribers.create')
     
     <div class="container" style="margin-top:7rem;">
 
@@ -147,6 +149,14 @@
 
                     </div>
                 </div>
+
+                <div class="text-center my-4">
+                    {{-- Open Subscribe Modal --}}
+                    <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#createSubscriberModal">
+                        {{__('I want to subscribe')}}
+                    </button>
+                </div>
+
             </div>
         </div>
 

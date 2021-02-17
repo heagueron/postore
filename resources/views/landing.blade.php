@@ -17,30 +17,20 @@
 
         <div class="row mt-3">
 
-            
-
-
             <div class="col-sm-12 col-lg-3">
 
                 <div class="d-flex flex-column">
 
                     @include('partials.categories')
 
-                    
-
                     <div class="text-center my-4">
-                    {{-- Open Subscribe Modal --}}
-                    <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#createSubscriberModal">
-                        {{__('I want to subscribe')}}
-                    </button>
-                </div>
+                        {{-- Open Subscribe Modal --}}
+                        <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#createSubscriberModal">
+                            {{__('I want to subscribe')}}
+                        </button>
+                    </div>
             
                 </div>
-                
-
-                
-
-                
                 
             </div>
 
@@ -59,10 +49,6 @@
             </div>
 
         </div>
-        
-        
-
-        
 
     </div>
     
