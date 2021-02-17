@@ -259,6 +259,12 @@ class RemjobController extends Controller
     public function searchByTags( $tags, Request $request )
     {
         // App::setLocale('es');
+        // Register a visit
+        $ip = \request()->ip();
+
+        if( $ip != "127.0.0.1" AND $ip != "45.186.209.3" ) {
+            $this->registerVisit( $ip, 'remjobs.searchByTags' );
+        }
 
         $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
         $categories = Category::where('language_id', '=',  $lenguageId )->get();
