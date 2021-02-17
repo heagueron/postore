@@ -279,7 +279,7 @@ class RemjobController extends Controller
         $remjob = Remjob::create([
             'position'          => $jobData["position"],
             'description'       => $jobData["description"],
-            'category_id'       => null,
+            'category_id'       => 2, // This is category id for dev by default. It should be edited in admin.
             'locations'         => $jobData["locations"],
             'apply_link'        => $jobData["apply_link"],
             'apply_mode'        => 'link',
