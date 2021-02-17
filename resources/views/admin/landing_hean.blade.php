@@ -24,10 +24,10 @@
 
                 <div class="d-flex flex-column">
 
-                    <select class="wide" id="selectCategory" style="marging-top:8px !important;">
+                    <select class="wide mb-3" id="selectCategory2" style="marging-top:8px !important;">
                         @foreach( $categories as $category )
                             @if( $selectedCategory->id == $category->id )
-                                <option selected value="{{ $category->tag }}">{{ $category->name }}</option>
+                                <option selected value="{{ $category->tag }}" class="mt-2">{{ $category->name }}</option>
                             @else 
                                 <option value="{{ $category->tag }}">{{ $category->name }}</option>
                             @endif

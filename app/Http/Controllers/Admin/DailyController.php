@@ -46,29 +46,27 @@ class DailyController extends Controller
         while ( $endDT->gte($startDT) ){
 
             if( Daily::where('track_day', $endDT->toDateString())->exists() ){
-                //dd('breaking on: ', $endDT->toDateString() );
                 break;
             }
 
-            $landingVisits = 0;
-            foreach (Visit::all() as $visit) {
-                if ( Str::limit( $visit->created_at, 10, '') == $endDT->toDateString()  ) {
-                    $landingVisits +=1;
+            if( Visit::where('created_at', '==', $endDT)->exists() ){
+                $landingVisits = 0;
+                $detailVisits = 0;
+                foreach ( Visit::whereDate('created_at', '==', $endDT)  as $visit ) {
+                    if ( $visit->entry_route == 'landing'  ) { $landingVisits +=1; }
+                    if ( $visit->entry_route == 'remjobs.show'  ) { $detailVisits +=1; }
                 }
-            }
-
-            // Got Landing Visits?
-            if( $landingVisits > 0 ){
                 Daily::create([
-                    'track_day'    => $endDT->toDateString(),
-                    'hits_landing' => $landingVisits,
+                    'track_day'     => $endDT->toDateString(),
+                    'hits_landing'  => $landingVisits,
+                    'hits_details'  => $$detailVisits,
                 ]);
             }
-            
-            //array_push( $all_dates, $endDT->toDateString() );
+
             $endDT->subDay();
+
         }
-        //dd($all_dates);
+
         return back()->with('flash', 'All dailies updated. ');
 
     }

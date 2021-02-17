@@ -61,7 +61,13 @@
             </li>
 
             <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">Today Visits: {{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
+                <span class="c-sidebar-nav-link">Today Landing Visits: {{ \App\Visit::where('entry_route', 'landing')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
+            </li>
+            <li class="c-sidebar-nav-item">
+                <span class="c-sidebar-nav-link">Today DetailVisits: {{ \App\Visit::where('entry_route', 'remjobs.show')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
+            </li>
+            <li class="c-sidebar-nav-item">
+                <span class="c-sidebar-nav-link">Today All Visits: {{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
             </li>
 
             <li class="c-sidebar-nav-item">

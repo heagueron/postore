@@ -239,7 +239,15 @@ class RemjobController extends Controller
      */
     public function show(Remjob $remjob)
     {
+        // Register a visit
+        $ip = \request()->ip();
+
+        if( $ip != "127.0.0.1" AND $ip != "45.186.209.3" ) {
+            $this->registerVisit( $ip, 'remjobs.show' );
+        }
+        
         return view( 'remjobs.show', compact('remjob') );
+
     }
 
     /**
