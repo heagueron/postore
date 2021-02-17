@@ -286,7 +286,7 @@ class RemjobController extends Controller
             'company_id'        => $company->id,
             'external_api'      => $jobData['external_api'],
             //'slug'              => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
-            'active'            => 1,
+            'active'            => 0, // will be active after edition.
         ]);
 
         $remjob->update([
