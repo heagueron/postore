@@ -49,19 +49,21 @@ class DailyController extends Controller
                 break;
             }
 
-            if( Visit::where('created_at', '==', $endDT)->exists() ){
-                $landingVisits = 0;
-                $detailVisits = 0;
-                $categoryOrTagVisits = 0;
-                foreach ( Visit::whereDate('created_at', '==', $endDT)  as $visit ) {
+            $landingVisits = 0;
+            $detailVisits = 0;
+            $categoryOrTagVisits = 0;
+            foreach (Visit::all() as $visit) {
+                if ( Str::limit( $visit->created_at, 10, '') == $endDT->toDateString()  ) {
                     if ( $visit->entry_route == 'landing'  ) { $landingVisits +=1; }
                     if ( $visit->entry_route == 'remjobs.show'  ) { $detailVisits +=1; }
                     if ( $visit->entry_route == 'remjobs.searchByTags'  ) { $categoryOrTagVisits +=1; }
                 }
+            }
+            if ( $landingVisits + $detailVisits + $categoryOrTagVisits > 0 ){
                 Daily::create([
                     'track_day'     => $endDT->toDateString(),
                     'hits_landing'  => $landingVisits,
-                    'hits_details'  => $$detailVisits,
+                    'hits_details'  => $detailVisits,
                     'hits_category' => $categoryOrTagVisits,
                 ]);
             }
