@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Remote Resources | Welcome')
+@section('title', 'Remote Jobs | Welcome')
 
 @section('content')
 
@@ -21,9 +21,23 @@
 
                 <div class="d-flex flex-column">
 
-                    @include('partials.categories')
+                    <!--the original select box is surrounded with a "rj-custom-select" DIV element.-->
+                    <div class="rj-custom-select" id="rj-custom-select">
+                        <select class="rj-select">
+                            @foreach( $categories as $category )
+                                @if( $selectedCategory->id == $category->id )
+                                    <option selected value="{{ $category->tag }}">{{ $category->name }}</option>
+                                @else 
+                                    <option value="{{ $category->tag }}">{{ $category->name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
 
-                    <div class="text-center my-4">
+                    
+
+
+                    <div class="text-center my-5">
                         {{-- Open Subscribe Modal --}}
                         <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#createSubscriberModal">
                             {{__('I want to subscribe')}}

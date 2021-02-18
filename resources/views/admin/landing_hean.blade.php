@@ -17,16 +17,12 @@
 
         <div class="row mt-3">
 
-            
-
 
             <div class="col-sm-12 col-lg-3">
 
                 <div class="d-flex flex-column">
 
-                    <!-- <h2>RJ Custom Select</h2> -->
-
-                    <!--surround the select box with a "rj-custom-select" DIV element. Remember to set the width:-->
+                    <!--the original select box is surrounded with a "rj-custom-select" DIV element.-->
                     <div class="rj-custom-select" id="rj-custom-select">
                         <select class="rj-select">
                             @foreach( $categories as $category )
@@ -39,18 +35,6 @@
                         </select>
                     </div>
 
-                    <!-- <select class="wide mb-3" id="selectCategory2" style="marging-top:8px !important;">
-                        @foreach( $categories as $category )
-                            @if( $selectedCategory->id == $category->id )
-                                <option selected value="{{ $category->tag }}" class="mt-2">{{ $category->name }}</option>
-                            @else 
-                                <option value="{{ $category->tag }}">{{ $category->name }}</option>
-                            @endif
-                        @endforeach
-                    </select> -->
-
-                    
-
                     <div class="text-center my-5">
                     {{-- Open Subscribe Modal --}}
                     <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#createSubscriberModal">
@@ -59,11 +43,6 @@
                 </div>
             
                 </div>
-                
-
-                
-
-                
                 
             </div>
 
@@ -82,10 +61,6 @@
             </div>
 
         </div>
-        
-        
-
-        
 
     </div>
     

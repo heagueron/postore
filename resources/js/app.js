@@ -118,71 +118,77 @@ const rjCategoryControl = () => {
   for (i = 0; i < l; i++) {
     selElmnt = x[i].getElementsByTagName("select")[0];
     ll = selElmnt.length;
+
     /*for each element, create a new DIV that will act as the selected item:*/
     a = document.createElement("DIV");
     a.setAttribute("class", "rj-select-selected");
     a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
     x[i].appendChild(a);
+
     /*for each element, create a new DIV that will contain the option list:*/
     b = document.createElement("DIV");
     b.setAttribute("class", "rj-select-items rj-select-hide");
 
-    for (j = 1; j < ll; j++) {
+    for (j = 0; j < ll; j++) {
+
       /*for each option in the original select element,
       create a new DIV that will act as an option item:*/
       c = document.createElement("DIV");
       c.innerHTML = selElmnt.options[j].innerHTML;
       c.setAttribute("data-tag", selElmnt.options[j].value);
 
-      c.addEventListener("click", function(e) { 	
-        /*when an item is clicked, update the original select box,
-        and the selected item:*/
-        var y, i, k, s, h, sl, yl;
-        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-        sl = s.length;
-        h = this.parentNode.previousSibling;
-        
-        for (i = 0; i < sl; i++) {
-
-          if (s.options[i].innerHTML == this.innerHTML) {
-            s.selectedIndex = i;
-            h.innerHTML = this.innerHTML;
-            y = this.parentNode.getElementsByClassName("same-as-selected");
-            yl = y.length;
-
-            for (k = 0; k < yl; k++) {
-              y[k].removeAttribute("class");
-            }
-            this.setAttribute("class", "same-as-selected");
-            break;
-          }//
+      if( c.innerHTML != a.innerHTML ) {
+          c.addEventListener("click", function(e) { 	
+          /*when an item is clicked, update the original select box,
+          and the selected item:*/
+          var y, i, k, s, h, sl, yl;
+          s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+          sl = s.length;
+          h = this.parentNode.previousSibling;
           
-        }
+          for (i = 0; i < sl; i++) {
 
-        const tag = this.getAttribute("data-tag");
+            if (s.options[i].innerHTML == this.innerHTML) {
+              s.selectedIndex = i;
+              h.innerHTML = this.innerHTML;
+              y = this.parentNode.getElementsByClassName("same-as-selected");
+              yl = y.length;
 
-        console.log(tag);
-        
-        h.click();
+              for (k = 0; k < yl; k++) {
+                y[k].removeAttribute("class");
+              }
+              this.setAttribute("class", "same-as-selected");
+              break;
+            }//
+            
+          }
 
-        console.log('right after hclick');
+          const tag = this.getAttribute("data-tag");
 
-        // NAVIGATE TO SELECTED CATEGORY:
-        const PATH = document.querySelector('#appURL').value == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
+          console.log(tag);
+          
+          h.click();
 
-        console.log(`PATH: ${PATH}`)
+          console.log('right after hclick');
 
-        console.log('SELECTION: '+tag);
+          // NAVIGATE TO SELECTED CATEGORY:
+          const PATH = document.querySelector('#appURL').value == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
 
-        if( tag != ''){
-          window.location.href = `${PATH}/list/remote_${tag}_jobs`
-        } else {
-          window.location.href = `${PATH}`
-        }
+          console.log(`PATH: ${PATH}`)
 
+          console.log('SELECTION: '+tag);
 
+          if( tag != 'all' && tag != 'todos'){
+            window.location.href = `${PATH}/list/remote_${tag}_jobs`
+          } else {
+            window.location.href = `${PATH}`
+          }
 
-    });
+        });
+      }
+
+      
+
     b.appendChild(c);
   }
   x[i].appendChild(b);
