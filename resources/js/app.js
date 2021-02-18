@@ -235,7 +235,7 @@ if ( window.location.href.indexOf("admin") <= -1) {
 //   categoryControl();
 // }
 
-const newLocal = "rj-custom-select";
+const newLocal = "rj-hero";
 if( document.getElementById(newLocal) ){
   rjCategoryControl();
 }
