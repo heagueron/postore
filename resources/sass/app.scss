@@ -1292,3 +1292,75 @@ li.selected{
     color: #ffffff !important;
 }
 
+/* NICER SELECT W3 */
+/*the container must be positioned relative:*/
+.rj-custom-select {
+    position: relative;
+    font-family: Arial;
+    width: 100% !important;
+  }
+  
+  .rj-custom-select .rj-select {
+    display: none; /*hide original SELECT element:*/
+  }
+  
+  .rj-select-selected {
+    background-color: #ffffff !important;
+    color: black !important;
+    border: 1px solid rgba(0, 0, 0, 0.125) !important;
+    /*border: 1px solid grey !important;*/
+    border-radius: 5px !important;	
+  }
+  
+  /*style the arrow inside the select element:*/
+  .rj-select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid $green;
+    border-color: $green transparent transparent transparent;
+  }
+  
+  /*point the arrow upwards when the select box is open (active):*/
+  .rj-select-selected.select-arrow-active:after {
+    border-color: transparent transparent $green transparent;
+    top: 7px;
+  }
+  
+  /*style the items (options), including the selected item:*/
+  .rj-select-items div,.rj-select-selected {
+    /*color: #ffffff;*/
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.0) transparent;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  /*style items (options):*/
+  .rj-select-items {
+    position: absolute;
+    background-color: #ffffff;
+    top: 120%;
+    left: 0;
+    right: 0;
+    color:black !important;
+    border: 1px solid rgba(0, 0, 0, 0.125) !important;
+    /*border: 1px solid grey !important;*/
+    border-radius: 5px !important;
+    transition: all 0.3s;
+    z-index: 99;
+  }
+  
+  /*hide the items when the select box is closed:*/
+  .rj-select-hide {
+    display: none;
+  }
+  
+  .rj-select-items div:hover, .same-as-selected {
+    background-color: $green;
+    color: #ffffff !important;
+  }

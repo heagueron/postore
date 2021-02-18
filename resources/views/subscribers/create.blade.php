@@ -48,7 +48,7 @@
                    
                     @foreach( \App\Category::where('language_id', $localeId)->get() as $category )
                         {{-- Exclude categories without tag --}}
-                        @if( $category->tag != '')
+                        @if( $category->tag != '' and $category->tag != 'all' and $category->tag != 'todos')
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endif
                     @endforeach

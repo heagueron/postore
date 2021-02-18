@@ -526,6 +526,7 @@ class RemjobController extends Controller
         $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
 
         $categories = Category::where('language_id', '=',  $lenguageId )->get();
+        //dd($categories);
         $selectedCategory = $categories[0];
 
         return view( 'admin.landing_hean', compact('remjobs', 'request', 'categories', 'selectedCategory') );
