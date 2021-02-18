@@ -247,7 +247,7 @@ setTimeout(() => {
     rjCategoryControl();
   }
 
-}, 50);
+}, 500);
 
 
 
