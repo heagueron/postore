@@ -107,6 +107,8 @@ function navBackgroundControl() {
 
 /* NICER SELECT W3 */
 const rjCategoryControl = () => {
+  
+  console.log('starting rjCategoryControl ...');
 
   var x, i, j, l, ll, selElmnt, a, b, c;
   /*look for any elements with the class "rj-custom-select":*/
@@ -235,10 +237,17 @@ if ( window.location.href.indexOf("admin") <= -1) {
 //   categoryControl();
 // }
 
-const newLocal = "rj-hero";
-if( document.getElementById(newLocal) ){
-  rjCategoryControl();
-}
+
+// Delay to allow for elements to appear.
+setTimeout(() => {
+
+  const newLocal = "rj-hero";
+  if( document.getElementById(newLocal) ){
+    console.log('Detected presence of Hero ... ');
+    rjCategoryControl();
+  }
+
+}, 500);
 
 
 
