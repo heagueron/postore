@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="remote jobs">
+    <meta name="description" content="Find and post remote jobs in software development and related technologies">
     <meta name="author" content="Hector Aguero - heagueron@gmail.com">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     
@@ -11,7 +11,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield( 'title' )</title>
-    <!-- <title>{{ __('Remote Resources | Welcome') }}</title> -->
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/remjob.png') }}" type="image/png">

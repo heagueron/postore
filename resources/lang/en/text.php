@@ -94,6 +94,7 @@ return [
     'terms'         => ' Terms ',
     'privacy'       => ' Privacy ',
     'faq'           => ' FAQ ',
+    'footCategory'  => 'Remote :categoryTitle Jobs',
 
     // Contact Form
     'supTitle'      => 'Remjob Contact Form',

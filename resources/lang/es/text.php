@@ -94,6 +94,7 @@ return [
     'terms'         => ' Terminos ',
     'privacy'       => ' Privacidad ',
     'faq'           => ' PREGUNTAS FRECUENTES ',
+    'footCategory'  => 'Trabajos Remotos en :categoryTitle',
 
     // Contact Form
     'supTitle'      => 'Contactar Soporte Remjob',
