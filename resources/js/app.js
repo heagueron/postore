@@ -16,7 +16,6 @@ require('./autocomplete');
 require('./job-post');
 require('./admin');
 require('./summernote');
-require('./jquery-nice-select');
 
 window.Vue = require('vue');
 
@@ -79,31 +78,6 @@ function navBackgroundControl() {
 }
 
 
-/* Categories in Jquery Nice Selector */
-// function categoryControl() {
-
-//   console.log('executin categoryControl ... ')
-
-//   $(document).ready(function() {
-//     $('#selectCategory').niceSelect();
-//   });
-
-//   $('#selectCategory').change(function () {
-    
-    // const PATH = document.querySelector('#appURL').value == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
-    // console.log(`App URL From DOM: ${document.querySelector('#appURL').value}`);
-    // console.log(`PATH: ${PATH}`)
-
-    // console.log('SELECTION: '+this.value);
-
-    // if( this.value != ''){
-    //   window.location.href = `${PATH}/list/remote_${this.value}_jobs`
-    // } else {
-    //   window.location.href = `${PATH}`
-    // }
-//   })
-// }
-
 
 /* NICER SELECT W3 */
 const rjCategoryControl = () => {
@@ -116,6 +90,8 @@ const rjCategoryControl = () => {
   l = x.length;
 
   const xTrueTag = x[0].getAttribute("data-true-tag");
+
+  console.log(`xTrueTag: ${xTrueTag}`);
 
   for (i = 0; i < l; i++) {
     selElmnt = x[i].getElementsByTagName("select")[0];
@@ -139,7 +115,10 @@ const rjCategoryControl = () => {
       c.innerHTML = selElmnt.options[j].innerHTML;
       c.setAttribute("data-tag", selElmnt.options[j].value);
 
-      if( c.innerHTML != a.innerHTML || xTrueTag == 'byTagOrCompany') {
+      if( ( c.innerHTML != a.innerHTML ) || ( xTrueTag == 'byTagOrCompany') ) {
+
+          console.log( `adding click event listener to ${c.innerHTML} `);
+
           c.addEventListener("click", function(e) { 	
           /*when an item is clicked, update the original select box,
           and the selected item:*/
@@ -230,9 +209,6 @@ const rjCategoryControl = () => {
 }
 
 
-
-
-
 if ( window.location.href.indexOf("admin") <= -1) {
   /* Not in admin routes */
 
@@ -240,10 +216,6 @@ if ( window.location.href.indexOf("admin") <= -1) {
   window.onscroll = function() {navBackgroundControl()};
 
 }
-
-// if( document.getElementById("selectCategory") ){
-//   categoryControl();
-// }
 
 
 // Delay to allow for elements to appear.
