@@ -276,7 +276,7 @@ class RemjobController extends Controller
         //Log::info('Searching jobs for tag: '.$tagsText);
 
         $catTags = [
-            'dev', 'customer_support', 'marketing', 'design', 'non_tech',
+            'dev', 'customer_support', 'marketing', 'design', 'non_tech', 'hr',
             'desarrollo', 'servicios_al_cliente', 'mercadotecnia', 'diseño', 'otros'
         ];
 
