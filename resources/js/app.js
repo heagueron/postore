@@ -115,6 +115,8 @@ const rjCategoryControl = () => {
   x = document.getElementsByClassName("rj-custom-select");
   l = x.length;
 
+  const xTrueTag = x[0].getAttribute("data-true-tag");
+
   for (i = 0; i < l; i++) {
     selElmnt = x[i].getElementsByTagName("select")[0];
     ll = selElmnt.length;
@@ -137,7 +139,7 @@ const rjCategoryControl = () => {
       c.innerHTML = selElmnt.options[j].innerHTML;
       c.setAttribute("data-tag", selElmnt.options[j].value);
 
-      if( c.innerHTML != a.innerHTML ) {
+      if( c.innerHTML != a.innerHTML || xTrueTag == 'byTagOrCompany') {
           c.addEventListener("click", function(e) { 	
           /*when an item is clicked, update the original select box,
           and the selected item:*/

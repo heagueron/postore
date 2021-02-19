@@ -22,13 +22,13 @@
                 <div class="d-flex flex-column">
 
                     <!--the original select box is surrounded with a "rj-custom-select" DIV element.-->
-                    <div class="rj-custom-select" id="rj-custom-select">
+                    <div class="rj-custom-select" id="rj-custom-select" data-true-tag="{{ $trueTag  ?? '' }}">
                         <select class="rj-select">
                             @foreach( $categories as $category )
                                 @if( $selectedCategory->id == $category->id )
                                     <option selected value="{{ $category->tag }}">{{ $category->name }}</option>
                                 @else 
-                                    <option value="{{ $category->tag }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->tag }}" data-tag="{{ $category->tag }}">{{ $category->name }}</option>
                                 @endif
                             @endforeach
                         </select>

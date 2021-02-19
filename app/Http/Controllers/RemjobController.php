@@ -295,6 +295,8 @@ class RemjobController extends Controller
             } else { $remjobs = []; }
 
             $selectedCategory = $category;
+
+            $trueTag = 'byCategory';
             
         } else {
             // Search for a normal TAG
@@ -315,9 +317,11 @@ class RemjobController extends Controller
 
             $selectedCategory = $categories[0];
 
+            $trueTag = 'byTagOrCompany';
+
         }
 
-        return view( 'landing', compact('remjobs', 'request', 'categories', 'selectedCategory') );
+        return view( 'landing', compact('remjobs', 'request', 'categories', 'selectedCategory', 'trueTag') );
         
     }
 
@@ -335,8 +339,14 @@ class RemjobController extends Controller
         $remjobs = Remjob::where( 'company_id', $company->id )
             ->orderBy('plan_id', 'desc')
             ->orderBy('created_at', 'desc')->get();
+
+        $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
+        $categories = Category::where('language_id', '=',  $lenguageId )->get();
+        $selectedCategory = $categories[0];
+
+        $trueTag = 'byTagOrCompany';
         
-        return view( 'landing', compact('remjobs', 'request') );
+        return view( 'landing', compact('remjobs', 'request', 'categories', 'selectedCategory', 'trueTag') );
         
     }
 
