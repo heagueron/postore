@@ -113,9 +113,9 @@ class RemjobController extends Controller
         $user = Auth::user();
         
         if (App::isLocale('es')) {
-            $categories = \App\Category::whereIn( 'id', [7, 8, 9, 10, 11, 12] )->get();
+            $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
         } else {
-            $categories = \App\Category::whereIn( 'id', [1, 2, 3, 4, 5, 6] )->get();
+            $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6] )->get();
         }
 
         return view( 'remjobs.create', compact('categories', 'user') );
@@ -373,9 +373,9 @@ class RemjobController extends Controller
         $tagsText = rtrim($tagsText, ", ");
 
         if ( $remjob->language == 'es' ) {
-            $categories = \App\Category::whereIn( 'id', [7, 8, 9, 10, 11, 12] )->get();
+            $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
         } else {
-            $categories = \App\Category::whereIn( 'id', [1, 2, 3, 4, 5, 6] )->get();
+            $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6] )->get();
         }
 
         $user = Auth::user();
