@@ -50,7 +50,7 @@ class CategoryController extends Controller
         //dd($request);
         $data = request()->validate([
             'name'          => 'required|min:3',
-            'tag'           => 'required|min:3',
+            'tag'           => 'required|min:2',
             'language_id'   => [ Rule::in(['1','2']) ],
             'mailchimp_audience_id' => 'nullable',
             'mailchimp_category_id' => 'nullable',
@@ -96,7 +96,7 @@ class CategoryController extends Controller
     {
         $data = request()->validate([
             'name'          => 'required|min:3',
-            'tag'           => 'required|min:3',
+            'tag'           => 'required|min:2',
             'language_id'   => [ Rule::in(['1','2']) ],
             'mailchimp_audience_id' => 'nullable',
             'mailchimp_category_id' => 'nullable',

@@ -362,7 +362,7 @@ class RemjobController extends Controller
         if ( $remjob->language == 'es' ) {
             $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
         } else {
-            $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6] )->get();
+            $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14] )->get();
         }
 
         $tagsText = '';
@@ -511,7 +511,7 @@ class RemjobController extends Controller
             'position'      => ['required', 'max:100'],
             'tags'          => ['required', 'max:100'],      
             'description'   => ['required'],
-            'category_id'   => [ Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12']) ],
+            'category_id'   => [ Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12','13','14']) ],
             'apply_link'    => ['exclude_if:apply_mode,==,email', 'url'],
             'apply_email'   => ['exclude_if:apply_mode,==,link', 'email'],
             'min_salary'    => ['nullable', 'max:7', 'lte:max_salary'], 

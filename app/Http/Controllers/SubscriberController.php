@@ -95,11 +95,20 @@ class SubscriberController extends Controller
 
     }
 
+    public function mcInterests(){
+        $api = Newsletter::getApi();
+
+        // Get segments
+        $interests = $api->get('lists/f52a8f2e25/interest-categories/7ad288a06c/interests?offset=0&count=37');
+        dd($interests);
+
+    }
+
     public function mcGetCampaigns(){
         $api = Newsletter::getApi();
 
         // Get campaigns
-        $campaigns = $api->get('campaigns');
+        $campaigns = $api->get('campaigns?offset=0&count=37');
         dd( $campaigns );
 
     }

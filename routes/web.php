@@ -176,6 +176,7 @@ Route::group(
 
 // Fake route to ping mailchimp
 Route::get('/mc/ping', 'SubscriberController@pingChimp');
+Route::get('/mc/interests', 'SubscriberController@mcInterests'); // get MailChimp segments
 Route::get('/mc/segments', 'SubscriberController@mcSegments'); // get MailChimp segments
 Route::get('/mc/campaigns', 'SubscriberController@mcGetCampaigns'); // get MailChimp campaigns
 Route::get('/mc/createCampaigne', 'SubscriberController@mcCreateCampaign'); // Create MailChimp Campaign

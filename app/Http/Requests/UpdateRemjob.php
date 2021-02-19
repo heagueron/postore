@@ -29,7 +29,7 @@ class UpdateRemjob extends FormRequest
             'position'      => ['required', 'max:100'],
             'tags'          => ['required', 'max:100'],      
             'description'   => ['required'],
-            'category_id'   => [ Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12']) ],
+            'category_id'   => [ Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12', '14']) ],
             'apply_link'    => ['exclude_if:apply_mode,==,email', 'url'],
             'apply_email'   => ['exclude_if:apply_mode,==,link', 'email'],
             'min_salary'    => ['nullable', 'max:7', 'lte:max_salary'], 
