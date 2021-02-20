@@ -42,10 +42,6 @@ class RemjobController extends Controller
         if( Remjob::all()->count() > 0 ){
             $remjobs = Remjob::latest()->get();
         } else { $remjobs = []; }
-
-        // if( Remjob::where('active',1)->exists() ){
-        //     $remjobs = Remjob::where('active',1)->orderBy('created_at', 'desc')->get();
-        // } else { $remjobs = []; }
         
         return view( 'admin.remjobs.index',compact('remjobs') );
 
@@ -362,7 +358,7 @@ class RemjobController extends Controller
         if ( $remjob->language == 'es' ) {
             $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
         } else {
-            $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14] )->get();
+            $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14, 15] )->get();
         }
 
         $tagsText = '';
@@ -511,7 +507,7 @@ class RemjobController extends Controller
             'position'      => ['required', 'max:100'],
             'tags'          => ['required', 'max:100'],      
             'description'   => ['required'],
-            'category_id'   => [ Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12','13','14']) ],
+            'category_id'   => [ Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12','13','14', '15']) ],
             'apply_link'    => ['exclude_if:apply_mode,==,email', 'url'],
             'apply_email'   => ['exclude_if:apply_mode,==,link', 'email'],
             'min_salary'    => ['nullable', 'max:7', 'lte:max_salary'], 
