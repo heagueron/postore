@@ -8,6 +8,7 @@ use App\Visit;
 use App\Remjob;
 use App\Company;
 use App\Category;
+use App\Language;
 use Carbon\Carbon;
 
 use Illuminate\Support\Str;
@@ -111,12 +112,16 @@ class RemjobController extends Controller
     {
         // Retrieve the currently authenticated user...
         $user = Auth::user();
-        
-        if (App::isLocale('es')) {
-            $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
-        } else {
-            $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14, 15] )->get();
-        }
+
+        // if (App::isLocale('es')) {
+        //     $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
+        // } else {
+        //     $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14, 15] )->get();
+        // }
+
+        $lenguageId = Language::where('short_name', \App::getLocale())->first()->id;
+
+        $categories = Category::where('language_id', '=',  $lenguageId )->whereNotIn('id', [1, 7])->get();
 
         return view( 'remjobs.create', compact('categories', 'user') );
 
@@ -275,12 +280,15 @@ class RemjobController extends Controller
 
         //Log::info('Searching jobs for tag: '.$tagsText);
 
-        $catTags = [
-            'dev', 'customer_support', 'marketing', 'design', 'non_tech', 'hr', 'health',
-            'desarrollo', 'servicios_al_cliente', 'mercadotecnia', 'diseño', 'otros'
-        ];
+        // $catTags = [
+        //     'dev', 'customer_support', 'marketing', 'design', 'non_tech', 'hr', 'health',
+        //     'desarrollo', 'servicios_al_cliente', 'mercadotecnia', 'diseño', 'otros'
+        // ];
 
-        if( in_array( $tagsText, $catTags ) ){
+        $catTags = DB::table('categories')->whereNotIn('id', [1, 7])->pluck('tag')->toArray();
+        //dd( array_values($catTags) );
+
+        if( in_array( $tagsText, array_values($catTags) ) ){
             // Search for a CATEGORY TAG
             $category = Category::where( 'tag', 'like', $tagsText )->first();
 
@@ -372,11 +380,15 @@ class RemjobController extends Controller
         }
         $tagsText = rtrim($tagsText, ", ");
 
-        if ( $remjob->language == 'es' ) {
-            $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
-        } else {
-            $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14, 15] )->get();
-        }
+        // if ( $remjob->language == 'es' ) {
+        //     $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
+        // } else {
+        //     $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14, 15] )->get();
+        // }
+
+        $lenguageId = Language::where('short_name', \App::getLocale())->first()->id;
+
+        $categories = Category::where('language_id', '=',  $lenguageId )->whereNotIn('id', [1, 7])->get();
 
         $user = Auth::user();
         

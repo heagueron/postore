@@ -6,6 +6,7 @@ use App\Tag;
 use App\Remjob;
 use App\Company;
 use App\Category;
+use App\Language;
 use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
@@ -355,11 +356,17 @@ class RemjobController extends Controller
      */
     public function edit(Remjob $remjob)
     {
-        if ( $remjob->language == 'es' ) {
-            $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
-        } else {
-            $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14, 15] )->get();
-        }
+        // if ( $remjob->language == 'es' ) {
+        //     $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
+        // } else {
+        //     $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14, 15] )->get();
+        // }
+
+        $lenguageId = Language::where('short_name', \App::getLocale())->first()->id;
+
+        $categories = Category::where('language_id', '=',  $lenguageId )->whereNotIn('id', [1, 7])->get();
+
+        //dd($categories);
 
         $tagsText = '';
         foreach( $remjob->tags()->take(5)->get() as $tag ){
@@ -502,12 +509,15 @@ class RemjobController extends Controller
 
     private function validateRemjob() 
     {
+        $categoryIds = DB::table('categories')->pluck('id')->toArray();
+        //dd( array_values($categoryIds) );
 
         $validatedData = request()->validate([
             'position'      => ['required', 'max:100'],
             'tags'          => ['required', 'max:100'],      
             'description'   => ['required'],
-            'category_id'   => [ Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12','13','14', '15']) ],
+            //'category_id'   => [ Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12','13','14', '15']) ],
+            'category_id'   => [ Rule::in( array_values($categoryIds) ) ],
             'apply_link'    => ['exclude_if:apply_mode,==,email', 'url'],
             'apply_email'   => ['exclude_if:apply_mode,==,link', 'email'],
             'min_salary'    => ['nullable', 'max:7', 'lte:max_salary'], 

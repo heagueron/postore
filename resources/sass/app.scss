@@ -533,6 +533,12 @@ nav {
         align-items: center;
         justify-content: center;
     }
+    &__tip{
+        font-weight:bolder;
+        padding:15px;
+        background-color: rgba(255, 255, 255, 0.1); /* For browsers that do not support gradients */
+        background-image: radial-gradient(rgba(204, 230, 255, 0.5), rgba(204, 230, 255, 0.1));
+    }
 }
 
 .logo-button-container .post-button {
@@ -1340,3 +1346,5 @@ h3 i {
     background-color: $green;
     color: #ffffff !important;
   }
+
+  

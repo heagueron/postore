@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class StoreRemjob extends FormRequest
 {
@@ -24,12 +25,14 @@ class StoreRemjob extends FormRequest
      */
     public function rules()
     {
+        $categoryIds = DB::table('categories')->pluck('id')->toArray();
+
         return [  
             'company_name'  => ['required', 'max:50'],
             'position'      => ['required', 'max:100'],
             'tags'          => ['required', 'max:100'],      
             'description'   => ['required'],
-            'category_id'   => [ Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15']) ],
+            'category_id'   => [ Rule::in( array_values($categoryIds) ) ],
             'apply_link'    => ['exclude_if:apply_mode,==,email', 'url'],
             'apply_email'   => ['exclude_if:apply_mode,==,link', 'email'],
             'min_salary'    => ['nullable', 'max:7', 'lte:max_salary'], 
