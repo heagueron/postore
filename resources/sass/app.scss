@@ -1271,6 +1271,9 @@ h3 i {
 
 .modal-content-subscribe{
     background-color: #71c174 !important;
+    -webkit-box-shadow: 2px 0px 15px 0px rgba(46, 50, 50, 0.75);
+    -moz-box-shadow:    2px 0px 15px 0px rgba(46, 50, 50, 0.75);
+    box-shadow:         2px 0px 15px 0px rgba(46, 50, 50, 0.75);
 }
 
 
@@ -1335,6 +1338,9 @@ h3 i {
     border-radius: 5px !important;
     transition: all 0.3s;
     z-index: 99;
+    -webkit-box-shadow: 6px 0px 10px 0px rgba(46, 50, 50, 0.59);
+    -moz-box-shadow:    6px 0px 10px 0px rgba(46, 50, 50, 0.59);
+    box-shadow:         6px 0px 10px 0px rgba(46, 50, 50, 0.59);
   }
   
   /*hide the items when the select box is closed:*/
