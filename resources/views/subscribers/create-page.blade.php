@@ -6,12 +6,12 @@
 
     @include('partials.hero')
    
-    <div class="d-flex flex-column align-content-center justify-content-center">
+    <div class="d-flex align-content-center justify-content-center text-center">
 
-        <div class="modal-content modal-content-subscribe">
+        <div class="modal-content modal-content-subscribe-page text-center">
 
             <!-- Modal Header -->
-            <!-- <div class="modal-header">
+            <!-- <div class="modal-header"> 
             <h4 class="modal-title">Create a Company</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div> -->

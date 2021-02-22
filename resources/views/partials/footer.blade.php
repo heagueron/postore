@@ -14,7 +14,7 @@
 
     {{-- LINKS --}}
     <div class="row my-2">
-        <div class="col-sm-12 col-lg-5">
+        <div class="col-sm-12 col-lg-5 mb-3">
             <h5 style="font-weight:bold;">Remote Jobs by Categories</h5>
             @foreach( \App\Category::where('language_id', $localeId)->get() as $category )
                 @if( $category->tag == '' or $category->tag == 'all' or $category->tag == 'todos')
@@ -24,7 +24,7 @@
                 @endif
             @endforeach
         </div>
-        <div class="col-sm-12 col-lg-5">
+        <div class="col-sm-12 col-lg-5 mb-5">
             <h5 style="font-weight:bold;">Remote Jobs by Skills</h5>
                 <a href="{{route('remjobs.searchByTags', 'remote_php_jobs')}}">{{ __('text.footCategory', ['categoryTitle' => 'Php' ]) }}</a><br>
                 <a href="{{route('remjobs.searchByTags', 'remote_java_jobs')}}">{{ __('text.footCategory', ['categoryTitle' => 'Java' ]) }}</a><br>

@@ -19,7 +19,7 @@
                 {{ $message }}
             </div>
                 
-            <div class="mt-5">
+            <div class="mt-5 mb-5">
                 <a href="{{ route('landing') }}" class="footer__post">
                     {{ __('text.siteName') }}
                 </a>
