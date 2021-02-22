@@ -19,7 +19,7 @@
 
             <div class="col-sm-12 col-lg-3">
 
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column cat-subs-col">
 
                     <!--the original select box is surrounded with a "rj-custom-select" DIV element.-->
                     <div class="rj-custom-select" id="rj-custom-select" data-true-tag="{{ $trueTag  ?? '' }}">

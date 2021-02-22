@@ -101,7 +101,7 @@
             </div>
 
             <div class="col-lg-3 col-sm-12">
-                <div class="card bg-light pb-2">
+                <div class="card bg-light pb-2 card-company">
                     <div class="card-body text-center">
 
                         @if( $remjob->external_api == null )

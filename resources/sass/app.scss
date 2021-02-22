@@ -1362,4 +1362,19 @@ h3 i {
     color: #ffffff !important;
   }
 
+
+  /* categories in landing*/
+  .cat-subs-col{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 85px;
+  }
+
+  /* show in remjob */
+  .card-company{
+    -webkit-box-shadow: 6px 0px 10px 0px rgba(46, 50, 50, 0.59);
+    -moz-box-shadow:    6px 0px 10px 0px rgba(46, 50, 50, 0.59);
+    box-shadow:         6px 0px 10px 0px rgba(46, 50, 50, 0.59);
+  }
+
   
