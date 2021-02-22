@@ -17,6 +17,11 @@ return [
     'searchJob' => 'Buscar',
     'heroTitleTip' => 'Publique o encuentre excelentes trabajos remotos en todo el mundo',
 
+    // Landing
+    'onlyWorldwide'     => '⬜️ Mostrar solo trabajos globales',
+    'notOnlyWorldwide'  => '✅ Mostrar solo trabajos globales',
+    'subscribeLabel'    => 'Subscribirme',
+
     // Categories
     'catRemoteJobs' => 'Trabajos Remotos',
     'catSoftwareDevelopment' => 'Desarrollo de Software',

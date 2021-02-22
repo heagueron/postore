@@ -4,7 +4,7 @@ return [
 
     'dearCustomer'      => 'Dear customer,',
 
-    'crClientSalute'    => 'Congratulations for creating at remjob.io!',
+    'crClientSalute'    => 'Congratulations on your new remote job post creation at remjob.io!',
     'updateSalute'      => 'Your remote job has been updated!',
     'contentLabel'    => 'Here are the details of your remote job post: ',
 

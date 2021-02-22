@@ -10,9 +10,9 @@
     <div class="d-flex flex-column">
 
         @if( !$request->is('worldwide_remote_jobs') )
-            <div class="worlwide-filter mt-2 mr-4 ml-auto"><a href="{{ route('remjobs.worlwide') }}">⬜️	Show only worldwide jobs </a></div>
+            <div class="worlwide-filter mt-2 mr-4 ml-auto"><a href="{{ route('remjobs.worlwide') }}">{{__('text.onlyWorldwide')}}</a></div>
         @else 
-            <div class="worlwide-filter mt-2 mr-4 ml-auto"><a href="{{ route('landing') }}">✅ Show only worldwide jobs </a></div>
+            <div class="worlwide-filter mt-2 mr-4 ml-auto"><a href="{{ route('landing') }}">{{__('text.notOnlyWorldwide')}}</a></div>
         @endif
 
         <div class="row mt-3">
@@ -40,7 +40,7 @@
                     <div class="text-center my-5">
                         {{-- Open Subscribe Modal --}}
                         <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#createSubscriberModal">
-                            {{__('I want to subscribe')}}
+                            {{__('text.subscribeLabel')}}
                         </button>
                     </div>
             

@@ -17,6 +17,11 @@ return [
     'searchJob' => 'Find',
     'heroTitleTip' => 'Post or find awesome remote jobs from around the world',
 
+    // Landing
+    'onlyWorldwide'     => '⬜️	Show only worldwide jobs',
+    'notOnlyWorldwide'  => '✅ Show only worldwide jobs',
+    'subscribeLabel'    => 'Keep me posted on remote jobs',
+
     //Categories
     'catRemoteJobs' => 'Remote Jobs',
     'catSoftwareDevelopment' => 'Software Development',
