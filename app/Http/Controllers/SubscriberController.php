@@ -4,12 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSubscriber;
+use App\Language;
+use App\Category;
 
 use Newsletter;
 
 
 class SubscriberController extends Controller
 {
+    /**
+     * Show a form for creating a new subscriber.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $lenguageId = Language::where('short_name', \App::getLocale())->first()->id;
+
+        $categories = Category::where('language_id', '=',  $lenguageId )->whereNotIn('id', [1, 7])->get();
+
+        return view('subscribers.create-page', compact('categories') );
+
+    }
+
     /**
      * Subscribe a new person to the list 
      *

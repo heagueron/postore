@@ -132,6 +132,7 @@ Route::group(
 
 // SUBSCRIBER ROUTES
 Route::post('/subscribers', 'SubscriberController@store')->name('subscribers.store');
+Route::get('/subscribers/create', 'SubscriberController@create')->name('admin.subcribers.create');
 
 
 

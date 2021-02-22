@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 
 class StoreSubscriber extends FormRequest
@@ -25,10 +26,12 @@ class StoreSubscriber extends FormRequest
      */
     public function rules()
     {
+        $categoryIds = DB::table('categories')->pluck('id')->toArray();
+
         return [         
             'name'                  => 'nullable|min:3',
             'email'                 => 'required|email',
-            'category_id'           => [ 'nullable', Rule::in(['1','2','3','4','5','6','7','8','9','10','11','12']) ],
+            'category_id'           => [ Rule::in( array_values($categoryIds) ) ],
         ];
         // TODO: validate twitter_accounts array input.
     }
