@@ -51,12 +51,8 @@
 
                 {{-- DESCRIPTION --}}
                 <div class="mt-5">
-                    
-                    @if( $remjob->external_api != 'https://remoteok.io')
-                        <div>{!! $remjob->description !!}</div>
-                    @else
-                        <p>{{ __('Press Apply to get this remote job details.') }}</p>
-                    @endif
+                    <div>{!! $remjob->description !!}</div>
+                   
 
                     @if($remjob->min_salary)
                         <p class="mt-2">
