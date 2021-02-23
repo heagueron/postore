@@ -63,12 +63,16 @@ class RemjobController extends Controller
 
         foreach ( array_slice($jobsArray, 0, 8) as $remApiJob ) {
 
+            if( STR::before( $remApiJob["company"], 'ÃÂ') == ''){
+                continue;
+            }
+
             if( DB::table('remjobs')->where([
                 ['external_api', '=', 'https://remoteok.io'],
                 ['position', '=', STR::before( $remApiJob["position"], '(')],
             ])->exists() ){
                 Log::info( 'ROK api job: ' .STR::before( $remApiJob["position"], '('). 'already exists' );
-                continue; 
+                 
             }
 
             if( strlen( $remApiJob["company_logo"] ) > 190 or strlen( $remApiJob["position"] > 75 ) ) {
