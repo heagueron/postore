@@ -75,7 +75,7 @@ class DailyNews extends Command
                     $html .= '<div style="background-color:#ffffff; padding:10px;">';
 
                     $html .= '<p>Hello *|FNAME|*,</p>';  
-                    $html .= '<p>Here are your selected remote jobs. Click on any job title to get more details.</p><br/>';
+                    $html .= '<p>Here are the latest <strong>'.$category->name.'</strong> remote jobs. Click on any job title to get more details.</p><br/>';
 
                     $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
 
@@ -92,10 +92,13 @@ class DailyNews extends Command
 
                     $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
 
-                    $html .= 'Find more jobs at: <a style="text-decoration: none;" href="https://remjob.io">https://remjob.io</a><br/>';
+                    $html .= '<p>If you have any questions or want to learn more about remjob.io, feel free to reach out to us at info@remjob.io.</p><br/>';
 
-                    $html .= '<p>Have a nice day!</p><br/>';
-                    $html .= '</div></div>';
+                    $html .= 'Find more jobs at: <a style="text-decoration: none;" href="https://remjob.io">https://remjob.io</a>';
+
+                    $html .= '<p>Cheers,</p>';
+                    $html .= '<p>Your friends at remjob.io</p><br/>';
+                    $html .= '</div></div><br/>';
 
                     //Update the clon campaigne
                     $options = [];
