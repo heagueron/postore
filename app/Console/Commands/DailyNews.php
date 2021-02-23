@@ -72,7 +72,7 @@ class DailyNews extends Command
                     $html  = '<div style="margin-top:1rem;padding:25px;background-color:#f2f5f3;">';
 
                     // Content
-                    $html .= '<div style="background-color:#ffffff; padding-left:20px;">';
+                    $html .= '<div style="background-color:#ffffff; padding:5px;20px;5px;30px">';
 
                     $html .= '<p>Hello *|FNAME|*,</p>';  
                     $html .= '<p>Here are the latest <strong>'.$category->name.'</strong> remote jobs. Click on any job title to get more details.</p><br/>';
@@ -94,7 +94,7 @@ class DailyNews extends Command
 
                     $html .= '<p>If you have any questions or want to learn more about Remjob, feel free to reach out to us at <strong style="text-decoration: none;">info@remjob.io</strong></p><br/>';
 
-                    $html .= 'Find more jobs at: <a style="text-decoration: none;" href="https://remjob.io">https://remjob.io</a><br/>';
+                    $html .= '<p>Find more jobs at: <a style="text-decoration: none;" href="https://remjob.io">https://remjob.io</a></p><br/>';
 
                     $html .= '<p>Cheers,</p>';
                     $html .= '<p>Your friends at Remjob</p><br/>';
