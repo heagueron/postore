@@ -65,10 +65,10 @@ class TestMCC extends Command
                             ->where('category_id', $category->id)->get();
                 
                 // Container
-                $html  = '<div style="margin-top:1rem;padding:25px;background-color:#f2f5f3;">';
+                $html  = '<div style="margin-top:1rem;padding:35px;background-color:#f2f5f3;">';
 
                 // Content
-                $html .= '<div style="background-color:#ffffff; padding:5px;20px;5px;30px">';
+                $html .= '<div style="background-color:#ffffff; padding:15px">';
 
                 $html .= '<p>Hello *|FNAME|*,</p>'; 
                 $html .= '<p>Here are the latest <strong>'.$category->name.'</strong> remote jobs. Click on any job title to get more details.</p><br/>';
