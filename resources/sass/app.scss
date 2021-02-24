@@ -25,7 +25,7 @@ body {
 .footer {
     flex-shrink: 0;
     &__banner{
-        background-color: #9b9b9b;
+        background-color: #242729;
         color: #fff
     }
     &__post{
@@ -41,6 +41,21 @@ body {
     & .list-group-item {
         border:none !important;
     }
+
+    &__title {
+        font-weight:bold;
+        color:#bbc0c4;
+        font-size: 14px;
+    }
+    &__link {
+        color:#bbc0c4;
+        font-size: 12px;
+        transition: all 0.3s;
+        &:hover{
+            color: #eff0f1;
+        }
+    }
+
 }
 
 #p-sidebar {

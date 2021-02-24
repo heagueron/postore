@@ -190,6 +190,11 @@
         <a class="gumroad-button" href="{{ 'https://gum.co/' .$remjob->plan->gumroad_permalink. '?wanted=true' }}" target="_blank" data-gumroad-single-product="true">
             <span style="color: #4CAF50;font-weight:bold;">{{ __('checkout.buy') }}</span>
         </a>
+        <p class="mt-3" style="font-size:12px;">
+            <i class="fas fa-lock mr-2" aria-hidden="true"></i> 
+            {{__('checkout.secure')}} 
+            <a href="https://gumroad.com/" target="_blank" style="decorator:none; font-weight:bold">Gumroad</a>
+        </p>
     @endif
         <!-- <p>LINK: {{  'https://gum.co/' .$remjob->plan->gumroad_permalink  }}</p>
         <p>GR ID: {{ $remjob->plan->gumroad_product_id }}</p> -->

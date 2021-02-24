@@ -16,7 +16,6 @@ return [
     'rowTitle' => 'Your job post on main page: ',
     'detailTitle' => 'Your job post on its detail page: ',
 
-    
-
+    'secure'    => ' Secure and Powered by ',
 
 ];

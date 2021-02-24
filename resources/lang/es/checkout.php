@@ -16,5 +16,7 @@ return [
     'rowTitle' => 'Su publicacion en la pagina principal: ',
     'detailTitle' => 'Su publicacion en la pagina detalle: ',
 
+    'secure'    => ' Pago seguro por medio de ',
+
 
 ];
