@@ -415,6 +415,7 @@ class RemjobController extends Controller
             'apply_email'           => request()->apply_email,
             'apply_mode'            => request()->apply_mode,
             'slug'                  => Str::slug( (request()->position.' '.$remjob->id), '_'),
+            'plan_id'               => request()->plan_id,
             
         ]);
 
@@ -527,6 +528,7 @@ class RemjobController extends Controller
             'min_salary'    => ['nullable', 'max:7', 'lte:max_salary'], 
             'max_salary'    => ['nullable', 'max:7', 'gte:min_salary'],
             'locations'     => ['max:100'],
+            'plan_id'       => [ Rule::in(['1','2','3']) ],
         ]);
 
         return $validatedData;

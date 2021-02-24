@@ -184,7 +184,30 @@
                     @error('apply_link') <p class="rp-group__error">{{ $message }}</p> @enderror
                     @error('apply_email') <p class="rp-group__error">{{ $message }}</p> @enderror
 
-                </div>  
+                </div> 
+                
+                <!-- plan_id -->
+                <div class="my-4">
+                    <span class="rp-group__head">{{__('P L A N')}}*</span>
+
+                    <select data-required="required" name="plan_id" id="planElement">
+
+                        @foreach( \App\Plan::get() as $plan )
+
+                            @if( old('plan_id') == $plan->id )
+                                <option value="{{ $plan->id }}" selected>{{ $plan->name }}</option>
+                            @elseif( $remjob->plan_id == $plan->id )
+                                <option value="{{ $plan->id }}" selected>{{ $plan->name }}</option>
+                            @else
+                                <option value="{{ $plan->id }}">{{ $plan->name }}</option>
+                            @endif
+
+                        @endforeach
+
+                    </select>
+                    @error('plan_id') <p class="rp-group__error">{{ $message }}</p>  @enderror
+                    
+                </div>
 
             </div>
 

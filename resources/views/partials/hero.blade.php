@@ -6,7 +6,7 @@
 
     <div class="hero__title mt-5 text-center">
         <h1>REMJOB</h1>
-        <h4 class="hero__tip">{{__('text.heroTitleTip')}}</h4>
+        <h3 class="hero__tip">{{__('text.heroTitleTip')}}</h3>
     </div>
 
     
