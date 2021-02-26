@@ -3,23 +3,15 @@
 @endphp
 
 <div class="footer__banner p-4">
-    <!-- <div class="row">
-        <div class="col-sm-9 col-lg-10">
-            <h1 style="font-weight:bold;">REMJOB</h1>
-        </div>
-        <div class="col-sm-3 col-lg-2 mt-3">
-            <a class="footer__post" href="{{ route('post_a_job') }}">{{ __('text.postAJob') }}</a>
-        </div>
-    </div> -->
 
     {{-- LINKS --}}
     <div class="row my-2">
 
-        <div class="col-sm-12 col-lg-2 mb-4 text-center">
+        <!-- <div class="col-sm-12 col-lg-2 mb-4 text-center">
             <a href="{{ route('landing') }}">
-                <img src="{{ asset('images/remjob.png') }}" alt="Remjob" class="w-15" >
+                <img src="{{ asset('images/remjob3.png') }}" alt="Remjob" class="w-15" >
             </a>
-        </div>
+        </div> -->
 
         <div class="col-sm-12 col-lg-4 mb-3">
             <h5 class="footer__title">{{ strtoupper('Remote Jobs by Categories') }}</h5>
