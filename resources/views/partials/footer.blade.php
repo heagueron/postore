@@ -7,6 +7,8 @@
     {{-- LINKS --}}
     <div class="row my-2">
 
+        <div class="col-sm-12 col-lg-2 mb-4 text-center"> </div>
+
         <!-- <div class="col-sm-12 col-lg-2 mb-4 text-center">
             <a href="{{ route('landing') }}">
                 <img src="{{ asset('images/remjob3.png') }}" alt="Remjob" class="w-15" >
