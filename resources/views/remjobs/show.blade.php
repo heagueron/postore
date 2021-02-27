@@ -52,7 +52,6 @@
                 {{-- DESCRIPTION --}}
                 <div class="mt-5">
                     <div>{!! $remjob->description !!}</div>
-                   
 
                     @if($remjob->min_salary)
                         <p class="mt-2">
@@ -140,20 +139,23 @@
                             {{__('show.allJobs')}}<i class="fas fa-arrow-right"></i>
                         </a>
 
-
-
-
                     </div>
                 </div>
 
                 <div class="subscribe-invitation-card my-3" 
+
                     style="background-image:url( {{ asset('images/news1.jpg') }} ), linear-gradient(45deg, #003333, #ffffff);" >
 
                     <h3 class="mb-5" style="color:white; float:right;font-weigth:bold;width:45%;">Never miss the news!</h3>
+
                     {{-- Open Subscribe Modal --}}
-                    <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#createSubscriberModal">
-                        {{__('text.subscribeLabel')}}
-                    </button>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#createSubscriberModal">
+                            {{__('text.subscribeLabel')}}
+                        </button>
+                    </div>
+                    
+
                 </div>
 
             </div>

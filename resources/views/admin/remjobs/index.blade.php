@@ -47,7 +47,13 @@
                 @forelse($remjobs as $remjob)
                     <tr>
                         @if( $remjob->company )
-                            <td>{{ $remjob->company->name }}</td>
+                            <td>
+                                {{ $remjob->company->name }}<br/>
+                                <a href="{{ route( 'remjobs.show', $remjob->slug ) }}" target="_blank">
+                                    <span class="badge badge-info">Page</span>
+                                </a>
+                            </td>
+                            
                         @else 
                             <td >{{ __('*** NO COMPANY! *** ') }}</td>
                         @endif

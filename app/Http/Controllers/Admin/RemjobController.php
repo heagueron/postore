@@ -63,9 +63,6 @@ class RemjobController extends Controller
 
         foreach ( array_slice($jobsArray, 0, 8) as $remApiJob ) {
 
-            if( STR::before( $remApiJob["company"], 'ÃÂ') == ''){
-                continue;
-            }
 
             if( DB::table('remjobs')->where([
                 ['external_api', '=', 'https://remoteok.io'],
@@ -114,7 +111,7 @@ class RemjobController extends Controller
     {
         $response = Http::get('https://remotive.io/api/remote-jobs');
         $jobsArray = $response->json();
-
+        
         if( !$jobsArray['job-count'] ) {
             return back()->with('fail', 'No job found on remotive api');
         }
@@ -445,7 +442,6 @@ class RemjobController extends Controller
         try{ 
             Mail::to( $remjob->company->user->email )
                 ->cc('info@remjob.io')
-                ->bcc('heagueron@gmail.com')
                 ->send( new RemjobUpdatedMail( $remjob ) );
         } catch (\Exception $exception){ 
             Log::info( 'Failed to send email to notify client or admin update of remjob: ' . $remjob->id );
