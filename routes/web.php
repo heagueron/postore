@@ -119,6 +119,9 @@ Route::group(
         Route::get('/api_jobs.github', 'Admin\RemjobController@github')->name('admin.api_jobs.github');
         Route::get('/api_jobs.stack', 'Admin\RemjobController@stack')->name('admin.api_jobs.stack');
 
+        // From javascript autocomplete search)
+        Route::get('/remjobs/searchJobsByCompanyJson/{companyId}', 'Admin\RemjobController@searchJobsByCompanyJson');
+
         // Test private route
         Route::get('/hean', 'RemjobController@index_hean')->name('landing_hean');
         

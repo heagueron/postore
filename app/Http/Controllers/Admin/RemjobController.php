@@ -599,5 +599,22 @@ class RemjobController extends Controller
 
     }
 
+    /**
+     * Returns a json list of jobs, filtered by company
+     * @param  string $search_term
+     * @return \Illuminate\Http\Response
+     */
+    public function searchJobsByCompanyJson( $id )
+    {
+        $company = Company::findOrFail($id);
+
+        $remjobs = $company->remjobs()->get();
+            
+        return response()->json([
+            'remjobs'       => $remjobs,
+        ],200);
+
+    }
+
 
 }

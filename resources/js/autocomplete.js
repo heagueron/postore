@@ -15,10 +15,9 @@ function autocomplete(inp) {
 
         /* GET THE OPTIONS ARRAY FROM THE SERVER */
         const PATH = document.querySelector('#appURL').value == 'https://remjob.io' ? "https://remjob.io" : "http://127.0.0.1:8000";
-        console.log(`App URL From DOM: ${document.querySelector('#appURL').value}`);
-        console.log(`PATH: ${PATH}`)
 
         arr = [];
+
         fetch(`${PATH}/job_tags/${val}`)
         .then( response => response.json() )
         .then( suggestions => {

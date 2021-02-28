@@ -3,7 +3,12 @@
 @section('title', 'Admin|Remote Jobs')
 
 @section('content')
+
 <div class="container">
+
+    {{-- MODALS --}}
+    @include('admin.companies.modal')
+
     <div class="row justify-content-center">
         <div class="col-md-12">
 
@@ -43,9 +48,9 @@
                     <tr>
                         @if( $remjob->company )
                             <td>
-                                {{ $remjob->company->name }}<br/>
-                                <a href="{{ route( 'remjobs.show', $remjob->slug ) }}" target="_blank">
-                                    <span class="badge badge-info">Page</span>
+                                <a data-toggle="modal" data-target="#companyModal" title="{{ $remjob->company->name . 'jobs' }}" class="open-AddBookDialog"
+                                    data-id="{{ $remjob->company->id }}" data-name="{{ $remjob->company->name }}" >
+                                    {{ $remjob->company->name }}<br/>
                                 </a>
                             </td>
                             
@@ -53,8 +58,10 @@
                             <td >{{ __('*** NO COMPANY! *** ') }}</td>
                         @endif
                         <td>
-                            {{ $remjob->position }}<br/>
-                            <small>{{$remjob->slug}}</small>
+                            <a href="{{ route( 'remjobs.show', $remjob->slug ) }}" target="_blank" style="text-decoration:none;">
+                                {{ $remjob->position }}<br/>
+                                <small>{{$remjob->slug}}</small>
+                            </a>
                         </td>
                         <td>
                             @if( $remjob->active )

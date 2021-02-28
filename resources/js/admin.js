@@ -70,9 +70,59 @@ const companyControl = () => {
     //     $(this).find("#companyTwitterElement").val(companyTwitter);
 
     // });
-
     
 
+}
+
+const companyModalControl = () => {
+
+    $('#companyModal').on('show.bs.modal', function (event) {
+
+        var name = $(event.relatedTarget).data('name');
+        const companyId = $(event.relatedTarget).data('id');
+        $(this).find("#company-name-label").text(name);
+
+        const locationStart = window.location.href.indexOf("admin/remjobs");
+        const PATH = window.location.href.slice(0, locationStart);
+
+        fetch(`${PATH}admin/remjobs/searchJobsByCompanyJson/${companyId}`)
+        .then( response => response.json() )
+        .then( result => {
+
+          var a, b, b1, b2, b3
+
+          var a = document.querySelector("#jobs-searched-container");
+          //a.replaceChildren();
+
+          for ( remjob of result.remjobs) {
+            b = document.createElement("TR");
+            b1 = document.createElement("TD");
+            b2 = document.createElement("TD");
+            b3 = document.createElement("TD");
+            b1.innerHTML = remjob.id;
+            b2.innerHTML = remjob.position;
+            b3.innerHTML = `<small>${remjob.created_at.slice(0,10)}</small>`;
+
+            b.appendChild(b1);
+            b.appendChild(b2);
+            b.appendChild(b3);
+
+            a.appendChild(b);
+            
+          }
+
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
+    });
+
+    $("#companyModal").on('hidden.bs.modal', function(){
+        var a = document.querySelector("#jobs-searched-container");
+        a.replaceChildren();
+    });
+    
 }
 
 const remjobControl = () => {
@@ -143,6 +193,7 @@ setTimeout(() => {
         console.log("active url is: admin companies page");
         companyControl();
     }
+
     
     if ( window.location.href.indexOf("admin/remjobs") > -1 || window.location.href.indexOf("remjobs/edit") > -1) {
         console.log("active url is: admin remjobs page");
@@ -150,6 +201,9 @@ setTimeout(() => {
            document.querySelector('#app-footer').style.display = "none"; 
         }
         remjobControl();
+
+        companyModalControl();
+
     }
 
     // Check if active url is the admin users page

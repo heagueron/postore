@@ -470,7 +470,6 @@ class RemjobController extends Controller
         //
     }
 
-
     /**
      * Returns a list of job_tags, filtered by a search_term
      * @param  string $search_term
