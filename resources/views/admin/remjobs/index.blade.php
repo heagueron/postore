@@ -8,25 +8,20 @@
         <div class="col-md-12">
 
             <div class="d-flex mb-4 text-center p-2" style="background-color:#ffffff;">
-                <a  rel="nofollow"
-                    href="{{ route('admin.api_jobs.rok') }}" 
-                    alt="Get api jobs" class="post-button mr-2">
+                <a rel="nofollow" href="{{ route('admin.api_jobs.rok') }}" class="post-button mr-2">
                     Get Jobs from R|OK
                 </a>
-                <a  rel="nofollow"
-                    href="{{ route('admin.api_jobs.remotive') }}" 
-                    alt="Get api jobs" class="post-button mr-2">
+                <a rel="nofollow" href="{{ route('admin.api_jobs.remotive') }}" class="post-button mr-2">
                     Get Jobs from remotive
                 </a>
-                <a  rel="nofollow"
-                    href="{{ route('admin.api_jobs.working-nomads') }}" 
-                    alt="Get api jobs" class="post-button mr-2">
+                <a rel="nofollow" href="{{ route('admin.api_jobs.working-nomads') }}" class="post-button mr-2">
                     Get Jobs from working nomads
                 </a>
-                <a  rel="nofollow"
-                    href="{{ route('admin.api_jobs.github') }}" 
-                    alt="Get api jobs" class="post-button mr-2">
+                <a rel="nofollow" href="{{ route('admin.api_jobs.github') }}" class="post-button mr-2">
                     Get Jobs from github
+                </a>
+                <a rel="nofollow" href="{{ route('admin.api_jobs.stack') }}" class="post-button mr-2">
+                    Get Jobs from Stack Overflow
                 </a>
             </div>
                 
@@ -77,6 +72,8 @@
                             <td> {{__('WNM')}}</td>
                         @elseif( $remjob->external_api == 'https://jobs.github.com/positions' )
                         <td> {{__('GH')}}</td>
+                        @elseif( $remjob->external_api == 'http://stackoverflow.com/jobs/feed' )
+                        <td> {{__('STACK')}}</td>
                         @else
                             <td style="color:orange"> {{__('RP')}}</td>
                         @endif

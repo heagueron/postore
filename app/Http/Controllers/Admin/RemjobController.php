@@ -85,7 +85,7 @@ class RemjobController extends Controller
                 'apply_link'        => $remApiJob["url"],
                 'apply_mode'        => 'link',
                 'company_name'      => STR::before( $remApiJob["company"], 'ÃÂ'),
-                'tags'              => array_pop( $remApiJob["tags"] ),
+                'tags'              => array_values( $remApiJob["tags"] ),
                 'logo'              => array_key_exists('company_logo', $remApiJob) ? $remApiJob["company_logo"] : null,
                 'external_api'      => 'https://remoteok.io',
             ];
@@ -99,7 +99,6 @@ class RemjobController extends Controller
         }
         return redirect()->back();
     }
-
     
     /**
      * Load jobs from API remotive
@@ -126,7 +125,7 @@ class RemjobController extends Controller
             if( strlen( $remApiJob["title"] > 75 ) ) {
                 continue;
             }
-
+            
             $jobData = [
                 'position'          => $remApiJob["title"],
                 'description'       => $remApiJob["description"],
@@ -175,7 +174,7 @@ class RemjobController extends Controller
             if( strlen( $remApiJob["title"] > 75 ) ) {
                 continue;
             }
-
+            
             $jobData = [
                 'position'          => $remApiJob["title"],
                 'description'       => $remApiJob["description"],
@@ -184,7 +183,7 @@ class RemjobController extends Controller
                 'apply_link'        => $remApiJob["url"],
                 'apply_mode'        => 'link',
                 'company_name'      => $remApiJob["company_name"],
-                'tags'              => $remApiJob["tags"],
+                'tags'              => explode(",",$remApiJob["tags"]),
                 'logo'              => null,
                 'external_api'      => 'https://www.workingnomads.co/',
             ];
@@ -251,6 +250,78 @@ class RemjobController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Load jobs from API remotive
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function stack()
+    {
+        //Feed URLs
+        $feeds = array(
+            "http://stackoverflow.com/jobs/feed?r=true",
+        );
+        
+        //Read each feed's items
+        $entries = array();
+        foreach($feeds as $feed) {
+            $xml = simplexml_load_file($feed);
+            $entries = array_merge($entries, $xml->xpath("//item"));
+        }
+
+        //Sort feed entries by pubDate
+        usort($entries, function ($feed1, $feed2) {
+            return strtotime($feed2->pubDate) - strtotime($feed1->pubDate);
+        });
+
+        
+
+        // $response = Http::get('https://jobs.github.com/positions.json');
+        
+        // $jobsArray = $response->json();
+
+        if( count( $entries ) == 0 ) {
+            return back()->with('fail', 'No job found on github jobs');
+        }
+
+        foreach ( array_slice($entries, 0, 11) as $remApiJob ) {
+
+            if( DB::table('remjobs')->where([
+                ['external_api', '=', 'http://stackoverflow.com/jobs/feed'],
+                ['apply_link', '=', $remApiJob->link],
+            ])->exists() ){ 
+                continue; 
+            }
+
+            // if( strlen( $remApiJob["company_logo"] ) > 190 or strlen( $remApiJob["title"] > 75 ) ) {
+            //     continue;
+            // }
+
+            $jobData = [
+                'position'          => (string)Str::of($remApiJob->title)->before(' at '),
+                'description'       => (string)$remApiJob->description,
+                'category_id'       => null,
+                'locations'         => (string)$remApiJob->location,
+                'apply_link'        => (string)$remApiJob->link,
+                'apply_mode'        => 'link',
+                'company_name'      => (string)Str::of($remApiJob->title)->after(' at ')->before(' ('),
+                'tags'              => (array)$remApiJob->category,
+                'logo'              => null,
+                'external_api'      => 'http://stackoverflow.com/jobs/feed',
+            ];
+
+            try{ 
+                $this->createApiJob( $jobData );
+            } catch (\Exception $exception){ 
+                Log::info( 'Failed to create STACK api job: ' . $jobData['position'] );
+            }
+
+        }
+        return redirect()->back();
+    }
+
+
     private function createApiJob( $jobData ){
 
         $companyName = $jobData['company_name'];
@@ -262,7 +333,7 @@ class RemjobController extends Controller
                 'name'  => $companyName,
                 'slug'  => Str::slug( $companyName, '-' ),
                 'email' => 'heagueron@gmail.com',
-                'logo'  => $jobData["logo"],
+                'logo'  => $jobData["logo"] != null ? $jobData["logo"]: null,
                 'user_id'   => 1,
             ]);
         } else {
@@ -291,7 +362,10 @@ class RemjobController extends Controller
             'slug'              => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
         ]);
 
-        if( $jobData['tags'] ){
+
+
+        if( $jobData['tags'] != null ){
+
             // tags for the remjob-tag pivot table
             $tagsIdToLink = [];
 
@@ -299,18 +373,21 @@ class RemjobController extends Controller
             
             // take first 3 tags
             foreach ( array_slice($jobData["tags"], 0, 2) as $inputTag ) {
+
                 if( Tag::where('name',trim($inputTag) )-> exists() ) {
                     $foundTag = Tag::where('name',trim($inputTag) )->first();
                     array_push( $tagsIdToLink, $foundTag->id );
+
                 } else {
                     $newTag = Tag::create([ 'name' => trim($inputTag) ]);
                     array_push( $tagsIdToLink, $newTag->id );
                 }
+
             }
 
-            $remjob->tags()->attach( array_unique( $tagsIdToLink ) );
-        }
-
+            $remjob->tags()->attach( array_values( array_unique( $tagsIdToLink ) ) );
+        } 
+        
         return;
 
     }
@@ -357,17 +434,9 @@ class RemjobController extends Controller
      */
     public function edit(Remjob $remjob)
     {
-        // if ( $remjob->language == 'es' ) {
-        //     $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
-        // } else {
-        //     $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14, 15] )->get();
-        // }
-
         $lenguageId = Language::where('short_name', \App::getLocale())->first()->id;
 
         $categories = Category::where('language_id', '=',  $lenguageId )->whereNotIn('id', [1, 7])->get();
-
-        //dd($categories);
 
         $tagsText = '';
         foreach( $remjob->tags()->take(5)->get() as $tag ){
@@ -511,7 +580,6 @@ class RemjobController extends Controller
     private function validateRemjob() 
     {
         $categoryIds = DB::table('categories')->pluck('id')->toArray();
-        //dd( array_values($categoryIds) );
 
         $validatedData = request()->validate([
             'position'      => ['required', 'max:100'],
