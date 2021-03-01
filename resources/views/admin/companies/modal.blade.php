@@ -15,9 +15,7 @@
             <th>Id</th>
             <th>Position</th>
             <th>Created At</th>
-            <tbody id="jobs-searched-container">
-                
-            </tbody>
+            <tbody id="jobs-searched-container"></tbody>
           </table>
       </div>
 

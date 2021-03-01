@@ -52,7 +52,7 @@ class DailyNews extends Command
         foreach (\App\Category::all() as $category) {
 
             if ( \App\Remjob::whereDate( 'created_at', '=', Carbon::yesterday()->toDateString() )
-                            ->where('category_id', $category->id)
+                            ->where([['category_id', $category->id],['active',1]])
                             ->exists() ){
                 $this->info( 'got ' .$category->tag. ' jobs.' );
             
@@ -66,7 +66,7 @@ class DailyNews extends Command
                     $campaignId = $clonCampaign["id"];
 
                     $remjobs = \App\Remjob::whereDate( 'created_at', '=', Carbon::yesterday()->toDateString() )
-                                ->where('category_id', $category->id)->get();
+                                ->where([['category_id', $category->id],['active',1]])->get();
                     
                     // Container
                     $html  = '<div style="margin-top:1rem;padding:35px;background-color:#f2f5f3;">';

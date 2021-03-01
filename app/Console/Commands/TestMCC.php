@@ -45,15 +45,15 @@ class TestMCC extends Command
         $api = Newsletter::getApi();
 
         // TESTING: MARKETING Remote Jobs
-        $category = \App\Category::where('tag', 'marketing')->first();
+        $category = \App\Category::where('tag', 'dev')->first();
 
         if ( \App\Remjob::whereDate( 'created_at', '=', Carbon::yesterday()->toDateString() )
-                        ->where('category_id', $category->id)
+                        ->where([['category_id', $category->id],['active',1]])
                         ->exists() ){
             $this->info( 'got ' .$category->tag. ' jobs.' );
         
             // Replicate the campaigne
-            $clonCampaign = $api->post('campaigns/1f89d556fa/actions/replicate');
+            $clonCampaign = $api->post('campaigns/175188e5ca/actions/replicate');
 
             if( $clonCampaign ) {
 
@@ -62,7 +62,7 @@ class TestMCC extends Command
                 $campaignId = $clonCampaign["id"];
 
                 $remjobs = \App\Remjob::whereDate( 'created_at', '=', Carbon::yesterday()->toDateString() )
-                            ->where('category_id', $category->id)->get();
+                            ->where([['category_id', $category->id],['active',1]])->get();
                 
                 // Container
                 $html  = '<div style="margin-top:1rem;padding:35px;background-color:#f2f5f3;">';
