@@ -485,6 +485,11 @@ class RemjobController extends Controller
             
         ]);
 
+        // Add or update media to the company model
+        if( !is_null( request()->logo ) ){
+            $remjob->company->update([ 'logo'    => request()->logo]);
+        }
+
         // tags for the remjob-tag pivot table
         $tagsIdToLink = [];  
 

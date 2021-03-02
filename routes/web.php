@@ -96,6 +96,10 @@ Route::group(
         Route::patch('/categories/{category}', 'Admin\CategoryController@update')->name('admin.categories.update');
         Route::delete('/categories/{category}', 'Admin\CategoryController@destroy')->name('admin.categories.destroy');
 
+        // TAGS ( Features Datatable )
+        Route::get('tags', ['uses'=>'Admin\TagController@index', 'as'=>'admin.tags.index']);
+
+
         // Plans
         Route::get('/plans', 'Admin\PlanController@index')->name('admin.plans.index');
         Route::get('/plans/{plan}/edit', 'Admin\PlanController@edit')->name('admin.plans.edit');

@@ -209,6 +209,17 @@
                     
                 </div>
 
+                <!-- logo -->
+                <div>
+                    <span class="rp-group__head">{{__('Logo Link')}}</span>
+                    <input  autocomplete="off"
+                            type="text" name="logo" data-name="candidate locations allowed"
+                            value="{{ !is_null( old('logo'))? old('logo') : $remjob->logo }}"
+                            
+                        >
+                    @error('logo') <p class="rp-group__error">{{ $message }}</p>  @enderror
+                </div>
+
             </div>
 
             <button class="post-button ml-4 my-2" type="submit" id="post-the-job-button">

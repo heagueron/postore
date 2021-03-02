@@ -48,9 +48,9 @@
                     <tr>
                         @if( $remjob->company )
                             <td>
-                                <a data-toggle="modal" data-target="#companyModal" title="{{ $remjob->company->name . 'jobs' }}" class="open-AddBookDialog"
+                                <a data-toggle="modal" data-target="#companyModal" title="{{ $remjob->company->name . ' jobs' }}" class="open-AddBookDialog"
                                     data-id="{{ $remjob->company->id }}" data-name="{{ $remjob->company->name }}" >
-                                    {{ $remjob->company->name }}<br/>
+                                    {{ $remjob->company->name }}
                                 </a>
                             </td>
                             

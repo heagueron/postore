@@ -167,6 +167,26 @@ const remjobControl = () => {
 
 }
 
+const tagControl = () => {
+
+    $(function () {
+        console.log('dt tags script ... ');
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.tags.index') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'name', name: 'name'},
+                //{data: 'email', name: 'email'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
+        
+      });
+
+}
+
 // const userControl = () => {
 //     /* FOR USER DESTROY */
 //     $('#destroyUserModal').on('show.bs.modal', function (event) {
@@ -204,6 +224,11 @@ setTimeout(() => {
 
         companyModalControl();
 
+    }
+
+    if ( window.location.href.indexOf("admin/tags") > -1) {
+        console.log("active url is: admin tags page");
+        tagControl();
     }
 
     // Check if active url is the admin users page
