@@ -65,7 +65,7 @@
                 <table class="table table-bordered" style="font-size:12px;color:white;">
                     <thead>
                         <tr>
-                            <th>L</th><th>C</th><th>D</th><th>A</th><th>U</th>
+                            <th>Land</th><th>Cat</th><th>Show</th><th>All</th><th>Uniq</th>
                         </tr>
                     </thead>
                     <tbody>
