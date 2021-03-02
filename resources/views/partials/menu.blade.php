@@ -61,6 +61,25 @@
             </li>
 
             <li class="c-sidebar-nav-item">
+                <table class="table" style="font-size:12px;">
+                    <thead>
+                        <tr>
+                            <th>L</th><th>D</th><th>C</th><th>A</th><th>U</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ \App\Visit::where('entry_route', 'landing')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
+                            <td>{{ \App\Visit::where('entry_route', 'remjobs.show')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
+                            <td>{{ \App\Visit::where('entry_route', 'remjobs.searchByTags')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
+                            <td>{{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
+                            <td>{{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->where('first_on_date', 1)->count() }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+
+            <!-- <li class="c-sidebar-nav-item">
                 <span class="c-sidebar-nav-link">Landing Hits: {{ \App\Visit::where('entry_route', 'landing')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
             </li>
             <li class="c-sidebar-nav-item">
@@ -78,7 +97,7 @@
 
             <li class="c-sidebar-nav-item">
                 <span class="c-sidebar-nav-link">Active Jobs: {{ \App\Remjob::where('active', 1)->count() }}</span>             
-            </li>
+            </li> -->
             
         @endif
 
@@ -91,6 +110,7 @@
 
     </ul>
 
+    
 
 
 </div>
