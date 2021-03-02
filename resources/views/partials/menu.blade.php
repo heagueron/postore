@@ -61,19 +61,20 @@
             </li>
 
             <li class="c-sidebar-nav-item">
-                <table class="table" style="font-size:12px;">
+                <p class="mb-1" style="font-size:12px;color:white;">Hits and visits today:</p>
+                <table class="table table-bordered" style="font-size:12px;color:white;">
                     <thead>
                         <tr>
-                            <th>L</th><th>D</th><th>C</th><th>A</th><th>U</th>
+                            <th>L</th><th>C</th><th>D</th><th>A</th><th>U</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ \App\Visit::where('entry_route', 'landing')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
-                            <td>{{ \App\Visit::where('entry_route', 'remjobs.show')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
-                            <td>{{ \App\Visit::where('entry_route', 'remjobs.searchByTags')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
-                            <td>{{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
-                            <td>{{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->where('first_on_date', 1)->count() }}</td>
+                            <td title="visits to LANDING page">{{ \App\Visit::where('entry_route', 'landing')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
+                            <td title="visits to CATEGORY/TAG page">{{ \App\Visit::where('entry_route', 'remjobs.searchByTags')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
+                            <td title="visits to DETAIL page">{{ \App\Visit::where('entry_route', 'remjobs.show')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
+                            <td title="all visits">{{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->count() }}</td>
+                            <td title="all unique visitors">{{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->where('first_on_date', 1)->count() }}</td>
                         </tr>
                     </tbody>
                 </table>
