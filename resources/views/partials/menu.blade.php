@@ -61,16 +61,19 @@
             </li>
 
             <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">Landing Visits: {{ \App\Visit::where('entry_route', 'landing')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
+                <span class="c-sidebar-nav-link">Landing Hits: {{ \App\Visit::where('entry_route', 'landing')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
             </li>
             <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">DetailVisits: {{ \App\Visit::where('entry_route', 'remjobs.show')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
+                <span class="c-sidebar-nav-link">Detail Hits: {{ \App\Visit::where('entry_route', 'remjobs.show')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
             </li>
             <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">Cat/Tag Visits: {{ \App\Visit::where('entry_route', 'remjobs.searchByTags')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
+                <span class="c-sidebar-nav-link">Cat/Tag Hits: {{ \App\Visit::where('entry_route', 'remjobs.searchByTags')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
             </li>
             <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">All Visits: {{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
+                <span class="c-sidebar-nav-link">All Hits: {{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
+            </li>
+            <li class="c-sidebar-nav-item">
+                <span class="c-sidebar-nav-link">Unique Hits: {{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->where('first_on_date', 1)->count() }}</span>             
             </li>
 
             <li class="c-sidebar-nav-item">
