@@ -16,6 +16,7 @@
         "intervention/image": "^2.5",
         "j7mbo/twitter-api-php": "^1.0",
         "laravel/framework": "^7.0",
+        "laravel/sanctum": "^2.9",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "orangehill/iseed": "^2.6",
