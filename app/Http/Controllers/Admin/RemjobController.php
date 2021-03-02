@@ -57,8 +57,8 @@ class RemjobController extends Controller
     public function rok()
     {
         $response = Http::retry(3, 100)->get('https://remoteok.io/api');
-        $jobsArray = $response->json();
 
+        $jobsArray = $response->json();
         array_shift( $jobsArray );
 
         foreach ( array_slice($jobsArray, 0, 8) as $remApiJob ) {
