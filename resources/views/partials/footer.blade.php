@@ -26,7 +26,7 @@
             @endforeach
         </div>
 
-        <div class="col-sm-12 col-lg-4 mb-5">
+        <div class="col-sm-12 col-lg-4 mb-4">
             <h5 class="footer__title">{{ strtoupper('Remote Jobs by Skills') }}</h5>
                 <a href="{{route('remjobs.searchByTags', 'remote_php_jobs')}}" class="footer__link">{{ __('text.footCategory', ['categoryTitle' => 'Php' ]) }}</a><br>
                 <a href="{{route('remjobs.searchByTags', 'remote_java_jobs')}}" class="footer__link">{{ __('text.footCategory', ['categoryTitle' => 'Java' ]) }}</a><br>
@@ -43,7 +43,13 @@
         </div>
 
         <div class="col-sm-12 col-lg-2 text-center">
-            <a class="footer__post" href="{{ route('post_a_job') }}">{{ __('text.postAJob') }}</a>
+            <div>
+                <a class="footer__post" href="{{ route('post_a_job') }}">{{ __('text.postAJob') }}</a>
+            </div>
+            <div class="mt-3 footer__link">
+                <a href="mailto:info@remjob.io?subject=Advertise on Remjob IO&amp;body=I would like to advertise with you!%0A%0A%0A">Advertise with us</a>
+            </div>
+            
         </div>
 
     </div>
