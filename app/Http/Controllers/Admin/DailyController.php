@@ -71,7 +71,7 @@ class DailyController extends Controller
                     'hits_landing'      => $landingVisits,
                     'hits_details'      => $detailVisits,
                     'hits_category'     => $categoryOrTagVisits,
-                    'visitors_count'    => $uniqueVisitors,
+                    'distinct_visitors' => $uniqueVisitors,
                 ]);
 
             } catch (\Exception $exception){ 

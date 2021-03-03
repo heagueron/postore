@@ -42,7 +42,7 @@
                             <td>{{ $daily->hits_category }}</td>
                             <td>{{ $daily->hits_details }}</td>
                             <td>{{ $daily->hits_faq }}</td>
-                            <td>{{ $daily->visitors_count }}</td>
+                            <td>{{ $daily->distinct_visitors }}</td>
 
                             {{-- Registered users--}}
                             <td>{{ $daily->registered_users }}</td>
