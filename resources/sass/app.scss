@@ -649,7 +649,7 @@ nav {
     align-items: center;
     padding-right: 0;
     padding-left: 0;
-
+    margin-top: 10px !important;
 }
 
 /* Categories */
@@ -1232,6 +1232,7 @@ h3 i {
 .jobrow-company-logo {
     width: 60px;
     height: auto;
+    text-align: center;
 }
 
 // Media queries
@@ -1240,6 +1241,13 @@ h3 i {
     .jobrow-company-logo {
         width: 50px;
         height: auto;
+        text-align: center;
+    }
+    .worlwide-filter{
+        display: none;
+    }
+    .search-container{
+        margin-top: 5px !important;
     }
 }
 
@@ -1377,7 +1385,7 @@ h3 i {
     /*border: 1px solid grey !important;*/
     border-radius: 5px !important;
     transition: all 0.3s;
-    z-index: 99;
+    z-index: 99 !important;
     -webkit-box-shadow: 6px 0px 10px 0px rgba(46, 50, 50, 0.59);
     -moz-box-shadow:    6px 0px 10px 0px rgba(46, 50, 50, 0.59);
     box-shadow:         6px 0px 10px 0px rgba(46, 50, 50, 0.59);
@@ -1396,9 +1404,9 @@ h3 i {
 
   /* categories in landing*/
   .cat-subs-col{
-    position: -webkit-sticky;
+    /*position: -webkit-sticky;
     position: sticky;
-    top: 85px;
+    top: 85px;*/
   }
 
   /* show in remjob */

@@ -15,59 +15,63 @@
             <div class="worlwide-filter mt-2 mr-4 ml-auto"><a href="{{ route('landing') }}">{{__('text.notOnlyWorldwide')}}</a></div>
         @endif
 
-        <div class="row mt-3">
+        <div class="container">
 
-            <div class="col-sm-12 col-lg-3">
+            <div class="row mt-4">
 
-                <div class="d-flex flex-column cat-subs-col">
+                <div class="col-sm-12 col-lg-3">
 
-                    <!--the original select box is surrounded with a "rj-custom-select" DIV element.-->
-                    <div class="rj-custom-select" id="rj-custom-select" data-true-tag="{{ $trueTag  ?? '' }}">
-                        <select class="rj-select">
-                            @foreach( $categories as $category )
-                                @if( $selectedCategory->id == $category->id )
-                                    <option selected value="{{ $category->tag }}">{{ $category->name }}</option>
-                                @else 
-                                    <option value="{{ $category->tag }}" data-tag="{{ $category->tag }}">{{ $category->name }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
+                    <div class="d-flex flex-column cat-subs-col">
 
-                    <div class="subscribe-invitation-card my-3" 
-                        style="background-image:url( {{ asset('images/news2.jpg') }} ), linear-gradient(45deg, #003333, #ffffff);" >
-
-                        <h3 class="mb-5" style="color:white; float:right;font-weigth:bold;width:45%;">Never miss the news!</h3>
-                        
-                        {{-- Open Subscribe Modal --}}
-                        <div class="text-center" style="margin-top:130px;">
-                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#createSubscriberModal">
-                                {{__('text.subscribeLabel')}}
-                            </button>
+                        <!--the original select box is surrounded with a "rj-custom-select" DIV element.-->
+                        <div class="rj-custom-select" id="rj-custom-select" data-true-tag="{{ $trueTag  ?? '' }}">
+                            <select class="rj-select">
+                                @foreach( $categories as $category )
+                                    @if( $selectedCategory->id == $category->id )
+                                        <option selected value="{{ $category->tag }}">{{ $category->name }}</option>
+                                    @else 
+                                        <option value="{{ $category->tag }}" data-tag="{{ $category->tag }}">{{ $category->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
-                    </div>
+
+                        <div class="subscribe-invitation-card my-3" 
+                            style="background-image:url( {{ asset('images/news2.jpg') }} ), linear-gradient(45deg, #003333, #ffffff);" >
+
+                            <h3 class="mb-5" style="color:white; float:right;font-weigth:bold;width:45%;">Never miss the news!</h3>
                             
-                </div>
-                
-            </div>
-
-            <div class="col-sm-12 col-lg-9">
-
-                <div  id="rp-accordion">
-
-                    @forelse ( $remjobs as $remjob )
-                        <x-jobrow :remjob="$remjob" page='landing'/>
-                    @empty
-                        <p class="d-flex justify-content-center align-content-center">
-                            {{ __('text.noRemjobs') }}
-                        </p>
-                    @endforelse
+                            {{-- Open Subscribe Modal --}}
+                            <div class="text-center" style="margin-top:130px;">
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#createSubscriberModal">
+                                    {{__('text.subscribeLabel')}}
+                                </button>
+                            </div>
+                        </div>
+                                
+                    </div>
                     
                 </div>
-                <div>
-                    {{ $remjobs->links() }}   
+
+                <div class="col-sm-12 col-lg-9">
+
+                    <div  id="rp-accordion" class="d-flex flex-column align-content-center justify-content-center my-5 ml-2">
+
+                        @forelse ( $remjobs as $remjob )
+                            <x-jobrow :remjob="$remjob" page='landing'/>
+                        @empty
+                            <p class="d-flex justify-content-center align-content-center">
+                                {{ __('text.noRemjobs') }}
+                            </p>
+                        @endforelse
+                        
+                    </div>
+                    <div>
+                        {{ $remjobs->links() }}   
+                    </div>
+                    
                 </div>
-                
+
             </div>
 
         </div>

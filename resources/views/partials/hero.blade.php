@@ -1,7 +1,7 @@
 
 @include('partials.nav')
 
-<header class="hero" style="background-image:url( {{ asset('images/caribbean3-rec.jpg') }} )" id="rj-hero">
+<header class="hero" style="background-image:url( {{ asset('images/birds.jpg') }} )" id="rj-hero">
 <!-- <header class="hero"> -->
 
     <div class="hero__title mt-5 text-center">
@@ -10,7 +10,7 @@
     </div>
 
     
-    <div class="search-container mt-3">
+    <div class="search-container">
 
             <div class="autocomplete" style="width:300px;">
                 <input id="myInput" class="rp-search-input" type="text" name="search-term" 
