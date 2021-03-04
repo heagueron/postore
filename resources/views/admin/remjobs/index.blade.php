@@ -143,6 +143,10 @@
                 </tbody>
             </table>
 
+            <div>
+                {{ $remjobs->links() }}   
+            </div>
+
         </div>
     </div>
 </div>

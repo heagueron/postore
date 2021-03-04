@@ -46,13 +46,13 @@
                             </button>
                         </div>
                     </div>
-                    
-            
+                            
                 </div>
                 
             </div>
 
             <div class="col-sm-12 col-lg-9">
+
                 <div  id="rp-accordion">
 
                     @forelse ( $remjobs as $remjob )
@@ -62,8 +62,12 @@
                             {{ __('text.noRemjobs') }}
                         </p>
                     @endforelse
-
+                    
                 </div>
+                <div>
+                    {{ $remjobs->links() }}   
+                </div>
+                
             </div>
 
         </div>

@@ -41,7 +41,7 @@ class RemjobController extends Controller
     public function index()
     {
         if( Remjob::all()->count() > 0 ){
-            $remjobs = Remjob::latest()->get();
+            $remjobs = Remjob::latest()->simplePaginate(100);
         } else { $remjobs = []; }
         
         return view( 'admin.remjobs.index',compact('remjobs') );

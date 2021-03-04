@@ -63,7 +63,7 @@ class RemjobController extends Controller
         if( Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )->exists() ){
 
             $remjobs = Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )
-                ->orderBy('plan_id', 'desc')->orderBy('created_at', 'desc')->get();
+                ->orderBy('plan_id', 'desc')->orderBy('created_at', 'desc')->simplePaginate(100);
 
         } else { $remjobs = []; } 
 
@@ -89,7 +89,7 @@ class RemjobController extends Controller
 
             $remjobs = Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )
             ->whereIn(strtoupper('locations'), ['WORLDWIDE', 'GLOBAL', 'ANYWHERE', 'REMOTE'])
-            ->orderBy('plan_id', 'desc')->orderBy('created_at', 'desc')->get();
+            ->orderBy('plan_id', 'desc')->orderBy('created_at', 'desc')->simplePaginate(100);
         } else { $remjobs = []; } 
 
         $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
@@ -337,7 +337,7 @@ class RemjobController extends Controller
                 //$remjobs = $category->remjobs()->where('active', 1)
                 $remjobs = $category->remjobs()->where( [['language', '=', App::getLocale()],['active', '=', '1']] )
                     ->orderBy('plan_id', 'desc')
-                    ->orderBy('created_at', 'desc')->get();
+                    ->orderBy('created_at', 'desc')->simplePaginate(100);
             } else { $remjobs = []; }
 
             $selectedCategory = $category;
@@ -358,7 +358,7 @@ class RemjobController extends Controller
                 //$remjobs = $tag->remjobs()->where('active', 1)
                 $remjobs = $tag->remjobs()->where( [['language', '=', App::getLocale()],['active', '=', '1']] )
                     ->orderBy('plan_id', 'desc')
-                    ->orderBy('created_at', 'desc')->get();
+                    ->orderBy('created_at', 'desc')->simplePaginate(100);
             } else { $remjobs = []; }
 
             $selectedCategory = $categories[0];
@@ -384,7 +384,7 @@ class RemjobController extends Controller
         // $company = Company::where( 'slug', 'like', $company_slug )->first();
         $remjobs = Remjob::where( 'company_id', $company->id )
             ->orderBy('plan_id', 'desc')
-            ->orderBy('created_at', 'desc')->get();
+            ->orderBy('created_at', 'desc')->simplePaginate(100);
 
         $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
         $categories = Category::where('language_id', '=',  $lenguageId )->get();
