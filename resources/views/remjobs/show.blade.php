@@ -10,22 +10,25 @@
     
     <div class="container" style="margin-top:7rem;">
 
-        <div class="d-flex justify-content-between mt-5">
-
-            <a href="{{ route('landing') }}" style="color:#4CAF50;">
-                <i class="fas fa-arrow-left"></i>{{__('show.back')}}
-            </a>
-
-            @if( $remjob->category )
-            <a href="{{route('remjobs.searchByTags', 'remote-' .$remjob->category->tag.'-jobs')}}" style="color:#4CAF50;">
-                {{ __('show.browseCategory', ['category' => $remjob->category->name]) }}<i class="fas fa-arrow-right"></i>
-            </a>
-            @endif
-
+        <div class="d-flex justify-content-between mt-5 ml-md-2 show-nav">
+            <div>
+                <a href="{{ route('landing') }}" style="color:#4CAF50;">
+                    <i class="fas fa-arrow-left"></i>{{__('show.back')}}
+                </a>
+            </div>
+            
+            <div>
+                @if( $remjob->category )
+                    <a href="{{route('remjobs.searchByTags', 'remote-' .$remjob->category->tag.'-jobs')}}" style="color:#4CAF50;">
+                        {{ __('show.browseCategory', ['category' => $remjob->category->name]) }}<i class="fas fa-arrow-right"></i>
+                    </a>
+                @endif
+            </div>
+            
         </div>
 
 
-        <div class="row mt-5">
+        <div class="row mt-5 p-2">
             <div class="col-lg-9 col-sm-12 remjob-description">
 
                 <p>{{ __(
