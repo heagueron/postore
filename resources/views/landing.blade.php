@@ -15,7 +15,7 @@
             <div class="worlwide-filter mt-2 mr-4 ml-auto"><a href="{{ route('landing') }}">{{__('text.notOnlyWorldwide')}}</a></div>
         @endif
 
-        <div class="container">
+        <!-- <div class="container"> -->
 
             <div class="row mt-4">
 
@@ -55,7 +55,7 @@
 
                 <div class="col-sm-12 col-lg-9">
 
-                    <div  id="rp-accordion" class="d-flex flex-column align-content-center justify-content-center my-5 ml-2">
+                    <div  id="rp-accordion">
 
                         @forelse ( $remjobs as $remjob )
                             <x-jobrow :remjob="$remjob" page='landing'/>
@@ -74,7 +74,7 @@
 
             </div>
 
-        </div>
+        <!-- </div> -->
 
     </div>
     

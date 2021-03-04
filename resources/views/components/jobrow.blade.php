@@ -6,18 +6,18 @@
     @if( $remjob->external_api == null )
 
         @if( $remjob->plan->yellow_background )
-        <div class="row rp-row__header job-box rp-row__highlight inner container p-2" style="margin-left:0;margin-right:0;">
+        <div class="row rp-row__header job-box rp-row__highlight inner container" style="margin-left:0;margin-right:0;">
         @else
-        <div class="row rp-row__header job-box rp-row__standard inner container p-2" style="margin-left:0;margin-right:0;">
+        <div class="row rp-row__header job-box rp-row__standard inner container" style="margin-left:0;margin-right:0;">
         @endif
 
     @else
-        <div class="row rp-row__header job-box rp-row__standard inner container p-2" style="margin-left:0;margin-right:0;">
+        <div class="row rp-row__header job-box rp-row__standard inner container" style="margin-left:0;margin-right:0;">
     @endif
     
 
             {{-- LOGO --}}
-            <div class="col-1" style="padding-left: 5px;">
+            <div class="col-1">
                 
                 @if( $remjob->external_api == null )
 
@@ -42,10 +42,10 @@
             </div>
 
             {{-- POSITION --}}
-            <div class="col-9 row">
+            <div class="col-11 row">
             
                 {{-- POSITION COMPANY LOCATIONS --}}
-                <div class="col-sm-10 col-lg-6 mt-lg-3 mt-sm-2 ml-3">
+                <div class="col-sm-10 col-lg-5 mt-lg-3 mt-sm-2 ml-3">
                     <h5 class="mb-1 rp-job-title"> {{ ucwords( $remjob->position ) }} </h5>
                     <a  class="mb-1 company-badge company-brand"
                         title="{{'browse '.$remjob->company->name.' jobs'}}"
@@ -81,13 +81,11 @@
                 </div>
 
                 {{-- TIME AGO --}}
-                <div class="col-sm-10 col-lg-2 mt-3 ml-3">
+                <div class="col-sm-10 col-lg-1 mt-3 ml-3">
                     <p class="job-date">{{ $remjob->created_at->diffForHumans() }}</p>
                 </div>
 
             </div>
-
-            
 
     </div>
 
