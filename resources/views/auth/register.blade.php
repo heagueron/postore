@@ -7,7 +7,7 @@
                     <div class="card shadow zindex-100 mb-0">
                         <div class="card-body px-md-5 py-3">
                             <div class="mb-5 text-center">
-                                <img src="{{ asset('images/remjob.png') }}" alt="remjob" class="w-25" >
+                                <img src="{{ asset('images/remjob7.png') }}" alt="remjob" class="w-25" >
                             </div>
                             <span class="clearfix"></span>
                             <form method="POST" action="{{ route('register') }}">
