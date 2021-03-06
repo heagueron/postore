@@ -145,7 +145,7 @@
 
                 </ul>
 
-                <div class="sp_center">
+                <div class="sp_center text-center">
                     <h1 class="sp_elements__title my-4">Have additional questions?</h1>
 
                     <a href="mailto:info@remjob.io?subject=Additional questions&amp;body=Hello. I need additional information about your ad schema ... %0A%0A%0A" style="color:#367c39; text-decoration:underline;">
