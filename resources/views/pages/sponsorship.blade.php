@@ -146,14 +146,12 @@
                 </ul>
 
                 <div class="sp_center">
-                    <h1 class="sp_elements__title my-4">Has additional questions?</h1>
+                    <h1 class="sp_elements__title my-4">Have additional questions?</h1>
 
                     <a href="mailto:info@remjob.io?subject=Additional questions&amp;body=Hello. I need additional information about your ad schema ... %0A%0A%0A" style="color:#367c39; text-decoration:underline;">
                         Send an email to us.
                     </a>
                 </div>
-
-
 
                 <div class="sp_center mt-5 mb-3">
                     <a href="mailto:info@remjob.io?subject=Advertise on Remjob IO&amp;body=I would like to advertise with you!%0A%0A%0A"
