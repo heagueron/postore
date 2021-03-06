@@ -1546,8 +1546,14 @@ h3 i {
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     .sp_intro, .sp_elements{
-        width: 98%;
+        width: 100%;
     }
+
+    .sp_intro__topImg{
+        width: 300px;
+        height: auto;
+    }
+
     .sp_elements__adLanding{
         width: 300px;
         height: auto;

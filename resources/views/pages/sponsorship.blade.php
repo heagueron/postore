@@ -19,22 +19,22 @@
 
             </div>
             
-            <p class="sp_intro__description mt-3 mb-3">
+            <p class="sp_intro__description mt-3 mb-3 mx-3">
                 Connect with thousands of professional remote workers from around the world who visit Remjob IO
                 on a daily base checking curated hand-picked remote job posts and who receive our newsletter. 
             </p>
 
-            <p class="sp_intro__description mt-3 mb-3">
+            <p class="sp_intro__description mt-3 mb-3 mx-3">
                 When you book a slot here, you promote your company with our <span class="sp_intro__highlight">Remjob Ads</span> (main landing page and job detail page),
                 our daily <span class="sp_intro__highlight">Remjob Newsletter</span> and you will even get 3 promotional tweets
                 in our main Twitter account, <a href="https://twitter.com/jmservca">@jmservca</a>.
                 
             </p>
-            <p class="sp_intro__description mb-3">
+            <p class="sp_intro__description mb-3 mx-3">
                 You can book a week-long block to promote your company.
             </p>
 
-            <p class="sp_intro__description mb-3">
+            <p class="sp_intro__description mb-3 mx-3">
                 See details below.
             </p>
 
