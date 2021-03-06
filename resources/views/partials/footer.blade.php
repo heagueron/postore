@@ -43,8 +43,13 @@
         </div>
 
         <div class="col-sm-12 col-lg-2 text-center">
-            <div>
+            <!-- <div>
                 <a class="footer__post" href="{{ route('post_a_job') }}">{{ __('text.postAJob') }}</a>
+            </div> -->
+            <div>
+                <a href="{{ route('post_a_job') }}" type="button" role="button" class="sp_btn">
+                    {{ __('text.postAJob') }}
+                </a>
             </div>
             <div class="mt-3 footer__link">
                 <a href="mailto:info@remjob.io?subject=Advertise on Remjob IO&amp;body=I would like to advertise with you!%0A%0A%0A">Advertise with us</a>

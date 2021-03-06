@@ -68,12 +68,26 @@ $('[data-toggle="tooltip"]').tooltip()
 
 /* nav background transparency */
 function navBackgroundControl() {
+
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     document.getElementById("app-nav").classList.remove('bg-transparent');
     document.getElementById("app-nav").classList.add('one-edge-shadow');
+
+    // document.getElementById("link-sponsorship").classList.add('nav-link__scrolled');
+    // document.getElementById("link-login").classList.add('nav-link__scrolled');
+    // document.getElementById("link-register").classList.add('nav-link__scrolled');
+
+
+
   } else {
     document.getElementById("app-nav").classList.add('bg-transparent');
     document.getElementById("app-nav").classList.remove('one-edge-shadow');
+
+    // document.getElementById("link-sponsorship").classList.remove('nav-link__scrolled');
+    // document.getElementById("link-login").classList.remove('nav-link__scrolled');
+    // document.getElementById("link-register").classList.remove('nav-link__scrolled');
+
+
   }
 }
 

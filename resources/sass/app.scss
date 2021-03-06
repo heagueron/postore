@@ -1048,14 +1048,20 @@ nav {
 }
 
 .nav-item {
-    background-color: #4CAF50 !important;
+    /*background-color: #4CAF50 !important;*/
+    background-color: transparent !important;
+    font-weight: bold;
+    // color: #121c15 !important;
     &__name{
         background-color: transparent !important;
     }
+    /*&__scrolled{
+        color: $remjob-green !important;
+    }*/
 }
 
 .nav-link {
-   color: #fff !important;
+   color: #1e2b24 !important;
    &__post{
        background-color: $post-bg !important;
        border:1px solid $post-bg !important;
@@ -1070,6 +1076,24 @@ nav {
            color: $post-bg !important;
        }
    }
+   &__scrolled{
+        color: #1e2b24 !important;
+    }
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .nav-item{
+        padding-left: 10px;
+        margin-left: 10px;
+    }
+    .nav-link{
+        width: 30%;
+        background-color: whitesmoke;
+        color: #1e2b24 !important;
+    }
+    .nav-link__post{    
+        width: 33%;
+    }
 }
 
 
@@ -1415,5 +1439,124 @@ h3 i {
     -moz-box-shadow:    6px 0px 10px 0px rgba(46, 50, 50, 0.59);
     box-shadow:         6px 0px 10px 0px rgba(46, 50, 50, 0.59);
   }
+
+  /* SPONSORSHIP */
+  .sp_center{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sp_page{
+      height: 100%;
+      background-color: #d1e0e0;
+      padding-top: 50px;
+  }
+  .sp_intro {
+
+    width: 50%;
+      
+    &__title{
+        font-weight: bold;
+        font-size: 3rem;
+    }
+    &__img_container{
+        margin-top: 60px;
+    }
+    &__topImg{
+        width: 500px;
+        height: auto;
+    }
+    &__description{
+        font-size: 18px;
+        line-height: 1.8;
+    }
+
+    &__highlight{
+        font-weight: bold !important;
+    }
+  }
+
+  .sp_btn{
+      padding: 10px 30px 10px 30px;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+      background-color: $remjob-green;
+      border: 1px solid $remjob-green;
+      /*border-radius: 5px;*/
+      transition: all 0.3s;
+      &:hover{
+        color: #ffffff;
+        background-color: #276129;
+        border: 1px solid #276129;
+      }
+  }
+
+  .sp_wrapper{
+     width:100%;
+     background-color: #fbfbfb; 
+  }
+
+  .sp_elements{
+    width:50%;
+    padding-top: 50px;
+    &__title{
+        font-weight: bold;
+        font-size: 2.0rem;
+    }
+    &__adLanding{
+        width: 600px;
+        height: auto;
+    }
+    &__adShow{
+        width: 400px;
+        height: auto;
+    }
+    &__adNews{
+        width: 500px;
+        height: auto;
+    }
+  }
+
+  ul.sp_list li{
+      font-size: 20px;
+  }
+
+  ul.sp_list li::marker {
+    color: $remjob-green;
+    font-size: 1.5em;
+  }
+
+  ul.sp_sublist li::marker {
+    color: $remjob-green;
+    font-size: 1.0em;
+  }
+
+  .sp_separator{
+      width: 100%;
+      background-color: #d1e0e0;
+  }
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .sp_intro, .sp_elements{
+        width: 98%;
+    }
+    .sp_elements__adLanding{
+        width: 300px;
+        height: auto;
+    }
+    .sp_elements__adShow{
+        width: 200px;
+        height: auto;
+    }
+    .sp_elements__adNews{
+        width: 250px;
+        height: auto;
+    }
+    
+}
 
   

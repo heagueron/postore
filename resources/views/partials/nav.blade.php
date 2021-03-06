@@ -11,27 +11,23 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
+            <!-- <ul class="navbar-nav mr-auto">
                 <li class="nav-item nav-item__name">
                     <h3 style="font-weight:bold;">{{ __('text.siteName') }}</h3>
                 </li>
-            </ul>
+            </ul> -->
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-                @if( Request::path() == '/')
-                    <li class="nav-item mr-5">
-                        <a class="nav-link nav-link__post" href="{{ route('post_a_job') }}">{{ __('text.postAJob') }}</a>
-                    </li>
-                @endif
+                
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item mr-2">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('auth.login') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}" id="link-login">{{ __('auth.login') }}</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item mr-2">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('auth.register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}" id="link-register">{{ __('auth.register') }}</a>
                         </li>
                     @endif
                 @else
@@ -53,6 +49,16 @@
                         </div>
                     </li>
                 @endguest
+
+                <li class="nav-item mr-2">
+                    <a class="nav-link" href="{{ route('pages.sponsorship') }}" id="link-sponsorship">{{ __('Sponsorship') }}</a>
+                </li>
+
+                @if( Request::path() == '/')
+                    <li class="nav-item mr-5">
+                        <a class="nav-link nav-link__post" href="{{ route('post_a_job') }}">{{ __('text.postAJob') }}</a>
+                    </li>
+                @endif
                 
 
             </ul>
