@@ -25,7 +25,7 @@
             </p>
 
             <p class="sp_intro__description mt-3 mb-3">
-                You can promote your company with our <span class="sp_intro__highlight">Remjob Ads</span> (main landing page and job detail page),
+                When you book a slot here, you promote your company with our <span class="sp_intro__highlight">Remjob Ads</span> (main landing page and job detail page),
                 our daily <span class="sp_intro__highlight">Remjob Newsletter</span> and you will even get 3 promotional tweets
                 in our main Twitter account, <a href="https://twitter.com/jmservca">@jmservca</a>.
                 
@@ -148,7 +148,7 @@
                 <div class="sp_center">
                     <h1 class="sp_elements__title my-4">Has additional questions?</h1>
 
-                    <a href="mailto:info@remjob.io?subject=Additional questions&amp;body=Hello. I need help with ... %0A%0A%0A" style="color:#367c39; text-decoration:underline;">
+                    <a href="mailto:info@remjob.io?subject=Additional questions&amp;body=Hello. I need additional information about your ad schema ... %0A%0A%0A" style="color:#367c39; text-decoration:underline;">
                         Send an email to us.
                     </a>
                 </div>
