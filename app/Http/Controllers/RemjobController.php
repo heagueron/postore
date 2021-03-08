@@ -69,7 +69,7 @@ class RemjobController extends Controller
 
         $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
 
-        $categories = Category::where('language_id', '=',  $lenguageId )->get();
+        $categories = Category::where('language_id', '=',  $lenguageId )->oldest()->get();
         $selectedCategory = $categories[0];
         //dd($selectedCategory);
         return view( 'landing', compact('remjobs', 'request', 'categories', 'selectedCategory') );
@@ -94,7 +94,7 @@ class RemjobController extends Controller
 
         $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
 
-        $categories = Category::where('language_id', '=',  $lenguageId )->get();
+        $categories = Category::where('language_id', '=',  $lenguageId )->oldest()->get();
         $selectedCategory = $categories[0];
         //dd($selectedCategory);
         return view( 'landing', compact('remjobs', 'request', 'categories', 'selectedCategory') );
@@ -310,7 +310,7 @@ class RemjobController extends Controller
         }
 
         $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
-        $categories = Category::where('language_id', '=',  $lenguageId )->get();
+        $categories = Category::where('language_id', '=',  $lenguageId )->oldest()->get();
 
 
         $tagsLength = ( Str::length( $tags ) ) - 12;
@@ -387,7 +387,7 @@ class RemjobController extends Controller
             ->orderBy('created_at', 'desc')->simplePaginate(100);
 
         $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
-        $categories = Category::where('language_id', '=',  $lenguageId )->get();
+        $categories = Category::where('language_id', '=',  $lenguageId )->oldest()->get();
         $selectedCategory = $categories[0];
 
         $trueTag = 'byTagOrCompany';

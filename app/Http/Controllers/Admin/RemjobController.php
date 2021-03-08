@@ -199,7 +199,7 @@ class RemjobController extends Controller
     }
 
     /**
-     * Load jobs from API remotive
+     * Load jobs from API Github
      *
      * @return \Illuminate\Http\Response
      */
@@ -207,6 +207,8 @@ class RemjobController extends Controller
     public function github()
     {
         $response = Http::get('https://jobs.github.com/positions.json');
+
+        //$response = Http::get('https://www.themuse.com/api/public/jobs?page=1&?location="Flexible / Remote"');
         
         $jobsArray = $response->json();
 
@@ -251,7 +253,7 @@ class RemjobController extends Controller
     }
 
     /**
-     * Load jobs from API remotive
+     * Load jobs from API StackOverflow
      *
      * @return \Illuminate\Http\Response
      */
@@ -321,6 +323,62 @@ class RemjobController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Load jobs from API Github
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function themuse()
+    {
+        //dd("will get jobs from themuse");
+
+        $response = Http::get('https://www.themuse.com/api/public/jobs?page=1&?location="Flexible / Remote"');
+        
+        $jobsArray = $response->json();
+
+        //dd( array_slice($jobsArray['results'], 0, 31) );
+
+        if( !$jobsArray ) {
+            return back()->with('fail', 'No job found on themuse jobs');
+        }
+
+        foreach ( array_slice($jobsArray['results'], 0, 31) as $remApiJob ) {
+            //dd($remApiJob);
+            if( DB::table('remjobs')->where([
+                ['external_api', '=', 'https://www.themuse.com/api/public/jobs'],
+                ['position', '=', $remApiJob["name"]],
+            ])->exists() ){ 
+                continue; 
+            }
+
+            if ( $remApiJob['locations'][0]['name'] != "Flexible / Remote" ) {
+                continue;
+            }
+
+            $jobData = [
+                'position'          => $remApiJob["name"],
+                'description'       => $remApiJob["contents"],
+                'category_id'       => 6,
+                'locations'         => "Flexible / Remote",
+                'apply_link'        => $remApiJob['refs']['landing_page'],
+                'apply_mode'        => 'link',
+                'company_name'      => $remApiJob["company"]["name"],
+                'tags'              => ['remotework', 'wfh'],
+                'logo'              => null,
+                'external_api'      => 'https://www.themuse.com/api/public/jobs',
+            ];
+
+            try{ 
+                $this->createApiJob( $jobData );
+            } catch (\Exception $exception){ 
+                Log::info( 'Failed to create THEMUSE api job: ' . $jobData['position'] );
+                dd($exception);
+            }
+
+        }
+        return redirect()->back();
+    }
 
     private function createApiJob( $jobData ){
 
@@ -339,7 +397,7 @@ class RemjobController extends Controller
         } else {
             $company = Company::where('name', $companyName)->first();
             if( !$company->user_id == 1 ){
-                // this company belongs to a registered client
+                dd('this company belongs to a registered client');
                 return;
             }
         }
@@ -348,7 +406,7 @@ class RemjobController extends Controller
         $remjob = Remjob::create([
             'position'          => $jobData["position"],
             'description'       => $jobData["description"],
-            'category_id'       => 2, // This is category id for dev by default. It should be edited in admin.
+            'category_id'       => is_null( $jobData['category_id'] ) ? 2 : $jobData['category_id'], // This is category id for dev by default. It should be edited in admin.
             'locations'         => $jobData["locations"],
             'apply_link'        => $jobData["apply_link"],
             'apply_mode'        => 'link',

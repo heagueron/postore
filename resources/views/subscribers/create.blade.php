@@ -46,7 +46,7 @@
 
                     <option value=""><p style="color:#d9d9d9 !important;">select a category ...</p> </option>
                    
-                    @foreach( \App\Category::where('language_id', $localeId)->get() as $category )
+                    @foreach( \App\Category::where('language_id', $localeId)->oldest()->get() as $category )
                         {{-- Exclude categories without tag --}}
                         @if( $category->tag != '' and $category->tag != 'all' and $category->tag != 'todos')
                             <option value="{{ $category->id }}">{{ $category->name }}</option>

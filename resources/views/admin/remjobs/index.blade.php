@@ -14,19 +14,22 @@
 
             <div class="d-flex mb-4 text-center p-2" style="background-color:#ffffff;">
                 <a rel="nofollow" href="{{ route('admin.api_jobs.rok') }}" class="post-button mr-2">
-                    Get Jobs from R|OK
+                    R|OK
                 </a>
                 <a rel="nofollow" href="{{ route('admin.api_jobs.remotive') }}" class="post-button mr-2">
-                    Get Jobs from remotive
+                    Remotive
                 </a>
                 <a rel="nofollow" href="{{ route('admin.api_jobs.working-nomads') }}" class="post-button mr-2">
-                    Get Jobs from working nomads
+                    WNMs
                 </a>
                 <a rel="nofollow" href="{{ route('admin.api_jobs.github') }}" class="post-button mr-2">
-                    Get Jobs from github
+                    Github
                 </a>
                 <a rel="nofollow" href="{{ route('admin.api_jobs.stack') }}" class="post-button mr-2">
-                    Get Jobs from Stack Overflow
+                    StackOverflow
+                </a>
+                <a rel="nofollow" href="{{ route('admin.api_jobs.themuse') }}" class="post-button mr-2">
+                    TheMuse
                 </a>
             </div>
                 
@@ -81,6 +84,8 @@
                         <td> {{__('GH')}}</td>
                         @elseif( $remjob->external_api == 'http://stackoverflow.com/jobs/feed' )
                         <td> {{__('STACK')}}</td>
+                        @elseif( $remjob->external_api == 'https://www.themuse.com/api/public/jobs' )
+                        <td> {{__('MUSE')}}</td>
                         @else
                             <td style="color:orange"> {{__('RP')}}</td>
                         @endif

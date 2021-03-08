@@ -29,6 +29,7 @@
                         <th>Name</th>
                         <th>Tag</th>
                         <th>Lang</th>
+                        <th>Cr. at</th>
                         <!-- <th>RJs</th>
                         <th>A RJs</th> -->
                         <th colspan="2">Actions</th>
@@ -42,6 +43,7 @@
                             <td>{{$category->name}}</td>
                             <td>{{$category->tag}}</td>
                             <td>{{$category->language->short_name}}</td>
+                            <td>{{$category->created_at->toDateString()}}</td>
 
                             {{-- ACTIONS --}}
                         

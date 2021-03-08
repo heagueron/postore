@@ -21,7 +21,7 @@ class SubscriberController extends Controller
     {
         $lenguageId = Language::where('short_name', \App::getLocale())->first()->id;
 
-        $categories = Category::where('language_id', '=',  $lenguageId )->whereNotIn('id', [1, 7])->get();
+        $categories = Category::where('language_id', '=',  $lenguageId )->oldest()->whereNotIn('id', [1, 7])->get();
 
         return view('subscribers.create-page', compact('categories') );
 

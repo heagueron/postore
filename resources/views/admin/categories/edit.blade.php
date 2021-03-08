@@ -93,6 +93,20 @@
                 @enderror
             </div>
 
+            <!-- DATES-->
+            <div>
+                <span class="rp-group__head">Created At</span>
+                <input  type="text" name="created_at"
+                        value="{{ !is_null( old('created_at') )? old('created_at') : $category->created_at }}"               
+                >
+            </div>
+            <div>
+                <span class="rp-group__head">Updated At</span>
+                <input  type="text" name="updated_at"
+                        value="{{ !is_null( old('updated_at') )? old('updated_at') : $category->updated_at }}"               
+                >
+            </div>
+
 
             
             <div class="d-flex justify-content-between">

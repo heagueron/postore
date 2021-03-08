@@ -23,7 +23,7 @@ class CategoryController extends Controller
     {
         // dd('will return companies');
         if( Category::all()->count() > 0 ){
-            $categories = Category::latest()->get();
+            $categories = Category::oldest()->get();
         } else { $categories = []; }
         
         return view( 'admin.categories.index',compact('categories') );
@@ -102,6 +102,8 @@ class CategoryController extends Controller
             'mailchimp_category_id' => 'nullable',
             'mailchimp_interest_id' => 'nullable',
             'mailchimp_base_campaign_id' => 'nullable',
+            'created_at' => 'nullable',
+            'updated_at' => 'nullable',
         ]);
 
         $category->update($data);
