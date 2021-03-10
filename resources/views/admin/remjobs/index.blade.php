@@ -31,6 +31,9 @@
                 <a rel="nofollow" href="{{ route('admin.api_jobs.themuse') }}" class="post-button mr-2">
                     TheMuse
                 </a>
+                <a href="{{ route('admin.remjobs.create') }}" type="button" class="btn btn-success ml-auto">
+                    <i class="fas fa-plus-circle"></i>
+                </a>
             </div>
                 
             <table class="table" style="background-color:#ffffff;">

@@ -73,6 +73,7 @@ Route::group(
 
         // Remjobs
         Route::get('/remjobs', 'Admin\RemjobController@index')->name('admin.remjobs.index');
+        Route::get('/remjobs/create', 'Admin\RemjobController@create')->name('admin.remjobs.create');
         Route::get('/remjobs/{remjob}/edit', 'Admin\RemjobController@edit')->name('admin.remjobs.edit');
         Route::patch('/remjob/{remjob}', 'Admin\RemjobController@update')->name('admin.remjobs.update');
 

@@ -460,7 +460,15 @@ class RemjobController extends Controller
      */
     public function create()
     {
-        //
+        // Retrieve the currently authenticated user...
+        $user = \App\User::find(1);
+
+        $lenguageId = Language::where('short_name', \App::getLocale())->first()->id;
+
+        $categories = Category::where('language_id', '=',  $lenguageId )->whereNotIn('id', [1, 7])->get();
+
+        return view( 'admin.remjobs.create', compact('categories', 'user') );
+
     }
 
     /**
