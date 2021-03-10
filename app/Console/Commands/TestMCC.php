@@ -71,11 +71,13 @@ class TestMCC extends Command
                 $html .= '<div style="background-color:#ffffff; padding:15px">';
 
                 // Advertising
+                $html  = '<div style="border:1px solid #fbfbfb; margin-bottom:20px; line-height:1.3;>';
                 $html .= '<img src="https://remjob.io/images/ad_on_news_pure.png" alt="newsAd" style="width:100%;height: auto;">';
-                $html .= '<h6>Ad title</h6>';
+                $html .= '<h3>Ad title</h3>';
                 $html .= '<p>Ad description. It will have a maximum of 50 words. Can be anything that explains your product or service.</p>';
                 $html .= '<a href="#">Ad link</a><br>';
                 $html .= '<small style="text-align:right;float:right;">Advertising</small>';
+                $html  = '</div>';
 
                 // Greet
                 $html .= '<p>Hello *|FNAME|*,</p>'; 
