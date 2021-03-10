@@ -167,7 +167,7 @@ const remjobControl = () => {
 
 }
 
-const tagControl = () => {
+/*const tagControl = () => {
 
     $(function () {
         console.log('dt tags script ... ');
@@ -185,7 +185,7 @@ const tagControl = () => {
         
       });
 
-}
+}*/
 
 // const userControl = () => {
 //     /* FOR USER DESTROY */
@@ -226,10 +226,10 @@ setTimeout(() => {
 
     }
 
-    if ( window.location.href.indexOf("admin/tags") > -1) {
+    /*if ( window.location.href.indexOf("admin/tags") > -1) {
         console.log("active url is: admin tags page");
         tagControl();
-    }
+    }*/
 
     // Check if active url is the admin users page
     // if ( window.location.href.indexOf("admin/users") > -1) {

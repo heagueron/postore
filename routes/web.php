@@ -99,6 +99,7 @@ Route::group(
 
         // TAGS ( Features Datatable )
         Route::get('tags', ['uses'=>'Admin\TagController@index', 'as'=>'admin.tags.index']);
+        Route::delete('/tags/{tag}', 'Admin\TagController@destroy')->name('admin.tags.destroy');
 
 
         // Plans

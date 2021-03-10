@@ -16,19 +16,10 @@ class TagController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $data = Tag::latest()->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                    return $btn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
+        //if ($request->ajax()) {
+            $tags = Tag::all();
 
-        return view('admin.tags.index');
+        return view( 'admin.tags.index', compact('tags') );
     }
 
     /**
@@ -94,6 +85,15 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        //dd('destroy that ugly unused tag: ', $tag->name );
+        if( $tag->remjobs->count()==0 ){
+            // Delete the tag
+            $tag->delete();
+
+        return back()->with('message', ' Removed TAG ');
+        }
+
+        return back()->with('message', ' Tag NOT Removed ' );
+
     }
 }

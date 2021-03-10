@@ -53,7 +53,7 @@ class TestMCC extends Command
             $this->info( 'got ' .$category->tag. ' jobs.' );
         
             // Replicate the campaigne
-            $clonCampaign = $api->post('campaigns/175188e5ca/actions/replicate');
+            $clonCampaign = $api->post('campaigns/1f89d556fa/actions/replicate'); // Test MC Campaign
 
             if( $clonCampaign ) {
 
