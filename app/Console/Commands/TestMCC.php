@@ -71,18 +71,18 @@ class TestMCC extends Command
                 $html .= '<div style="background-color:#ffffff; padding:15px">';
 
                 // Advertising
-                $html .= '<div style="border:1px solid #fbfbfb; margin-bottom:20px; line-height:1.3;">';
+                $html .= '<div style="border:1px solid #fbfbfb; margin-bottom:25px; line-height:1.3;padding:10px;">';
                 $html .= '<img src="https://remjob.io/images/ad_on_news_pure.png" alt="newsAd" style="width:100%;height:auto;">';
                 $html .= '<h3>Ad title</h3>';
                 $html .= '<p>Ad description. It will have a maximum of 50 words. Can be anything that explains your product or service.</p>';
-                $html .= '<div style="display:flex;justify-content: space-between;">';
+                $html .= '<div style="display:flex;justify-content:space-between;">';
                 $html .= '<a href="#">Ad link</a>';
-                $html .= '<small>Advertising</small>';
+                $html .= '<small style="float:right;">Advertising</small>';
                 $html .= '</div>';
                 $html .= '</div>';
 
                 // Greet
-                $html .= '<p>Hello *|FNAME|*,</p>'; 
+                $html .= '<h4>Hello *|FNAME|*,</h4>'; 
                 $html .= '<p>Here are the latest <strong>'.$category->name.'</strong> remote jobs. Click on any job title to get more details.</p><br/>';
 
                 //$html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
