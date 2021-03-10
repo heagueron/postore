@@ -71,17 +71,17 @@ class TestMCC extends Command
                 $html .= '<div style="background-color:#ffffff; padding:15px">';
 
                 // Advertising
-                $html .= '<img src="https://remjob.io/images/ad_on_news_pure.png" alt="newsAd" style="width:250px;height: auto;" ';
+                $html .= '<img src="https://remjob.io/images/ad_on_news_pure.png" alt="newsAd" style="width:100%;height: auto;">';
                 $html .= '<h6>Ad title</h6>';
                 $html .= '<p>Ad description. It will have a maximum of 50 words. Can be anything that explains your product or service.</p>';
-                $html .= '<a href="#">Ad link</a>';
-                $html .= '<small style="text-align:right;">Advertising</small>';
+                $html .= '<a href="#">Ad link</a><br>';
+                $html .= '<small style="text-align:right;float:right;">Advertising</small>';
 
                 // Greet
                 $html .= '<p>Hello *|FNAME|*,</p>'; 
                 $html .= '<p>Here are the latest <strong>'.$category->name.'</strong> remote jobs. Click on any job title to get more details.</p><br/>';
 
-                $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
+                //$html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
 
                 // Jobs
                 foreach ( $remjobs as $remjob ) {
