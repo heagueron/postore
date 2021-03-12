@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Remjob;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\RemjobResource;
+use App\Http\Resources\RemjobCollection;
 
 
 class RemjobController extends Controller
@@ -19,25 +21,13 @@ class RemjobController extends Controller
      */
     public function index()
     {
-        $remjobs = Remjob::where('active',1)->whereDate('created_at', '<', Carbon::yesterday()->toDateString())->get();
-        
-        $apiRemjobs = [];
-        foreach ($remjobs as $remjob) {
-            $apiRemjob = [
-                'id'            => $remjob->id,
-                'position'      => $remjob->position,
-                'description'   => $remjob->description,
-                'category'      => $remjob->category->name,
-                'tags'          => $remjob->tags()->take(5)->pluck('name'),
-                'locations'     => $remjob->locations,
-                'url'           => 'https://remjob.io/' . $remjob->slug,
-                'company'       => $remjob->company->name,
-                'created_at'    => date_format($remjob->created_at,"Y-m-d H:i:s"),
-            ];
+        $remjobs = Remjob::where('active',1)
+            ->whereDate('created_at', '<', Carbon::yesterday()->toDateString())
+            ->take(150)
+            ->get();
 
-            array_push($apiRemjobs, $apiRemjob);
-        }
-        return $apiRemjobs;
+        return new RemjobCollection( $remjobs );
+        
     }
 
     /**
