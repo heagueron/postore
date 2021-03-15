@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\TagResource;
+use App\Http\Resources\CompanyResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RemjobResource extends JsonResource
@@ -19,11 +21,9 @@ class RemjobResource extends JsonResource
             'id'            => $this->id,
             'title'         => $this->position,
             'description'   => $this->description,
-            'category'      => $this->category->name,
-            'company'       => $this->company->name,
+            'company'       => CompanyResource::make( $this->company ),
             'locations'     => $this->locations,
-            'tags'          => $this->tags()->take(5)->pluck('name'),
-            'pub_date'      => $this->created_at,
+            'pub_date'      => $this->created_at->toDateTimeString(),
             'url'           => 'https://remjob.io/remote_job/' . $this->slug
         ];
     }
