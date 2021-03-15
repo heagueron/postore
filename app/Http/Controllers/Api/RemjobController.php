@@ -23,6 +23,7 @@ class RemjobController extends Controller
     {
         $remjobs = Remjob::where('active',1)
             ->whereDate('created_at', '<', Carbon::yesterday()->toDateString())
+            ->orderBy('created_at', 'desc')
             ->take(150)
             ->get();
 
