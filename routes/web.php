@@ -178,6 +178,10 @@ Route::get('/sponsorship', function () {
     return view('pages.sponsorship');
 })->name('pages.sponsorship');
 
+Route::get('/api-docs', function () {
+    return view('pages.api-docs');
+})->name('pages.api-docs');
+
 
 
 // Support Routes

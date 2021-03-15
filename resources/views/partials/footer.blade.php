@@ -51,8 +51,11 @@
                     {{ __('text.postAJob') }}
                 </a>
             </div>
-            <div class="mt-3 footer__link">
+            <div class="my-3 footer__link">
                 <a href="mailto:info@remjob.io?subject=Advertise on Remjob IO&amp;body=I would like to advertise with you!%0A%0A%0A">Advertise with us</a>
+            </div>
+            <div class="my-3 footer__link">
+                <a href="{{ route('pages.api-docs') }}">Remjob IO API</a>
             </div>
             
         </div>

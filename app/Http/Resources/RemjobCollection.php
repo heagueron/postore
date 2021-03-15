@@ -25,7 +25,7 @@ class RemjobCollection extends ResourceCollection
         return [
 
             'terms' => [
-                "legal" => "By using our Remjob's API you agree to mention Remjob as the source and also to link back to the job listing URL on https://remjob.io. The jobs list returned at /api/v1/remjobs is delayed by 12 hours. We offer a paid option for instant API access for all remote jobs (US$ 3k/mo). Just send an email to info@remjob.io for details.",
+                "attribution" => "By using our Remjob's API you agree to attribute and mention Remjob IO as the source and also to link back to the job listing URL on https://remjob.io. Please be aware that the jobs list returned from our endpoint /api/v1/remjobs is delayed by 12 hours. We offer a paid option for instant API access for all remote jobs (US$ 3k/mo). Just send an email to info@remjob.io for details.",
             ],
             'data' => $this->collection,
             
