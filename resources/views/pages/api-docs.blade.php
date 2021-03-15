@@ -12,7 +12,7 @@
 
             <div class="sp_center">
                 <div class="mt-5 sp_intro__img_container">
-                    <img src="{{ asset('images/api.png') }}" alt="sponsors" class="sp_intro__topImg">
+                    <img src="{{ asset('images/api.png') }}" alt="api docs page image" class="sp_intro__topImg">
                 </div>
                 
                 <h3 class="sp_intro__title mt-5">Remjob API Endpoints</h3>
@@ -45,7 +45,7 @@
                 <div class="sp_center text-center">
                     <h1 class="sp_elements__title my-4">Have additional questions?</h1>
 
-                    <a href="mailto:info@remjob.io?subject=Additional questions&amp;body=Hello. I need additional information about your ad schema ... %0A%0A%0A" style="color:#367c39; text-decoration:underline;">
+                    <a href="mailto:info@remjob.io?subject=Additional questions&amp;body=Hello. I need additional information about Remjob IO API ... %0A%0A%0A" style="color:#367c39; text-decoration:underline;">
                         Send an email to us.
                     </a>
                 </div>
