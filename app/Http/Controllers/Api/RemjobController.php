@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RemjobResource;
 use App\Http\Resources\RemjobCollection;
+use App\Http\Resources\RemjobCollectionPro;
 
 
 class RemjobController extends Controller
@@ -28,7 +29,20 @@ class RemjobController extends Controller
             ->get();
 
         return new RemjobCollection( $remjobs );
-        
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexPro()
+    {
+        $remjobs = Remjob::where('active',1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return new RemjobCollectionPro( $remjobs );  
     }
 
     /**

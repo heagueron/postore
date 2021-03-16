@@ -183,6 +183,15 @@ Route::get('/api-docs', function () {
 })->name('pages.api-docs');
 
 
+// ACCOUNT SETTINGS
+// Route::group( 
+//     ['prefix' => 'account_settings','middleware' => ['auth']], 
+//     function () {
+//         Route::get('/manage_settings', 'Auth\AccountSettingsController@manageSettings')->name('auth.account_settings.manage');
+// });
+
+
+
 
 // Support Routes
 Route::group( 

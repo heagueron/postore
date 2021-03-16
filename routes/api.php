@@ -20,3 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Free all remjobs
 Route::get('/v1/remjobs', 'Api\RemjobController@index');
 //Route::get('/v1/remjobs', [Api\RemjobController::class, 'index']);
+
+// Paid all remjobs
+Route::get('/v1/remjobs-pro', 'Api\RemjobController@indexPro')->middleware('auth:sanctum');

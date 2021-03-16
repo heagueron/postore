@@ -15,7 +15,7 @@
 
                 <h3>USERS</h3>
 
-                {{-- Open Create Company Modal --}}
+                {{-- Open Create Users Modal --}}
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createUserModal">
                     <i class="fas fa-plus-circle"></i>
                 </button>
