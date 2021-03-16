@@ -22,6 +22,15 @@ class RemjobController extends Controller
      */
     public function index()
     {
+        // Register a visit
+        $ip = \request()->ip();
+        if( $ip != "127.0.0.1" AND $ip != "45.186.209.3" ) {
+
+            // Not administrator
+            $this->registerVisit($ip, 'apiV1Remjobs');
+
+        }
+
         $remjobs = Remjob::where('active',1)
             ->whereDate('created_at', '<', Carbon::yesterday()->toDateString())
             ->orderBy('created_at', 'desc')
@@ -38,11 +47,44 @@ class RemjobController extends Controller
      */
     public function indexPro()
     {
+        // Register a visit
+        $ip = \request()->ip();
+        if( $ip != "127.0.0.1" AND $ip != "45.186.209.3" ) {
+
+            // Not administrator
+            $this->registerVisit($ip, 'apiV1RemjobsPro');
+
+        } 
+
         $remjobs = Remjob::where('active',1)
             ->orderBy('created_at', 'desc')
             ->get();
 
         return new RemjobCollectionPro( $remjobs );  
+    }
+
+    private function registerVisit( $ip, $route, $firstOnDate = false ){
+
+        if( !Visit::where('visitor_ip', $ip)->exists() ){
+            // First time ever!
+            $firstOnDate = true;
+
+        } else {
+            $latestVisit = Visit::where('visitor_ip', $ip)->orderBy('created_at', 'desc')->first();
+            if ( !$latestVisit->created_at->isToday() ){
+                $firstOnDate = true;
+            } 
+        }
+
+        Visit::create([
+            'visitor_ip'    => $ip,
+            'entry_route'   => $route,
+            'user_id'       => Auth::check() ? Auth::user()->id : null,
+            'first_on_date' => $firstOnDate
+        ]);
+
+        return;
+        
     }
 
     /**

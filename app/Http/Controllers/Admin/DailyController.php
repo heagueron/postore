@@ -64,6 +64,15 @@ class DailyController extends Controller
             $uniqueVisitors = Visit::whereDate( 'created_at', '=', $endDT->toDateString())->where('first_on_date', 1)->exists()
                             ? Visit::whereDate( 'created_at', '=', $endDT->toDateString())->where('first_on_date', 1)->count()
                             : 0;
+
+            $apiRemjobsVisitors = Visit::whereDate( 'created_at', '=', $endDT->toDateString())->where('entry_route', 'apiV1Remjobs')->exists()
+                            ? Visit::whereDate( 'created_at', '=', $endDT->toDateString())->where('entry_route', 'apiV1Remjobs')->count()
+                            : 0;
+
+            $apiRemjobsProVisitors = Visit::whereDate( 'created_at', '=', $endDT->toDateString())->where('entry_route', 'apiV1RemjobsPro')->exists()
+                            ? Visit::whereDate( 'created_at', '=', $endDT->toDateString())->where('entry_route', 'apiV1RemjobsPro')->count()
+                            : 0;
+            
             try{ 
 
                 Daily::create([
@@ -72,6 +81,8 @@ class DailyController extends Controller
                     'hits_details'      => $detailVisits,
                     'hits_category'     => $categoryOrTagVisits,
                     'distinct_visitors' => $uniqueVisitors,
+                    'hits_api_remjobs'  => $apiRemjobsVisitors,
+                    'hits_api_remjobs_pro'  => $apiRemjobsProVisitors,
                 ]);
 
             } catch (\Exception $exception){ 

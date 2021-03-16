@@ -27,7 +27,7 @@
                         <th>+Users</th>
                         <th colspan="3">Sales</th>
                     </tr>
-                    <tr><td></td><td>Landing</td><td>Cat</td><td>Details</td><td>FAQ</td><td>UNQ</td><td></td><td>P1</td><td>P2</td><td>P3</td></tr>
+                    <tr><td></td><td>Landing</td><td>Cat</td><td>Details</td><td>Api</td><td>UNQ</td><td></td><td>P1</td><td>P2</td><td>P3</td></tr>
                 </thead>
                 <tbody>
                     @forelse($dailies as $daily)
@@ -41,7 +41,7 @@
                             <td>{{ $daily->hits_landing }}</td>
                             <td>{{ $daily->hits_category }}</td>
                             <td>{{ $daily->hits_details }}</td>
-                            <td>{{ $daily->hits_faq }}</td>
+                            <td>{{ $daily->hits_api_remjobs }}</td>
                             <td>{{ $daily->distinct_visitors }}</td>
 
                             {{-- Registered users--}}
