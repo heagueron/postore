@@ -42,23 +42,9 @@ class RemjobController extends Controller
         if( $ip != "127.0.0.1" AND $ip != "45.186.209.3" ) {
 
             // Not administrator
-            if( !Visit::where('visitor_ip', $ip)->exists() ){
-                // First time ever!
-                $this->registerVisit( $ip, 'landing', true );
-
-            } else {
-                $latestVisit = Visit::where('visitor_ip', $ip)->orderBy('created_at', 'desc')->first();
-                if ( !$latestVisit->created_at->isToday() ){
-                    $this->registerVisit( $ip, 'landing', true );
-                } else {
-                    $this->registerVisit( $ip, 'landing', false );
-                }
-            }
+            $this->registerVisit($ip, 'landing');
 
         }
-        
-        
-        Log::info( 'Will show all active remote jobs' );
 
         if( Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )->exists() ){
 
@@ -100,9 +86,18 @@ class RemjobController extends Controller
         return view( 'landing', compact('remjobs', 'request', 'categories', 'selectedCategory') );
     }
 
-    private function registerVisit( $ip, $route, $firstOnDate ){
+    private function registerVisit( $ip, $route, $firstOnDate = false ){
 
-        Log::info( 'Will register a visitor' );
+        if( !Visit::where('visitor_ip', $ip)->exists() ){
+            // First time ever!
+            $firstOnDate = true;
+
+        } else {
+            $latestVisit = Visit::where('visitor_ip', $ip)->orderBy('created_at', 'desc')->first();
+            if ( !$latestVisit->created_at->isToday() ){
+                $firstOnDate = true;
+            } 
+        }
 
         Visit::create([
             'visitor_ip'    => $ip,
@@ -110,6 +105,7 @@ class RemjobController extends Controller
             'user_id'       => Auth::check() ? Auth::user()->id : null,
             'first_on_date' => $firstOnDate
         ]);
+
         return;
         
     }
@@ -260,22 +256,9 @@ class RemjobController extends Controller
 
         if( $ip != "127.0.0.1" AND $ip != "45.186.209.3" ) {
             // Not administrator
-            if( !Visit::where('visitor_ip', $ip)->exists() ){
-                // First time ever!
-                $this->registerVisit( $ip, 'remjobs.show', true );
-
-            } else {
-                $latestVisit = Visit::where('visitor_ip', $ip)->orderBy('created_at', 'desc')->first();
-                if ( !$latestVisit->created_at->isToday() ){
-                    $this->registerVisit( $ip, 'remjobs.show', true );
-                } else {
-                    $this->registerVisit( $ip, 'remjobs.show', false );
-                }
-            }
-            
-            //$this->registerVisit( $ip, 'remjobs.show' );
+            $this->registerVisit( $ip, 'remjobs.show' );
         }
-        
+
         return view( 'remjobs.show', compact('remjob') );
 
     }
@@ -294,19 +277,8 @@ class RemjobController extends Controller
 
         if( $ip != "127.0.0.1" AND $ip != "45.186.209.3" ) {
             // Not administrator
-            if( !Visit::where('visitor_ip', $ip)->exists() ){
-                // First time ever!
-                $this->registerVisit( $ip, 'remjobs.searchByTags', true );
+            $this->registerVisit( $ip, 'remjobs.searchByTags' );
 
-            } else {
-                $latestVisit = Visit::where('visitor_ip', $ip)->orderBy('created_at', 'desc')->first();
-                if ( !$latestVisit->created_at->isToday() ){
-                    $this->registerVisit( $ip, 'remjobs.searchByTags', true );
-                } else {
-                    $this->registerVisit( $ip, 'remjobs.searchByTags', false );
-                }
-            }
-            //$this->registerVisit( $ip, 'remjobs.searchByTags' );
         }
 
         $lenguageId = \App\Language::where('short_name', App::getLocale())->first()->id;
