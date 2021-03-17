@@ -82,6 +82,26 @@ class AdminController extends Controller
     }
 
     /**
+     * Store a newly created numeric option in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeOption(Request $request)
+    {
+        //dd($request);
+        $data = request()->validate([
+            'name'          => 'required',
+            'description'   => 'required',
+            'value'         => 'required',
+        ]);
+
+        Option::create($data);
+
+        return redirect()->route('admin.edit-options');
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Option  $option

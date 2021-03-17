@@ -61,6 +61,7 @@ Route::group(
     function () {
         
         // App Options
+        Route::post('/options', 'Admin\AdminController@storeOption')->name('admin.options.store');
         Route::get('/editOptions', 'Admin\AdminController@editAdminOptions')->name('admin.edit-options');
         Route::patch('/update-options', 'Admin\AdminController@updateAdminOptions')->name('admin.update-options');
 

@@ -10,11 +10,12 @@
 
             {{-- MODALS --}}
             @include('admin.options.createTextOption')
+            @include('admin.options.createOption')
          
             <div class="d-flex justify-content-between my-2 p-2"  style="background-color:#ffffff;">
 
                 <h3>TEXT OPTIONS</h3>
-                {{-- Open Create Category Modal --}}
+                {{-- Open Create Text Option Modal --}}
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createTextOptionModal">
                     <i class="fas fa-plus-circle"></i>
                 </button>
@@ -64,6 +65,10 @@
             <div class="d-flex justify-content-between my-2 p-2"  style="background-color:#ffffff;">
 
                 <h3>NUMERIC OPTIONS</h3>
+                {{-- Open Create Numeric Option Modal --}}
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createOptionModal">
+                    <i class="fas fa-plus-circle"></i>
+                </button>
 
             </div>
 

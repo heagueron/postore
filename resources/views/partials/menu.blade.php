@@ -80,24 +80,12 @@
                 </table>
             </li>
 
-            <!-- <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">Landing Hits: {{ \App\Visit::where('entry_route', 'landing')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
-            </li>
             <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">Detail Hits: {{ \App\Visit::where('entry_route', 'remjobs.show')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
-            </li>
-            <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">Cat/Tag Hits: {{ \App\Visit::where('entry_route', 'remjobs.searchByTags')->whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
-            </li>
-            <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">All Hits: {{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->count() }}</span>             
-            </li>
-            <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">Unique Hits: {{ \App\Visit::whereDate('created_at', \Carbon\Carbon::today())->where('first_on_date', 1)->count() }}</span>             
-            </li> -->
-
-            <li class="c-sidebar-nav-item">
-                <span class="c-sidebar-nav-link">Active Jobs: {{ \App\Remjob::where('active', 1)->count() }}</span>             
+                <div class="c-sidebar-nav-link"> 
+                    <span>AHR/AR:&nbsp;</span>
+                    <span>{{ \App\Remjob::all()->count() }}&nbsp;</span>
+                    <span>/&nbsp;{{ \App\Remjob::where('active', 1)->count() }}</span>
+                </div>                 
             </li>
             
         @endif

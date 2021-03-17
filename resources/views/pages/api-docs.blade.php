@@ -19,15 +19,23 @@
 
             </div>
 
+            <p class="sp_intro__description mt-5 mb-3 mx-3">
+                This API and its documentation are a work in progress and is intended to provide a subset of the functionalities at Remjob IO.
+            </p>
+
             <p class="sp_intro__description mt-3 mb-3 mx-3">
-                All Remjob endpoints return a standard Json representation of the requested data.<br>  
+                All Remjob API endpoints are rooted in https://remjob.io/api/v1.
+            </p>
+
+            <p class="sp_intro__description mt-3 mb-3 mx-3">
+                All Remjob API endpoints return a standard Json representation of the requested data.<br>  
             </p>
 
             <ul class="sp_list">
                 <li class="my-4">
                     List all jobs:
                     <p style="color:#4CAF50;">https://remjob.io/api/v1/remjobs</p>
-                    Returns the most recent 150 remote jobs, delayed 12 hrs (Need instant access? Send email to info@remjob.io)
+                    Returns the most recent 150 remote jobs, delayed 12 hrs (Need instant access to all jobs? Send email to info@remjob.io).
                 </li>
             </ul>
 
