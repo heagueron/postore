@@ -42,7 +42,7 @@ class CleanRemjobs extends Command
             // Get active remote jobs
             $remjobs = \App\Remjob::where('active', 1)->get();
 
-            $inactivatedRemjobs = 0;
+            $inactivatedRemjobsCount = 0;
             $datetime2 = date_create();
 
             foreach ( $remjobs as $remjob ) {
@@ -56,12 +56,15 @@ class CleanRemjobs extends Command
                     $this->info( $remjob->position.', posted on: '.$dt1.' will be set inactive' );
                     $remjob->update([ 'active'  => 0 ]);
 
-                    $inactivatedRemjobs += 1;
+                    $inactivatedRemjobsCount += 1;
                 }
 
             }
 
-            $this->info( ' Total remote jobs inactivated: '.$inactivatedRemjobs );
+            $this->info( ' Total remote jobs inactivated: '.$inactivatedRemjobsCount );
+
+            // Decrement active remjobs count
+            \App\Option::where('name','active_remjobs')->first()->decrement('value', $inactivatedRemjobsCount);
 
         } else {
             $this->info( ' No remote jobs on active state ' );

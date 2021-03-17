@@ -238,6 +238,9 @@ class RemjobController extends Controller
             Log::info( 'Failed to send email to notify client or admin creation of remjob: ' . $remjob->id );
         }
 
+        // Increment All Historic Remjobs
+        \App\Option::where('name','all_historic_remjobs')->first()->increment('value');
+
         // return redirect()->route( 'checkout', [ $company->slug.'-'.Str::slug( request()->position, '-' ).'-'.$remjob->id ] );
         return redirect()->route( 'checkout', $remjob->slug );
 

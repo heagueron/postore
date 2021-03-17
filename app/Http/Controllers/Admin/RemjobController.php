@@ -421,8 +421,6 @@ class RemjobController extends Controller
             'slug'              => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
         ]);
 
-
-
         if( $jobData['tags'] != null ){
 
             // tags for the remjob-tag pivot table
@@ -446,6 +444,9 @@ class RemjobController extends Controller
 
             $remjob->tags()->attach( array_values( array_unique( $tagsIdToLink ) ) );
         } 
+
+        // Increment All Historic Remjobs
+        \App\Option::where('name','all_historic_remjobs')->first()->increment('value');
         
         return;
 
@@ -606,8 +607,16 @@ class RemjobController extends Controller
         // Delete from pivot table remjob_tag
         DB::table('remjob_tag')->where('remjob_id',$remjob->id)->delete();
 
+        // Decrement Active Jobs if needed
+        if( $remjob->active == 1) {
+            \App\Option::where('name','active_remjobs')->first()->decrement('value');
+        }
+
         // Delete the remote job
         $remjob->delete();
+
+        // Decrement All Historic Remjobs
+        \App\Option::where('name','all_historic_remjobs')->first()->decrement('value');
 
         return back()->with('message', 'Removed Remote Job Post from ' . $remjob->company_name );
         
@@ -624,9 +633,14 @@ class RemjobController extends Controller
         if($remjob->active){
             // Inactivate the scheduled post
             $remjob->update( ['active'    => 0, ]);
+
+            \App\Option::where('name','active_remjobs')->first()->decrement('value');
+
         } else {
             // Activate the scheduled post
             $remjob->update( ['active'    => 1, ]);
+
+            \App\Option::where('name','active_remjobs')->first()->increment('value');
         }
 
         return back()->with('message', 'Inactivated Remote Job Post from ' . $remjob->company_name );
