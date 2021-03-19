@@ -100,6 +100,8 @@ return [
     'privacy'       => ' Privacy ',
     'faq'           => ' FAQ ',
     'footCategory'  => 'Remote :categoryTitle Jobs',
+    'rjBySkills'    => 'Remote Jobs by Skills',
+    'rjByCats'      => 'Remote Jobs by Categories',
 
     // Contact Form
     'supTitle'      => 'Remjob Contact Form',
@@ -109,6 +111,8 @@ return [
     // Other
     'noRemjobs'     => 'There are not remote jobs posted in that category or tag.',
     'startTyping'   => 'Start typing to find jobs ...',
+    'apiLinkLabel'  => 'Remjob IO API',
+    'adWithUs'      => 'Advertise with us',
 
     // Edit remjob
     'edFormTitle'   => 'edit your remote job post',

@@ -9,14 +9,8 @@
 
         <div class="col-sm-12 col-lg-2 mb-4 text-center"> </div>
 
-        <!-- <div class="col-sm-12 col-lg-2 mb-4 text-center">
-            <a href="{{ route('landing') }}">
-                <img src="{{ asset('images/remjob3.png') }}" alt="Remjob" class="w-15" >
-            </a>
-        </div> -->
-
         <div class="col-sm-12 col-lg-4 mb-3">
-            <h5 class="footer__title">{{ strtoupper('Remote Jobs by Categories') }}</h5>
+            <h5 class="footer__title">{{ strtoupper(__('text.rjByCats')) }}</h5>
             @foreach( \App\Category::where('language_id', $localeId)->get() as $category )
                 @if( $category->tag == '' or $category->tag == 'all' or $category->tag == 'todos')
                     <a href="/" class="footer__link">{{ $category->name }}</a><br>
@@ -27,7 +21,7 @@
         </div>
 
         <div class="col-sm-12 col-lg-4 mb-4">
-            <h5 class="footer__title">{{ strtoupper('Remote Jobs by Skills') }}</h5>
+            <h5 class="footer__title">{{ strtoupper(__('text.rjBySkills')) }}</h5>
                 <a href="{{route('remjobs.searchByTags', 'remote_php_jobs')}}" class="footer__link">{{ __('text.footCategory', ['categoryTitle' => 'Php' ]) }}</a><br>
                 <a href="{{route('remjobs.searchByTags', 'remote_java_jobs')}}" class="footer__link">{{ __('text.footCategory', ['categoryTitle' => 'Java' ]) }}</a><br>
                 <a href="{{route('remjobs.searchByTags', 'remote_python_jobs')}}" class="footer__link">{{ __('text.footCategory', ['categoryTitle' => 'Python' ]) }}</a><br>
@@ -43,20 +37,18 @@
         </div>
 
         <div class="col-sm-12 col-lg-2 text-center">
-            <!-- <div>
-                <a class="footer__post" href="{{ route('post_a_job') }}">{{ __('text.postAJob') }}</a>
-            </div> -->
+
             <div>
                 <a href="{{ route('post_a_job') }}" type="button" role="button" class="sp_btn">
                     {{ __('text.postAJob') }}
                 </a>
             </div>
             <div class="my-3 footer__link">
-                <a href="mailto:info@remjob.io?subject=Advertise on Remjob IO&amp;body=I would like to advertise with you!%0A%0A%0A">Advertise with us</a>
+                <a href="mailto:info@remjob.io?subject=Advertise on Remjob IO&amp;body=I would like to advertise with you!%0A%0A%0A">{{ __('text.adWithUs') }}</a>
             </div>
-            <!-- <div class="my-3 footer__link">
-                <a href="{{ route('pages.api-docs') }}">Remjob IO API</a>
-            </div> -->
+            <div class="my-3 footer__link">
+                <a href="{{ route('pages.api-docs') }}">{{ __('text.apiLinkLabel') }}</a>
+            </div>
             
         </div>
 

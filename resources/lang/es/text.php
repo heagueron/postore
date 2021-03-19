@@ -100,6 +100,8 @@ return [
     'privacy'       => ' Privacidad ',
     'faq'           => ' PREGUNTAS FRECUENTES ',
     'footCategory'  => 'Trabajos Remotos en :categoryTitle',
+    'rjBySkills'    => 'Trabajos Remotos por Habilidades',
+    'rjByCats'      => 'Trabajos Remotos por Categorias',
 
     // Contact Form
     'supTitle'      => 'Contactar Soporte Remjob',
@@ -109,4 +111,6 @@ return [
     // Other
     'noRemjobs'     => 'No encontramos trabajos remotos en esa categoria o etiqueta.',
     'startTyping'   => 'Escriba para ver trabajos ...',
+    'apiLinkLabel'  => 'Api Remjob IO',
+    'adWithUs'      => 'Promocione su empresa',
 ];
