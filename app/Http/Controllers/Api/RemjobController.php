@@ -24,12 +24,8 @@ class RemjobController extends Controller
     {
         // Register a visit
         $ip = \request()->ip();
-        if( $ip != "127.0.0.1" AND $ip != "45.186.209.3" ) {
 
-            // Not administrator
-            $this->registerVisit($ip, 'apiV1Remjobs');
-
-        }
+        $this->registerVisit($ip, 'apiV1Remjobs');
 
         $remjobs = Remjob::where('active',1)
             ->whereDate('created_at', '<', Carbon::yesterday()->toDateString())

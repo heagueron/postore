@@ -35,7 +35,7 @@
                 <li class="my-4">
                     List all jobs:
                     <p style="color:#4CAF50;">https://remjob.io/api/v1/remjobs</p>
-                    Returns the most recent 150 remote jobs, delayed 12 hrs (Need instant access to all jobs? Send email to info@remjob.io).
+                    Returns the most recent 150 remote jobs.
                 </li>
             </ul>
 
