@@ -172,6 +172,7 @@
                 @foreach( \App\Remjob::where('category_id', $remjob->category_id )
                                         ->where("id", "!=", $remjob->id)
                                         ->take(5)
+                                        ->with(['company','tags'])
                                         ->orderBy('created_at', 'desc')
                                         ->get() as $remjob )    
                     <x-jobrow :remjob="$remjob" page='landing'/>

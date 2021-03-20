@@ -49,6 +49,7 @@ class RemjobController extends Controller
         if( Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )->exists() ){
 
             $remjobs = Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )
+                ->with(['company','tags'])
                 ->orderBy('plan_id', 'desc')->orderBy('created_at', 'desc')->simplePaginate(100);
 
         } else { $remjobs = []; } 
@@ -74,6 +75,7 @@ class RemjobController extends Controller
             ->exists() ){
 
             $remjobs = Remjob::where( [['language', '=', App::getLocale()],['active', '=', '1']] )
+            ->with(['company','tags'])
             ->whereIn(strtoupper('locations'), ['WORLDWIDE', 'GLOBAL', 'ANYWHERE', 'REMOTE'])
             ->orderBy('plan_id', 'desc')->orderBy('created_at', 'desc')->simplePaginate(100);
         } else { $remjobs = []; } 
@@ -117,14 +119,7 @@ class RemjobController extends Controller
      */
     public function create()
     {
-        // Retrieve the currently authenticated user...
         $user = Auth::user();
-
-        // if (App::isLocale('es')) {
-        //     $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
-        // } else {
-        //     $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14, 15] )->get();
-        // }
 
         $lenguageId = Language::where('short_name', \App::getLocale())->first()->id;
 
@@ -293,13 +288,7 @@ class RemjobController extends Controller
 
         //Log::info('Searching jobs for tag: '.$tagsText);
 
-        // $catTags = [
-        //     'dev', 'customer_support', 'marketing', 'design', 'non_tech', 'hr', 'health',
-        //     'desarrollo', 'servicios_al_cliente', 'mercadotecnia', 'diseño', 'otros'
-        // ];
-
         $catTags = DB::table('categories')->whereNotIn('id', [1, 7])->pluck('tag')->toArray();
-        //dd( array_values($catTags) );
 
         if( in_array( $tagsText, array_values($catTags) ) ){
             // Search for a CATEGORY TAG
@@ -311,6 +300,7 @@ class RemjobController extends Controller
             }) ){
                 //$remjobs = $category->remjobs()->where('active', 1)
                 $remjobs = $category->remjobs()->where( [['language', '=', App::getLocale()],['active', '=', '1']] )
+                    ->with(['company'])
                     ->orderBy('plan_id', 'desc')
                     ->orderBy('created_at', 'desc')->simplePaginate(100);
             } else { $remjobs = []; }
@@ -332,6 +322,7 @@ class RemjobController extends Controller
             }) ){
                 //$remjobs = $tag->remjobs()->where('active', 1)
                 $remjobs = $tag->remjobs()->where( [['language', '=', App::getLocale()],['active', '=', '1']] )
+                    ->with(['company'])
                     ->orderBy('plan_id', 'desc')
                     ->orderBy('created_at', 'desc')->simplePaginate(100);
             } else { $remjobs = []; }
@@ -358,6 +349,7 @@ class RemjobController extends Controller
         
         // $company = Company::where( 'slug', 'like', $company_slug )->first();
         $remjobs = Remjob::where( 'company_id', $company->id )
+            ->with(['tags'])
             ->orderBy('plan_id', 'desc')
             ->orderBy('created_at', 'desc')->simplePaginate(100);
 
@@ -392,12 +384,6 @@ class RemjobController extends Controller
             $tagsText .= $tag->name.', ';
         }
         $tagsText = rtrim($tagsText, ", ");
-
-        // if ( $remjob->language == 'es' ) {
-        //     $categories = \App\Category::whereIn( 'id', [8, 9, 10, 11, 12] )->get();
-        // } else {
-        //     $categories = \App\Category::whereIn( 'id', [2, 3, 4, 5, 6, 13, 14, 15] )->get();
-        // }
 
         $lenguageId = Language::where('short_name', \App::getLocale())->first()->id;
 
@@ -472,16 +458,6 @@ class RemjobController extends Controller
         return redirect()->route('landing');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Remjob  $remjob
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Remjob $remjob)
-    {
-        //
-    }
 
     /**
      * Returns a list of job_tags, filtered by a search_term
