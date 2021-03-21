@@ -164,6 +164,8 @@
             </div>
         </div>
 
+
+        <!-- SIMILAR JOBS -->
         @if( \App\Remjob::where('category_id', $remjob->category_id )->count() > 1 )                
             <div class="d-flex flex-column align-content-center justify-content-center my-5 ml-2">
                 
@@ -171,7 +173,7 @@
                     
                 @foreach( \App\Remjob::where('category_id', $remjob->category_id )
                                         ->where("id", "!=", $remjob->id)
-                                        ->take(5)
+                                        ->take(12)
                                         ->with(['company','tags'])
                                         ->orderBy('created_at', 'desc')
                                         ->get() as $remjob )    
