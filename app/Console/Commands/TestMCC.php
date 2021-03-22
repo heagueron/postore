@@ -65,7 +65,8 @@ class TestMCC extends Command
                             ->where([['category_id', $category->id],['active',1]])->get();
                 
                 // Container
-                $html  = '<div style="margin-top:1rem;padding:35px;background-color:#f2f5f3;">';
+                $html  = '<style>.plainText{color:black;font-size:14px;}.titleText{color:#38c172;font-size:16px;font-weigth:bold}</style>';
+                $html  .= '<div style="margin-top:1rem;padding:35px;background-color:#f2f5f3;">';
 
                 // Content
                 $html .= '<div style="background-color:#ffffff; padding:15px">';
@@ -87,7 +88,7 @@ class TestMCC extends Command
 
                 // Greet
                 $html .= '<h2>Hello *|FNAME|*,</h2>'; 
-                $html .= '<p>Here are the latest <strong>'.$category->name.'</strong> remote jobs. Click on any job title to get more details.</p><br/>';
+                $html .= '<p class="plainText">Here are the latest <strong>'.$category->name.'</strong> remote jobs. Click on any job title to get more details.</p><br/>';
 
                 //$html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
 
@@ -95,22 +96,22 @@ class TestMCC extends Command
                 foreach ( $remjobs as $remjob ) {
                     $html .= '<div style="line-height: 1.3;">';
                     $html .= '<a style="text-decoration: none;" href="https://remjob.io/remote_job/' .$remjob->slug. '">';
-                    $html .= '<p style="color:#38c172;">' .$remjob->position. '</p></a>';
-                    $html .= '<p>At ' .$remjob->company->name. '</p>';
+                    $html .= '<p class="titleText">' .$remjob->position. '</p></a>';
+                    $html .= '<p class="plainText">At ' .$remjob->company->name. '</p>';
                     if( $remjob->locations ){
-                        $html .= '<p>[ ' .$remjob->locations. ' ]</p>';
+                        $html .= '<p class="plainText">[ ' .$remjob->locations. ' ]</p>';
                     }
                     $html .= '</div><br/>';
                 }
 
                 $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
 
-                $html .= '<p>If you have any questions or want to learn more about Remjob, feel free to reach out to us at <strong style="text-decoration: none;">info@remjob.io</strong></p><br/>';
+                $html .= '<p class="plainText">If you have any questions or want to learn more about Remjob, feel free to reach out to us at <strong style="text-decoration: none;">info@remjob.io</strong></p><br/>';
 
-                $html .= '<p>Find more jobs at: <a style="text-decoration: none;" href="https://remjob.io">https://remjob.io</a></p><br/>';
+                $html .= '<p class="plainText">Find more jobs at: <a style="text-decoration: none;" href="https://remjob.io">https://remjob.io</a></p><br/>';
 
-                $html .= '<p>Cheers,</p>';
-                $html .= '<p>Your friends at Remjob</p><br/>';
+                $html .= '<p class="plainText">Cheers,</p>';
+                $html .= '<p class="plainText">Your friends at Remjob</p><br/>';
                 $html .= '</div></div><br/>';
 
                 //Update the clon campaigne
