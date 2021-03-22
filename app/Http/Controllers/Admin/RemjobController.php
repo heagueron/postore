@@ -207,8 +207,6 @@ class RemjobController extends Controller
     public function github()
     {
         $response = Http::get('https://jobs.github.com/positions.json');
-
-        //$response = Http::get('https://www.themuse.com/api/public/jobs?page=1&?location="Flexible / Remote"');
         
         $jobsArray = $response->json();
 
@@ -277,11 +275,6 @@ class RemjobController extends Controller
             return strtotime($feed2->pubDate) - strtotime($feed1->pubDate);
         });
 
-        
-
-        // $response = Http::get('https://jobs.github.com/positions.json');
-        
-        // $jobsArray = $response->json();
 
         if( count( $entries ) == 0 ) {
             return back()->with('fail', 'No job found on github jobs');
@@ -296,16 +289,15 @@ class RemjobController extends Controller
                 continue; 
             }
 
-            // if( strlen( $remApiJob["company_logo"] ) > 190 or strlen( $remApiJob["title"] > 75 ) ) {
-            //     continue;
-            // }
+            // Prefills
+            $applyLink =  (string)Str::of($remApiJob->link)->before('?') . '?utm_source=remjob.io&ref=remjob.io';
 
             $jobData = [
                 'position'          => (string)Str::of($remApiJob->title)->before(' at '),
                 'description'       => (string)$remApiJob->description,
                 'category_id'       => null,
                 'locations'         => (string)$remApiJob->location,
-                'apply_link'        => (string)$remApiJob->link,
+                'apply_link'        => $applyLink,
                 'apply_mode'        => 'link',
                 'company_name'      => (string)Str::of($remApiJob->title)->after(' at ')->before(' ('),
                 'tags'              => (array)$remApiJob->category,
@@ -337,14 +329,13 @@ class RemjobController extends Controller
         
         $jobsArray = $response->json();
 
-        //dd( array_slice($jobsArray['results'], 0, 31) );
 
         if( !$jobsArray ) {
             return back()->with('fail', 'No job found on themuse jobs');
         }
 
         foreach ( array_slice($jobsArray['results'], 0, 31) as $remApiJob ) {
-            //dd($remApiJob);
+
             if( DB::table('remjobs')->where([
                 ['external_api', '=', 'https://www.themuse.com/api/public/jobs'],
                 ['position', '=', $remApiJob["name"]],
@@ -412,7 +403,6 @@ class RemjobController extends Controller
             'apply_mode'        => 'link',
             'company_id'        => $company->id,
             'external_api'      => $jobData['external_api'],
-            //'slug'              => Str::slug( ($remjob->position.' '.$remjob->id), '_'),
             'active'            => 0, // will be active after edition.
             'plan_id'           => 1,
         ]);
@@ -470,28 +460,6 @@ class RemjobController extends Controller
 
         return view( 'admin.remjobs.create', compact('categories', 'user') );
 
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Remjob  $remjob
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Remjob $remjob)
-    {
-        //
     }
 
     /**
