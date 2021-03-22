@@ -53,7 +53,7 @@ class TestMCC extends Command
             $this->info( 'got ' .$category->tag. ' jobs.' );
         
             // Replicate the campaigne
-            $clonCampaign = $api->post('campaigns/1f89d556fa/actions/replicate'); // Test MC Campaign
+            $clonCampaign = $api->post('campaigns/1f89d556fa/actions/replicate'); // Test MCC Campaign
 
             if( $clonCampaign ) {
 
@@ -72,7 +72,7 @@ class TestMCC extends Command
 
                 // Advertising
                 $html .= '<div style="border:1px solid #fbfbfb; margin-bottom:25px; line-height:1.3;">';
-                $html .= '<img src="https://remjob.io/images/ad_on_news_pure.png" alt="newsAd" style="width:100%;height:auto;">';
+                $html .= '<img src="https://remjob.io/images/cintaRJ.png" alt="newsAd" style="width:100%;height:auto;">';
                 $html .= '<br><small style="text-align:right;float:right;">Advertising</small>';
                 $html .= '<div style="margin:10px;">';
                 $html .= '<h3>Ad title</h3>';
