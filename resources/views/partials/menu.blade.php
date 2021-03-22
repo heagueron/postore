@@ -83,7 +83,7 @@
             <li class="c-sidebar-nav-item">
                 <div class="c-sidebar-nav-link"> 
                     <span>AHR/AR:&nbsp;</span>
-                    <span>{{ \App\Remjob::all()->count() }}&nbsp;</span>
+                    <span>{{ \App\Option::findOrFail(2)->value }}&nbsp;</span>
                     <span>/&nbsp;{{ \App\Remjob::where('active', 1)->count() }}</span>
                 </div>                 
             </li>

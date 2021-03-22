@@ -583,7 +583,7 @@ class RemjobController extends Controller
         // Delete the remote job
         $remjob->delete();
 
-        // Decrement All Historic Remjobs
+        // Decrement All Historic Remjobs ( Only here in admin. For example, it can be a bad api capture )
         \App\Option::where('name','all_historic_remjobs')->first()->decrement('value');
 
         return back()->with('message', 'Removed Remote Job Post from ' . $remjob->company_name );
