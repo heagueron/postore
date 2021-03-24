@@ -44,7 +44,6 @@ class TweetOne extends Command
     public function handle()
     {
 
-
         // Get active remote jobs
         $remjobs = \App\Remjob::where('active', 1)->get();
 
@@ -74,9 +73,7 @@ class TweetOne extends Command
                 // Allow only one share
                 break;
 
-            } else {
-                $this->info( 'No remjob to share' );
-            }
+            } 
 
         }
 
