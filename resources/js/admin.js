@@ -100,7 +100,7 @@ const companyModalControl = () => {
             b2 = document.createElement("TD");
             b3 = document.createElement("TD");
             b1.innerHTML = remjob.id;
-            b2.innerHTML = remjob.position;
+            b2.innerHTML = remjob.position;  
             b3.innerHTML = `<small>${remjob.created_at.slice(0,10)}</small>`;
 
             b.appendChild(b1);
