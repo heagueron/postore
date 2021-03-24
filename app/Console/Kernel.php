@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('postore:tweetOne')->hourlyAt(19);
+        $schedule->command('postore:tweetOne --force')->hourlyAt(19);
     }
 
     /**
