@@ -3,10 +3,8 @@
 namespace App\Console;
 
 use DB;
-use App\Console\Commands\PostTweets;
-use App\Console\Commands\CleanRemjobs;
-use App\Console\Commands\HourlyTwitter;
-use App\Console\Commands\DailyTwitter;
+
+use App\Console\Commands\TweetOne;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -19,10 +17,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        PostTweets::class,
-        CleanRemjobs::class,
-        HourlyTwitter::class,
-        DailyTwitter::class,
+        TweetOne::class,
     ];
 
     /**
@@ -33,11 +28,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('postore:post')->everyMinute();
-        $schedule->command('postore:clean-sposts')->daily();
-        $schedule->command('postore:hourlyTwitter')->hourly();
-        $schedule->command('postore:dailyTwitter')->dailyAt('11:00');
-        
+        $schedule->command('postore:tweetOne')->hourlyAt(19);
     }
 
     /**
