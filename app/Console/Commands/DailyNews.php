@@ -44,9 +44,6 @@ class DailyNews extends Command
     {
         $api = Newsletter::getApi();
 
-        // TESTING: MARKETING Remote Jobs
-        // $category = \App\Category::where('tag', 'marketing')->first();
-
         // Loop and prepare campaigns for every category
 
         foreach (\App\Category::all() as $category) {
@@ -69,23 +66,29 @@ class DailyNews extends Command
                                 ->where([['category_id', $category->id],['active',1]])->get();
                     
                     // Container
-                    $html  = '<div style="margin-top:1rem;padding:35px;background-color:#f2f5f3;">';
+                    $html  = '<div style="margin-top:1rem;padding:35px 85px 35px 85px;background-color:#f2f5f3;">';
 
                     // Content
-                    $html .= '<div style="background-color:#ffffff; padding:15px">';
+                    $html .= '<div style="background-color:#ffffff; padding:15px 60px 15px 60px">';
 
-                    $html .= '<p>Hello *|FNAME|*,</p>';  
-                    $html .= '<p>Here are the latest <strong>'.$category->name.'</strong> remote jobs. Click on any job title to get more details.</p><br/>';
+                    // Remjob Banner Without Advertising
+                    $html .= '<div style="margin-bottom:25px;">';
+                    $html .= '<img src="https://remjob.io/images/cintaRJ2.png" alt="newsAd" style="width:100%;height:auto;">';
+                    $html .= '</div>';
+
+                    // Greet
+                    $html .= '<h2>Hello *|FNAME|*,</h2>';  
+                    $html .= '<p style="font-size:14px;>Here are the latest <strong>'.$category->name.'</strong> remote jobs. Click on any job title to get more details.</p><br/>';
 
                     $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
 
                     foreach ( $remjobs as $remjob ) {
-                        $html .= '<div style="line-height: 1.3;">';
+                        $html .= '<div style="line-height: 0.9;">';
                         $html .= '<a style="text-decoration: none;" href="https://remjob.io/remote_job/' .$remjob->slug. '">';
-                        $html .= '<p style="color:#38c172;">' .$remjob->position. '</p></a>';
-                        $html .= '<p>At ' .$remjob->company->name. '</p>';
+                        $html .= '<p style="color:#38c172;font-weight:bold;font-size:16px;">' .$remjob->position. '</p></a>';
+                        $html .= '<p style="font-size:14px;">At ' .$remjob->company->name. '</p>';
                         if( $remjob->locations ){
-                            $html .= '<p>[ ' .$remjob->locations. ' ]</p>';
+                            $html .= '<p style="font-size:13px;">[ ' .$remjob->locations. ' ]</p>';
                         }
                         $html .= '</div><br/>';
                     }

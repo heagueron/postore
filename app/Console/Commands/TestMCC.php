@@ -80,14 +80,14 @@ class TestMCC extends Command
                 // $html .= '<a href="#">Ad link</a>';
                 // $html .= '</div></div>';
 
-                // Without Advertising
+                // Remjob Banner Without Advertising
                 $html .= '<div style="margin-bottom:25px;">';
                 $html .= '<img src="https://remjob.io/images/cintaRJ2.png" alt="newsAd" style="width:100%;height:auto;">';
                 $html .= '</div>';
 
                 // Greet
                 $html .= '<h2>Hello *|FNAME|*,</h2>'; 
-                $html .= '<p>Here are the latest <strong>'.$category->name.'</strong> remote jobs. Click on any job title to get more details.</p><br/>';
+                $html .= '<p style="font-size:14px;>Here are the latest <strong>'.$category->name.'</strong> remote jobs. Click on any job title to get more details.</p><br/>';
 
                 $html .= '<hr style="display: block; margin-block-start: 0.5em; margin-block-end: 0.5em;"><br/>';
 
