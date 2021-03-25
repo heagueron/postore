@@ -93,12 +93,12 @@ class TestMCC extends Command
 
                 // Jobs
                 foreach ( $remjobs as $remjob ) {
-                    $html .= '<div style="line-height: 1.3;">';
+                    $html .= '<div style="line-height: 1.1;">';
                     $html .= '<a style="text-decoration: none;" href="https://remjob.io/remote_job/' .$remjob->slug. '">';
-                    $html .= '<p style="color:#38c172;">' .$remjob->position. '</p></a>';
-                    $html .= '<p>At ' .$remjob->company->name. '</p>';
+                    $html .= '<h4 style="color:#38c172; font-weight:bold">' .$remjob->position. '</h4></a>';
+                    $html .= '<p style="font-size:14px;">At ' .$remjob->company->name. '</p>';
                     if( $remjob->locations ){
-                        $html .= '<p>[ ' .$remjob->locations. ' ]</p>';
+                        $html .= '<p style="font-size:13px;">[ ' .$remjob->locations. ' ]</p>';
                     }
                     $html .= '</div><br/>';
                 }
