@@ -47,22 +47,22 @@ class TweetOne extends Command
         // Get active remote jobs
         $remjobs = \App\Remjob::where('active', 1)->get();
 
-        //$sharedRemjobs = 0;
+        $dt1 = Carbon::parse( $remjob->created_at );
+
+        $foundRemjobToShare = false;
 
         foreach ( $remjobs as $remjob ) {
 
-            $dt1 = Carbon::parse( $remjob->created_at );
-
             if( ( $remjob->twitterPosts()->count() == 1 and now()->diffInHours($remjob->created_at) > 12 ) ){
+
+                $foundRemjobToShare = true;
 
                 $this->info( $remjob->position.', posted on: '.$dt1.' set to be re-shared. Posted before: '.$remjob->twitterPosts()->count(). ' times.' );
                 
                 // Share remote job on Twitter
                 $publish = $this->shareRemjobOnTwitter( $remjob );
-                // $publish = true;
 
                 if( $publish ){
-                    //$sharedRemjobs += 1;
                     //Log::info( 'Remote Job id: ' .$remjob->id.' shared on Twitter for the '.$remjob->twitterPosts()->count().'th time.' );
                     $this->info( 'Remote Job id: ' .$remjob->id.' shared on Twitter for the '.$remjob->twitterPosts()->count().'th time.' );
                 } else {
@@ -73,7 +73,11 @@ class TweetOne extends Command
                 // Allow only one share
                 break;
 
-            } 
+            }
+            
+            if( !$foundRemjobToShare ){
+                $this->info( 'No remote job to share at this moment ...');
+            }
 
         }
 
