@@ -65,10 +65,10 @@ class TestMCC extends Command
                             ->where([['category_id', $category->id],['active',1]])->get();
                 
                 // Container
-                $html  = '<div style="margin-top:1rem;padding:35px 85px 35px 85px;background-color:#f2f5f3;">';
+                $html  = '<div style="margin-top:1rem;padding:35px;background-color:#f2f5f3;">';
 
                 // Content
-                $html .= '<div style="background-color:#ffffff; padding:15px 60px 15px 60px">';
+                $html .= '<div style="background-color:#ffffff; padding:15px;">';
 
                 // Advertising
                 // $html .= '<div style="border:1px solid #fbfbfb; margin-bottom:25px; line-height:1.3;">';
