@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18539f7b1f255c8be28c00e2fa00611f",
+    "content-hash": "f5d69df9e8ead987a244820d9deed60a",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -2544,6 +2544,60 @@
                 }
             ],
             "time": "2020-08-18T17:17:46+00:00"
+        },
+        {
+            "name": "robersonfaria/laravel-database-schedule",
+            "version": "1.0.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robersonfaria/laravel-database-schedule.git",
+                "reference": "5074d8a54522589eac45e8e2d81766324abdef2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robersonfaria/laravel-database-schedule/zipball/5074d8a54522589eac45e8e2d81766324abdef2b",
+                "reference": "5074d8a54522589eac45e8e2d81766324abdef2b",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.5|6.*|7.*|8.*",
+                "php": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RobersonFaria\\DatabaseSchedule\\DatabaseSchedulingServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RobersonFaria\\DatabaseSchedule\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roberson Faria",
+                    "email": "roberson.faria@gmail.com"
+                }
+            ],
+            "description": "Manage your Laravel Task Scheduling in a friendly interface and save schedules to the database.",
+            "keywords": [
+                "jobs",
+                "laravel",
+                "schedule",
+                "task"
+            ],
+            "support": {
+                "issues": "https://github.com/robersonfaria/laravel-database-schedule/issues",
+                "source": "https://github.com/robersonfaria/laravel-database-schedule/tree/1.0.15"
+            },
+            "time": "2021-03-20T15:40:28+00:00"
         },
         {
             "name": "spatie/laravel-newsletter",

@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "orangehill/iseed": "^2.6",
+        "robersonfaria/laravel-database-schedule": "^1.0",
         "spatie/laravel-newsletter": "^4.9",
         "spatie/laravel-permission": "^3.17",
         "yajra/laravel-datatables-oracle": "^9.15"
