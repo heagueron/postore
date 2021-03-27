@@ -74,11 +74,11 @@ class TweetOne extends Command
                 break;
 
             }
-            
-            if( !$foundRemjobToShare ){
-                $this->info( 'No remote job to share at this moment ...');
-            }
 
+        }
+
+        if( !$foundRemjobToShare ){
+            $this->info( 'No remote job to share at this moment ...');
         }
 
 
