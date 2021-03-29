@@ -24,9 +24,7 @@ class AdminController extends Controller
     {
         $options = \App\Option::all();
         $textOptions = TextOption::all();
-        // $adminPlans = \App\Plan::all();
 
-        //return view( 'admin.edit-options', compact( 'adminOptions', 'adminTextOptions', 'adminPlans') );
         return view( 'admin.options.index', compact( 'options', 'textOptions') );
     }
 
@@ -38,7 +36,6 @@ class AdminController extends Controller
      */
     public function storeTextOption(Request $request)
     {
-        //dd($request);
         $data = request()->validate([
             'name'          => 'required',
             'value'         => 'required',
@@ -57,7 +54,6 @@ class AdminController extends Controller
      */
     public function editTextOption(TextOption $textOption)
     {
-        // dd('will edit text option: ', $textOption->name);
         return view('admin.options.editTextOption', compact('textOption') );
     }
 
@@ -70,7 +66,6 @@ class AdminController extends Controller
      */
     public function updateTextOption(Request $request, TextOption $textOption)
     {
-        //dd('upddate ', $textOption->name, $request);
         $data = request()->validate([
             'name'          => 'required',
             'value'         => 'required',
@@ -89,7 +84,6 @@ class AdminController extends Controller
      */
     public function storeOption(Request $request)
     {
-        //dd($request);
         $data = request()->validate([
             'name'          => 'required',
             'description'   => 'required',
@@ -109,7 +103,6 @@ class AdminController extends Controller
      */
     public function editOption(Option $option)
     {
-        //dd('will edit option: ', $option->name);
         return view('admin.options.editOption', compact('option') );
     }
 
@@ -122,7 +115,6 @@ class AdminController extends Controller
      */
     public function updateOption(Request $request, Option $option)
     {
-        //dd('upddate ', $option->name, $request);
         $data = request()->validate([
             'name'          => 'required',
             'value'         => 'required',

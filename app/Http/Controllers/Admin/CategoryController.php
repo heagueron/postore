@@ -21,22 +21,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // dd('will return companies');
-        if( Category::all()->count() > 0 ){
+        if( Category::count() > 0 ){
             $categories = Category::oldest()->get();
         } else { $categories = []; }
         
         return view( 'admin.categories.index',compact('categories') );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -47,7 +36,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
         $data = request()->validate([
             'name'          => 'required|min:3',
             'tag'           => 'required|min:2',
@@ -63,17 +51,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Category  $category
@@ -81,7 +58,6 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //dd('will edit category: ', $category->name);
         return view('admin.categories.edit', compact('category') );
     }
 
@@ -110,18 +86,5 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.categories.index');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Category $category)
-    {
-        //
-    }
-
-
 
 }

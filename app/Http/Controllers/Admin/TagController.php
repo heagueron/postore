@@ -16,65 +16,9 @@ class TagController extends Controller
      */
     public function index(Request $request)
     {
-        //if ($request->ajax()) {
-            $tags = Tag::all();
+        $tags = Tag::all();
 
         return view( 'admin.tags.index', compact('tags') );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tag $tag)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tag $tag)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Tag $tag)
-    {
-        //
     }
 
     /**
@@ -85,7 +29,6 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //dd('destroy that ugly unused tag: ', $tag->name );
         if( $tag->remjobs->count()==0 ){
             // Delete the tag
             $tag->delete();

@@ -25,22 +25,12 @@ class CompanyController extends Controller
     public function index()
     {
         // dd('will return companies');
-        if( Company::all()->count() > 0 ){
+        if( Company::count() > 0 ){
             $companies = Company::latest()->get();
         } else { $companies = []; }
         
         return view( 'admin.companies.index',compact('companies') );
 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // dd('I will create a company via admin dashboard');
     }
 
     /**
@@ -69,17 +59,6 @@ class CompanyController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -87,7 +66,6 @@ class CompanyController extends Controller
      */
     public function edit( Company $company )
     {
-        //dd('will edit company: ', $company->name);
         return view('admin.companies.edit', compact('company') );
 
     }
@@ -101,7 +79,6 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
         $this->validateCompany();
 
         $company = Company::findOrFail( $id ); 
@@ -116,8 +93,6 @@ class CompanyController extends Controller
         if ( request()->has('company_logo') ){
             $this->storeMedia($company);
         }
-
-        //dd( $company );
 
         return redirect()->route('admin.companies.index');
 
@@ -134,7 +109,6 @@ class CompanyController extends Controller
         // Check if $company has remjobs and destroy them
         if( $company->remjobs()->count() > 0 ){
 
-            // dd('this company has one or more remjobs');
             $remjobs = $company->remjobs()->get();
 
             foreach ($remjobs as $key => $remjob) {

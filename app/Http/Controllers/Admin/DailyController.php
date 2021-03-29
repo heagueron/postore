@@ -23,7 +23,7 @@ class DailyController extends Controller
      */
     public function index()
     {
-        if( Daily::all()->count() > 0 ){
+        if( Daily::count() > 0 ){
             $dailies = Daily::latest()->get();
         } else { $dailies = []; }
         
