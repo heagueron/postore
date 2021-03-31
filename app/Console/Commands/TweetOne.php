@@ -45,7 +45,7 @@ class TweetOne extends Command
     {
 
         // Get active remote jobs
-        $remjobs = \App\Remjob::where('active', 1)->get();
+        $remjobs = \App\Remjob::where('active', 1)->where( 'id', '>', 2466 )->get();
 
         $foundRemjobToShare = false;
 
@@ -53,7 +53,7 @@ class TweetOne extends Command
 
             $dt1 = Carbon::parse( $remjob->created_at );
 
-            if( ( $remjob->twitterPosts()->count() == 1 and now()->diffInHours($remjob->created_at) > 12 ) ){
+            if( ( $remjob->twitterPosts()->count() == 2 and now()->diffInHours($remjob->created_at) > 12 ) ){
 
                 $foundRemjobToShare = true;
 
