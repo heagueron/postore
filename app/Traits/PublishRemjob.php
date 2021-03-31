@@ -87,11 +87,20 @@ trait PublishRemjob
             $response = $twitter->connection->post( "statuses/update", [ "status"    => $text,] );
 
             if ( $twitter->connection->getLastHttpCode() == 200 ) {          
+                
                 // register the social share
                 $tweetPost = new \App\TwitterPost();
                 $tweetPost->remjob_id = $remjob->id;
+
+                if( $remjob->twitterPosts()->count() == 0 ){
+                    // First share
+                    $tweetPost->tweet_id = $response->id;
+                }
+                
                 $tweetPost->save();
+
                 return true;
+
             } else {
                 return false;
             } 
