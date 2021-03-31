@@ -4,11 +4,13 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\ApiConnectors\TwitterGateway;
+use App\Traits\RetweetRemjob;
 
 
 class RT3 extends Command
 {
+    use RetweetRemjob;
+
     /**
      * The name and signature of the console command.
      *
@@ -40,31 +42,36 @@ class RT3 extends Command
      */
     public function handle()
     {
-        //$twitterProfile = \App\TwitterProfile::where('handler','JMServca')->first();
-        $twitterProfile = \App\TwitterProfile::where('handler','BenGilWealth')->first();
+        // Get active remote jobs
+        $remjobs = \App\Remjob::where('active', 1)->where( 'id', '>', 2489 )->get();
 
-        $twitter = new TwitterGateway( $twitterProfile->id, false );
+        $foundRemjobToShare = false;
 
-        $text = 'Let us pray for the health of us all ... ';
+        foreach ( $remjobs as $remjob ) {
+            $dt1 = Carbon::parse( $remjob->created_at );
+            if( ( $remjob->twitterPosts()->count() == 1 ) and ( now()->diffInHours( $remjob->twitterPosts->first()->created_at ) > 3 ) ){
+                
+                $foundRemjobToShare = true;
 
-        try {
-            $response = $twitter->connection->post( "statuses/update", [ "status"    => $text,] );
+                $this->info( $remjob->position.', posted on: '.$dt1.' set to be re-tweeted. Posted before: '.$remjob->twitterPosts()->count(). ' times.' );
+                
+                // Share remote job on Twitter
+                $publish = $this->retweetRemjobOnTwitter( $remjob );
 
-            if ( $twitter->connection->getLastHttpCode() == 200 ) { 
+                if( $publish ){
+                    $this->info( ' RETWEETED REMJOB ID: ' . $remjob->id );
+                } else {
+                    $this->info( 'Something went wrong ... failed to retweet remjob id: ' . $remjob->id );
+                }
 
-                // register the social share
-                // $tweetPost = new \App\TwitterPost();
-                // $tweetPost->remjob_id = $remjob->id;
-                // $tweetPost->save();
-                // return true;
-                $this->info( 'Tweet Id: ' . $response->id );
-
-            } else {
-                $this->info( 'Something went wrong ... ' );
-            } 
-
-        } catch (TwitterOAuthException $exception) {
-            $this->info( 'Something went wrong ... an exception was thrown.' );
+                // Allow only one retweet
+                break;
+            }
         }
+
+        if( !$foundRemjobToShare ){
+            $this->info( 'No remote job to share at this moment ...');
+        }
+
     }
 }
