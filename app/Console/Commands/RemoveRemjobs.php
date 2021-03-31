@@ -56,6 +56,11 @@ class RemoveRemjobs extends Command
                 // Delete from pivot table remjob_tag
                 DB::table('remjob_tag')->where('remjob_id',$remjob->id)->delete();
 
+                // Delete entries in twitter_posts table
+                if( \App\TwitterPost::where('remjob_id', $remjob->id)->exists() ){
+                    \App\TwitterPost::where('remjob_id', $remjob->id)->delete();
+                }
+
                 // Delete the remote job
                 $remjob->delete();
 

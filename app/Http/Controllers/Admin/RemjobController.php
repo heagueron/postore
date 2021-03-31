@@ -580,6 +580,11 @@ class RemjobController extends Controller
             \App\Option::where('name','active_remjobs')->first()->decrement('value');
         }
 
+        // Delete entries in twitter_posts table
+        if( \App\TwitterPost::where('remjob_id', $remjob->id)->exists() ){
+            \App\TwitterPost::where('remjob_id', $remjob->id)->delete();
+        }
+
         // Delete the remote job
         $remjob->delete();
 
