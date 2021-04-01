@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use Carbon\Carbon;
 
 use App\Traits\PublishRemjob;
-use Illuminate\Support\Facades\Log;
 
 class TweetOne extends Command
 {
@@ -63,10 +62,8 @@ class TweetOne extends Command
                 $publish = $this->shareRemjobOnTwitter( $remjob );
 
                 if( $publish ){
-                    //Log::info( 'Remote Job id: ' .$remjob->id.' shared on Twitter for the '.$remjob->twitterPosts()->count().'th time.' );
                     $this->info( 'Remote Job id: ' .$remjob->id.' shared on Twitter for the '.$remjob->twitterPosts()->count().'th time.' );
                 } else {
-                    //Log::info( 'Remote Job id: ' .$remjob->id.' failed to share on Twitter. Current share count: '.$remjob->twitterPosts()->count().'' );
                     $this->info( 'Remote Job id: ' .$remjob->id.' failed to share on Twitter. Current share count: '.$remjob->twitterPosts()->count().'' );
                 }
 
