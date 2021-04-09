@@ -54,10 +54,10 @@
 
                 {{-- DESCRIPTION --}}
                 <div class="mt-5">
-                    <div>{!! $remjob->description !!}</div>
+                    <div class="my-2">{!! $remjob->description !!}</div>
 
                     @if($remjob->min_salary)
-                        <p class="mt-2">
+                        <p class="mt-4">
                             <span style="font-weight:bold;">{{__('Min. Annual Salary: ')}}</span>
                             <span>${{ number_format($remjob->min_salary,0,'.',',') }}</span>
                         </p>
@@ -70,19 +70,23 @@
                     @endif
 
                     @if($remjob->locations)
-                        <h4 class="mt-2">{{__('Location')}}</h4>
-                        <p class= >{{ $remjob->locations }}</p>
+                        <h4 class="mt-4">{{__('Location')}}</h4>
+                        <p>{{ $remjob->locations }}</p>
                     @endif
 
-                    @if( $remjob->apply_email == null )
-                        <a  href="{{ $remjob->apply_link }}"
-                            class="rp-jobrow__apply mt-4 mb-4" target="_blank"> 
-                    @else
-                        <a  href="mailto:{{ $remjob->apply_email }}"  
-                            class="rp-jobrow__apply mt-4 mb-4" target="_blank" rel="noindex nofollow">  
-                    @endif
-                        {{ __('Apply for this job') }}
-                    </a>
+                    <div class="mt-5">
+                        @if( $remjob->apply_email == null )
+                            <a  href="{{ $remjob->apply_link }}"
+                                class="rp-jobrow__apply mb-4" target="_blank"> 
+                        @else
+                            <a  href="mailto:{{ $remjob->apply_email }}"  
+                                class="rp-jobrow__apply mb-4" target="_blank" rel="noindex nofollow">  
+                        @endif
+                            {{ __('Apply for this job') }}
+                        </a>
+                    </div>
+
+                   
 
                     <div class="d-flex mt-4 mb-4">
 
