@@ -52,7 +52,7 @@ class TweetOne extends Command
 
             $dt1 = Carbon::parse( $remjob->created_at );
 
-            if( ( $remjob->twitterPosts()->count() == 2 and now()->diffInHours($remjob->created_at) > 12 ) ){
+            if( ( $remjob->twitterPosts()->count() < 3 and now()->diffInHours($remjob->created_at) > 12 ) ){
 
                 $foundRemjobToShare = true;
 

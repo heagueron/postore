@@ -50,7 +50,7 @@ class RT3 extends Command
 
         foreach ( $remjobs as $remjob ) {
             $dt1 = Carbon::parse( $remjob->created_at );
-            if( ( $remjob->twitterPosts()->count() == 1 ) and ( now()->diffInHours( $remjob->twitterPosts->first()->created_at ) > 3 ) ){
+            if( ( $remjob->twitterPosts()->count() < 2 ) and ( now()->diffInHours( $remjob->twitterPosts->first()->created_at ) > 3 ) ){
                 
                 $foundRemjobToShare = true;
 
