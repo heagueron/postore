@@ -6,11 +6,26 @@
 
     @include('partials.nav')
 
+    <!-- Subscription modal -->
     @include('subscribers.create')
-    
-    <div class="container" style="margin-top:7rem;">
 
-        <div class="d-flex justify-content-between mt-5 ml-md-2 show-nav">
+    <header class="hero" style="background-color:#00cc99;">
+
+        <div class="hero__title mt-5 text-center">
+            <h1 class="detail__title">{{ $remjob->position }}</h1>
+        </div>
+
+        @if( in_array( strtoupper( $remjob->locations ), ['WORLDWIDE', 'GLOBAL', 'ANYWHERE', 'REMOTE'] ) )
+            <h3 class="hero__tip detail__tip"><i class="fa fa-globe" aria-hidden="true" style="color:#668cff; text-decoration:none;"></i></i> {{ $remjob->locations }} </h3>
+        @elseif( $remjob->locations != null )
+            <h3 class="hero__tip detail__tip"><i class="fa fa-map-marker" style="color:#4CAF50; text-decoration:none;"></i> {{ $remjob->locations }} </h3>
+        @endif
+
+    </header>
+    
+    <div class="container" style="margin-top:3rem;">
+
+        <!-- <div class="d-flex justify-content-between mt-5 ml-md-2 show-nav">
             <div>
                 <a href="{{ route('landing') }}" style="color:#4CAF50;">
                     <i class="fas fa-arrow-left"></i>{{__('show.back')}}
@@ -25,7 +40,7 @@
                 @endif
             </div>
             
-        </div>
+        </div> -->
 
 
         <div class="row mt-5 p-2">

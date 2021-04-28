@@ -554,8 +554,6 @@ nav {
     &__tip{
         font-weight:bold;
         padding:15px;
-        /*background-color: rgba(255, 255, 255, 0.1);*/ /* For browsers that do not support gradients */
-        /*background-image: radial-gradient(rgba(204, 230, 255, 0.5), rgba(204, 230, 255, 0.1));*/
     }
 }
 
@@ -1080,6 +1078,17 @@ nav {
         color: #1e2b24 !important;
     }
 }
+
+.detail__title{
+    font-size: 52px;
+    color: white;
+}
+
+.detail__tip{
+    font-size: 27px;
+    color: white;
+}
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     .nav-item{
@@ -1094,6 +1103,15 @@ nav {
     .nav-link__post{    
         width: 33%;
     }
+
+    .detail__title{
+        font-size: 34px;
+    }
+
+    .detail__tip{
+        font-size: 23px;
+    }
+
 }
 
 
@@ -1190,6 +1208,7 @@ section.pricing {
     .pricing .card:hover .btn {
       opacity: 1;
     }
+    
   }
 
   .pricing label {
