@@ -20,7 +20,7 @@
             </div>
 
             <p class="sp_intro__description mt-5 mb-3 mx-3">
-                This API and its documentation are a work in progress and is intended to provide a subset of the functionalities at Remjob IO.
+                This API and its documentation are intended to provide a subset of the functionalities at Remjob IO.
             </p>
 
             <p class="sp_intro__description mt-3 mb-3 mx-3">
@@ -35,7 +35,7 @@
                 <li class="my-4">
                     List all jobs:
                     <p style="color:#4CAF50;">https://remjob.io/api/v1/remjobs</p>
-                    Returns the most recent 150 remote jobs.
+                    Returns recent 150 remote jobs.
                 </li>
             </ul>
 

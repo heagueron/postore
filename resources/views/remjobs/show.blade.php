@@ -149,9 +149,11 @@
                     </div>
                 </div>
 
+
+                <!-- Subscribe invitation -->
                 <div class="subscribe-invitation-card my-3" 
 
-                    style="background-image:url( {{ asset('images/news1.jpg') }} ), linear-gradient(45deg, #003333, #ffffff);" >
+                    style="background-image:url( {{ asset('images/news3.png') }} ), linear-gradient(45deg, #003333, #ffffff);" >
 
                     <h3 class="mb-5" style="color:white; float:right;font-weigth:bold;width:45%;">Never miss the news!</h3>
 
