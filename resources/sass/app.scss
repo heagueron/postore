@@ -81,7 +81,6 @@ body {
 #p-sidebar ul li a {
     padding: 10px;
     font-size: 1.1em;
-    //display: block;
 }
 #p-sidebar ul li a:hover {
     color: #7386D5;
@@ -140,7 +139,6 @@ a, a:hover, a:focus {
 .left-menu-icons li a i:hover,
 .add-media-btns span i:hover
 {
-    //font-size: 1.1rem;
     color:$blue; 
  }
 
@@ -161,8 +159,6 @@ a, a:hover, a:focus {
 }
 
 .social-selector{
-    // border: 2px solid #3490dc;
-    // border-radius: 5px;
     padding: 2px;
     position: relative;
 
@@ -182,8 +178,6 @@ a, a:hover, a:focus {
         top: -3px;
         background-color: white;
         font-size: 1.2rem;
-        //border-radius: 100%;
-        //margin-right: -12px;
     }
 
 }
@@ -228,7 +222,6 @@ twitter-profile-option-active{
 .show-post-options-menu{
     background-color: white;
     border: 0px solid;
-    //padding: 10px;
     box-shadow: .1px .1px 4px 0px $blue;
     z-index: 5;
     border-radius: 2px;
@@ -263,8 +256,6 @@ twitter-profile-option-active{
 }
 
 .show-social-selector{
-    // border: 2px solid #3490dc;
-    // border-radius: 5px;
     padding: 2px;
     position: relative;
     .show-social-selector-twitter{
@@ -273,8 +264,6 @@ twitter-profile-option-active{
         top: -3px;
         background-color: white;
         font-size: 1.2rem;
-        //border-radius: 100%;
-        //margin-right: -12px;
     }
 }
 
@@ -287,7 +276,6 @@ twitter-profile-option-active{
         top: 0;
         background-color: white;
         border: 0px solid;
-        //padding: 10px;
         box-shadow: .1px .1px 4px 0px $blue;
         z-index: 5;
         border-radius: 2px;
@@ -317,7 +305,6 @@ twitter-profile-option-active{
 .image-preview-container{
     width: 240px;
     height: 240px;
-    //display: none !important;
 }
 
 .imagePreview{
@@ -346,7 +333,6 @@ twitter-profile-option-active{
 .mic-1{
     width: 240px;
     height: 240px;
-    //margin: 5px;
 }
 
 .show-image-1{
@@ -357,8 +343,7 @@ twitter-profile-option-active{
 
 .mic-2{
     width: 120px;
-    height: 240px;
-    //margin: 5px; 
+    height: 240px; 
 }
 
 .show-image-2{
@@ -369,8 +354,7 @@ twitter-profile-option-active{
 
 .mic-3{
     width: 120px;
-    height: 120px;
-    //margin: 5px; 
+    height: 120px; 
 }
 
 .show-image-3{
@@ -379,9 +363,6 @@ twitter-profile-option-active{
     border-radius: 14px;
 }
 
-// .add-media-btns {
-//     color: $blue;
-// }
 
 // PAGES
 .page-title{
@@ -464,7 +445,6 @@ i.fab.fa-twitter{
     }
     .show-post-text{
         font-size: 14px !important;
-        //width: 400px !important;
     }
     .container, li{
         margin-left: 0 !important;
@@ -535,12 +515,10 @@ nav {
 
 
 .hero {
-    //background-image: url( {{asset('storage/images/logo.png')}} );
     width: 100%;
     height: 250px;
     background-size: cover;
     background-position: 50% 47%;
-    /*padding: 0 20px 50px;*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -568,7 +546,6 @@ nav {
     text-decoration: none;
     font-size: .9em;
     padding: 14px 28px 12px;
-    /*border-radius: 5px;*/
     display: inline-block;
     box-shadow: 0 4px 4px -2px rgba(180,181,182,.2);
     transition: all .2s;
@@ -641,7 +618,6 @@ nav {
 
 /* SEARCH CONTAINER */
   .search-container {
-    /*height: 100%;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -664,29 +640,9 @@ nav {
         justify-content: center;
         align-items: center;
         text-align: center;
-        /*border-right: 1px solid blue;*/
     }
 }
 
-.cat {
-    // overflow-x:hidden;
-    // overflow-y:hidden;
-    //margin: 30px auto;
-    &__list{
-        //display: flex;
-        //justify-content: space-around;
-        //align-items: center;
-    }
-
-}
-.cat__list__item {
-    //display:inline !important;
-    // padding-bottom: 0.5rem;
-    // border-bottom: 2px solid transparent;
-    // &:hover {
-    //     border-bottom: 2px solid #4CAF50;
-    // }
-}
 
 /* Banners */
 .banner-post-job {
@@ -698,9 +654,7 @@ nav {
     margin: 30px auto;
     justify-content: center;
     align-items: center;
-    &__header {
-        
-    }
+
 }
 
 /* JOB ROWS */
@@ -729,9 +683,6 @@ nav {
     }
     &__standard{
         background-color: #f9f9f9;
-        /*&:hover{
-            background-color: #e6ffe6;
-        }*/
     }
 }
 
@@ -770,26 +721,17 @@ nav {
 /* Job listing */
 
 
-
-
-/*.card-header {
-    background-color:white !important;
-}*/
-
 .job-date{
     font-size: 0.75em;
 }
 
 .apply-button{
-    /*display: none;*/
     &:hover{
-        /*display: block;*/
         background-color: #4CAF50;
         color: #fff;
         text-decoration: none;
         font-size: .9em;
         padding: 14px 28px 12px;
-        /*border-radius: 5px;*/
         display: inline-block;
         box-shadow: 0 4px 4px -2px rgba(180,181,182,.2);
         transition: all .2s;
@@ -817,7 +759,6 @@ nav {
 
 .rp-jobrow {
     &__apply{
-        /*display: none;*/
         background-color: #4CAF50 !important;
         color: #fff !important;
         text-decoration: none !important;
@@ -1002,7 +943,6 @@ textarea, select, input[type="text"]:not(.rp-search-input), input[type="email"] 
     width: 100%;
     background-color: #f9f9f9;
     border-top: 1px solid #c9c9c9;
-    /*display: flex;*/
     z-index: 1;
     &__job{
         background-color: #fff;
@@ -1039,23 +979,16 @@ nav {
     position: fixed !important;
     top: 0 !important;
     z-index: 200 !important;
-    /*background-color: #d9d9d9 !important;*/
     background-color: #fff !important;
     width:100% !important;
-    /*opacity: 0.95 !important;*/
 }
 
 .nav-item {
-    /*background-color: #4CAF50 !important;*/
     background-color: transparent !important;
     font-weight: bold;
-    // color: #121c15 !important;
     &__name{
         background-color: transparent !important;
     }
-    /*&__scrolled{
-        color: $remjob-green !important;
-    }*/
 }
 
 .nav-link {
@@ -1063,8 +996,6 @@ nav {
    &__post{
        background-color: $post-bg !important;
        border:1px solid $post-bg !important;
-       /*padding-left: 2rem !important;
-       padding-right: 2rem !important;*/
        font-size: 12pt;
        font-weight: bold;
        transition: all 0.2s;
@@ -1081,12 +1012,12 @@ nav {
 
 .detail__title{
     font-size: 52px;
-    color: white;
+    color: #ffffff;
 }
 
 .detail__tip{
     font-size: 27px;
-    color: white;
+    color: #ffffff;
 }
 
 @media only screen and (max-width: 768px) {
@@ -1134,8 +1065,6 @@ nav {
 
 .company-card {
     background: #f8f9fa;
-    /*float: right;*/
-    /*padding: 28px 36px 0 36px;*/
     -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.15);
     box-shadow: 0 1px 5px rgba(0,0,0,0.15);
     margin-top: 20px;
@@ -1154,7 +1083,6 @@ section.pricing {
   
   .pricing .card {
     border: none;
-    /*border-radius: 1rem;*/
     transition: all 0.2s;
     box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
   }
@@ -1234,8 +1162,6 @@ h3 i {
 }
 
 .checkout-subtitle{
-    /*background-color: $hero-bg;
-    border: none;*/
     padding: 0.6rem;
 }
 
@@ -1320,9 +1246,6 @@ h3 i {
 .worlwide-filter{
     font-size: 14px;
     float: right;
-    //position: absolute;
-    //top: 11px;
-    //right: 0;
 }
 
 .remjob-button{
@@ -1342,7 +1265,6 @@ h3 i {
     width: 100%;
     height: 180px;
     background-size: cover;
-    /*background-color: red;*/
     border-radius: 5px;
     @supports ( background-blend-mode: multiply) {
         background-blend-mode: multiply;
@@ -1352,7 +1274,6 @@ h3 i {
 }
 
 .modal-content-subscribe{
-    /*background-color: #71c174 !important;*/
     -webkit-box-shadow: 2px 0px 15px 0px rgba(46, 50, 50, 0.75);
     -moz-box-shadow:    2px 0px 15px 0px rgba(46, 50, 50, 0.75);
     box-shadow:         2px 0px 15px 0px rgba(46, 50, 50, 0.75);
@@ -1361,7 +1282,6 @@ h3 i {
     margin-top: 20px;
     margin-bottom: 20px;
     width:40%;
-    /*background-color: #71c174 !important;*/
     -webkit-box-shadow: 2px 0px 15px 0px rgba(46, 50, 50, 0.75);
     -moz-box-shadow:    2px 0px 15px 0px rgba(46, 50, 50, 0.75);
     box-shadow:         2px 0px 15px 0px rgba(46, 50, 50, 0.75);
@@ -1384,7 +1304,6 @@ h3 i {
     background-color: #ffffff !important;
     color: black !important;
     border: 1px solid rgba(0, 0, 0, 0.125) !important;
-    /*border: 1px solid grey !important;*/
     border-radius: 5px !important;	
   }
   
@@ -1408,7 +1327,6 @@ h3 i {
   
   /*style the items (options), including the selected item:*/
   .rj-select-items div,.rj-select-selected {
-    /*color: #ffffff;*/
     padding: 8px 16px;
     border: 1px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.0) transparent;
@@ -1425,7 +1343,6 @@ h3 i {
     right: 0;
     color:black !important;
     border: 1px solid rgba(0, 0, 0, 0.125) !important;
-    /*border: 1px solid grey !important;*/
     border-radius: 5px !important;
     transition: all 0.3s;
     z-index: 99 !important;
@@ -1442,14 +1359,6 @@ h3 i {
   .rj-select-items div:hover, .same-as-selected {
     background-color: $green;
     color: #ffffff !important;
-  }
-
-
-  /* categories in landing*/
-  .cat-subs-col{
-    /*position: -webkit-sticky;
-    position: sticky;
-    top: 85px;*/
   }
 
   /* show in remjob */
@@ -1507,7 +1416,6 @@ h3 i {
       font-weight: bold;
       background-color: $remjob-green;
       border: 1px solid $remjob-green;
-      /*border-radius: 5px;*/
       transition: all 0.3s;
       &:hover{
         color: #ffffff;
