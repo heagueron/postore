@@ -12,13 +12,13 @@
     <header class="hero" style="background-color:#00cc99;">
 
         <div class="hero__title mt-5 text-center">
-            <h1 class="detail__title">{{ $remjob->position }}</h1>
+            <h1 class="detail__title" style="color:white;">{{ $remjob->position }}</h1>
         </div>
 
         @if( in_array( strtoupper( $remjob->locations ), ['WORLDWIDE', 'GLOBAL', 'ANYWHERE', 'REMOTE'] ) )
-            <h3 class="hero__tip detail__tip"><i class="fa fa-globe" aria-hidden="true" style="color:#668cff; text-decoration:none;"></i></i> {{ $remjob->locations }} </h3>
+            <h3 class="hero__tip detail__tip" style="color:white;"><i class="fa fa-globe" aria-hidden="true" style="color:#668cff; text-decoration:none;"></i></i> {{ $remjob->locations }} </h3>
         @elseif( $remjob->locations != null )
-            <h3 class="hero__tip detail__tip"><i class="fa fa-map-marker" style="color:#4CAF50; text-decoration:none;"></i> {{ $remjob->locations }} </h3>
+            <h3 class="hero__tip detail__tip" style="color:white;"><i class="fa fa-map-marker" style="color:#4CAF50; text-decoration:none;"></i> {{ $remjob->locations }} </h3>
         @endif
 
     </header>
