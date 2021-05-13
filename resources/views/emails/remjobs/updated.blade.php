@@ -2,7 +2,7 @@
 
     <p style="text-align:center;margin:10px 0;padding:0;">
         <a href="{{ url('/') }}" target="_blank">
-            <img align="center" height="85" src="{{ asset('images/remjob.png') }}" alt="" 
+            <img align="center" height="85" src="{{ asset('images/remjob2c.svg') }}" alt="" 
                 style="float:center;border:0;height:auto!important;outline:none;text-decoration:none" 
                 width="100" class="CToWUd">
         </a>
