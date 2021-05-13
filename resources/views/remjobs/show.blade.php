@@ -9,7 +9,7 @@
     <!-- Subscription modal -->
     @include('subscribers.create')
 
-    <header class="hero" style="background-color:#00cc99;">
+    <header class="hero" style="background-color:#5acbe5;">
 
         <div class="hero__title mt-5 text-center">
             <h1 class="detail__title" style="color:white;">{{ $remjob->position }}</h1>
