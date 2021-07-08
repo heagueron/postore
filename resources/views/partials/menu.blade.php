@@ -1,14 +1,14 @@
-<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+<div class="" id="sidebar">
 
-    <div class="c-sidebar-brand d-md-down-none">
+    <div class="">
         <a href="{{ route('landing') }}">
             Remote Jobs
         </a>
     </div>
 
-    <ul class="c-sidebar-nav ps ps--active-y">
+    <ul class="remjob-sidenav__list">
 
-        <li class="c-sidebar-nav-item">
+        <li class="remjob-sidenav__item">
             <a class="c-sidebar-nav-link" href="/home">
 
                 Dashboard
@@ -18,49 +18,49 @@
 
         @if( Auth::user()->is_admin == 1 )
 
-            <li class="c-sidebar-nav-item">
+            <li class="remjob-sidenav__item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.remjobs.index') }}">
                     Remote Jobs
                 </a>              
             </li>
 
-            <li class="c-sidebar-nav-item">
+            <li class="remjob-sidenav__item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.companies.index') }}">
                     Companies
                 </a>              
             </li>
 
-            <li class="c-sidebar-nav-item">
+            <li class="remjob-sidenav__item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.users.index') }}">
                     Users
                 </a>              
             </li>
 
-            <li class="c-sidebar-nav-item">
+            <li class="remjob-sidenav__item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.categories.index') }}">
                     Categories
                 </a>              
             </li>
 
-            <li class="c-sidebar-nav-item">
+            <li class="remjob-sidenav__item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.plans.index') }}">
                     Plans
                 </a>              
             </li>
 
-            <li class="c-sidebar-nav-item">
+            <li class="remjob-sidenav__item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.edit-options') }}">
                     Admin Options
                 </a>              
             </li>
 
-            <li class="c-sidebar-nav-item">
+            <li class="remjob-sidenav__item">
                 <a class="c-sidebar-nav-link" href="{{ route('admin.dailies.index') }}">
                     Dailies
                 </a>              
             </li>
 
-            <li class="c-sidebar-nav-item">
+            <li class="remjob-sidenav__item">
                 <p class="mb-1" style="font-size:12px;color:white;">Hits and visits today:</p>
                 <table class="table table-bordered" style="font-size:12px;color:white;">
                     <thead>
@@ -80,7 +80,7 @@
                 </table>
             </li>
 
-            <li class="c-sidebar-nav-item">
+            <li class="remjob-sidenav__item">
                 <div class="c-sidebar-nav-link"> 
                     <span>AHR/AR:&nbsp;</span>
                     <span>{{ \App\Option::findOrFail(2)->value }}&nbsp;</span>
@@ -90,7 +90,7 @@
             
         @endif
 
-        <li class="c-sidebar-nav-item">
+        <li class="remjob-sidenav__item">
             <a class="c-sidebar-nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 Logout
